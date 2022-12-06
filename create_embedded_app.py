@@ -23,7 +23,7 @@ parser.add_argument("-r",
                     dest="ROLES",
                     type=str,
                     nargs="+",
-                    default=['PUBLIC'],
+                    default="",
                     choices=['PUBLIC', 'USER', 'ADMIN'],
                     help="Roles of the embedded app (default: PUBLIC)")
 
@@ -56,28 +56,32 @@ args = parser.parse_args()
 
 
 # if interactive mode is activated, ask the user for all unspecified arguments
-icon_invalid = ['""', "", "undefined"]
+input_invalid = ['""', "", "undefined"]
 if args.INTERACTIVE:
     if not args.TITLE:
         args.TITLE = input("TITLE: ")
-    if not args.ROLES:
-        args.ROLES = input("ROLES: ").split(" ")
+    if args.ROLES in input_invalid:
+        role_input = input("ROLES: ")
+        if role_input not in input_invalid:
+            args.ROLES = input("ROLES: ").split(" ")
+        else:
+            args.ROLES = ['PUBLIC']
     if args.DESCRIPTION == "":
         args.DESCRIPTION = input("DESCRIPTION: ")
     # icon_class and icon_source_url are not both allowed
-    if args.ICON_CLASS not in icon_invalid and args.ICON_SOURCE_URL not in icon_invalid:
+    if args.ICON_CLASS not in input_invalid and args.ICON_SOURCE_URL not in input_invalid:
         print("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
         exit()
     # if one of icon_class and icon_source_url is specified, we can continue
-    if args.ICON_CLASS in icon_invalid and args.ICON_SOURCE_URL in icon_invalid:
+    if args.ICON_CLASS in input_invalid and args.ICON_SOURCE_URL in input_invalid:
         icon_input = input("ICON_CLASS: ")
-        if icon_input not in icon_invalid:
+        if icon_input not in input_invalid:
             args.ICON_CLASS = icon_input
             args.ICON_SOURCE_URL = "undefined"
         else:
             args.ICON_CLASS = "undefined"
             icon_input = input("ICON_SOURCE_URL: ")
-            if icon_input not in icon_invalid:
+            if icon_input not in input_invalid:
                 args.ICON_SOURCE_URL = icon_input
             else:
                 print("\nNo icon has been specified.")
@@ -85,7 +89,7 @@ if args.INTERACTIVE:
 else:
     # due to the interactive parameter, we cant make the icon_group required
     # anymore, so we have to check it manually
-    if args.ICON_CLASS in icon_invalid and args.ICON_SOURCE_URL in icon_invalid:
+    if args.ICON_CLASS in input_invalid and args.ICON_SOURCE_URL in input_invalid:
         print("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
         exit()
 
@@ -237,12 +241,15 @@ import_string = f'import {{{SERVICE_NAME}}} from "./{args.NAME}.service";\n'
 with open(TEILER_MODULES, "r") as file:
     lines = file.readlines()
     last_import_line = 0
+    found_section = False
     for i, line in enumerate(lines):
-        if line.find("import {") != -1:
+        if not found_section and line.find("import {") != -1:
             last_import_line = i
             continue
-        if line.find("providers:") != -1:
-            lines[i] = line.replace("]", f", {SERVICE_NAME}]")
+        if not found_section and line.find("providers:") != -1:
+            found_section = True
+        if found_section and line.find("]") != -1:
+            lines[i] = line.replace("]", f",\n\t\t{SERVICE_NAME}]")
             lines.insert(last_import_line + 1, import_string)
             break
     else:
@@ -326,21 +333,28 @@ import_string = f'import {{{SERVICE_NAME}}} from "./{args.NAME}.service";\n'
 
 with open(TEILER_SERVICE, "r") as file:
     lines = file.readlines()
-    found_section = False
+    found_section1 = False
+    edited_section1 = False
+    found_section2 = False
     last_import_line = 0
+    SERVICE_NAME_lower = SERVICE_NAME[0].lower() + SERVICE_NAME[1:]
     for i, line in enumerate(lines):
-        if not found_section and line.find("import {") != -1:
+        if not found_section1 and line.find("import {") != -1:
             last_import_line = i
-        if not found_section and line.find("constructor") != -1:
-            found_section = True
+        if not found_section1 and line.find("constructor") != -1:
+            found_section1 = True
             continue
-        if found_section and line.find(")") != -1:
-            SERVICE_NAME_lower = SERVICE_NAME[0].lower() + SERVICE_NAME[1:]
-            lines[i - 1] = lines[i - 1].replace("\n", ",\n")
-            lines[i + 1] = lines[i + 1].replace("]", f", {SERVICE_NAME_lower}]")
-            lines.insert(i, f"\t\t{SERVICE_NAME_lower}: {SERVICE_NAME}\n")
+        if found_section1 and line.find(")") != -1:
+            lines[i - 1] = lines[i - 1].replace("\n", f",\n\t\t{SERVICE_NAME_lower}: {SERVICE_NAME}\n")
+            edited_section1 = True
+            continue
+        if found_section1 and edited_section1 and line.find("let embeddedTeilerApps") != -1:
+            found_section2 = True
+        if found_section2 and line.find("]") != -1:
+            lines[i] = line.replace("]", f",\n\t\t\t{SERVICE_NAME_lower}]")
             lines.insert(last_import_line + 1, import_string)
             break
+
     else:
         print("Could not find the needed lines.")
         exit()
