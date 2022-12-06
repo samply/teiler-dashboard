@@ -63,7 +63,7 @@ if args.INTERACTIVE:
     if args.ROLES in input_invalid:
         role_input = input("ROLES: ")
         if role_input not in input_invalid:
-            args.ROLES = input("ROLES: ").split(" ")
+            args.ROLES = role_input.split(" ")
         else:
             args.ROLES = ['PUBLIC']
     if args.DESCRIPTION == "":
