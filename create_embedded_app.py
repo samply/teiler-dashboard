@@ -33,7 +33,7 @@ parser.add_argument("-d",
                     default="",
                     help="Description of the embedded app (default: '')")
 
-group_icon = parser.add_mutually_exclusive_group(required=True)
+group_icon = parser.add_mutually_exclusive_group()
 
 group_icon.add_argument("-ic",
                         dest="ICON_CLASS",
@@ -41,14 +41,53 @@ group_icon.add_argument("-ic",
                         default="undefined",
                         help="Icon class of the embedded app (default: undefined)")
 
-
 group_icon.add_argument("-is",
                         dest="ICON_SOURCE_URL",
                         type=str,
                         default="undefined",
                         help="URL of the icon for the embedded app (default: undefined)")
 
+parser.add_argument("-i",
+                    dest="INTERACTIVE",
+                    action="store_true",
+                    help="Give the parameters interactively during runtime.")
+
 args = parser.parse_args()
+
+
+# if interactive mode is activated, ask the user for all unspecified arguments
+icon_invalid = ['""', "", "undefined"]
+if args.INTERACTIVE:
+    if not args.TITLE:
+        args.TITLE = input("TITLE: ")
+    if not args.ROLES:
+        args.ROLES = input("ROLES: ").split(" ")
+    if args.DESCRIPTION == "":
+        args.DESCRIPTION = input("DESCRIPTION: ")
+    # icon_class and icon_source_url are not both allowed
+    if args.ICON_CLASS not in icon_invalid and args.ICON_SOURCE_URL not in icon_invalid:
+        print("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
+        exit()
+    # if one of icon_class and icon_source_url is specified, we can continue
+    if args.ICON_CLASS in icon_invalid and args.ICON_SOURCE_URL in icon_invalid:
+        icon_input = input("ICON_CLASS: ")
+        if icon_input not in icon_invalid:
+            args.ICON_CLASS = icon_input
+            args.ICON_SOURCE_URL = "undefined"
+        else:
+            args.ICON_CLASS = "undefined"
+            icon_input = input("ICON_SOURCE_URL: ")
+            if icon_input not in icon_invalid:
+                args.ICON_SOURCE_URL = icon_input
+            else:
+                print("\nNo icon has been specified.")
+                exit()
+else:
+    # due to the interactive parameter, we cant make the icon_group required
+    # anymore, so we have to check it manually
+    if args.ICON_CLASS in icon_invalid and args.ICON_SOURCE_URL in icon_invalid:
+        print("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
+        exit()
 
 # add quotation marks to the icon parameters, if they are defined
 if args.ICON_CLASS != "undefined":
@@ -222,7 +261,8 @@ with open(TEILER_APP, "r") as file:
     lines = file.readlines()
     found_section = False
     for i, line in enumerate(lines):
-        if not found_section and line.find("export enum EmbeddedTeilerApps") != -1:
+        if not found_section and line.find(
+            "export enum EmbeddedTeilerApps") != -1:
             found_section = True
             continue
         if found_section and line.find("}") != -1:
