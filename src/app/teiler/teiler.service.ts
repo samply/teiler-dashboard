@@ -70,7 +70,7 @@ export class TeilerService {
 
   filterTeilerApps() {
     this.teilerApps = [];
-    this.allTeilerApps.filter(teilerApp => this.isAuthorized(teilerApp)).forEach(teilerApp => this.teilerApps.push(teilerApp))
+    this.allTeilerApps.filter(teilerApp => teilerApp.activated && this.isAuthorized(teilerApp)).forEach(teilerApp => this.teilerApps.push(teilerApp))
   }
 
   isAuthorized(teilerApp: TeilerApp) {
