@@ -2,6 +2,7 @@ import subprocess
 from os import path
 import shutil
 import argparse
+import sys
 
 # Create the parser
 parser = argparse.ArgumentParser(prog="create-embedded-app",
@@ -54,24 +55,35 @@ parser.add_argument("-i",
 
 args = parser.parse_args()
 
+possible_roles = ["PUBLIC", "USER", "ADMIN"]
+
+def getRoles(role_input):
+    while 1:
+        if not role_input:
+            role_input = input("ROLES [PUBLIC, USER, ADMIN] (comma separated): ")
+        if isinstance(role_input, str):
+            role_input = set(role_input.replace(" ", "").upper().split(","))
+        for role in role_input:
+            if role not in possible_roles:
+                print(f"'{role}' is not a valid role, please repeat.")
+                break  # if a role is not valid, repeat input
+        else:
+            break  # if all roles are valid, break out of the while loop
+    return role_input
 
 # if interactive mode is activated, ask the user for all unspecified arguments
 input_invalid = ['""', "", "undefined"]
 if args.INTERACTIVE:
     if not args.TITLE:
         args.TITLE = input("TITLE: ")
-    if args.ROLES in input_invalid:
-        role_input = input("ROLES: ")
-        if role_input not in input_invalid:
-            args.ROLES = role_input.split(" ")
-        else:
-            args.ROLES = ['PUBLIC']
+
+    args.ROLES = getRoles(args.ROLES)
+
     if args.DESCRIPTION == "":
         args.DESCRIPTION = input("DESCRIPTION: ")
     # icon_class and icon_source_url are not both allowed
     if args.ICON_CLASS not in input_invalid and args.ICON_SOURCE_URL not in input_invalid:
-        print("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
-        exit()
+        sys.exit("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
     # if one of icon_class and icon_source_url is specified, we can continue
     if args.ICON_CLASS in input_invalid and args.ICON_SOURCE_URL in input_invalid:
         icon_input = input("ICON_CLASS: ")
@@ -84,14 +96,12 @@ if args.INTERACTIVE:
             if icon_input not in input_invalid:
                 args.ICON_SOURCE_URL = icon_input
             else:
-                print("\nNo icon has been specified.")
-                exit()
+                sys.exit("\nNo icon has been specified.")
 else:
     # due to the interactive parameter, we cant make the icon_group required
     # anymore, so we have to check it manually
     if args.ICON_CLASS in input_invalid and args.ICON_SOURCE_URL in input_invalid:
-        print("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
-        exit()
+        sys.exit("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
 
 # add quotation marks to the icon parameters, if they are defined
 if args.ICON_CLASS != "undefined":
@@ -128,15 +138,13 @@ print(f"\nGenerate new service {args.NAME}...")
 rt = subprocess.call(['npm', 'run', 'ng', 'g', 's', args.NAME], cwd=root,
                      shell=True)
 if rt:
-    print("Generating failed...")
-    exit()
+    sys.exit("Generating failed...")
 
 print(f"\nGenerate new component {args.NAME}...")
 rt = subprocess.call(['npm', 'run', 'ng', 'g', 'c', args.NAME], cwd=root,
                      shell=True)
 if rt:
-    print("Something went wrong")
-    exit()
+    sys.exit("Something went wrong")
 
 """-------------------------------------
 1.5. Remove Samply from XXX.component.ts
@@ -150,8 +158,7 @@ with open(COMPONENT_FILE, "r") as file:
             lines[i] = line.replace("samply-", "")
             break
     else:
-        print("Could not find the needed lines.")
-        exit()
+        sys.exit("Could not find the needed lines.")
 
 with open(COMPONENT_FILE, "w") as file:
     file.writelines(lines)
@@ -189,8 +196,7 @@ with open(APP_MODULES, "r") as file:
             lines[i - 1] = lines[i - 1].replace(",", "")
             break
     else:
-        print("Could not find the needed lines.")
-        exit()
+        sys.exit("Could not find the needed lines.")
     for i in delete_lines[::-1]:
         import_string = lines.pop(i)
 
@@ -217,8 +223,7 @@ with open(APP_ROUTING_MODULES, "r") as file:
             lines.insert(last_import_line + 1, import_string)
             break
     else:
-        print("Could not find the needed lines.")
-        exit()
+        sys.exit("Could not find the needed lines.")
 
 with open(APP_ROUTING_MODULES, "w") as file:
     file.writelines(lines)
@@ -253,8 +258,7 @@ with open(TEILER_MODULES, "r") as file:
             lines.insert(last_import_line + 1, import_string)
             break
     else:
-        print("Could not find the needed lines.")
-        exit()
+        sys.exit("Could not find the needed lines.")
 
 with open(TEILER_MODULES, "w") as file:
     file.writelines(lines)
@@ -277,8 +281,7 @@ with open(TEILER_APP, "r") as file:
             lines.insert(i, f"\t{NAME_ENUM} = '{args.NAME}'\n")
             break
     else:
-        print("Could not find the needed lines.")
-        exit()
+        sys.exit("Could not find the needed lines.")
 
 with open(TEILER_APP, "w") as file:
     file.writelines(lines)
@@ -318,8 +321,7 @@ with open(SERVICE_FILE, "r") as file:
             lines.insert(1, import_string)
             break
     else:
-        print("Could not find the needed lines.")
-        exit()
+        sys.exit("Could not find the needed lines.")
 
 with open(SERVICE_FILE, "w") as file:
     file.writelines(lines)
@@ -356,8 +358,7 @@ with open(TEILER_SERVICE, "r") as file:
             break
 
     else:
-        print("Could not find the needed lines.")
-        exit()
+        sys.exit("Could not find the needed lines.")
 
 with open(TEILER_SERVICE, "w") as file:
     file.writelines(lines)
@@ -386,8 +387,7 @@ with open(ROUTE_MANAGER, "r") as file:
             lines.insert(last_import_line + 1, import_string)
             break
     else:
-        print("Could not find the needed lines.")
-        exit()
+        sys.exit("Could not find the needed lines.")
 
 with open(ROUTE_MANAGER, "w") as file:
     file.writelines(lines)
