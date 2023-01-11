@@ -17,21 +17,21 @@ parser.add_argument("-n",
 parser.add_argument("-t",
                     dest="TITLE",
                     type=str,
-                    default="",
+                    default=None,
                     help="Title of the embedded app (default: '')")
 
 parser.add_argument("-r",
                     dest="ROLES",
                     type=str,
                     nargs="+",
-                    default="",
+                    default=None,
                     choices=['PUBLIC', 'USER', 'ADMIN'],
                     help="Roles of the embedded app (default: PUBLIC)")
 
 parser.add_argument("-d",
                     dest="DESCRIPTION",
                     type=str,
-                    default="",
+                    default=None,
                     help="Description of the embedded app (default: '')")
 
 group_icon = parser.add_mutually_exclusive_group()
@@ -50,58 +50,100 @@ group_icon.add_argument("-is",
 
 parser.add_argument("-i",
                     dest="INTERACTIVE",
-                    action="store_true",
-                    help="Give the parameters interactively during runtime.")
+                    action="store_false",
+                    help="If specified, no interactive prompt will open if one "
+                         "of the inputs was not specified in the command (this "
+                         "may lead to a failure).")
 
 args = parser.parse_args()
+args._get_args()
 
-possible_roles = ["PUBLIC", "USER", "ADMIN"]
+INPUT_INVALID = ['""', "", "undefined"]
+POSSIBLE_ROLES = ["PUBLIC", "USER", "ADMIN"]
 
 def getRoles(role_input):
     while 1:
-        if not role_input:
+        if role_input is None:
             role_input = input("ROLES [PUBLIC, USER, ADMIN] (comma separated): ")
+
         if isinstance(role_input, str):
             role_input = set(role_input.replace(" ", "").upper().split(","))
+        else:
+            sys.exit(f"{role_input} is not a valid input.")
+
         for role in role_input:
-            if role not in possible_roles:
+            if role not in POSSIBLE_ROLES:
                 print(f"'{role}' is not a valid role, please repeat.")
+                role_input = None
                 break  # if a role is not valid, repeat input
         else:
             break  # if all roles are valid, break out of the while loop
     return role_input
 
+
 # if interactive mode is activated, ask the user for all unspecified arguments
-input_invalid = ['""', "", "undefined"]
 if args.INTERACTIVE:
-    if not args.TITLE:
+    if args.TITLE is None:
         args.TITLE = input("TITLE: ")
 
-    args.ROLES = getRoles(args.ROLES)
+    if args.ROLES is None:
+        args.ROLES = getRoles(args.ROLES)
 
-    if args.DESCRIPTION == "":
+    if args.DESCRIPTION is None:
         args.DESCRIPTION = input("DESCRIPTION: ")
+
     # icon_class and icon_source_url are not both allowed
-    if args.ICON_CLASS not in input_invalid and args.ICON_SOURCE_URL not in input_invalid:
-        sys.exit("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
+    # if args.ICON_CLASS not in INPUT_INVALID and args.ICON_SOURCE_URL not in INPUT_INVALID:
+    #     while 1:
+    #         print("You specified both ICON_CLASS and ICON_SOURCE_URL, but only one "
+    #               "is allowed. Please enter 1 to keep ICON_CLASS or 2 for "
+    #               "ICON_SOURCE_URL.")
+    #         choice = input()
+    #         if choice == 1:
+    #             args.ICON_SOURCE_URL = "undefined"
+    #             break
+    #         elif choice == 2:
+    #             args.ICON_CLASS = "undefined"
+    #             break
+    #         else:
+    #             print("Wrong input, please just enter 1 or 2.")
+
     # if one of icon_class and icon_source_url is specified, we can continue
-    if args.ICON_CLASS in input_invalid and args.ICON_SOURCE_URL in input_invalid:
-        icon_input = input("ICON_CLASS: ")
-        if icon_input not in input_invalid:
-            args.ICON_CLASS = icon_input
-            args.ICON_SOURCE_URL = "undefined"
-        else:
-            args.ICON_CLASS = "undefined"
-            icon_input = input("ICON_SOURCE_URL: ")
-            if icon_input not in input_invalid:
-                args.ICON_SOURCE_URL = icon_input
+    if args.ICON_CLASS == "undefined" and args.ICON_SOURCE_URL == "undefined":
+        while 1:
+            icon_input = "undefined"
+            while icon_input == "undefined":
+                icon_input = input("ICON_CLASS (leave empty if you don't want to"
+                                   " specify): ")
+                if icon_input == "undefined":
+                    print("undefined is not a valid input!")
+            if icon_input not in ["", "''", '""']:
+                args.ICON_CLASS = icon_input
+                args.ICON_SOURCE_URL = "undefined"
+                break
             else:
-                sys.exit("\nNo icon has been specified.")
+                icon_input = 'undefined'
+                # args.ICON_CLASS = "undefined"
+                while icon_input == "undefined":
+                    icon_input = input("ICON_SOURCE_URL: ")
+                    if icon_input == "undefined":
+                        print("undefined is not a valid input!")
+                if icon_input not in ["", "''", '""']:
+                    args.ICON_SOURCE_URL = icon_input
+                    args.ICON_CLASS = 'undefined'
+                    break
+            print("Neither ICON_CLASS or ICON_SOURCE_URL were specified!")
 else:
     # due to the interactive parameter, we cant make the icon_group required
     # anymore, so we have to check it manually
-    if args.ICON_CLASS in input_invalid and args.ICON_SOURCE_URL in input_invalid:
-        sys.exit("\nSpecify either ICON_CLASS or ICON_SOURCE_URL, not both of them.")
+    if args.ICON_CLASS in INPUT_INVALID and args.ICON_SOURCE_URL in INPUT_INVALID:
+        sys.exit("\nSpecify ICON_CLASS or ICON_SOURCE_URL.")
+    if args.TITLE is None:
+        args.TITLE = ""
+    if args.DESCRIPTION is None:
+        args.DESCRIPTION = ""
+    if args.ROLES is None:  # no other cases needed here, argparse guarantees correct input if given
+        args.ROLES = ['PUBLIC']
 
 # add quotation marks to the icon parameters, if they are defined
 if args.ICON_CLASS != "undefined":
