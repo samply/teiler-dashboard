@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Inquiry
 - Inquiry Sarkome Mock-Up
 - Generate router link from window.location.pathname instead of router
+- Get export from teiler
 
 ## Fixed
 - Update teiler apps in sidebar

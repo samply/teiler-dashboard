@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
 import {Router} from "@angular/router";
 import {Inquiry} from "../embedded/inquiries/inquiries-client.service";
+import {Observable} from "rxjs";
 
 
 @Injectable({
@@ -16,6 +17,6 @@ export abstract class InquiriesService extends EmbeddedTeilerApp {
     super(name, router);
   }
 
-  abstract fetchInquiries(): Inquiry[];
+  abstract fetchInquiries(): Observable<Inquiry[]>;
 
 }

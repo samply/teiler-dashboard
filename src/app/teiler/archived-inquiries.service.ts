@@ -3,6 +3,7 @@ import {EmbeddedTeilerApps} from "./teiler-app";
 import {Router} from "@angular/router";
 import {InquiriesService} from "./inquiries.service";
 import {InquiriesClientService, Inquiry} from "../embedded/inquiries/inquiries-client.service";
+import {Observable} from "rxjs";
 
 
 @Injectable({
@@ -19,8 +20,8 @@ export class ArchivedInquiriesService extends InquiriesService{
     super(EmbeddedTeilerApps.ARCHIVED_INQUIRIES, router);
   }
 
-  fetchInquiries(): Inquiry[] {
-    return this.inquiriesClientService.getArchivedInquiries();
+  fetchInquiries(): Observable<Inquiry[]> {
+    return this.inquiriesClientService.fetchArchivedInquiries(this.backendUrl);
   }
 
 }

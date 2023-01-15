@@ -16,17 +16,17 @@
       </div>
     </div>
   <div class="wholetable">
-    <table mat-table [dataSource]="fetchInquiriesTableItems()" class="mat-elevation-z8">
+    <table mat-table [dataSource]="inquiries" class="mat-elevation-z8">
       <div *ngFor="let column of getInquiriesTableItemColumnsToDisplay()">
         <ng-container matColumnDef="{{column}}">
           <th mat-header-cell *matHeaderCellDef>{{column}}</th>
           <td mat-cell *matCellDef="let inquiry">
-            <div *ngIf="column == inquiriesTableItemColumn.NAME">
+            <div *ngIf="column == inquiriesTableItemColumn.ID">
               <a routerLink="{{getRouterLink(inquiry)}}">
                 {{getInquiriesTableItemColumn(inquiry, column)}}
               </a>
             </div>
-            <div *ngIf="column != inquiriesTableItemColumn.NAME">
+            <div *ngIf="column != inquiriesTableItemColumn.ID">
               {{getInquiriesTableItemColumn(inquiry, column)}}
             </div>
           </td>

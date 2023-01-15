@@ -11,7 +11,8 @@
     "TEILER_ADMIN_NAME": "Max Mustermann",
     "TEILER_ADMIN_EMAIL": "max.mustermann@teiler-example.com",
     "TEILER_ADMIN_PHONE": "+49 123 456789",
-    "TEILER_PROJECT": "DKTK"
+    "TEILER_PROJECT": "DKTK",
+    "TEILER_API_KEY": "ttsHGwSITs0Eq8L63YWtLVyHymBmULvZIihL6w4t42FBmzp6Eb9SGNd7fZmeUtAI"
   };
 
 })(this);
