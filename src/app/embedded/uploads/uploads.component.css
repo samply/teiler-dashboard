@@ -31,6 +31,7 @@ h3{
 }
 
 mat-expansion-panel {
+  margin-left: 0%;
   padding-right: 10px;
 }
 
