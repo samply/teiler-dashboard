@@ -30,13 +30,9 @@ export interface UrlAndParameters {
 })
 export class InquiriesClientService {
 
-  httpHeaders: HttpHeaders = new HttpHeaders()
   backendUrl: string | undefined;
 
-  // httpHeaders: HttpHeaders = new HttpHeaders()
-  //   .append("x-api-key", environment.config.TEILER_API_KEY)
-  //   .append("Accept", "*/*")
-  //   .append("Content-Type", "text/plain");
+  httpHeaders: HttpHeaders = new HttpHeaders().append("x-api-key", environment.config.TEILER_API_KEY);
 
   constructor(private httpClient: HttpClient) {
   }
@@ -78,14 +74,14 @@ export class InquiriesClientService {
     if (responseUrl) {
       let urlAndParameters = this.extractUrlAndParameters(responseUrl);
       this.httpClient.get(urlAndParameters.url, {
-        headers: this.httpHeaders,
+        //headers: this.httpHeaders,
         params: urlAndParameters.parameters,
         responseType: 'blob',
         observe: 'response'
       }).subscribe(response => {
-        if (response.status == 200){
+        if (response.status == 200) {
           let filename = this.extractFilename(response);
-          if (!filename){
+          if (!filename) {
             filename = "export";
           }
           let link = document.createElement('a');
@@ -93,7 +89,7 @@ export class InquiriesClientService {
           link.href = URL.createObjectURL(response.body);
           link.download = filename;
           link.click();
-        } else if (response.status == 202){
+        } else if (response.status == 202) {
 
         } else {
           //TODO
@@ -102,12 +98,12 @@ export class InquiriesClientService {
     }
   }
 
-  extractFilename(response: HttpResponse<Blob>): string | undefined{
+  extractFilename(response: HttpResponse<Blob>): string | undefined {
     let contentDisposition = response.headers.get("Content-Disposition");
-    if (contentDisposition){
+    if (contentDisposition) {
       let index = contentDisposition.indexOf("=");
-      if (index >= 0){
-        return contentDisposition.substring(index+1);
+      if (index >= 0) {
+        return contentDisposition.substring(index + 1);
       }
     }
     return undefined;
