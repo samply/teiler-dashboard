@@ -1,34 +1,12 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css");
 
-html{
-  min-height: fit-content;
-  min-width: fit-content;
-  height: 80%;
-}
-header{
-  background-color: blue;
-  padding: 0.05%;
-
-}
-.title{
-  margin-left:auto;
-  margin-right:auto;
-}
-
-h1{
-  color: white;
-  text-align: left;
-  font-family: Roboto, Helvetica Neue, sans-serif;
-  font-size: 28px;
-}
 .main{
   width: 1200px;
   margin-left:auto;
   margin-right:auto;
 }
 .over{
-
   margin-top: 1%;
   color: dimgrey;
 }
@@ -44,55 +22,22 @@ h3{
   font-size: 22px;
   margin-top: 1.5%;
 }
-h4{
-  text-align: left;
-  font-family: Roboto, Helvetica Neue, sans-serif;
-  font-size: 19px;
-  margin-top: 1.5%;
-}
-p{
-  text-align: left;
-  font-family: Roboto, Helvetica Neue, sans-serif;
-  font-size: 16px;
-  margin-top: 1.5%;
-}
+
 .search{
-font-family: Roboto, Helvetica Neue, sans-serif;
+  font-family: Roboto, Helvetica Neue, sans-serif;
   font-size: 16px;
   margin-top: 0.5%;
   margin-left: 960px;
-
-}
-
-.firstoption {
-  margin-left: 0%;
-  padding-right: 10px;
-}
-
-.secondoption {
-  margin-left: 0%;
-  padding-right: 10px;
-}
-
-.thirdoption {
-  margin-left: 0%;
-  padding-right: 10px;
 }
 
 mat-expansion-panel {
-  margin-left: 0%;
   padding-right: 10px;
 }
 
 .downloadandselector {
   flex-direction: column;
-  padding-right: 10px;
 }
 
-.choose_how_many {
-  margin-left: 0%;
-  padding-right: 10px;
-}
 table{
   text-align: left;
   width: 100%;
@@ -100,10 +45,6 @@ table{
   margin-top: 2%;
 }
 
-LogAndTable {
-  position: center;
-}
 mat-paginator{
-  margin-top: 1%;
   background-color: #fafafa
 }

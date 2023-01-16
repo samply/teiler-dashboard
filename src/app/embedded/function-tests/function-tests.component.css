@@ -1,24 +1,18 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
-html{
-  min-height: fit-content;
-  min-width: fit-content;
-  height: 80%;
-}
-header{
-  background-color: blue;
-  padding: 0.05%;
-}
-.title{
-  margin-left:auto;
-  margin-right:auto;
-}
+
 .main{
   width: 1200px;
   margin-left:auto;
   margin-right:auto;
 
+}
+h2{
+  text-align: left;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: 32px;
+  margin-top: 1.5%;
 }
 .over{
   color: dimgrey;
@@ -59,12 +53,6 @@ mat-card {
   font-size:14px;
 }
 
-mat-expansion-panel{
-  padding:0.6%;
-}
-mat-panel-title{
-  font-family: Roboto, Helvetica Neue, sans-serif;
-}
 button{
   background-color: royalblue;
   font-family: Roboto, Helvetica Neue, sans-serif;
@@ -75,14 +63,8 @@ button{
 .infb{
   background-color: lightgrey;
   margin-right:3%;
+}
 
-}
-h2{
-  text-align: left;
-  font-family: Roboto, Helvetica Neue, sans-serif;
-  font-size: 32px;
-  margin-top: 1.5%;
-}
 h3{
   text-align: left;
   font-family: Roboto, Helvetica Neue, sans-serif;

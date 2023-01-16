@@ -49,7 +49,6 @@ import {MatDialogModule} from "@angular/material/dialog";
     ExternalLinkDirective,
     TeilerBoxComponent,
     TeilerWelcomeComponent
-
   ],
   imports: [
     AppRoutingModule,
