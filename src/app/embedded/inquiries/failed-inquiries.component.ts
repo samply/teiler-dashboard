@@ -16,11 +16,10 @@ export class FailedInquiriesComponent extends InquiriesComponent{
 
   getInquiriesTableItemColumnsToDisplay(): InquiriesTableItemColumn[]{
     return [
+      InquiriesTableItemColumn.ID,
       InquiriesTableItemColumn.NAME,
-      InquiriesTableItemColumn.LOOKING_FOR,
       InquiriesTableItemColumn.RECEIVED_AT,
-      InquiriesTableItemColumn.ERROR_CODE,
-      InquiriesTableItemColumn.AS_OF
+      InquiriesTableItemColumn.ERROR_CODE
     ];
   };
 

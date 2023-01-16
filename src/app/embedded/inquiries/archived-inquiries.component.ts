@@ -16,8 +16,8 @@ export class ArchivedInquiriesComponent extends InquiriesComponent{
 
   getInquiriesTableItemColumnsToDisplay(): InquiriesTableItemColumn[]{
     return [
+      InquiriesTableItemColumn.ID,
       InquiriesTableItemColumn.NAME,
-      InquiriesTableItemColumn.LOOKING_FOR,
       InquiriesTableItemColumn.RECEIVED_AT,
       InquiriesTableItemColumn.ARCHIVED_AT
     ];

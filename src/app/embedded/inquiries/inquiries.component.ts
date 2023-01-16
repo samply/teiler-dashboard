@@ -3,14 +3,13 @@ import {InquiriesService} from "../../teiler/inquiries.service";
 import {Inquiry} from "./inquiries-client.service";
 import {EmbeddedTeilerApps} from "../../teiler/teiler-app";
 import {createRouterLinkForBase} from "../../route/route-utils";
+import {Observable} from "rxjs";
 
 export enum InquiriesTableItemColumn {
+  ID = 'Id',
   NAME = 'Name',
-  LOOKING_FOR = 'Looking for',
   RECEIVED_AT = 'Received at',
   ARCHIVED_AT = 'Archived at',
-  MATCHING_DATASETS = 'Matching datasets',
-  AS_OF = 'As of',
   ERROR_CODE = 'Error Code'
 }
 
@@ -22,30 +21,26 @@ export enum InquiriesTableItemColumn {
 export abstract class InquiriesComponent implements OnInit {
 
   inquiriesTableItemColumn: typeof InquiriesTableItemColumn = InquiriesTableItemColumn;
+  inquiries: Inquiry[] = [];
 
   constructor(private inquiriesService: InquiriesService) {
   }
 
   ngOnInit(): void {
+    this.inquiriesService.fetchInquiries().subscribe(inquiries => this.inquiries = inquiries);
   }
 
   abstract getInquiriesTableItemColumnsToDisplay(): InquiriesTableItemColumn[];
 
   abstract getTitel(): string;
 
-  fetchInquiriesTableItems(): Inquiry[] {
-    return this.inquiriesService.fetchInquiries();
-  }
-
   private columnGetterMap = new Map<InquiriesTableItemColumn, (item: Inquiry) => string | undefined>([
-    [InquiriesTableItemColumn.NAME, item => item.name],
-    [InquiriesTableItemColumn.LOOKING_FOR, item => item.lookingFor],
+    [InquiriesTableItemColumn.ID, item => item.id],
+    [InquiriesTableItemColumn.NAME, item => item.label],
     [InquiriesTableItemColumn.RECEIVED_AT, item => item.receivedAt],
     [InquiriesTableItemColumn.ARCHIVED_AT, item => item.archivedAt],
-    [InquiriesTableItemColumn.MATCHING_DATASETS, item => item.matchingDatasets],
-    [InquiriesTableItemColumn.AS_OF, item => item.asOf],
-    [InquiriesTableItemColumn.ERROR_CODE, item => item.errorCode]
-  ])
+    [InquiriesTableItemColumn.ERROR_CODE, item => item.error]
+  ]);
 
   getInquiriesTableItemColumn(item: Inquiry, column: InquiriesTableItemColumn): string | undefined {
     // @ts-ignore
@@ -54,7 +49,7 @@ export abstract class InquiriesComponent implements OnInit {
   }
 
   getRouterLink(inquiry: Inquiry): string {
-    return '/' + createRouterLinkForBase(EmbeddedTeilerApps.INQUIRY + '/' + inquiry.inquiryId);
+    return '/' + createRouterLinkForBase(EmbeddedTeilerApps.INQUIRY + '/' + inquiry.id);
   }
   reload() {
     window.location.reload();

@@ -48,7 +48,7 @@ export class TeilerService {
     dialogUploadsService: DialogUploadsService,
     dialogTestsService: DialogTestsService
   ) {
-    let embeddedTeilerApps = [qualityReportService, configurationService, functionTestsService, eventLogService, uploadsService, newInquiriesService, archivedInquiriesService, failedInquiriesService, inquiryService, inquiryDialogService, dialogQualiService, dialogUploadsService];
+    let embeddedTeilerApps = [qualityReportService, configurationService, functionTestsService, eventLogService, uploadsService, newInquiriesService, archivedInquiriesService, failedInquiriesService, inquiryService, inquiryDialogService, dialogQualiService, dialogUploadsService, dialogTestsService];
     this.fetchTeilerCoreAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
     router.events.subscribe(myEvent => this.fetchTeilerCoreAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
   }

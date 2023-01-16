@@ -16,11 +16,9 @@ export class ActiveInquiriesComponent extends InquiriesComponent{
 
   getInquiriesTableItemColumnsToDisplay(): InquiriesTableItemColumn[]{
     return [
+      InquiriesTableItemColumn.ID,
       InquiriesTableItemColumn.NAME,
-      InquiriesTableItemColumn.LOOKING_FOR,
       InquiriesTableItemColumn.RECEIVED_AT,
-      InquiriesTableItemColumn.MATCHING_DATASETS,
-      InquiriesTableItemColumn.AS_OF
     ];
   };
 

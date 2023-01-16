@@ -1,43 +1,42 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <div class="main">
   <div class="title">
-    <h2>{{querrydata.name}}</h2>
+    <h2>{{inquiry.label}}</h2>
   </div>
+  <!--
   <div class="underhead">
-    <button mat-stroked-button class="button">Patients</button>
-    <button mat-stroked-button class="button">Biomaterial</button>
-    <button mat-stroked-button class="button">Clinical Data</button>
-
     <button mat-raised-button (click)="openDialog()" style="margin-left: 835px;">Verlauf</button>
   </div>
+  -->
   <div class="over">
     <hr>
   </div>
   <div class="x1">
     <div class="first">
-      <button mat-button [matMenuTriggerFor]="menu" style="padding-left:6%; padding-right: 6%">Exportieren</button>
+      <button mat-button [matMenuTriggerFor]="menu" style="padding-left:6%; padding-right: 6%" [disabled]="!executionUrl">Exportieren</button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Keine Validierung vornehmen. Das erzeugte Dokument kann deshalb Einträge enthalten, die
+        <button mat-menu-item (click)="createExport()">Keine Validierung vornehmen. Das erzeugte Dokument kann deshalb Einträge enthalten, die
           nicht konform zu den MDR hinterlegten Validierungsinformationen sind
         </button>
-        <button mat-menu-item>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden
+        <button mat-menu-item [disabled]="true">Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden
           nicht in das erzeugte Dokument aufenommen.
         </button>
-        <button mat-menu-item>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden
+        <button mat-menu-item [disabled]="true">Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden
           im erzeugten Dokument orange hinterlegt.
         </button>
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="menu1">Anfrage erneut ausfüllen</button>
       <mat-menu #menu1="matMenu">
-        <button mat-menu-item>Ergebnisliste erzeugen</button>
-        <button mat-menu-item>Nur Anzahl abfragen</button>
+        <button mat-menu-item (click)="postExcelRequest()">Ergebnisliste erzeugen (Excel)</button>
+        <button mat-menu-item (click)="postCsvRequest()">Ergebnisliste erzeugen (CSV)</button>
+        <button mat-menu-item [disabled]="true">Nur Anzahl abfragen</button>
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="menu2" disabled style="margin-left:120px;padding-left:4%; padding-right: 4%">
         Bereits beantwortet
       </button>
       <mat-menu #menu2="matMenu">
       </mat-menu>
-      <button mat-button style="padding-left:6.5%; padding-right: 6.5%">Archivieren</button>
+      <button mat-button style="padding-left:6.5%; padding-right: 6.5%" [disabled]="true">Archivieren</button>
     </div>
     <div class="second">
       <div>
@@ -45,7 +44,9 @@
           <mat-tab-group>
             <mat-tab label="Beschreibung">
               <br>
-              <p>Der Anfragesteller hat keinen Beschreibungstext eingegeben.</p>
+              <div *ngIf="inquiry.description != null && inquiry.description.length > 0;then content else other_content"></div>
+              <ng-template #content>{{inquiry.description}}</ng-template>
+              <ng-template #other_content><p>Der Anfragesteller hat keinen Beschreibungstext eingegeben.</p></ng-template>
               <hr>
               <p>Expóse herunterladen</p>
             </mat-tab>

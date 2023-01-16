@@ -16,7 +16,7 @@
       </div>
     </div>
   <div class="wholetable">
-    <table mat-table [dataSource]="fetchInquiriesTableItems()" class="mat-elevation-z8">
+    <table mat-table [dataSource]="inquiries" class="mat-elevation-z8">
       <div *ngFor="let column of getInquiriesTableItemColumnsToDisplay()">
         <ng-container matColumnDef="{{column}}">
           <th mat-header-cell *matHeaderCellDef>{{column}}</th>
