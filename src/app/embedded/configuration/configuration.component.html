@@ -3,10 +3,10 @@
     <div>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <form class="config-form">
-        <h1>Configuration</h1>
+        <h1 i18n>Configuration</h1>
 
         <button mat-raised-button color="primary" (click)="updateConfigFileContentAndPrepareForDownload()">
-          <mat-icon>cloud_download</mat-icon>
+          <mat-icon> <div i18n>cloud_download </div></mat-icon>
           Download
         </button>
         <a id="{{createConfigFileLinkId}}" [href]="configFileUrl" download="teiler.conf" hidden></a>

@@ -1,12 +1,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 <div mat-dialog-content>
-  <p><br>Startzeit: <br> Bisherige Laufzeit: 0 min<br>Restlaufzeit: 0 min <br><br></p>
+
+  <br><p i18n>Startzeit:</p><br>
+  <p i18n>Bisherige Laufzeit: 0 min</p><br>
+  <p i18n>Restlaufzeit: 0 min</p> <br><br>
   <div class="progress">
     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"  style="width: 25%; background-color: blue; color: white; border: 1px solid blue" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
   </div>
   <p><br>-requesting local data management statistics<br>-requesting local data management results</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Abbrechen</button>
+  <button mat-button (click)="onNoClick()"> <p i18n>Abbrechen </p> </button>
 </div>
