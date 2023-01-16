@@ -390,9 +390,15 @@ export class InquiryComponent implements OnInit, OnDestroy {
     }
   }
 
-  postRequest() {
+  postExcelRequest() {
     if (this.inquiry.id != '') {
       this.inquiriesClientService.postRequest(this.inquiry.id, "ccp", "EXCEL")?.subscribe(value => this.executionUrl = value.responseUrl)
+    }
+  }
+
+  postCsvRequest() {
+    if (this.inquiry.id != '') {
+      this.inquiriesClientService.postRequest(this.inquiry.id, "ccp", "CSV")?.subscribe(value => this.executionUrl = value.responseUrl)
     }
   }
 

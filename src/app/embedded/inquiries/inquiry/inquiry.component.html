@@ -3,9 +3,11 @@
   <div class="title">
     <h2>{{inquiry.label}}</h2>
   </div>
+  <!--
   <div class="underhead">
     <button mat-raised-button (click)="openDialog()" style="margin-left: 835px;">Verlauf</button>
   </div>
+  -->
   <div class="over">
     <hr>
   </div>
@@ -25,7 +27,8 @@
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="menu1">Anfrage erneut ausfüllen</button>
       <mat-menu #menu1="matMenu">
-        <button mat-menu-item (click)="postRequest()">Ergebnisliste erzeugen</button>
+        <button mat-menu-item (click)="postExcelRequest()">Ergebnisliste erzeugen (Excel)</button>
+        <button mat-menu-item (click)="postCsvRequest()">Ergebnisliste erzeugen (CSV)</button>
         <button mat-menu-item [disabled]="true">Nur Anzahl abfragen</button>
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="menu2" disabled style="margin-left:120px;padding-left:4%; padding-right: 4%">
@@ -33,7 +36,7 @@
       </button>
       <mat-menu #menu2="matMenu">
       </mat-menu>
-      <button mat-button style="padding-left:6.5%; padding-right: 6.5%">Archivieren</button>
+      <button mat-button style="padding-left:6.5%; padding-right: 6.5%" [disabled]="true">Archivieren</button>
     </div>
     <div class="second">
       <div>
