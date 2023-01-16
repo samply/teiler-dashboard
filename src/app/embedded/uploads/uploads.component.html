@@ -68,11 +68,12 @@
             <button mat-stroked-button (click)="stepper.reset()">Auswahl zurücksetzen</button>
             <button mat-stroked-button (click)=toggleDisplayDivIf()>Starten</button>
           </div>
+          <br>
           <div mat-dialog-actions>
             <div *ngIf="!isShowDivIf">
               <p>Fortschritt:</p>
               <br>
-              <div class="progress">
+              <div class="progress" style="width:100%">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"  style="width: 25%; background-color: blue; color: white; border: 1px solid blue" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
               </div>
               <br>
