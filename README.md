@@ -13,11 +13,18 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Generate an embedded app
 
 Run `python create-embedded-app.py [parameters]` to automatically perform all steps needed to integrate an embedded app into the Teiler-UI. 
-The parameters are the following:
+There are 3 ways to specify the parameters:
+- by using the CLI arguments (explained below)
+- interactively during the runtime
+- both combined
+
+By default, if a parameter is not specified in the CLI a prompt will be created during the runtime.
+For required parameters this prompt repeats until an acceptable input is given.
+This interactive mode can be turned off by using the `-i` argument, in which case parameters can only be given in the CLI.
 - `-n <string>`: The name of the embedded app (required).
 - `-t <string>`: The title of the embedded app (default: "").
 - `-r <string>`: Roles of the embedded app (default: PUBLIC, choices: PUBLIC, USER, ADMIN). Multiple arguments can be specified here. Example: `-r PUBLIC USER ADMIN`
-- `-d <string>`: Description of the embedded app (default: '').<br />
+- `-d <string>`: Description of the embedded app (default: "").<br />
 - The app requires an icon, which can **either** be specified by the name of the icon class
   - `-ic <string>`: Icon class of the embedded app.
 
@@ -25,6 +32,7 @@ The parameters are the following:
   - `-is <string>`: URL of the icon for the embedded app.
   
   Exactly one of those must be specified. The other one will default to `undefined`.
+- `-i`: Turns off the interactive mode.
 
 ## Build
 
