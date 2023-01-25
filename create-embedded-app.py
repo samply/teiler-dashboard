@@ -3,6 +3,10 @@ from os import path
 import shutil
 import argparse
 
+
+INPUT_INVALID = ["''", '""', "", "undefined"]
+POSSIBLE_ROLES = ["PUBLIC", "USER", "ADMIN"] # the first value should be the default
+
 # Create the parser
 parser = argparse.ArgumentParser(prog="create-embedded-app",
                                  description="Creates an embedded app in the Teiler-UI.")
@@ -24,8 +28,8 @@ parser.add_argument("-r",
                     type=str,
                     nargs="+",
                     default=None,
-                    choices=['PUBLIC', 'USER', 'ADMIN'],
-                    help="Roles of the embedded app (default: PUBLIC)")
+                    choices=POSSIBLE_ROLES,
+                    help=f"Roles of the embedded app (default: {POSSIBLE_ROLES[0]})")
 
 parser.add_argument("-d",
                     dest="DESCRIPTION",
@@ -57,13 +61,10 @@ parser.add_argument("-i",
 args = parser.parse_args()
 args._get_args()
 
-INPUT_INVALID = ["''", '""', "", "undefined"]
-POSSIBLE_ROLES = ["PUBLIC", "USER", "ADMIN"]
-
 def getRoles(role_input):
     while 1:
         if role_input is None:
-            role_input = input("ROLES [PUBLIC, USER, ADMIN] (comma separated): ")
+            role_input = input(f"ROLES [{', '.join(POSSIBLE_ROLES)}] (comma separated): ")
 
         if isinstance(role_input, str):
             role_input = set(role_input.replace(" ", "").upper().split(","))
@@ -123,16 +124,16 @@ if args.INTERACTIVE:
 else:
     # due to the interactive parameter, we cant make the icon_group required
     # anymore, so we have to check it manually
-    if args.ICON_CLASS in INPUT_INVALID and args.ICON_SOURCE_URL in INPUT_INVALID:
-        raise ValueError("Specify ICON_CLASS or ICON_SOURCE_URL.")
     if args.NAME is None:
         raise ValueError("NAME is required!")
+    if args.ICON_CLASS in INPUT_INVALID and args.ICON_SOURCE_URL in INPUT_INVALID:
+        raise ValueError("Specify ICON_CLASS or ICON_SOURCE_URL.")
     if args.TITLE is None:
         args.TITLE = ""
     if args.DESCRIPTION is None:
         args.DESCRIPTION = ""
     if args.ROLES is None:  # no other cases needed here, argparse guarantees correct input if given
-        args.ROLES = ['PUBLIC']
+        args.ROLES = [POSSIBLE_ROLES[0]]
 
 # add quotation marks to the icon parameters, if they are defined
 if args.ICON_CLASS != "undefined":
