@@ -2,7 +2,7 @@ import subprocess
 from os import path
 import shutil
 import argparse
-
+import sys
 
 INPUT_INVALID = ["''", '""', "", "undefined"]
 POSSIBLE_ROLES = ["PUBLIC", "USER", "ADMIN"] # the first value should be the default
@@ -69,7 +69,7 @@ def getRoles(role_input):
         if isinstance(role_input, str):
             role_input = set(role_input.replace(" ", "").upper().split(","))
         else:
-            raise ValueError(f"{role_input} is not a valid input.")
+            sys.exit(f"{role_input} is not a valid input.")
 
         for role in role_input:
             if role not in POSSIBLE_ROLES:
@@ -125,9 +125,9 @@ else:
     # due to the interactive parameter, we cant make the icon_group required
     # anymore, so we have to check it manually
     if args.NAME is None:
-        raise ValueError("NAME is required!")
+        sys.exit("NAME is required!")
     if args.ICON_CLASS in INPUT_INVALID and args.ICON_SOURCE_URL in INPUT_INVALID:
-        raise ValueError("Specify ICON_CLASS or ICON_SOURCE_URL.")
+        sys.exit("Specify ICON_CLASS or ICON_SOURCE_URL.")
     if args.TITLE is None:
         args.TITLE = ""
     if args.DESCRIPTION is None:
