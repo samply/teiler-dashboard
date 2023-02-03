@@ -48,7 +48,20 @@ export class TeilerService {
     dialogUploadsService: DialogUploadsService,
     dialogTestsService: DialogTestsService
   ) {
-    let embeddedTeilerApps = [qualityReportService, configurationService, functionTestsService, eventLogService, uploadsService, newInquiriesService, archivedInquiriesService, failedInquiriesService, inquiryService, inquiryDialogService, dialogQualiService, dialogUploadsService, dialogTestsService];
+    let embeddedTeilerApps = [
+      qualityReportService,
+      configurationService,
+      functionTestsService,
+      eventLogService,
+      uploadsService,
+      newInquiriesService,
+      archivedInquiriesService,
+      failedInquiriesService,
+      inquiryService,
+      inquiryDialogService,
+      dialogQualiService,
+      dialogUploadsService,
+      dialogTestsService];
     this.fetchTeilerCoreAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
     router.events.subscribe(myEvent => this.fetchTeilerCoreAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
   }
@@ -70,7 +83,7 @@ export class TeilerService {
 
   filterTeilerApps() {
     this.teilerApps = [];
-    this.allTeilerApps.filter(teilerApp => this.isAuthorized(teilerApp)).forEach(teilerApp => this.teilerApps.push(teilerApp))
+    this.allTeilerApps.filter(teilerApp => teilerApp.activated && this.isAuthorized(teilerApp)).forEach(teilerApp => this.teilerApps.push(teilerApp))
   }
 
   isAuthorized(teilerApp: TeilerApp) {
