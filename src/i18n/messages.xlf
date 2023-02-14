@@ -4,57 +4,67 @@
     <unit id="4234470053856852293">
       <notes>
         <note category="location">src/app/app.component.html:11</note>
+        <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:27</note>
       </notes>
       <segment>
         <source>Brückenkopf</source>
       </segment>
     </unit>
-    <unit id="3008420115644088420">
+    <unit id="6848854315007631078">
+      <notes>
+        <note category="location">src/app/app.component.html:21</note>
+      </notes>
+      <segment>
+        <source>log in</source>
+      </segment>
+    </unit>
+    <unit id="5113632876676621367">
+      <notes>
+        <note category="location">src/app/app.component.html:24</note>
+      </notes>
+      <segment>
+        <source>log out</source>
+      </segment>
+    </unit>
+    <unit id="6350018030736977811">
       <notes>
         <note category="location">src/app/embedded/configuration/configuration.component.html:6</note>
       </notes>
       <segment>
-        <source>Configuration</source>
+        <source>Konfiguration</source>
       </segment>
     </unit>
-    <unit id="2291678049946240003">
+    <unit id="7633830982491636649">
       <notes>
-        <note category="location">src/app/embedded/configuration/configuration.component.html:9</note>
+        <note category="location">src/app/embedded/configuration/configuration.component.html:10</note>
       </notes>
       <segment>
-        <source>cloud_download </source>
+        <source>Herunterladen</source>
       </segment>
     </unit>
-    <unit id="8258590386315097048">
+    <unit id="8891062677484108726">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:4</note>
       </notes>
       <segment>
-        <source>Event Log</source>
+        <source>Ereignisprotokoll</source>
       </segment>
     </unit>
-    <unit id="6571040539544212643">
-      <notes>
-        <note category="location">src/app/embedded/event-log/event-log.component.html:10</note>
-      </notes>
-      <segment>
-        <source>Suche:</source>
-      </segment>
-    </unit>
-    <unit id="1375913333051334272">
+    <unit id="3840739858389961694">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:25</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:32</note>
       </notes>
       <segment>
-        <source> Timestamp </source>
+        <source>Zeitstempel</source>
       </segment>
     </unit>
-    <unit id="3181866262913879267">
+    <unit id="5644795770167690835">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:31</note>
       </notes>
       <segment>
-        <source> Message </source>
+        <source>Nachricht</source>
       </segment>
     </unit>
     <unit id="8332823385826673272">
@@ -65,169 +75,190 @@
         <source>Funktionstest</source>
       </segment>
     </unit>
-    <unit id="7735872093250682154">
+    <unit id="354905689195417146">
       <notes>
         <note category="location">src/app/embedded/function-tests/function-tests.component.html:14</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:48</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:82</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:104</note>
       </notes>
       <segment>
-        <source> Erreichbarkeit prüfen</source>
+        <source>Erreichbarkeit prüfen</source>
       </segment>
     </unit>
-    <unit id="8198424253360174080">
+    <unit id="2005703878417580473">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:20,23</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:20</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:53</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:85</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:108</note>
       </notes>
       <segment>
-        <source> Sendet einen HTTP GET request an die <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/> konfigurierte Adresse, um zu prüfen, ob<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/> der Dienst erreichbar ist.</source>
+        <source>Sendet einen HTTP GET request an die<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>konfigurierte Adresse, um zu prüfen,<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>ob der Dienst erreichbar ist.</source>
       </segment>
     </unit>
-    <unit id="144728957701993779">
+    <unit id="4451878019720049961">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:35,36</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:32</note>
       </notes>
       <segment>
-        <source> Sendet einen einfachen Testpatienten <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/> Datensatz zur zentralen MDS Datenbank <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>hoch und löscht diesen anschließend wieder. </source>
+        <source>Sendet einen einfachen Testpatienten<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>Datensatz zur zentralen MDS Datenbank<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>hoch und löscht diesen anschließend wieder.</source>
       </segment>
     </unit>
     <unit id="9151298699074996487">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:45</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:41</note>
       </notes>
       <segment>
         <source>Verbindung zum ID-Manager prüfen</source>
       </segment>
     </unit>
-    <unit id="5876025283097724855">
+    <unit id="2265664420876464338">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:52</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:88</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:110</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:59</note>
       </notes>
       <segment>
-        <source>Erreichbarkeit prüfen </source>
+        <source>Export ID anfordern</source>
       </segment>
     </unit>
-    <unit id="2883191681542948753">
+    <unit id="5847200314441653915">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:57</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:62</note>
       </notes>
       <segment>
-        <source> Sendet einen HTTP GET request an die <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>konfigurierte Adresse, um zu prüfen, ob <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>der Dienst erreichbar ist.</source>
+        <source>Holt ein Exportpseudonym für eine<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>gegebene DKTK-Standort ID ab.<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>Die zu prüfende ID bitte nachfolgend angeben.</source>
       </segment>
     </unit>
-    <unit id="6163700229636867111">
+    <unit id="1046397744290011920">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:66,67</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:63</note>
       </notes>
       <segment>
-        <source>Holt ein Exportpseudonym für eine <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>gegebene DKTK-Standort ID ab. <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>Die zu prüfende ID bitte nachfolgend angeben. </source>
-      </segment>
-    </unit>
-    <unit id="7754873394144586720">
-      <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:68,69</note>
-      </notes>
-      <segment>
-        <source> DKTK-Standort ID:</source>
+        <source>DKTK-Standort ID</source>
       </segment>
     </unit>
     <unit id="9039741579547034529">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:81</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:75</note>
       </notes>
       <segment>
         <source>Verbindung zum lokalen Datenmanagement prüfen</source>
       </segment>
     </unit>
-
     <unit id="3354861079372292445">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:100</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:94</note>
       </notes>
       <segment>
         <source>Verbindung zu dem/den Suchbroker(n) prüfen</source>
       </segment>
     </unit>
-
-    <unit id="5201905017792088411">
+    <unit id="1539356813894688208">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:121</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:110</note>
       </notes>
       <segment>
-        <source>Testanfrage herunterladen </source>
+        <source>Prüfen</source>
       </segment>
     </unit>
-    <unit id="1550192715129168091">
+    <unit id="2142741714265462168">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:124,125</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:115</note>
       </notes>
       <segment>
-        <source> Lädt eine einfache, vom<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/> Suchbroker generierte, Testanfrage<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/> herunter. </source>
+        <source>Testanfrage herunterladen</source>
+      </segment>
+    </unit>
+    <unit id="4441106115486149030">
+      <notes>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:119</note>
+      </notes>
+      <segment>
+        <source>Lädt eine einfache, vom<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>Suchbroker generierte, Testanfrage<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>herunter.</source>
       </segment>
     </unit>
     <unit id="7614582309936894316">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:132</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:126</note>
       </notes>
       <segment>
         <source>Testanfrage herunterladen und ausführen</source>
       </segment>
     </unit>
-
-    <unit id="1749144035168647652">
+    <unit id="4584408393196436744">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:18,19</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:130</note>
       </notes>
       <segment>
-        <source>Keine Validierung vornehmen. Das erzeugte Dokument kann deshalb Einträge enthalten, die nicht konform zu den MDR hinterlegten Validierungsinformationen sind </source>
+        <source>Lädt eine einfache, vom<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>Suchbroker generierte Testanfrage<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>herunter und schickt diese an<ph id="2" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>das lokale Datenmanagement.</source>
       </segment>
     </unit>
-    <unit id="5731041698178817634">
+    <unit id="9098454119754693999">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:21,22</note>
+        <note category="location">src/app/embedded/inquiries/inquiries.component.html:11</note>
+        <note category="location">src/app/embedded/inquiries/inquiries.component.html:11</note>
+        <note category="location">src/app/embedded/inquiries/inquiries.component.html:11</note>
+        <note category="location">src/app/embedded/inquiries/inquiries.component.html:11</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
       </notes>
       <segment>
-        <source> Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden nicht in das erzeugte Dokument aufgenommen.</source>
+        <source>Suche</source>
       </segment>
     </unit>
-    <unit id="1269230205186860727">
+    <unit id="5368569711274766465">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:24,25</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:19</note>
       </notes>
       <segment>
-        <source> Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden im erzeugten Dokument orange hinterlegt. </source>
+        <source>Keine Validierung vornehmen. Das erzeugte Dokument kann deshalb Einträge enthalten, die nicht konform zu den MDR hinterlegten Validierungsinformationen sind.</source>
       </segment>
     </unit>
-    <unit id="4986061709456840862">
+    <unit id="4823182825482999580">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:28</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:22</note>
       </notes>
       <segment>
-        <source> Anfrage erneut ausfüllen </source>
+        <source>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden nicht in das erzeugte Dokument aufgenommen.</source>
       </segment>
     </unit>
-    <unit id="1325401736371208528">
+    <unit id="469909917545407381">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:30</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:25</note>
       </notes>
       <segment>
-        <source>Ergebnisliste erzeugen (Excel) </source>
+        <source>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden im erzeugten Dokument orange hinterlegt.</source>
       </segment>
     </unit>
-    <unit id="67743965786856626">
+    <unit id="4885766104050604377">
+      <notes>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:29</note>
+      </notes>
+      <segment>
+        <source> Anfrage erneut ausfüllen</source>
+      </segment>
+    </unit>
+    <unit id="7644487670693293606">
       <notes>
         <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:31</note>
       </notes>
       <segment>
-        <source>Ergebnisliste erzeugen (CSV) </source>
+        <source>Ergebnisliste erzeugen (Excel)</source>
       </segment>
     </unit>
-    <unit id="2685906136198633224">
+    <unit id="3047453899515192138">
       <notes>
         <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:32</note>
       </notes>
       <segment>
-        <source> Nur Anzahl abfragen </source>
+        <source>Ergebnisliste erzeugen (CSV)</source>
+      </segment>
+    </unit>
+    <unit id="5425384892297548117">
+      <notes>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:33</note>
+      </notes>
+      <segment>
+        <source>Nur Anzahl abfragen</source>
       </segment>
     </unit>
     <unit id="9179449244500388247">
@@ -238,17 +269,17 @@
         <source>Bereits beantwortet</source>
       </segment>
     </unit>
-    <unit id="3240763490490130240">
+    <unit id="6275450215073900352">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:39</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:38</note>
       </notes>
       <segment>
-        <source> Archivieren </source>
+        <source>Archivieren</source>
       </segment>
     </unit>
     <unit id="7034201329736814695">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:49</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:48</note>
       </notes>
       <segment>
         <source>Der Anfragesteller hat keinen Beschreibungstext eingegeben.</source>
@@ -256,560 +287,129 @@
     </unit>
     <unit id="118024421195624369">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:51</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:50</note>
       </notes>
       <segment>
         <source>Expóse herunterladen</source>
       </segment>
     </unit>
-    <unit id="6090374670180020942">
+    <unit id="7814399578676262996">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:55</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:53</note>
       </notes>
       <segment>
-        <source> Keine Dokumente angehängt </source>
+        <source>Keine Dokumente angehängt</source>
       </segment>
     </unit>
-    <unit id="4382832506319149887">
+    <unit id="8953033926734869941">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:57</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:59</note>
       </notes>
       <segment>
-        <source>Datei auswählen </source>
+        <source>Name</source>
       </segment>
     </unit>
-    <unit id="4400378012619322177">
+    <unit id="681866609203884162">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:62,67</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:60</note>
       </notes>
       <segment>
-        <source> Name:Pierre Deply <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/> Telefonnummer: <ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/> Email:p.deply@dkfz.heidelberg.de <ph id="2" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/> Institution: </source>
+        <source>Telefonnummer</source>
       </segment>
     </unit>
-    <unit id="4345004530550724653">
+    <unit id="8115083664628466958">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:70,72</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:61</note>
       </notes>
       <segment>
-        <source> Beantwortet am: <ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/> Antwort: 261</source>
+        <source>E-Mail</source>
+      </segment>
+    </unit>
+    <unit id="2598039109801317313">
+      <notes>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:62</note>
+      </notes>
+      <segment>
+        <source>Einrichtung</source>
+      </segment>
+    </unit>
+    <unit id="422776820557165963">
+      <notes>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:65</note>
+      </notes>
+      <segment>
+        <source>Beantwortet am</source>
+      </segment>
+    </unit>
+    <unit id="4220537191485568025">
+      <notes>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:65</note>
+      </notes>
+      <segment>
+        <source>Antwort</source>
       </segment>
     </unit>
     <unit id="789555460980371940">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:84</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:77</note>
       </notes>
       <segment>
         <source>Suchkriterien</source>
       </segment>
     </unit>
-    <unit id="6823251942281124378">
+    <unit id="3914344858413020487">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:116</note>
+        <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:4</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:12</note>
       </notes>
       <segment>
-        <source>Diganose</source>
+        <source>Startzeit</source>
       </segment>
     </unit>
-    <unit id="8668685473099647193">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:118</note>
-      </notes>
-      <segment>
-        <source> Enthält </source>
-      </segment>
-    </unit>
-    <unit id="5113624452474575370">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:363</note>
-      </notes>
-      <segment>
-        <source>Patient KRZJH7TK</source>
-      </segment>
-    </unit>
-    <unit id="7452031862552386825">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:369</note>
-      </notes>
-      <segment>
-        <source>Datum des letztbekannten Vitalstatus: </source>
-      </segment>
-    </unit>
-    <unit id="1568210931011397737">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:373</note>
-      </notes>
-      <segment>
-        <source> Vitalstatus: </source>
-      </segment>
-    </unit>
-    <unit id="7032978191567718693">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:374</note>
-      </notes>
-      <segment>
-        <source> verstorben </source>
-      </segment>
-    </unit>
-    <unit id="3683926126865960607">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:377</note>
-      </notes>
-      <segment>
-        <source> Geschlecht: </source>
-      </segment>
-    </unit>
-    <unit id="2515364725479573779">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:378</note>
-      </notes>
-      <segment>
-        <source> weiblich </source>
-      </segment>
-    </unit>
-    <unit id="674989727775521947">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:381</note>
-      </notes>
-      <segment>
-        <source> Geburtsdatum:</source>
-      </segment>
-    </unit>
-    <unit id="637167529862717440">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:397</note>
-      </notes>
-      <segment>
-        <source>Alter bei Erstdiagnose: </source>
-      </segment>
-    </unit>
-    <unit id="1231088149818368464">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:401</note>
-      </notes>
-      <segment>
-        <source> ICD-Katalog (Version):</source>
-      </segment>
-    </unit>
-    <unit id="6968730871743209065">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:402</note>
-      </notes>
-      <segment>
-        <source>ICD-General 2015 </source>
-      </segment>
-    </unit>
-    <unit id="7763833825356716702">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:405</note>
-      </notes>
-      <segment>
-        <source>Tumor Diagnosedatum: </source>
-      </segment>
-    </unit>
-    <unit id="2724052099691173687">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:423</note>
-      </notes>
-      <segment>
-        <source>ICD-O Katalog Morphologie (Version): </source>
-      </segment>
-    </unit>
-    <unit id="4151353125754861282">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:427</note>
-      </notes>
-      <segment>
-        <source>KMorphologie: </source>
-      </segment>
-    </unit>
-    <unit id="3050919264824384020">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:443</note>
-      </notes>
-      <segment>
-        <source>TNM-r-Symbol: </source>
-      </segment>
-    </unit>
-    <unit id="5163682811556033998">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:444</note>
-      </notes>
-      <segment>
-        <source> native Klassifikation vor Eintreten eines Rezidivs</source>
-      </segment>
-    </unit>
-    <unit id="7159450396158942445">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:452</note>
-      </notes>
-      <segment>
-        <source>Kategorie wurde durch klinische Angaben festgestellt </source>
-      </segment>
-    </unit>
-    <unit id="6415344456986710454">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:468</note>
-      </notes>
-      <segment>
-        <source> native Klassifikation</source>
-      </segment>
-    </unit>
-    <unit id="6392373394534210799">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:479</note>
-      </notes>
-      <segment>
-        <source> Datum der TNM-Dokumentation/Datum Befund</source>
-      </segment>
-    </unit>
-    <unit id="2435470643823209727">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:505</note>
-      </notes>
-      <segment>
-        <source>Immuntherapie: </source>
-      </segment>
-    </unit>
-    <unit id="3195276107973285981">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:509</note>
-      </notes>
-      <segment>
-        <source>Knochenmarktransplantation: </source>
-      </segment>
-    </unit>
-    <unit id="3347718376332597479">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:513</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:591</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:696</note>
-      </notes>
-      <segment>
-        <source>Datum Lymphknoten-Rezidiv: </source>
-      </segment>
-    </unit>
-    <unit id="8843604265579251982">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:521</note>
-      </notes>
-      <segment>
-        <source> Synthetischer Progresseintrag</source>
-      </segment>
-    </unit>
-    <unit id="1198291140741814968">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:525</note>
-      </notes>
-      <segment>
-        <source>Lymphknoten-Rezidiv: </source>
-      </segment>
-    </unit>
-    <unit id="6552208700894937029">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:526</note>
-      </notes>
-      <segment>
-        <source> Fehlende Angabe</source>
-      </segment>
-    </unit>
-    <unit id="5522530115464813802">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:529</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:607</note>
-      </notes>
-      <segment>
-        <source>Datum Fernmetastasen: </source>
-      </segment>
-    </unit>
-    <unit id="3056009435115179727">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:533</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:716</note>
-      </notes>
-      <segment>
-        <source>Ansprechen im Verlauf: </source>
-      </segment>
-    </unit>
-    <unit id="6162616549695590402">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:537</note>
-      </notes>
-      <segment>
-        <source> Strahlentherapie:</source>
-      </segment>
-    </unit>
-    <unit id="3532495335287130872">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:541</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:621</note>
-      </notes>
-      <segment>
-        <source> Fernmetastasen:</source>
-      </segment>
-    </unit>
-    <unit id="3780777455232606079">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:545</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:625</note>
-      </notes>
-      <segment>
-        <source> Hormontherapie:</source>
-      </segment>
-    </unit>
-    <unit id="3817905239053461744">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:549</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:637</note>
-      </notes>
-      <segment>
-        <source> Untersuchungs-/ Befunddatum im Verlauf:</source>
-      </segment>
-    </unit>
-    <unit id="400066714707960753">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:553</note>
-      </notes>
-      <segment>
-        <source> Chemotherapie: </source>
-      </segment>
-    </unit>
-    <unit id="7848468608662709817">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:557</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:645</note>
-      </notes>
-      <segment>
-        <source>Lokales/regionäres Rezidiv: </source>
-      </segment>
-    </unit>
-    <unit id="7738880030634072243">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:561</note>
-      </notes>
-      <segment>
-        <source>Datum lokales/regionäres Rezidiv: </source>
-      </segment>
-    </unit>
-    <unit id="294597932264750204">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:579</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:684</note>
-      </notes>
-      <segment>
-        <source> Immuntherapie:</source>
-      </segment>
-    </unit>
-    <unit id="1837394272515247369">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:583</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:688</note>
-      </notes>
-      <segment>
-        <source> Knochenmarktransplantation:</source>
-      </segment>
-    </unit>
-    <unit id="1346854241719287820">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:587</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:692</note>
-      </notes>
-      <segment>
-        <source> Intention OP:</source>
-      </segment>
-    </unit>
-    <unit id="2183598722514043825">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:588</note>
-      </notes>
-      <segment>
-        <source> kurativ</source>
-      </segment>
-    </unit>
-    <unit id="6016121760024800659">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:599</note>
-      </notes>
-      <segment>
-        <source> Synthetischer Progresseintrag:</source>
-      </segment>
-    </unit>
-    <unit id="2085985103061269641">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:603</note>
-      </notes>
-      <segment>
-        <source> Lymphknoten-Rezidiv:</source>
-      </segment>
-    </unit>
-    <unit id="4164754461187694694">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:604</note>
-      </notes>
-      <segment>
-        <source> Kein Lymphknotenbefall nachweisbar</source>
-      </segment>
-    </unit>
-    <unit id="8033131200991640398">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:611</note>
-      </notes>
-      <segment>
-        <source> Ansprechen im Verlauf:</source>
-      </segment>
-    </unit>
-    <unit id="4227764242194262193">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:612,613</note>
-      </notes>
-      <segment>
-        <source> Teilremission / mindestens 50% Rückgang des Tumors (partial remission, PR)</source>
-      </segment>
-    </unit>
-    <unit id="3918153310645450642">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:617</note>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:720</note>
-      </notes>
-      <segment>
-        <source>Strahlentherapie: </source>
-      </segment>
-    </unit>
-    <unit id="5490432231285413916">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:622</note>
-      </notes>
-      <segment>
-        <source>Keine Fernmetastasen nachweisbar </source>
-      </segment>
-    </unit>
-    <unit id="2796932815825024786">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:646</note>
-      </notes>
-      <segment>
-        <source>Tumorreste (Residualtumor) </source>
-      </segment>
-    </unit>
-    <unit id="3774043724287177303">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:649</note>
-      </notes>
-      <segment>
-        <source> Datum lokales/regionäres Rezidiv:</source>
-      </segment>
-    </unit>
-    <unit id="5316014516130865536">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:664</note>
-      </notes>
-      <segment>
-        <source>Gesamtbeurteilung Resttumor: </source>
-      </segment>
-    </unit>
-    <unit id="328075281947267601">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:665</note>
-      </notes>
-      <segment>
-        <source>Mikroskopischer Residualtumor </source>
-      </segment>
-    </unit>
-    <unit id="1117747757661199713">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:704</note>
-      </notes>
-      <segment>
-        <source>Synthetischer Progresseintrag: </source>
-      </segment>
-    </unit>
-    <unit id="4583392824237733709">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:717</note>
-      </notes>
-      <segment>
-        <source>Vollremission (complete remission, CR) </source>
-      </segment>
-    </unit>
-    <unit id="5218879749146324240">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:732</note>
-      </notes>
-      <segment>
-        <source>Untersuchungs-/ Befunddatum im Verlauf: </source>
-      </segment>
-    </unit>
-    <unit id="798581221224761270">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:759</note>
-      </notes>
-      <segment>
-        <source> Gesamtbeurteilung Resttumor:</source>
-      </segment>
-    </unit>
-    <unit id="4107810539005290475">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:760</note>
-      </notes>
-      <segment>
-        <source> kein Residualtumor</source>
-      </segment>
-    </unit>
-    <unit id="5855333760067603327">
-      <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:763</note>
-      </notes>
-      <segment>
-        <source>Lokale Beurteilung Resttumor: </source>
-      </segment>
-    </unit>
-    <unit id="355113394317179971">
+    <unit id="3206897127516304134">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:5</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:12</note>
       </notes>
       <segment>
-        <source>Startzeit:</source>
+        <source>Verstrichene Laufzeit</source>
       </segment>
     </unit>
-    <unit id="3640070275276632401">
+    <unit id="2869773054150578799">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:6</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:12</note>
       </notes>
       <segment>
-        <source>Bisherige Laufzeit: 0 min</source>
+        <source>Restlaufzeit</source>
       </segment>
     </unit>
-    <unit id="501125699523659347">
-      <notes>
-        <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:7</note>
-      </notes>
-      <segment>
-        <source>Restlaufzeit: 0 min</source>
-      </segment>
-    </unit>
-    <unit id="136970423974293667">
+    <unit id="7624133960269641605">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:14</note>
         <note category="location">src/app/embedded/pop-ups/dialog-uploads/dialog-uploads.component.html:13</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:17</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:80</note>
       </notes>
       <segment>
-        <source>Abbrechen </source>
+        <source>Abbrechen</source>
       </segment>
     </unit>
-    <unit id="4060004420913067634">
+    <unit id="314315645942131479">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-tests/dialog-tests.component.html:2</note>
       </notes>
       <segment>
-        <source>Info:</source>
+        <source>Info</source>
       </segment>
     </unit>
-    <unit id="7307373920921198392">
+    <unit id="4687226433765004136">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-uploads/dialog-uploads.component.html:4</note>
         <note category="location">src/app/embedded/uploads/uploads.component.html:74</note>
       </notes>
       <segment>
-        <source>Fortschritt:</source>
+        <source>Fortschritt</source>
       </segment>
     </unit>
     <unit id="4147144933915335175">
@@ -828,12 +428,20 @@
         <source>Qualitätsbericht</source>
       </segment>
     </unit>
-    <unit id="1244565487329406717">
+    <unit id="2551151927873073463">
       <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:32</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:10</note>
       </notes>
       <segment>
-        <source> Zeitstempel</source>
+        <source>Generieren</source>
+      </segment>
+    </unit>
+    <unit id="2724055831234181057">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:37</note>
+      </notes>
+      <segment>
+        <source>Version</source>
       </segment>
     </unit>
     <unit id="6445536054910475490">
@@ -854,14 +462,26 @@
     </unit>
     <unit id="914304656572352050">
       <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:22</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:35</note>
         <note category="location">src/app/embedded/uploads/uploads.component.html:49</note>
       </notes>
       <segment>
         <source>Auswahl</source>
       </segment>
     </unit>
+    <unit id="6955197012374967605">
+      <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:28</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:42</note>
+      </notes>
+      <segment>
+        <source>Nächste</source>
+      </segment>
+    </unit>
     <unit id="8930526198656004715">
       <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:41</note>
         <note category="location">src/app/embedded/uploads/uploads.component.html:55</note>
       </notes>
       <segment>
@@ -871,17 +491,10 @@
     <unit id="6802674628954006174">
       <notes>
         <note category="location">src/app/embedded/uploads/uploads.component.html:56</note>
-      </notes>
-      <segment>
-        <source>Ihre Auswahl</source>
-      </segment>
-    </unit>
-    <unit id="808188621002324102">
-      <notes>
         <note category="location">src/app/embedded/uploads/uploads.component.html:62</note>
       </notes>
       <segment>
-        <source>Ihre Auswahl:</source>
+        <source>Ihre Auswahl</source>
       </segment>
     </unit>
     <unit id="1089358809969161036">
@@ -900,44 +513,77 @@
         <source>Starten</source>
       </segment>
     </unit>
-    <unit id="7624133960269641605">
-      <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:80</note>
-      </notes>
-      <segment>
-        <source>Abbrechen</source>
-      </segment>
-    </unit>
-    <unit id="5211686893582427127">
+    <unit id="7156169325434342107">
       <notes>
         <note category="location">src/app/embedded/uploads/uploads.component.html:107</note>
       </notes>
       <segment>
-        <source> Gestartet um </source>
+        <source>Gestartet um</source>
       </segment>
     </unit>
-    <unit id="7039629196749484089">
+    <unit id="4319219110345032132">
       <notes>
         <note category="location">src/app/embedded/uploads/uploads.component.html:112</note>
       </notes>
       <segment>
-        <source> Gestartet von </source>
+        <source>Gestartet von</source>
       </segment>
     </unit>
-    <unit id="6971331390410833223">
+    <unit id="197680319909290273">
+      <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:117</note>
+      </notes>
+      <segment>
+        <source>Stand</source>
+      </segment>
+    </unit>
+    <unit id="6631852761620844734">
       <notes>
         <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:7</note>
       </notes>
       <segment>
-        <source>Local Apps</source>
+        <source>Lokale Apps</source>
       </segment>
     </unit>
-    <unit id="6138538715397095480">
+    <unit id="2598281716737340252">
       <notes>
         <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:26</note>
       </notes>
       <segment>
-        <source>Central Apps</source>
+        <source>Zentrale Apps</source>
+      </segment>
+    </unit>
+    <unit id="2068445951425750817">
+      <notes>
+        <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:26</note>
+      </notes>
+      <segment>
+        <source>Willkommen auf Ihrem</source>
+      </segment>
+    </unit>
+    <unit id="8272241371255446389">
+      <notes>
+        <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:30,35</note>
+      </notes>
+      <segment>
+        <source>
+    Sie befinden sich auf der Einstiegsseite des Brückenkopfes am Standort.
+    Der Brückenkopf dient dazu, die Daten eines Standorts in ein DKTK-kompatibles Format zu überführen und für die anderen Komponenten nutzbar zu machen.
+    Er ist zwar Software des DKTK, wird jedoch unter lokaler Hoheit, also der in betrieben.
+    Weitere Informationen zum Brückenkopfkonzept finden Sie in den Konzepten der DKTK-Arbeitsgruppe CCP-IT, die Sie unter
+  </source>
+      </segment>
+    </unit>
+    <unit id="198728259139807699">
+      <notes>
+        <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:36,40</note>
+      </notes>
+      <segment>
+        <source>
+    frei herunterladen können.
+    Diese Seite zeigt, aus welchen Softwarekomponenten Ihr Brückenkopf besteht. Mit einem Linksklick auf einen Eintrag werden Sie zur entsprechenden Komponente weitergeleitet.
+    Außerdem können Sie Erreichbarkeit und Version jeder Komponente einsehen.
+  </source>
       </segment>
     </unit>
   </file>
