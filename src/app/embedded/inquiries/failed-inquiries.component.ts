@@ -23,8 +23,4 @@ export class FailedInquiriesComponent extends InquiriesComponent{
     ];
   };
 
-  getTitel(): string {
-    return "Fehlerhafte Suchanfragen";
-  }
-
 }

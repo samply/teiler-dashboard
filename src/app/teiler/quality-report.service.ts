@@ -7,10 +7,10 @@ import {Router} from "@angular/router";
 })
 export class QualityReportService extends EmbeddedTeilerApp {
 
-  description: string = "Generate and download quality reports";
+  description: string = $localize`Qualitätsberichte erzeugen und ansehen`;
   iconClass: string = "bi bi-file-earmark-excel-fill";
   iconSourceUrl: string | undefined = undefined;
-  title: string = "Quality Report";
+  title: string = $localize`Qualitätsbericht`;
   roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
 
   constructor(router: Router) {

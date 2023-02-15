@@ -15,28 +15,27 @@
     <div class="first">
       <button mat-button [matMenuTriggerFor]="menu" style="padding-left:6%; padding-right: 6%" [disabled]="!executionUrl">Exportieren</button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="createExport()">Keine Validierung vornehmen. Das erzeugte Dokument kann deshalb Einträge enthalten, die
-          nicht konform zu den MDR hinterlegten Validierungsinformationen sind
+        <button mat-menu-item (click)="createExport()">
+          <span i18n>Keine Validierung vornehmen. Das erzeugte Dokument kann deshalb Einträge enthalten, die nicht konform zu den MDR hinterlegten Validierungsinformationen sind.</span>
         </button>
-        <button mat-menu-item [disabled]="true">Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden
-          nicht in das erzeugte Dokument aufenommen.
+        <button mat-menu-item [disabled]="true">
+          <span i18n>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden nicht in das erzeugte Dokument aufgenommen.</span>
         </button>
-        <button mat-menu-item [disabled]="true">Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden
-          im erzeugten Dokument orange hinterlegt.
+        <button mat-menu-item [disabled]="true">
+          <span i18n>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden im erzeugten Dokument orange hinterlegt.</span>
         </button>
       </mat-menu>
-      <button mat-button [matMenuTriggerFor]="menu1">Anfrage erneut ausfüllen</button>
+      <button mat-button [matMenuTriggerFor]="menu1">
+        <span i18n> Anfrage erneut ausfüllen</span></button>
       <mat-menu #menu1="matMenu">
-        <button mat-menu-item (click)="postExcelRequest()">Ergebnisliste erzeugen (Excel)</button>
-        <button mat-menu-item (click)="postCsvRequest()">Ergebnisliste erzeugen (CSV)</button>
-        <button mat-menu-item [disabled]="true">Nur Anzahl abfragen</button>
+        <button mat-menu-item (click)="postExcelRequest()" i18n>Ergebnisliste erzeugen (Excel)</button>
+        <button mat-menu-item (click)="postCsvRequest()" i18n>Ergebnisliste erzeugen (CSV)</button>
+        <button mat-menu-item [disabled]="true" i18n>Nur Anzahl abfragen</button>
       </mat-menu>
-      <button mat-button [matMenuTriggerFor]="menu2" disabled style="margin-left:120px;padding-left:4%; padding-right: 4%">
-        Bereits beantwortet
-      </button>
+      <button mat-button [matMenuTriggerFor]="menu2" disabled style="margin-left:120px;padding-left:4%; padding-right: 4%" i18n>Bereits beantwortet</button>
       <mat-menu #menu2="matMenu">
       </mat-menu>
-      <button mat-button style="padding-left:6.5%; padding-right: 6.5%" [disabled]="true">Archivieren</button>
+      <button mat-button style="padding-left:6.5%; padding-right: 6.5%" [disabled]="true" i18n>Archivieren</button>
     </div>
     <div class="second">
       <div>
@@ -46,30 +45,24 @@
               <br>
               <div *ngIf="inquiry.description != null && inquiry.description.length > 0;then content else other_content"></div>
               <ng-template #content>{{inquiry.description}}</ng-template>
-              <ng-template #other_content><p>Der Anfragesteller hat keinen Beschreibungstext eingegeben.</p></ng-template>
+              <ng-template #other_content><p i18n>Der Anfragesteller hat keinen Beschreibungstext eingegeben.</p></ng-template>
               <hr>
-              <p>Expóse herunterladen</p>
+              <p i18n>Expóse herunterladen</p>
             </mat-tab>
             <mat-tab label="Dokumente">
-              <br>
-              Keine Dokumente angehängt
+              <br><span i18n>Keine Dokumente angehängt</span>
               <hr>
-              Datei auswählen <br> <br>
-              <input type="file" class="file-upload" onchange="console.log(event.target.files)">
+              <input type="file" class="file-upload" onchange="console.log(event.target.files)" >
             </mat-tab>
             <mat-tab label="Kontakt">
               <br>
-              <p>
-                Name:Pierre Deply <br>
-                Telefonnummer: <br>
-                Email:p.deply@dkfz.heidelberg.de <br>
-                Institution:
-              </p>
+              <span i18n>Name</span>:Pierre Deply<br>
+              <span i18n>Telefonnummer</span>: +49 1234 567<br>
+              <span i18n>E-Mail</span>:p.deply@dkfz.heidelberg.de<br>
+              <span i18n>Einrichtung</span>: DKFZ
             </mat-tab>
             <mat-tab label="Antwort">
-              <br>
-              Beantwortet am: <br>
-              Antwort: 261
+              <br><span i18n>Beantwortet am</span>: 15.2.2023<br><span i18n>Antwort</span>: 261
             </mat-tab>
           </mat-tab-group>
         </div>
@@ -81,7 +74,7 @@
                              (closed)="panelOpenState = false" class="expand" style="float:left;width:100%">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Suchkriterien
+             <span i18n>Suchkriterien</span>
             </mat-panel-title>
           </mat-expansion-panel-header>
           <div class="and_or">

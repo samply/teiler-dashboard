@@ -11,10 +11,10 @@ export class ConfigurationService extends EmbeddedTeilerApp {
     super(EmbeddedTeilerApps.CONFIGURATION, router);
   }
 
-  description: string = "Configure teiler services";
+  description: string = $localize`Teiler Services einrichten`;
   iconClass: string = "bi bi-gear-wide";
   iconSourceUrl: string | undefined = undefined;
-  title: string = "Teiler Configuration";
+  title: string = $localize`Teilers Konfiguration`;
   roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
 
   /*
