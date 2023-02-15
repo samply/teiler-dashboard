@@ -7,10 +7,10 @@ import {Router} from "@angular/router";
 })
 export class EventLogService extends EmbeddedTeilerApp {
 
-  description: string = "Check the chronology of events";
+  description: string = $localize`Ereignisse überprüfen`;
   iconClass: string = "bi bi-book";
   iconSourceUrl: string | undefined = undefined;
-  title: string = "Event Log";
+  title: string = $localize`Ereignislog`;
   roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
 
   constructor(router: Router) {

@@ -21,7 +21,7 @@
           <mat-form-field appearance="fill">
             <mat-label><span i18n>Auswahl</span></mat-label>
             <select matNativeControl [formControl]="optionControl" name="option">
-              <option *ngFor="let option of op1" [value]="option.value">{{ option.value }}</option>
+              <option *ngFor="let option of op1" [value]="option.value">{{ option.viewValue }}</option>
             </select>
           </mat-form-field>
           <div>
@@ -34,7 +34,7 @@
           <mat-form-field appearance="fill">
             <mat-label><span i18n>Auswahl</span></mat-label>
             <select matNativeControl [formControl]="option2Control" name="option">
-              <option *ngFor="let option of op2" [value]="option.value">{{ option.value }}</option>
+              <option *ngFor="let option of op2" [value]="option.value">{{ option.viewValue }}</option>
             </select>
           </mat-form-field>
           <div>
@@ -48,7 +48,7 @@
           <mat-form-field appearance="fill">
             <mat-label><span i18n>Auswahl</span></mat-label>
             <select matNativeControl [formControl]="option3Control" name="option">
-              <option *ngFor="let option of op3" [value]="option.value">{{ option.value }}</option>
+              <option *ngFor="let option of op3" [value]="option.value">{{ option.viewValue }}</option>
             </select>
           </mat-form-field>
           <div>
@@ -104,7 +104,7 @@
       </ng-container>
 
       <ng-container matColumnDef="startedat">
-        <th mat-header-cell *matHeaderCellDef i18n>Gestartet um</th>
+        <th mat-header-cell *matHeaderCellDef i18n>Gestartet am</th>
         <td mat-cell *matCellDef="let element"> {{element.startedat}}</td>
       </ng-container>
 

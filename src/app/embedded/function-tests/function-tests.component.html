@@ -19,19 +19,19 @@
     <mat-card>
       <span i18n>Sendet einen HTTP GET request an die<br>konfigurierte Adresse, um zu pr&uuml;fen,<br>ob der Dienst erreichbar ist.</span>
       <br><br>
-      <button mat-stroked-button onclick="document.getElementById('1').style.backgroundColor = '#dff0d8'" (click)="isShowInfo = !isShowInfo">Prüfen</button>
+      <button mat-stroked-button onclick="document.getElementById('1').style.backgroundColor = '#dff0d8'" (click)="isShowInfo = !isShowInfo" i18n>Prüfen</button>
     </mat-card>
   </div>
 
   <div class="float" style="margin-left:1%">
-    <mat-card id="2">Testpatient hochladen und anschließend l&ouml;schen
+    <mat-card id="2"><span i18n>Testpatient hochladen und anschließend l&ouml;schen</span>
       <div *ngIf="isShowInfo1">
         <button mat-mini-fab class="infb" (click)="openDialog()"><i aria-hidden="false" class="bi bi-info-square"></i></button>
       </div></mat-card>
     <mat-card>
       <span i18n>Sendet einen einfachen Testpatienten<br>Datensatz zur zentralen MDS Datenbank<br>hoch und löscht diesen anschließend wieder.</span>
       <br><br>
-      <button mat-stroked-button onclick="document.getElementById('2').style.backgroundColor = '#dff0d8'" (click)="isShowInfo1 = !isShowInfo1">Prüfen</button>
+      <button mat-stroked-button onclick="document.getElementById('2').style.backgroundColor = '#dff0d8'" (click)="isShowInfo1 = !isShowInfo1" i18n>Prüfen</button>
     </mat-card>
   </div>
 
@@ -51,7 +51,7 @@
       </mat-card>
       <mat-card>
         <span i18n>Sendet einen HTTP GET request an die<br>konfigurierte Adresse, um zu pr&uuml;fen,<br>ob der Dienst erreichbar ist.</span>
-        <button mat-stroked-button onclick="document.getElementById('3').style.backgroundColor = '#dff0d8'" (click)="isShowInfo2 = !isShowInfo2" style="margin-bottom: 0.5%; margin-top: 12.5%">Prüfen</button>
+        <button mat-stroked-button onclick="document.getElementById('3').style.backgroundColor = '#dff0d8'" (click)="isShowInfo2 = !isShowInfo2" style="margin-bottom: 0.5%; margin-top: 12.5%" i18n>Prüfen</button>
       </mat-card>
     </div>
 
@@ -64,7 +64,7 @@
         <mat-form-field style="margin-bottom:2.5%">
           <input matInput>
         </mat-form-field>
-        <button mat-stroked-button onclick="document.getElementById('4').style.backgroundColor = '#dff0d8'" (click)="isShowInfo3 = !isShowInfo3">Prüfen</button>
+        <button mat-stroked-button onclick="document.getElementById('4').style.backgroundColor = '#dff0d8'" (click)="isShowInfo3 = !isShowInfo3" i18n>Prüfen</button>
       </mat-card>
     </div>
 
@@ -84,7 +84,7 @@
       </div></mat-card>
       <mat-card><span i18n>Sendet einen HTTP GET request an die<br>konfigurierte Adresse, um zu pr&uuml;fen,<br>ob der Dienst erreichbar ist.</span>
         <br><br>
-        <button mat-stroked-button onclick="document.getElementById('5').style.backgroundColor = '#dff0d8'" (click)="isShowInfo4 = !isShowInfo4">Prüfen</button>
+        <button mat-stroked-button onclick="document.getElementById('5').style.backgroundColor = '#dff0d8'" (click)="isShowInfo4 = !isShowInfo4" i18n>Prüfen</button>
       </mat-card>
     </div>
 
@@ -118,7 +118,7 @@
         <mat-card>
           <span i18n>L&auml;dt eine einfache, vom<br>Suchbroker generierte, Testanfrage<br>herunter.</span>
           <br><br>
-          <button mat-stroked-button onclick="document.getElementById('7').style.backgroundColor = '#dff0d8'" (click)="isShowInfo6 = !isShowInfo6"><div>Prüfen</div></button>
+          <button mat-stroked-button onclick="document.getElementById('7').style.backgroundColor = '#dff0d8'" (click)="isShowInfo6 = !isShowInfo6" i18n>Prüfen</button>
         </mat-card>
       </div>
 
@@ -129,7 +129,7 @@
         <mat-card>
           <span i18n>L&auml;dt eine einfache, vom<br>Suchbroker generierte Testanfrage<br>herunter und schickt diese an<br>das lokale Datenmanagement.</span>
           <br><br>
-          <button mat-stroked-button onclick="document.getElementById('8').style.backgroundColor = '#dff0d8'" (click)="isShowInfo7 = !isShowInfo7"><div>Prüfen</div></button>
+          <button mat-stroked-button onclick="document.getElementById('8').style.backgroundColor = '#dff0d8'" (click)="isShowInfo7 = !isShowInfo7" i18n>Prüfen</button>
         </mat-card>
       </div>
 

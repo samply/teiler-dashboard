@@ -10,28 +10,29 @@
         <source>Brückenkopf</source>
       </segment>
     </unit>
-    <unit id="6848854315007631078">
+    <unit id="8458737915529390534">
       <notes>
         <note category="location">src/app/app.component.html:21</note>
       </notes>
       <segment>
-        <source>log in</source>
+        <source>einloggen</source>
       </segment>
     </unit>
-    <unit id="5113632876676621367">
+    <unit id="9065377445413378007">
       <notes>
         <note category="location">src/app/app.component.html:24</note>
       </notes>
       <segment>
-        <source>log out</source>
+        <source>ausloggen</source>
       </segment>
     </unit>
-    <unit id="6350018030736977811">
+    <unit id="5886354452287257792">
       <notes>
         <note category="location">src/app/embedded/configuration/configuration.component.html:6</note>
+        <note category="location">src/app/teiler/configuration.service.ts:17</note>
       </notes>
       <segment>
-        <source>Konfiguration</source>
+        <source>Teilers Konfiguration</source>
       </segment>
     </unit>
     <unit id="7633830982491636649">
@@ -97,6 +98,29 @@
         <source>Sendet einen HTTP GET request an die<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>konfigurierte Adresse, um zu prüfen,<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>ob der Dienst erreichbar ist.</source>
       </segment>
     </unit>
+    <unit id="1539356813894688208">
+      <notes>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:22</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:34</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:54</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:67</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:87</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:110</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:121</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:132</note>
+      </notes>
+      <segment>
+        <source>Prüfen</source>
+      </segment>
+    </unit>
+    <unit id="1249069311610531659">
+      <notes>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:27</note>
+      </notes>
+      <segment>
+        <source>Testpatient hochladen und anschließend löschen</source>
+      </segment>
+    </unit>
     <unit id="4451878019720049961">
       <notes>
         <note category="location">src/app/embedded/function-tests/function-tests.component.html:32</note>
@@ -151,14 +175,6 @@
       </notes>
       <segment>
         <source>Verbindung zu dem/den Suchbroker(n) prüfen</source>
-      </segment>
-    </unit>
-    <unit id="1539356813894688208">
-      <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:110</note>
-      </notes>
-      <segment>
-        <source>Prüfen</source>
       </segment>
     </unit>
     <unit id="2142741714265462168">
@@ -423,6 +439,7 @@
     <unit id="8960936367812691745">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:4</note>
+        <note category="location">src/app/teiler/quality-report.service.ts:13</note>
       </notes>
       <segment>
         <source>Qualitätsbericht</source>
@@ -513,12 +530,12 @@
         <source>Starten</source>
       </segment>
     </unit>
-    <unit id="7156169325434342107">
+    <unit id="3273461864129851578">
       <notes>
         <note category="location">src/app/embedded/uploads/uploads.component.html:107</note>
       </notes>
       <segment>
-        <source>Gestartet um</source>
+        <source>Gestartet am</source>
       </segment>
     </unit>
     <unit id="4319219110345032132">
@@ -535,6 +552,69 @@
       </notes>
       <segment>
         <source>Stand</source>
+      </segment>
+    </unit>
+    <unit id="3124582708903941639">
+      <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:39</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:39</note>
+      </notes>
+      <segment>
+        <source>Testlauf</source>
+      </segment>
+    </unit>
+    <unit id="6932865105766151309">
+      <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:40</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:40</note>
+      </notes>
+      <segment>
+        <source>Upload</source>
+      </segment>
+    </unit>
+    <unit id="311236914373735731">
+      <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:44</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:44</note>
+      </notes>
+      <segment>
+        <source>komplett</source>
+      </segment>
+    </unit>
+    <unit id="4913769100931924861">
+      <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:45</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:45</note>
+      </notes>
+      <segment>
+        <source>inkrementell</source>
+      </segment>
+    </unit>
+    <unit id="4621427196200632710">
+      <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:49</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:49</note>
+      </notes>
+      <segment>
+        <source>DKTK: Ja</source>
+      </segment>
+    </unit>
+    <unit id="8734689083279523277">
+      <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:50</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:50</note>
+      </notes>
+      <segment>
+        <source>DKTK: Nein</source>
+      </segment>
+    </unit>
+    <unit id="1604823060459595401">
+      <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.ts:71</note>
+        <note category="location">src/app/teiler/uploads.service.ts:14</note>
+      </notes>
+      <segment>
+        <source>Uploads</source>
       </segment>
     </unit>
     <unit id="6631852761620844734">
@@ -584,6 +664,89 @@
     Diese Seite zeigt, aus welchen Softwarekomponenten Ihr Brückenkopf besteht. Mit einem Linksklick auf einen Eintrag werden Sie zur entsprechenden Komponente weitergeleitet.
     Außerdem können Sie Erreichbarkeit und Version jeder Komponente einsehen.
   </source>
+      </segment>
+    </unit>
+    <unit id="8309375931756676569">
+      <notes>
+        <note category="location">src/app/teiler/active-inquiries.service.ts:13</note>
+        <note category="location">src/app/teiler/active-inquiries.service.ts:16</note>
+      </notes>
+      <segment>
+        <source>Aktive Suchanfragen</source>
+      </segment>
+    </unit>
+    <unit id="649608730049958972">
+      <notes>
+        <note category="location">src/app/teiler/archived-inquiries.service.ts:14</note>
+        <note category="location">src/app/teiler/archived-inquiries.service.ts:17</note>
+      </notes>
+      <segment>
+        <source>Archivierte Suchanfragen</source>
+      </segment>
+    </unit>
+    <unit id="173086818969653881">
+      <notes>
+        <note category="location">src/app/teiler/configuration.service.ts:14</note>
+      </notes>
+      <segment>
+        <source>Teiler Services einrichten</source>
+      </segment>
+    </unit>
+    <unit id="1783646821256883393">
+      <notes>
+        <note category="location">src/app/teiler/event-log.service.ts:10</note>
+      </notes>
+      <segment>
+        <source>Ereignisse überprüfen</source>
+      </segment>
+    </unit>
+    <unit id="424627679302747849">
+      <notes>
+        <note category="location">src/app/teiler/event-log.service.ts:13</note>
+      </notes>
+      <segment>
+        <source>Ereignislog</source>
+      </segment>
+    </unit>
+    <unit id="1018606136972574138">
+      <notes>
+        <note category="location">src/app/teiler/failed-inquiries.service.ts:13</note>
+        <note category="location">src/app/teiler/failed-inquiries.service.ts:16</note>
+      </notes>
+      <segment>
+        <source>Fehlgeschlagene Suchanfragen</source>
+      </segment>
+    </unit>
+    <unit id="21547958700886516">
+      <notes>
+        <note category="location">src/app/teiler/function-tests.service.ts:10</note>
+      </notes>
+      <segment>
+        <source>Überprüfen Sie die Kommunikation mit anderen Komponenten</source>
+      </segment>
+    </unit>
+    <unit id="3844920811361480358">
+      <notes>
+        <note category="location">src/app/teiler/function-tests.service.ts:13</note>
+      </notes>
+      <segment>
+        <source>Tests</source>
+      </segment>
+    </unit>
+    <unit id="1447758518246009372">
+      <notes>
+        <note category="location">src/app/teiler/quality-report.service.ts:10</note>
+      </notes>
+      <segment>
+        <source>Qualitätsberichte erzeugen und ansehen</source>
+      </segment>
+    </unit>
+    <unit id="3806333758103364534">
+      <notes>
+        <note category="location">src/app/teiler/uploads.service.ts:10</note>
+      </notes>
+      <segment>
+        <source>Lädt Patienten in die Zentrale Suche</source>
       </segment>
     </unit>
   </file>

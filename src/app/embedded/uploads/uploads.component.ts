@@ -36,18 +36,18 @@ export class UploadsComponent implements OnInit {
   isLinear = false;
 //select1
   op1: Options[] = [
-    {value: 'Testlauf', viewValue: 'xx'},
-    {value: 'Upload', viewValue: 'Upload'},
+    {value: $localize`Testlauf`, viewValue: $localize`Testlauf`},
+    {value: $localize`Upload`, viewValue: $localize`Upload`},
   ];
   //select2
   op2: Options[] = [
-    {value: 'komplett', viewValue: 'komplett'},
-    {value: 'inkrementell', viewValue: 'inkrementell'},
+    {value: $localize`komplett`, viewValue: $localize`komplett`},
+    {value: $localize`inkrementell`, viewValue: $localize`inkrementell`},
   ];
   //select3
   op3: Options[] = [
-    {value: 'DKTK: Ja', viewValue: 'DKTK: Ja'},
-    {value: 'DKTK: Nein', viewValue: 'DKTK: Nein'},
+    {value: $localize`DKTK: Ja`, viewValue: $localize`DKTK: Ja`},
+    {value: $localize`DKTK: Nein`, viewValue: $localize`DKTK: Nein`},
   ];
   optionControl = new FormControl(this.op1[1].value);
   option2Control = new FormControl(this.op2[1].value);
@@ -68,7 +68,7 @@ export class UploadsComponent implements OnInit {
   displayedColumns: string[] = ['uploadid', 'startedat', 'startedfrom', 'status'];
   dataSource = new MatTableDataSource(this.EmpData);
 
-  title = 'Uploads';
+  title = $localize`Uploads`;
   panelOpenState = false;
 
   constructor(private _formBuilder: FormBuilder, private route: ActivatedRoute,) { }
@@ -84,4 +84,3 @@ export class UploadsComponent implements OnInit {
 
 
 }
-

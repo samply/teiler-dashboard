@@ -23,9 +23,5 @@ export class ArchivedInquiriesComponent extends InquiriesComponent{
     ];
   };
 
-  getTitel(): string {
-    return "Archivierte Suchanfragen";
-  }
-
 
 }
