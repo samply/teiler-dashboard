@@ -1,6 +1,6 @@
-<div class="teiler-box">
-  <div fxLayout="row" fxLayoutAlign="space-between">
-    <div class="teiler-imagebox">
+<mat-card class="teiler-box" [style.background]="teilerApp.backgroundColor">
+  <mat-card-header>
+    <div mat-card-avatar>
       <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
         <i class="{{teilerApp.iconClass}}"></i>
       </div>
@@ -8,12 +8,14 @@
         <img src="{{teilerApp.iconSourceUrl}}">
       </div>
     </div>
-    <div class="teiler-textbox">
-      <div class="teiler-box-title">{{teilerApp.title}}</div>
-      <div class="teiler-box-description">{{teilerApp.description}}</div>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="end" class="teiler-box-checks">
+      <mat-card-title>
+          {{teilerApp.title}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{teilerApp.description}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-footer>
     <i class="{{getCheckIconClass()}}" title="{{getCheckIconTitle()}}"></i>
-  </div>
-</div>
+  </mat-card-footer>
+</mat-card>
