@@ -51,6 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CSV export from teiler
 - Docker ignore
 - Is export ready
+- Dockerignore
+- Gitignore
 
 ## Fixed
 - Update teiler apps in sidebar
