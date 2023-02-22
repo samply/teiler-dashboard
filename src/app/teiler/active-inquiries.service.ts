@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {EmbeddedTeilerApps} from "./teiler-app";
+import {EmbeddedTeilerApps, BackgroundColors} from "./teiler-app";
 import {Router} from "@angular/router";
 import {InquiriesService} from "./inquiries.service";
 import {InquiriesClientService, Inquiry} from "../embedded/inquiries/inquiries-client.service";
@@ -14,6 +14,7 @@ export class ActiveInquiriesService extends InquiriesService{
   iconClass: string | undefined = "bi bi-inbox";
   iconSourceUrl: string | undefined = undefined;
   title: string = "Active inquiries";
+  override backgroundColor: BackgroundColors = BackgroundColors.YELLOW;
 
   constructor(router: Router, private inquiriesClientService:InquiriesClientService) {
     super(EmbeddedTeilerApps.ACTIVE_INQUIRIES, router);

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {EmptyTeilerApp, TeilerApp} from "../teiler/teiler-app";
+import {BackgroundColors, EmptyTeilerApp, TeilerApp} from "../teiler/teiler-app";
 
 
 enum TeilerAppStatus {
@@ -19,8 +19,9 @@ export class TeilerBoxComponent implements OnInit {
 
   constructor() {
   }
-
+  
   ngOnInit(): void {
+    this.teilerApp.backgroundColor = this.teilerApp.backgroundColor || BackgroundColors.GREEN;
   }
 
 

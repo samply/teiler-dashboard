@@ -20,6 +20,7 @@ export class ConfigurationComponent implements AfterViewChecked {
   variableValueFormMap: Map<string, FormGroup> = new Map<string, FormGroup>();
   defaultValueFormGroup = this.createValueFormGroup('');
   downloadNow: boolean = false;
+  allSectionsOpen: boolean = false;
 
   constructor(public teilerConfigService: TeilerConfigService,
               private domSanitizer: DomSanitizer,
@@ -115,6 +116,23 @@ export class ConfigurationComponent implements AfterViewChecked {
     let a = document.getElementById(this.createConfigFileLinkId);
     // @ts-ignore
     a.click();
+  }
+
+  
+  toggleSection(configBlockName: string, onlyOpenSection: boolean = false) {
+    this.teilerConfigService.configBlocks.forEach(configBlock => {
+      if (configBlock.title == configBlockName) {
+        console.log("allSectionsOpen: " + this.allSectionsOpen + ", onlyOpenSection: " + onlyOpenSection + ", configBlock.open: " + configBlock.open + ", configBlockName: " + configBlockName);
+        configBlock.open = onlyOpenSection ? true : !configBlock.open;
+      }
+    })
+  }
+
+  toggleAllSections() {
+    this.teilerConfigService.configBlocks.forEach(configBlock => {
+      configBlock.open = !this.allSectionsOpen ? true: false;
+    })
+    this.allSectionsOpen = !this.allSectionsOpen;
   }
 
 }

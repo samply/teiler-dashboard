@@ -3,7 +3,7 @@
   <div *ngIf="!isLoggedIn">
     <teiler-welcome></teiler-welcome>
   </div>
-  <div *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
+  <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
     <h2>Local Apps</h2>
   </div>
   <div class="card-container">
@@ -22,11 +22,11 @@
       </div>
     </div>
   </div>
-  <div *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
+  <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
     <h2>Central Apps</h2>
   </div>
   <div class="card-container">
-    <div *ngFor="let teilerApp of teilerService.teilerApps">
+    <div class="card-wrapper" *ngFor="let teilerApp of teilerService.teilerApps">
       <div *ngIf="!teilerApp.local && teilerApp.inMenu">
         <div *ngIf="!teilerApp.externLink">
           <a routerLink="{{'/'+teilerApp.routerLink}}">

@@ -19,7 +19,7 @@ export class TeilerMainMenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
   existLocalAndCentralTeilerAppsAtTheSameTime() {
     if (this.teilerService.teilerApps.length > 0) {
       let isLocal = this.teilerService.teilerApps[0].local;

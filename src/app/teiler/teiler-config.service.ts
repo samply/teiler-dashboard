@@ -14,6 +14,7 @@ export interface ConfigBlock {
   title: string;
   titleComment: string[];
   variables: ConfigVariable[];
+  open?: boolean;
 }
 
 @Injectable({

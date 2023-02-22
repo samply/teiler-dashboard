@@ -4,30 +4,49 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <form class="config-form">
         <h1>Configuration</h1>
-
+        
         <button mat-raised-button color="primary" (click)="updateConfigFileContentAndPrepareForDownload()">
           <mat-icon>cloud_download</mat-icon>
           Download
         </button>
+        
+        <div class="toggle-all-button-container">
+          <div class="toggle-all-button" (click)="toggleAllSections()">
+            <span>
+              <i class="bi bi-caret-down-fill" 
+              [class.bi-caret-down-fill]="!allSectionsOpen"
+              [class.bi-caret-up-fill]="allSectionsOpen"></i>
+            </span>
+            {{allSectionsOpen ? 'Collapse all' : 'Expand all'}}
+          </div>
+        </div>
+        
         <a id="{{createConfigFileLinkId}}" [href]="configFileUrl" download="teiler.conf" hidden></a>
-        <br>
-        <div *ngFor="let configBlock of teilerConfigService.configBlocks">
-          <h2 id="{{configBlock.title}}">{{configBlock.title}}
+        <div *ngFor="let configBlock of teilerConfigService.configBlocks; let index=index">
+          <h2 id="{{configBlock.title}}" (click)="toggleSection(configBlock.title)">
+            <span *ngIf="configBlock.title">
+              <i class="bi bi-caret-down-fill" [class.bi-caret-down-fill]="!configBlock.open"
+              [class.bi-caret-up-fill]="configBlock.open"></i>
+            </span>
+            {{configBlock.title}}
             <mat-icon matSuffix *ngIf="configBlock.titleComment.length>0 && configBlock.titleComment[0].length > 0"
-                      title="{{configBlock.titleComment.filter(isNotEmpty).concat('\n')}}">info
+              title="{{configBlock.titleComment.filter(isNotEmpty).concat('\n')}}">info
             </mat-icon>
           </h2>
-          <div *ngFor="let configVariable of configBlock.variables">
-            <div [formGroup]="variableValueFormMap.get(configVariable.variable) ?? defaultValueFormGroup">
-              <mat-form-field class="config-full-width" appearance="outline">
-                <mat-label>{{configVariable.variable}}</mat-label>
-                <textarea matInput formControlName="configValue">{{configVariable.value}}</textarea>
-                <mat-icon matSuffix *ngIf="configVariable.variableComment.length!=0"
-                          title="{{configVariable.variableComment.concat('\n')}}">info
-                </mat-icon>
-              </mat-form-field>
+          <div *ngIf="configBlock.open">
+            <div *ngFor="let configVariable of configBlock.variables">
+              <div [formGroup]="variableValueFormMap.get(configVariable.variable) ?? defaultValueFormGroup">
+                <mat-form-field class="config-full-width" appearance="outline">
+                  <mat-label>{{configVariable.variable}}</mat-label>
+                  <input matInput formControlName="configValue" value="configCariable.value">
+                  <mat-icon matSuffix *ngIf="configVariable.variableComment.length!=0"
+                    title="{{configVariable.variableComment.concat('\n')}}">info
+                  </mat-icon>
+                </mat-form-field>
+              </div>
             </div>
           </div>
+          <hr *ngIf="index > 0">
         </div>
       </form>
     </div>
@@ -36,7 +55,7 @@
     <mat-nav-list>
       <div *ngFor="let configBlock of teilerConfigService.configBlocks">
         <div *ngIf="configBlock.title != null && configBlock.title != undefined">
-          <a mat-list-item href="{{'#'+configBlock.title}}">{{configBlock.title}}</a>
+          <a (click)="toggleSection(configBlock.title, true)" mat-list-item href="{{'#'+configBlock.title}}">{{configBlock.title}}</a>
         </div>
       </div>
     </mat-nav-list>

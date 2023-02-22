@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
+import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole, BackgroundColors} from "./teiler-app";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -12,6 +12,7 @@ export class UploadsService extends EmbeddedTeilerApp{
   iconSourceUrl: string | undefined = undefined;
   roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
   title: string = "Uploads";
+  override backgroundColor: BackgroundColors = BackgroundColors.BLUE;
 
   constructor(router: Router) {
     super(EmbeddedTeilerApps.UPLOADS, router);
