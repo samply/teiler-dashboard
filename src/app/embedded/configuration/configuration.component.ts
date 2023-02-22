@@ -20,6 +20,7 @@ export class ConfigurationComponent implements AfterViewChecked {
   variableValueFormMap: Map<string, FormGroup> = new Map<string, FormGroup>();
   defaultValueFormGroup = this.createValueFormGroup('');
   downloadNow: boolean = false;
+  passwordVisibilityMap: Map<string, boolean> = new Map();
 
   constructor(public teilerConfigService: TeilerConfigService,
               private domSanitizer: DomSanitizer,
@@ -109,12 +110,45 @@ export class ConfigurationComponent implements AfterViewChecked {
     }
   }
 
-  download(){
+  download() {
     console.log("downloading...");
     // @ts-ignore
     let a = document.getElementById(this.createConfigFileLinkId);
     // @ts-ignore
     a.click();
+  }
+
+  isPassword(variable: string): boolean {
+    let blacklist = ['password', 'key', 'secret'];
+    for (let element of blacklist) {
+      if (variable.toLocaleLowerCase().includes(element)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  showPasswordList: Map<string, boolean> = new Map();
+
+
+  getVisibility(blockTitle: string, variable: string): boolean {
+    let key = this.getPasswordKey(blockTitle, variable);
+    let visibility = this.passwordVisibilityMap.get(key);
+    if (!visibility) {
+      visibility = false;
+      this.passwordVisibilityMap.set(key, visibility);
+    }
+    return visibility;
+  }
+
+  getPasswordKey(blockTitle: string, variable: string): string {
+    return blockTitle + variable;
+  }
+
+  togglePasswordVisibility(blockTitle: string, variable: string) {
+    let key = this.getPasswordKey(blockTitle, variable);
+    let visibility = this.getVisibility(blockTitle, variable);
+    this.passwordVisibilityMap.set(key, !visibility)
   }
 
 }

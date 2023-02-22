@@ -20,3 +20,10 @@ td {
 .configuration-mat-sidenav{
   width: 25%;
 }
+
+.pwIcon{
+  align-items: baseline;
+  align-content: flex-end;
+  float: right;
+  padding-bottom: 0.5%;
+}

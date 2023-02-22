@@ -51,6 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CSV export from teiler
 - Docker ignore
 - Is export ready
+- Dockerignore
+- Gitignore
 
 ## Fixed
 - Update teiler apps in sidebar
@@ -63,3 +65,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## CHANGED
 - Check for both frontend and backend
 - Name: Bridgehead instead of Teiler
+- Update Libraries for Keycloak 20
+- Update all libraries
