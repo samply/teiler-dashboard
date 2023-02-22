@@ -21,7 +21,16 @@
             <div [formGroup]="variableValueFormMap.get(configVariable.variable) ?? defaultValueFormGroup">
               <mat-form-field class="config-full-width" appearance="outline">
                 <mat-label>{{configVariable.variable}}</mat-label>
-                <textarea matInput formControlName="configValue">{{configVariable.value}}</textarea>
+                <div *ngIf="!isPassword(configVariable.variable)">
+                <textarea  formControlName="configValue"
+                          matInput>{{configVariable.value}}</textarea>
+                </div>
+                <div *ngIf="isPassword(configVariable.variable)">
+                  <input matInput [type]="getVisibility(configBlock.title, configVariable.variable) ? 'text' : 'password'" name="password">
+                  <mat-icon class="pwIcon" matSuffix (click)="togglePasswordVisibility(configBlock.title, configVariable.variable)">
+                    {{getVisibility(configBlock.title, configVariable.variable)?'visibility_off':'visibility'}}
+                  </mat-icon>
+                </div>
                 <mat-icon matSuffix *ngIf="configVariable.variableComment.length!=0"
                           title="{{configVariable.variableComment.concat('\n')}}">info
                 </mat-icon>
