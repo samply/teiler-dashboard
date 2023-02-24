@@ -3,7 +3,7 @@
   <file id="ngi18n" original="ng.template">
     <unit id="4234470053856852293">
       <notes>
-        <note category="location">src/app/app.component.html:11</note>
+        <note category="location">src/app/app.component.html:13</note>
         <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:27</note>
       </notes>
       <segment>
@@ -13,7 +13,7 @@
     </unit>
     <unit id="8458737915529390534">
       <notes>
-        <note category="location">src/app/app.component.html:21</note>
+        <note category="location">src/app/app.component.html:27</note>
       </notes>
       <segment>
         <source>einloggen</source>
@@ -22,7 +22,7 @@
     </unit>
     <unit id="9065377445413378007">
       <notes>
-        <note category="location">src/app/app.component.html:24</note>
+        <note category="location">src/app/app.component.html:30</note>
       </notes>
       <segment>
         <source>ausloggen</source>
