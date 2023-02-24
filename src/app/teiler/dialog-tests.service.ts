@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
 import {Router} from "@angular/router";
 
@@ -7,12 +7,14 @@ import {Router} from "@angular/router";
 })
 export class DialogTestsService extends EmbeddedTeilerApp {
 
-  constructor(router: Router) { super(EmbeddedTeilerApps.DIALOG_TESTS, router);}
+  constructor(router: Router) {
+    super(EmbeddedTeilerApps.DIALOG_TESTS, router);
+  }
 
-  description: string ="dialog tests";
-  iconClass: string ="bi bi-123";
+  description: string = "";
+  iconClass: string = "bi bi-123";
   iconSourceUrl: string | undefined;
   roles: TeilerRole[] = [TeilerRole.TEILER_USER];
-  title: string ="Dialog Tests";
+  title: string = "";
 
 }

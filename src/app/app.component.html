@@ -24,10 +24,10 @@
 
     <div>
       <div *ngIf="!isLoggedIn">
-        <a routerLink="{{'/' + routeManagerService.loginRouterLink}}"><span>log in</span></a>
+        <a routerLink="{{'/' + routeManagerService.loginRouterLink}}"><span i18n>einloggen</span></a>
       </div>
       <div *ngIf="isLoggedIn">
-        <a routerLink="{{'/' + routeManagerService.logoutRouterLink}}" (click)="authService.logout()"><span>log out</span></a>
+        <a routerLink="{{'/' + routeManagerService.logoutRouterLink}}" (click)="authService.logout()"><span i18n>ausloggen</span></a>
       </div>
     </div>
     <div>

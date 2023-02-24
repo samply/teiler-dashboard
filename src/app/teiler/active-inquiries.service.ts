@@ -10,10 +10,10 @@ import {Observable} from "rxjs";
 })
 export class ActiveInquiriesService extends InquiriesService{
 
-  description: string = "Active inquiries";
+  description: string = $localize`Aktive Suchanfragen`;
   iconClass: string | undefined = "bi bi-inbox";
   iconSourceUrl: string | undefined = undefined;
-  title: string = "Active inquiries";
+  title: string = $localize`Aktive Suchanfragen`;
   override backgroundColor: BackgroundColors = BackgroundColors.YELLOW;
 
   constructor(router: Router, private inquiriesClientService:InquiriesClientService) {

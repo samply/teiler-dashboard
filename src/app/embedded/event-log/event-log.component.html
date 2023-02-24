@@ -1,13 +1,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <div class="main">
   <div class="title">
-    <h2>Event Log</h2>
+    <h2 i18n>Ereignisprotokoll</h2>
   </div>
   <div class="over">
     <hr>
   </div>
   <div class="search">
-    Suche:
+    <span>Suche</span>:&nbsp;
     <label class="matinput">
       <input matInput style="border:1px solid dimgrey; width: 175px; border-radius:4px; padding: 2px;">
     </label>
@@ -22,13 +22,13 @@
 
         <!-- Position Column -->
         <ng-container matColumnDef="timestamp">
-          <th mat-header-cell *matHeaderCellDef> Timestamp</th>
+          <th mat-header-cell *matHeaderCellDef><span i18n>Zeitstempel</span></th>
           <td mat-cell *matCellDef="let element"> {{element.timestamp}} </td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="message">
-          <th mat-header-cell *matHeaderCellDef> Message</th>
+          <th mat-header-cell *matHeaderCellDef><span i18n>Nachricht</span></th>
           <td mat-cell *matCellDef="let element"> {{element.message}} </td>
         </ng-container>
 

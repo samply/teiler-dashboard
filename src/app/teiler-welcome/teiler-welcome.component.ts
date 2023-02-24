@@ -23,16 +23,22 @@ export class TeilerWelcomeComponent implements OnInit {
 
   teilerAdmin: TeilerAdmin = new TeilerAdmin();
 
-  welcomeTitle: string = "Welcome to your " + environment.config.TEILER_PROJECT + " Bridgehead";
-  welcomeMessage: string = `
-  You are on the entry page of the Bridgehead on site DKTK Brückenkopf.
-  The Bridgehead is used to convert a site's data into a DKTK-compatible format and make it usable for the other components.
-  Although it is DKTK software, it is under local sovereignty, i.e. it runs under DKTK Brückenkopf.
-  Further information on the Bridgehead concept can be found in the concepts of the DKTK working group CCP-IT, which you can find at <a href="https: //ccp-it.dktk.dkfz.de/">https: //ccp-it.dktk.dkfz.de/</a> and download for free.<br><br>
-  This page shows which software components your Bridgehead consists of. Left-clicking on an entry will take you to the corresponding component.
-  You can also see the availability and version of each component.<br><br>
-  If you have any questions, please contact your local bridgehead administrator:
-  `;
+  welcomeTitle1: string = $localize`Willkommen auf Ihrem`
+  welcomeTitle2: string = $localize`Brückenkopf`
+  welcomeTitle: string = this.welcomeTitle1 + " " + environment.config.TEILER_PROJECT + " " + this.welcomeTitle2;
+
+  welcomeMessage1: string = $localize`
+    Sie befinden sich auf der Einstiegsseite des Brückenkopfes am Standort.
+    Der Brückenkopf dient dazu, die Daten eines Standorts in ein DKTK-kompatibles Format zu überführen und für die anderen Komponenten nutzbar zu machen.
+    Er ist zwar Software des DKTK, wird jedoch unter lokaler Hoheit, also der in betrieben.
+    Weitere Informationen zum Brückenkopfkonzept finden Sie in den Konzepten der DKTK-Arbeitsgruppe CCP-IT, die Sie unter
+  `
+  welcomeMessage2: string = $localize`
+    frei herunterladen können.
+    Diese Seite zeigt, aus welchen Softwarekomponenten Ihr Brückenkopf besteht. Mit einem Linksklick auf einen Eintrag werden Sie zur entsprechenden Komponente weitergeleitet.
+    Außerdem können Sie Erreichbarkeit und Version jeder Komponente einsehen.
+  `
+  welcomeMessage: string = this.welcomeMessage1 + ' <a href="https: //ccp-it.dktk.dkfz.de/">https: //ccp-it.dktk.dkfz.de/</a> ' + this.welcomeMessage2;
 
   constructor() {
   }

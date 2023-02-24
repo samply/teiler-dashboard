@@ -11,10 +11,10 @@ import {Observable} from "rxjs";
 })
 export class ArchivedInquiriesService extends InquiriesService{
 
-  description: string = "Archived inquiries";
+  description: string = $localize`Archivierte Suchanfragen`;
   iconClass: string | undefined = "bi bi-archive";
   iconSourceUrl: string | undefined = undefined;
-  title: string = "Archived inquiries";
+  title: string = $localize`Archivierte Suchanfragen`;
   override backgroundColor: BackgroundColors = BackgroundColors.BLUE;
 
   constructor(router: Router, private inquiriesClientService:InquiriesClientService) {

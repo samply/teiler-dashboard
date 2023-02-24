@@ -25,6 +25,12 @@ export interface UrlAndParameters {
   parameters: HttpParams | undefined;
 }
 
+export enum QueryExecutionStatus {
+  OK = "OK",
+  RUNNING = "RUNNING",
+  ERROR = "ERROR"
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -96,6 +102,15 @@ export class InquiriesClientService {
         }
       });
     }
+  }
+
+  getExportStatus(responseUrl: string): Observable<QueryExecutionStatus> {
+    return this.httpClient.get<QueryExecutionStatus>(this.extractStatusUrl(responseUrl), {headers: this.httpHeaders}) ;
+  }
+
+  extractStatusUrl(responseUrl: string) {
+    let index = responseUrl.indexOf("/response");
+    return responseUrl.substring(0, index) + "/status" + responseUrl.substring(index + "/response".length);
   }
 
   extractFilename(response: HttpResponse<Blob>): string | undefined {

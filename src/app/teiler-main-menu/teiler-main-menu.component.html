@@ -4,7 +4,7 @@
     <teiler-welcome></teiler-welcome>
   </div>
   <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
-    <h2>Local Apps</h2>
+    <h2 i18n>Lokale Apps</h2>
   </div>
   <div class="card-container">
     <div *ngFor="let teilerApp of teilerService.teilerApps">
@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
-    <h2>Central Apps</h2>
+    <h2 i18n>Zentrale Apps</h2>
   </div>
   <div class="card-container">
     <div class="card-wrapper" *ngFor="let teilerApp of teilerService.teilerApps">

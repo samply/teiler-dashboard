@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {InquiriesClientService, Inquiry} from "../inquiries-client.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {map, Observable, Subscription} from "rxjs";
+import {InquiriesClientService, Inquiry, QueryExecutionStatus} from "../inquiries-client.service";
+import {ActivatedRoute} from "@angular/router";
 // @ts-ignore
 import {Data, data} from './data'
 import {Dataname, dataname} from "./dataname";
@@ -402,10 +402,15 @@ export class InquiryComponent implements OnInit, OnDestroy {
     }
   }
 
-  createExport(){
-    if (this.executionUrl){
+  createExport() {
+    if (this.executionUrl) {
       this.inquiriesClientService.createExport(this.executionUrl);
     }
   }
+
+  isExportReady(): Observable<boolean> | boolean {
+    return (this.executionUrl) ? this.inquiriesClientService.getExportStatus(this.executionUrl).pipe(map(status => status == QueryExecutionStatus.OK)) : false;
+  }
+
 
 }

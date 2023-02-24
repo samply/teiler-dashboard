@@ -32,7 +32,9 @@ export abstract class InquiriesComponent implements OnInit {
 
   abstract getInquiriesTableItemColumnsToDisplay(): InquiriesTableItemColumn[];
 
-  abstract getTitel(): string;
+  getTitel(): string{
+    return this.inquiriesService.title;
+  }
 
   private columnGetterMap = new Map<InquiriesTableItemColumn, (item: Inquiry) => string | undefined>([
     [InquiriesTableItemColumn.ID, item => item.id],

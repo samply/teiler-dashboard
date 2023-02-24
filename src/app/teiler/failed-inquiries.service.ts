@@ -10,10 +10,10 @@ import {Observable} from "rxjs";
 })
 export class FailedInquiriesService extends InquiriesService{
 
-  description: string = "Failed Inquiries";
+  description: string = $localize`Fehlgeschlagene Suchanfragen`;
   iconClass: string | undefined = "bi bi-exclamation-triangle";
   iconSourceUrl: string | undefined = undefined;
-  title: string = "Failed inquiries";
+  title: string = $localize`Fehlgeschlagene Suchanfragen`;
   override backgroundColor: BackgroundColors = BackgroundColors.PINK;
 
   constructor(router: Router, private inquiriesClientService:InquiriesClientService) {
