@@ -19,7 +19,7 @@
   box-shadow: none;
 }
 
-.teiler-box.mat-card._mat-animation-noopable {
+.teiler-box.mat-mdc-card._mat-animation-noopable {
   transition: all 0.2s ease-in-out !important;
 }
 
@@ -41,8 +41,8 @@
 .teiler-box.card.highlight-card span {
   margin-left: 60px;
 }
- 
-.mat-card-avatar {
+
+.mat-mdc-card-avatar {
   width: 45px;
   display: flex;
   align-items: center;
@@ -55,11 +55,14 @@
   justify-content: center;
 }
 
+.mat-mdc-card-title {
+  font-size:
+}
 
-.mat-card-footer {
+.mat-mdc-card-footer {
   position: absolute;
-  bottom: 11px;
-  right: 11px;
+  bottom: -11px;
+  right: -11px;
   background: white;
   height: 40px;
   width: 40px;
@@ -71,7 +74,7 @@
 }
 
 
-.teiler-box:hover .mat-card-footer{
+.teiler-box:hover .mat-mdc-card-footer{
   transform: translateY(-5px);
   box-shadow: -4px -1px 13px rgba(0, 0, 0, 0.35)
 }
