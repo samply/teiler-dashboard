@@ -10,13 +10,13 @@ a {
   padding: 8px;
 }
 
-::ng-deep .mat-menu-panel {
+::ng-deep .mat-mdc-menu-panel {
   padding: 16px;
   min-width: auto !important;
   min-height: auto !important;
 }
 
-::ng-deep .mat-menu-content:not(:empty) {
+::ng-deep .mat-mdc-menu-content:not(:empty) {
   padding: 0 !important;
 }
 

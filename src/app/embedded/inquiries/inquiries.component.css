@@ -47,7 +47,7 @@ button{
   font-family: Roboto, Helvetica Neue, sans-serif;
 
 }
-.mat-paginator{
+.mat-mdc-paginator{
   background-color:#fafafa;
 }
 

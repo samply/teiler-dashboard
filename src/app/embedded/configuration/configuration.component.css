@@ -13,7 +13,7 @@ td {
   padding-right: 8px;
 }
 
-.mat-raised-button{
+.mat-mdc-raised-button{
   background-color: var(--color-green);
   margin-bottom: 40px;
 }
@@ -23,7 +23,7 @@ td {
   display: none;
 }
 
-.configuration-mat-sidenav .mat-list-item  {
+.configuration-mat-sidenav .mat-mdc-list-item  {
   height: auto;
   margin-top: 16px;
 }
