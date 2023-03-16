@@ -13,7 +13,7 @@ services:
     environment:
       DEFAULT_LANGUAGE: "DE"
       TEILER_CORE_URL: "http://localhost:8085"
-      KEYCLOAK_URL: "http://localhost:8380/auth"
+      KEYCLOAK_URL: "http://localhost:8380/login"
       KEYCLOAK_REALM: "teiler-ui"
       KEYCLOAK_CLIENT_ID: "teiler-ui"
       TEILER_ADMIN_NAME: "Max Mustermann"
