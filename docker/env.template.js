@@ -1,6 +1,6 @@
 (function (window) {
   window["env"] = window["env"] || {};
-
+  window["env"]["teiler"] = {};
   // Environment variables
   window["env"]["teiler"]["config"] = {
     "DEFAULT_LANGUAGE": "${DEFAULT_LANGUAGE}",
