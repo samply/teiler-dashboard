@@ -67,3 +67,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Name: Bridgehead instead of Teiler
 - Update Libraries for Keycloak 20
 - Update all libraries
+- Add http relative path (compatible with traefik)
