@@ -86,7 +86,7 @@ export class RouteManagerService {
   }
 
   private completeRoute(route: Route, teilerApp: TeilerApp, routeName: string, subroutes: Route[]) {
-    if (!teilerApp.roles.includes(TeilerRole.TEILER_PUBLIC)) {
+    if (teilerApp.roles && !teilerApp.roles.includes(TeilerRole.TEILER_PUBLIC)) {
       route.canActivate = [AuthGuard];
     }
 

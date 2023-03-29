@@ -1,5 +1,4 @@
 import {environment} from "../../environments/environment";
-import {Router} from "@angular/router";
 
 export const BASE_MAIN_ROUTER_LINK: string = '';
 export const BASE_LOGIN_ROUTER_LINK: string = 'login';
@@ -19,19 +18,26 @@ export function createLogoutRouterLink(): string {
 }
 
 export function createRouterLinkForBase(base: string) {
-    return createRouterLinkForBaseWithLocale(getLocale(), base)
+  return createRouterLinkForBaseWithLocale(getLocale(), base)
 }
 
 function createRouterLinkForBaseWithLocale(locale: string, base: string) {
   if (environment.config.DEFAULT_LANGUAGE.toLowerCase() === locale) {
     locale = '';
   }
-  return locale + ((locale.length > 0 && base.length > 0) ? '/' : '') + base;
+  let root = '';
+  if (environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH && environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH.length > 0) {
+    root = (environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH[0] == '/') ? environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH.substring(1) : environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH;
+    if (locale.length > 0 || base.length > 0){
+      root += '/';
+    }
+  }
+  return root + locale + ((locale.length > 0 && base.length > 0) ? '/' : '') + base;
 }
 
 export function getLocale(): string {
   let locale = environment.config.DEFAULT_LANGUAGE.toLowerCase();
-  let url = window.location.pathname;
+  let url = removeHttpRelativePath(window.location.pathname);
   let index1 = url.indexOf('/');
   if (index1 > -1 && index1 + 1 < url.length) {
     let index2 = url.indexOf('/', index1 + 1);
@@ -42,6 +48,15 @@ export function getLocale(): string {
   }
 
   return locale;
+}
+
+export function removeHttpRelativePath(url: string){
+  if (environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH && environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH.length > 0){
+    let httpRelativePath = (environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH[0] == '/') ? environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH.substring(1) : environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH;
+    url = url.replace(environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH, "");
+    url = url.replace(httpRelativePath, "");
+  }
+  return url;
 }
 
 function isLocale(locale: string): boolean {
@@ -64,5 +79,5 @@ function ignoreFirstSlash(url: string) {
 }
 
 export function getHref(routerLink: string) {
-  return window.location.origin + ((routerLink.length > 0) ? '/' + routerLink : '');
+  return removeHttpRelativePath(window.location.origin) + environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH + ((routerLink.length > 0) ? '/' + removeHttpRelativePath(routerLink) : '');
 }

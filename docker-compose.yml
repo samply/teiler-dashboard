@@ -20,6 +20,10 @@ services:
       TEILER_ADMIN_EMAIL: "max.mustermann@teiler-example.com"
       TEILER_ADMIN_PHONE: "+49 123 456789"
       TEILER_PROJECT: "DKTK"
+      TEILER_UI_SERVER_NAME: "localhost"
+      TEILER_ROOT_CONFIG_URL: "http://localhost:9000"
+      TEILER_UI_HTTP_RELATIVE_PATH: ""
+      TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH: ""
 
 #  teiler-core :
 #    image: teiler-core

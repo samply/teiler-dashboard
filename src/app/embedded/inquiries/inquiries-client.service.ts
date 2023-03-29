@@ -38,7 +38,7 @@ export class InquiriesClientService {
 
   backendUrl: string | undefined;
 
-  httpHeaders: HttpHeaders = new HttpHeaders().append("x-api-key", environment.config.TEILER_API_KEY);
+  httpHeaders: HttpHeaders = new HttpHeaders().append("x-api-key", environment.config.EXPORTER_API_KEY);
 
   constructor(private httpClient: HttpClient) {
   }
