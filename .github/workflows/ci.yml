@@ -3,13 +3,13 @@ name: Docker CI
 on:
   push:
     branches:
-      - developer
+      - develop
     # Build then a new version is tagged
     tags:
       - '*.*.*'
   pull_request:
     branches:
-      - developer
+      - develop
   schedule:
     # Build every night at 1am
     - cron: '0 1 * * *'
