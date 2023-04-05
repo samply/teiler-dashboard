@@ -11,42 +11,44 @@
         </button>
 
         <div class="toggle-all-button-container">
-          <div class="toggle-all-button" (click)="toggleAllSections()">
+          <button class="toggle-all-button" (click)="toggleAllSections()">
             <span>
-              <i class="bi bi-caret-down-fill"
-              [class.bi-caret-down-fill]="!allSectionsOpen"
-              [class.bi-caret-up-fill]="allSectionsOpen"></i>
+              <i class="bi"
+              [class.bi-caret-right-fill]="!allSectionsOpen"
+              [class.bi-caret-down-fill]="allSectionsOpen"></i>
             </span>
             {{allSectionsOpen ? 'Collapse all' : 'Expand all'}}
-          </div>
+          </button>
         </div>
 
         <a id="{{createConfigFileLinkId}}" [href]="configFileUrl" download="teiler.conf" hidden></a>
         <div *ngFor="let configBlock of teilerConfigService.configBlocks; let index=index">
-          <h2 id="{{configBlock.title}}" (click)="toggleSection(configBlock.title)">
-            <span *ngIf="configBlock.title">
-              <i class="bi bi-caret-down-fill" [class.bi-caret-down-fill]="!configBlock.open"
-              [class.bi-caret-up-fill]="configBlock.open"></i>
-            </span>
-            {{configBlock.title}}
-            <mat-icon matSuffix *ngIf="configBlock.titleComment.length>0 && configBlock.titleComment[0].length > 0"
+          <div class="heading">
+            <div class="arrow" *ngIf="configBlock.title" (click)="toggleSection(configBlock.title)">
+              <i class="bi bi-caret-right" [class.bi-caret-right]="!configBlock.open"
+              [class.bi-caret-down]="configBlock.open"></i>
+            </div>
+            <h2 id="{{configBlock.title}}" (click)="toggleSection(configBlock.title)">
+              {{configBlock.title}}
+            </h2>
+            <mat-icon class="info" matSuffix *ngIf="configBlock.titleComment.length>0 && configBlock.titleComment[0].length > 0"
               title="{{configBlock.titleComment.filter(isNotEmpty).concat('\n')}}">info
             </mat-icon>
-          </h2>
+          </div>
           <div *ngIf="configBlock.open">
             <div *ngFor="let configVariable of configBlock.variables">
-              <div [formGroup]="variableValueFormMap.get(configVariable.variable) ?? defaultValueFormGroup">
-                <mat-form-field class="config-full-width" appearance="outline">
+              <div [formGroup]="variableValueFormMap.get(configVariable.variable) ?? defaultValueFormGroup" [ngClass]="'form-field-wrapper'">
+                <mat-form-field class="config-full-width">
                   <mat-label>{{configVariable.variable}}</mat-label>
-                  <input matInput formControlName="configValue" value="configCariable.value">
-                  <mat-icon matSuffix *ngIf="configVariable.variableComment.length!=0"
+                  <input type="text" matInput formControlName="configValue" value="configCariable.value">
+                  <mat-icon class="info" matSuffix *ngIf="configVariable.variableComment.length!=0"
                     title="{{configVariable.variableComment.concat('\n')}}">info
                   </mat-icon>
                 </mat-form-field>
               </div>
             </div>
           </div>
-          <hr *ngIf="index > 0">
+
         </div>
       </form>
     </div>

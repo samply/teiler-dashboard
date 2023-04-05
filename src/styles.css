@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 :root {
     --color-blue: #1B9AAA;
     --color-yellow: #FFC43D;
@@ -7,43 +8,3 @@
     --color-green: #06D6A0;
 }
 
-html,
-body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-
-/* form-fields */
-
-/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-.mat-form-field-appearance-outline .mat-form-field-outline {
-    color: var(--color-blue);
-}
-
-/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
-.mat-focused .mat-form-field-outline,
-.mat-focused mat-label {
-    color: var(--color-green) !important;
-}
-
-
-/* headings */
-
-h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: 0.00938em;
-}
-
-h2 {
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: 0.00938em;
-}
