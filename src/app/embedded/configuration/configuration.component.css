@@ -1,6 +1,6 @@
 .config-form {
   min-width: 150px;
-  max-width: 500px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
 }
@@ -14,7 +14,8 @@ td {
 }
 
 .mat-mdc-raised-button{
-  background-color: var(--color-green);
+  /* background-color: var(--color-green); */
+  background-color: #06D6A0 !important;
   margin-bottom: 40px;
 }
 
@@ -36,29 +37,40 @@ td {
 }
 
 h1 {
-  margin: 40px auto;
+  margin: 0 auto 40px;
+}
+
+.toggle-all-button-container{
+  cursor: pointer;
+}
+
+.toggle-all-button {
+  background-color: white;
+  padding: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+.heading {
+  display: flex;
+  font-size: 18px;
+  margin: 24px 0;
+}
+
+.arrow {
+  margin: 6px;
+  cursor: pointer;
+}
+
+.info {
+  font-size: 18px;
+  margin: 4px;
+  padding: 0 !important;
 }
 
 h2 {
   position: relative;
   cursor: pointer;
-}
-
-hr {
-  border: none;
-  height: 1px;
-  background-color: var(--color-blue);
-  margin-bottom: 40px;
-}
-
-.toggle-all-button-container{
-  cursor: pointer;
-  margin-bottom: 32px;
-}
-
-.pwIcon{
-  align-items: baseline;
-  align-content: flex-end;
-  float: right;
-  padding-bottom: 0.5%;
+  font-weight: normal;
+  margin: 0;
 }

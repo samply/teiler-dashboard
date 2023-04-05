@@ -7,6 +7,12 @@
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* You can add global styles to this file, and also import other style files */
+
+  --color-blue: #1B9AAA;
+  --color-yellow: #FFC43D;
+  --color-pink: #EF476F;
+  --color-green: #06D6A0;
 }
 
 h1,
@@ -17,6 +23,13 @@ h5,
 h6 {
   margin: 8px 0;
 }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: red;
+}
+
 
 /* header */
 
@@ -29,6 +42,7 @@ h6 {
   /* needed for box-shadow to show */
   position: relative;
   z-index: 10;
+  margin-bottom: 40px;
 }
 
 .toolbar * {
@@ -77,3 +91,33 @@ h6 {
 }
 
 
+
+/* global TODO: move to global styles when implemented correctly */
+::ng-deep body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .form-field-wrapper {
+    line-height: 32px;
+}
+
+::ng-deep .mdc-text-field {
+  overflow: unset !important;
+}
+
+::ng-deep .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+  line-height: unset !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  height: 48px !important;
+}
+
+::ng-deep .mdc-line-ripple::before {
+  border-color: var(--color-blue)
+}
+
+::ng-deep .mdc-line-ripple::after {
+  border-color: var(--color-yellow)
+}
