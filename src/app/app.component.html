@@ -1,41 +1,30 @@
-<!-- Toolbar -->
-
-<div class="toolbar">
-
-  <div class="logo">
-    <a routerLink="{{'/' + routeManagerService.mainRouterLink}}">
-      <img
-      width="40"
-      alt="DKTK Teiler"
-      src="https://dktk.dkfz.de/packages/dktk/img/logo-dktk-sign.svg"
-      />
-    </a>
-    <span class="logo-text" i18n>Brückenkopf</span>
-  </div>
-
-  <div class="spacer"></div>
-
-  <div class="user">
-
-    <div *ngIf="user != undefined && user.length > 0">
-      <i class="bi bi-person"></i>&nbsp;
-      <span>{{user}}</span>
+<div class="app">
+  <div class="toolbar">
+    <div class="logo">
+      <a routerLink="{{'/' + routeManagerService.mainRouterLink}}">
+        <img width="40" alt="DKTK Teiler" src="https://dktk.dkfz.de/packages/dktk/img/logo-dktk-sign.svg" />
+      </a>
+      <span class="logo-text" i18n>Brückenkopf</span>
     </div>
-
-    <div>
-      <div *ngIf="!isLoggedIn">
-        <a routerLink="{{'/' + routeManagerService.loginRouterLink}}"><span i18n>einloggen</span></a>
+    <div class="spacer"></div>
+    <div class="user">
+      <div *ngIf="user != undefined && user.length > 0">
+        <i class="bi bi-person"></i>&nbsp;
+        <span>{{user}}</span>
       </div>
-      <div *ngIf="isLoggedIn">
-        <a routerLink="{{'/' + routeManagerService.logoutRouterLink}}" (click)="authService.logout()"><span i18n>einloggen</span></a>
+      <div>
+        <div *ngIf="!isLoggedIn">
+          <a routerLink="{{'/' + routeManagerService.loginRouterLink}}"><span i18n>einloggen</span></a>
+        </div>
+        <div *ngIf="isLoggedIn">
+          <a routerLink="{{'/' + routeManagerService.logoutRouterLink}}" (click)="authService.logout()"><span
+              i18n>ausloggen</span></a>
+        </div>
+      </div>
+      <div>
+        <language-selector></language-selector>
       </div>
     </div>
-    <div>
-      <language-selector></language-selector>
-    </div>
   </div>
-</div>
-
-<div>
   <app-sidebar></app-sidebar>
 </div>

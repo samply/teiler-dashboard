@@ -24,12 +24,11 @@ h6 {
   margin: 8px 0;
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: red;
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
 }
-
 
 /* header */
 
@@ -42,7 +41,6 @@ body {
   /* needed for box-shadow to show */
   position: relative;
   z-index: 10;
-  margin-bottom: 40px;
 }
 
 .toolbar * {
@@ -93,6 +91,10 @@ body {
 
 
 /* global TODO: move to global styles when implemented correctly */
+::ng-deep h2 {
+  margin: 0;
+}
+
 ::ng-deep body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
