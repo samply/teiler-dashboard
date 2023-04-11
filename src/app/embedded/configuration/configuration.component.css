@@ -58,6 +58,12 @@ h1 {
   padding-bottom: 0.5%;
 }
 
+.heading {
+  display: flex;
+  font-size: 18px;
+  margin: 24px 0;
+}
+
 .arrow {
   margin: 6px;
   cursor: pointer;
