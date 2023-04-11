@@ -51,10 +51,11 @@ h1 {
   font-size: 16px;
 }
 
-.heading {
-  display: flex;
-  font-size: 18px;
-  margin: 24px 0;
+.pwIcon{
+  align-items: baseline;
+  align-content: flex-end;
+  float: right;
+  padding-bottom: 0.5%;
 }
 
 .arrow {
