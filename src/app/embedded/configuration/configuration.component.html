@@ -36,9 +36,9 @@
             </mat-icon>
           </div>
           <div *ngIf="configBlock.open">
-            <div *ngFor="let configVariable of configBlock.variables">
+            <div *ngFor="let configVariable of configBlock.variables" class="form-field-container">
               <div [formGroup]="variableValueFormMap.get(configVariable.variable) ?? defaultValueFormGroup"
-                [ngClass]="'form-field-wrapper'">
+                ngClass="form-field-wrapper">
                 <mat-form-field class="config-full-width">
                   <mat-label>{{configVariable.variable}}</mat-label>
                   <div *ngIf="!isPassword(configVariable.variable)">
@@ -50,11 +50,13 @@
                   <mat-icon class="pwIcon" matSuffix *ngIf="isPassword(configVariable.variable)"
                     (click)="togglePasswordVisibility(configBlock.title, configVariable.variable)">
                     {{getVisibility(configBlock.title, configVariable.variable) ? 'visibility_off' : 'visibility'}}
-                  </mat-icon>
-                  <mat-icon class="info" matSuffix *ngIf="configVariable.variableComment.length!=0"
-                    title="{{configVariable.variableComment.concat('\n')}}">info
-                  </mat-icon>
+                  </mat-icon> 
                 </mat-form-field>
+              </div>
+              <div class="info-wrapper">
+                <mat-icon class="info" matSuffix *ngIf="configVariable.variableComment.length!=0"
+                title="{{configVariable.variableComment.concat('\n')}}">info
+                </mat-icon>
               </div>
             </div>
           </div>
