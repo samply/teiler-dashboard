@@ -23,6 +23,13 @@ export enum EmbeddedTeilerApps {
   DIALOG_TESTS = 'dialog-tests'
 }
 
+export enum BackgroundColors {
+  BLUE = '#1B9AAA',
+  YELLOW = '#FFC43D',
+  PINK = '#EF476F',
+  GREEN = '#06D6A0',
+}
+
 export interface TeilerAppRoute extends Route {
   teilerAppName: string;
 }
@@ -49,7 +56,7 @@ export interface TeilerApp {
   backendReachable?: boolean;
   frontendReachable?: boolean;
   subroutes?: TeilerAppRoute[];
-
+  backgroundColor?: BackgroundColors;
 }
 
 export abstract class EmbeddedTeilerApp implements TeilerApp {
@@ -72,6 +79,7 @@ export abstract class EmbeddedTeilerApp implements TeilerApp {
   sourceUrl: string | undefined = undefined;
   frontendReachable: boolean = true;
   inMenu: boolean = true;
+  backgroundColor: BackgroundColors = BackgroundColors.GREEN;
 
 
   constructor(name: string, router: Router) {
@@ -99,5 +107,5 @@ export class EmptyTeilerApp implements TeilerApp {
   sourceUrl: undefined = undefined;
   title: string = "";
   inMenu: boolean = false;
-
+  backgroundColor: BackgroundColors = BackgroundColors.GREEN;
 }

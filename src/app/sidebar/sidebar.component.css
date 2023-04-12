@@ -1,3 +1,56 @@
-.router-style {
-  height: 100vh;
+.content {
+    border-left: solid 1px #e0e0e0;
+    border-radius: solid 1px #e0e0e0;
+    padding: 32px;
+
 }
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100%;
+    position: relative;
+}
+
+.side-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 2;
+    padding: 0 0 0 16px;
+}
+
+.burger-menu-button-open {
+    text-align: right;
+    margin: 8px 16px;
+}
+
+.burger-menu-button-close {
+    text-align: right;
+    margin: 8px 16px 28px;
+}
+
+a {
+    font-size: 16px;
+}
+
+@media screen and (min-width: 769px) {
+    .side-nav {
+        position: static;
+        padding-top: 24px;
+    }
+    .main-content {
+        grid-template-columns: auto 1fr;
+    }
+    .sidenav-container {
+        position: static;
+    }
+    .side-nav-menu-container {
+        position: sticky;
+        top: 20px;
+    }
+}
+

@@ -10,13 +10,13 @@
 
   <div class="float">
 
-    <mat-card id="1">
+    <mat-card appearance="outlined" id="1">
        <span i18n>Erreichbarkeit pr&uuml;fen</span>
       <div *ngIf="isShowInfo">
         <button mat-mini-fab class="infb" (click)="openDialog()"><i aria-hidden="false" class="bi bi-info-square"></i></button>
       </div>
     </mat-card>
-    <mat-card>
+    <mat-card appearance="outlined">
       <span i18n>Sendet einen HTTP GET request an die<br>konfigurierte Adresse, um zu pr&uuml;fen,<br>ob der Dienst erreichbar ist.</span>
       <br><br>
       <button mat-stroked-button onclick="document.getElementById('1').style.backgroundColor = '#dff0d8'" (click)="isShowInfo = !isShowInfo" i18n>Prüfen</button>
@@ -24,11 +24,11 @@
   </div>
 
   <div class="float" style="margin-left:1%">
-    <mat-card id="2"><span i18n>Testpatient hochladen und anschließend l&ouml;schen</span>
+    <mat-card appearance="outlined" id="2"><span i18n>Testpatient hochladen und anschließend l&ouml;schen</span>
       <div *ngIf="isShowInfo1">
         <button mat-mini-fab class="infb" (click)="openDialog()"><i aria-hidden="false" class="bi bi-info-square"></i></button>
       </div></mat-card>
-    <mat-card>
+    <mat-card appearance="outlined">
       <span i18n>Sendet einen einfachen Testpatienten<br>Datensatz zur zentralen MDS Datenbank<br>hoch und löscht diesen anschließend wieder.</span>
       <br><br>
       <button mat-stroked-button onclick="document.getElementById('2').style.backgroundColor = '#dff0d8'" (click)="isShowInfo1 = !isShowInfo1" i18n>Prüfen</button>
@@ -45,21 +45,21 @@
   <div class="x1">
 
     <div class="float">
-      <mat-card id="3"><span i18n>Erreichbarkeit pr&uuml;fen</span><div *ngIf="isShowInfo2">
+      <mat-card appearance="outlined" id="3"><span i18n>Erreichbarkeit pr&uuml;fen</span><div *ngIf="isShowInfo2">
         <button mat-mini-fab class="infb" (click)="openDialog()"><i aria-hidden="false" class="bi bi-info-square"></i></button>
       </div>
       </mat-card>
-      <mat-card>
+      <mat-card appearance="outlined">
         <span i18n>Sendet einen HTTP GET request an die<br>konfigurierte Adresse, um zu pr&uuml;fen,<br>ob der Dienst erreichbar ist.</span>
         <button mat-stroked-button onclick="document.getElementById('3').style.backgroundColor = '#dff0d8'" (click)="isShowInfo2 = !isShowInfo2" style="margin-bottom: 0.5%; margin-top: 12.5%" i18n>Prüfen</button>
       </mat-card>
     </div>
 
     <div class="float" style="margin-left:1%">
-      <mat-card id="4"><span i18n>Export ID anfordern</span> <div *ngIf="isShowInfo3">
+      <mat-card appearance="outlined" id="4"><span i18n>Export ID anfordern</span> <div *ngIf="isShowInfo3">
         <button mat-mini-fab class="infb" (click)="openDialog()" ><i aria-hidden="false" class="bi bi-info-square"></i></button>
       </div></mat-card>
-      <mat-card><div i18n>Holt ein Exportpseudonym für eine<br>gegebene DKTK-Standort ID ab.<br>Die zu pr&uuml;fende ID bitte nachfolgend angeben.</div><br>
+      <mat-card appearance="outlined"><div i18n>Holt ein Exportpseudonym für eine<br>gegebene DKTK-Standort ID ab.<br>Die zu pr&uuml;fende ID bitte nachfolgend angeben.</div><br>
         <span i18n>DKTK-Standort ID</span>:
         <mat-form-field style="margin-bottom:2.5%">
           <input matInput>
@@ -79,10 +79,10 @@
   <div class="x1">
 
     <div class="float">
-      <mat-card id="5"><span i18n>Erreichbarkeit pr&uuml;fen</span><div *ngIf="isShowInfo4">
+      <mat-card appearance="outlined" id="5"><span i18n>Erreichbarkeit pr&uuml;fen</span><div *ngIf="isShowInfo4">
         <button mat-mini-fab class="infb" (click)="openDialog()"><i aria-hidden="false" class="bi bi-info-square"></i></button>
       </div></mat-card>
-      <mat-card><span i18n>Sendet einen HTTP GET request an die<br>konfigurierte Adresse, um zu pr&uuml;fen,<br>ob der Dienst erreichbar ist.</span>
+      <mat-card appearance="outlined"><span i18n>Sendet einen HTTP GET request an die<br>konfigurierte Adresse, um zu pr&uuml;fen,<br>ob der Dienst erreichbar ist.</span>
         <br><br>
         <button mat-stroked-button onclick="document.getElementById('5').style.backgroundColor = '#dff0d8'" (click)="isShowInfo4 = !isShowInfo4" i18n>Prüfen</button>
       </mat-card>
@@ -97,14 +97,14 @@
   </div>
   <div class="x1" >
 
-    <mat-card class="heading">https://decentralsearch-test.ccpit.dktk.dkfz.de</mat-card>
+    <mat-card appearance="outlined" class="heading">https://decentralsearch-test.ccpit.dktk.dkfz.de</mat-card>
     <div class="inside" >
 
       <div class="float">
-        <mat-card id="6"><span i18n>Erreichbarkeit pr&uuml;fen</span><div *ngIf="isShowInfo5" >
+        <mat-card appearance="outlined" id="6"><span i18n>Erreichbarkeit pr&uuml;fen</span><div *ngIf="isShowInfo5" >
           <button mat-mini-fab class="infb" (click)="openDialog()"><i aria-hidden="false" class="bi bi-info-square"></i></button>
         </div></mat-card>
-        <mat-card>
+        <mat-card appearance="outlined">
           <span i18n>Sendet einen HTTP GET request an die<br>konfigurierte Adresse, um zu pr&uuml;fen,<br>ob der Dienst erreichbar ist.</span>
           <br><br>
           <button mat-stroked-button onclick="document.getElementById('6').style.backgroundColor = '#dff0d8'" (click)="isShowInfo5 = !isShowInfo5" i18n>Prüfen</button>
@@ -112,10 +112,10 @@
       </div>
 
       <div class="float" style="margin-left:1%">
-        <mat-card id="7"><span i18n>Testanfrage herunterladen</span><div *ngIf="isShowInfo6">
+        <mat-card appearance="outlined" id="7"><span i18n>Testanfrage herunterladen</span><div *ngIf="isShowInfo6">
           <button mat-mini-fab class="infb" (click)="openDialog()"><i aria-hidden="false" class="bi bi-info-square"></i></button>
         </div></mat-card>
-        <mat-card>
+        <mat-card appearance="outlined">
           <span i18n>L&auml;dt eine einfache, vom<br>Suchbroker generierte, Testanfrage<br>herunter.</span>
           <br><br>
           <button mat-stroked-button onclick="document.getElementById('7').style.backgroundColor = '#dff0d8'" (click)="isShowInfo6 = !isShowInfo6" i18n>Prüfen</button>
@@ -123,10 +123,10 @@
       </div>
 
       <div class="float" style="float:right; margin-right:605px">
-        <mat-card id="8"><span i18n>Testanfrage herunterladen und ausf&uuml;hren</span><div *ngIf="isShowInfo7" >
+        <mat-card appearance="outlined" id="8"><span i18n>Testanfrage herunterladen und ausf&uuml;hren</span><div *ngIf="isShowInfo7" >
           <button mat-mini-fab class="infb" (click)="openDialog()"><i aria-hidden="false" class="bi bi-info-square"></i></button>
         </div></mat-card>
-        <mat-card>
+        <mat-card appearance="outlined">
           <span i18n>L&auml;dt eine einfache, vom<br>Suchbroker generierte Testanfrage<br>herunter und schickt diese an<br>das lokale Datenmanagement.</span>
           <br><br>
           <button mat-stroked-button onclick="document.getElementById('8').style.backgroundColor = '#dff0d8'" (click)="isShowInfo7 = !isShowInfo7" i18n>Prüfen</button>

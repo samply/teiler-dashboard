@@ -1,28 +1,37 @@
-<br>
-<br>
-<br>
-<mat-sidenav-container>
-  <mat-sidenav opened mode="side" *ngIf="!isMainSite()">
-    <mat-nav-list>
-      <div *ngFor="let teilerApp of teilerService.teilerApps">
-        <div *ngIf="teilerApp.inMenu">
-          <div *ngIf="!teilerApp.externLink">
-            <!-- TODO: -->
-            <!--<i class="{{teilerApp.iconClass}}"></i>-->
-            <a mat-list-item routerLink="{{'/'+teilerApp.routerLink}}">{{teilerApp.title}}</a>
-          </div>
-          <div *ngIf="teilerApp.externLink">
-            <!--<i class="{{teilerApp.iconClass}}"></i>-->
-            <a mat-list-item routerLink="{{'/'+teilerApp.routerLink}}"
-               [externalLink]="teilerApp.sourceUrl??''">{{teilerApp.title}}</a>
+<div class="main-content">
+  <div class="side-nav-container" *ngIf="!isMainSite()">
+    <div class="burger-menu-button-open" *ngIf="innerWidth <= 768">
+      <button mat-icon-button (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="side-nav-menu-container" *ngIf="menuVisibleMobile || innerWidth > 768">
+      <mat-nav-list class="side-nav">
+        <div class="burger-menu-button-close" *ngIf="innerWidth <= 768">
+          <button mat-icon-button (click)="toggleMenu()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div *ngFor="let teilerApp of teilerService.teilerApps">
+          <div *ngIf="teilerApp.inMenu">
+            <div *ngIf="!teilerApp.externLink">
+              <!-- TODO: -->
+              <!--<i class="{{teilerApp.iconClass}}"></i>-->
+              <a mat-list-item routerLink="{{'/'+teilerApp.routerLink}}">{{teilerApp.title}}</a>
+            </div>
+            <div *ngIf="teilerApp.externLink">
+              <!--<i class="{{teilerApp.iconClass}}"></i>-->
+              <a mat-list-item routerLink="{{'/'+teilerApp.routerLink}}"
+              [externalLink]="teilerApp.sourceUrl??''">{{teilerApp.title}}</a>
+            </div>
           </div>
         </div>
-      </div>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
+      </mat-nav-list>
+    </div>
+  </div>
+  <div class="content">
     <div class="router-style">
       <router-outlet></router-outlet>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</div>

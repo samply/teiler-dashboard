@@ -1,8 +1,8 @@
 .config-form {
   min-width: 150px;
-  max-width: 500px;
+  max-width: 1000px;
   width: 100%;
-  margin-left: 2%;
+  margin: 0 auto;
 }
 
 .config-full-width {
@@ -13,12 +13,42 @@ td {
   padding-right: 8px;
 }
 
-.mat-raised-button{
-  background-color: seagreen;
+.mat-mdc-raised-button{
+  /* background-color: var(--color-green); */
+  background-color: #06D6A0 !important;
+  margin-bottom: 40px;
 }
 
 .configuration-mat-sidenav{
   width: 25%;
+  display: none;
+}
+
+.configuration-mat-sidenav .mat-mdc-list-item  {
+  height: auto;
+  margin-top: 16px;
+}
+
+/* show configuration-mat-sidenav on desktop */
+@media (min-width: 1024px) {
+  .configuration-mat-sidenav{
+    display: block;
+  }
+}
+
+h1 {
+  margin: 0 auto 40px;
+}
+
+.toggle-all-button-container{
+  cursor: pointer;
+}
+
+.toggle-all-button {
+  background-color: white;
+  padding: 5px;
+  border: none;
+  font-size: 16px;
 }
 
 .pwIcon{
@@ -26,4 +56,28 @@ td {
   align-content: flex-end;
   float: right;
   padding-bottom: 0.5%;
+}
+
+.heading {
+  display: flex;
+  font-size: 18px;
+  margin: 24px 0;
+}
+
+.arrow {
+  margin: 6px;
+  cursor: pointer;
+}
+
+.info {
+  font-size: 18px;
+  margin: 4px;
+  padding: 0 !important;
+}
+
+h2 {
+  position: relative;
+  cursor: pointer;
+  font-weight: normal;
+  margin: 0;
 }
