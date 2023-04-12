@@ -20,6 +20,8 @@ export class LanguageSelectorComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public menuVisible: boolean = false;
+
   getAvailableLanguageHrefs(): LanguageHref[] {
     let languageHrefs: LanguageHref[] = [];
     this.getAvailableLocales().forEach(locale => languageHrefs.push(new LanguageHref(this.getLanguage(locale), this.getHref(locale))));
@@ -51,6 +53,10 @@ export class LanguageSelectorComponent implements OnInit {
       locales.push(locale);
     }
     return locales.sort();
+  }
+
+  toggleLanguageMenu() {
+    this.menuVisible = !this.menuVisible;
   }
 
 }
