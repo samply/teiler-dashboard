@@ -13,9 +13,8 @@
         <div class="toggle-all-button-container">
           <button class="toggle-all-button" (click)="toggleAllSections()">
             <span>
-              <i class="bi"
-                 [class.bi-caret-right-fill]="!allSectionsOpen"
-                 [class.bi-caret-down-fill]="allSectionsOpen"></i>
+              <i class="bi" [class.bi-caret-right-fill]="!allSectionsOpen"
+                [class.bi-caret-down-fill]="allSectionsOpen"></i>
             </span>
             {{allSectionsOpen ? 'Collapse all' : 'Expand all'}}
           </button>
@@ -26,36 +25,34 @@
           <div class="heading">
             <div class="arrow" *ngIf="configBlock.title" (click)="toggleSection(configBlock.title)">
               <i class="bi bi-caret-right" [class.bi-caret-right]="!configBlock.open"
-                 [class.bi-caret-down]="configBlock.open"></i>
+                [class.bi-caret-down]="configBlock.open"></i>
             </div>
             <h2 id="{{configBlock.title}}" (click)="toggleSection(configBlock.title)">
               {{configBlock.title}}
             </h2>
             <mat-icon class="info" matSuffix
-                      *ngIf="configBlock.titleComment.length>0 && configBlock.titleComment[0].length > 0"
-                      title="{{configBlock.titleComment.filter(isNotEmpty).concat('\n')}}">info
+              *ngIf="configBlock.titleComment.length>0 && configBlock.titleComment[0].length > 0"
+              title="{{configBlock.titleComment.filter(isNotEmpty).concat('\n')}}">info
             </mat-icon>
           </div>
           <div *ngIf="configBlock.open">
             <div *ngFor="let configVariable of configBlock.variables">
               <div [formGroup]="variableValueFormMap.get(configVariable.variable) ?? defaultValueFormGroup"
-                   [ngClass]="'form-field-wrapper'">
+                [ngClass]="'form-field-wrapper'">
                 <mat-form-field class="config-full-width">
                   <mat-label>{{configVariable.variable}}</mat-label>
                   <div *ngIf="!isPassword(configVariable.variable)">
                     <input type="text" matInput formControlName="configValue" value="configCariable.value">
                   </div>
-                  <div *ngIf="isPassword(configVariable.variable)">
-                    <input matInput
-                           [type]="getVisibility(configBlock.title, configVariable.variable) ? 'text' : 'password'"
-                           name="password">
-                    <mat-icon class="pwIcon" matSuffix
-                              (click)="togglePasswordVisibility(configBlock.title, configVariable.variable)">
-                      {{getVisibility(configBlock.title, configVariable.variable) ? 'visibility_off' : 'visibility'}}
-                    </mat-icon>
-                  </div>
+                  <input matInput *ngIf="isPassword(configVariable.variable)"
+                    [type]="getVisibility(configBlock.title, configVariable.variable) ? 'text' : 'password'"
+                    name="password">
+                  <mat-icon class="pwIcon" matSuffix *ngIf="isPassword(configVariable.variable)"
+                    (click)="togglePasswordVisibility(configBlock.title, configVariable.variable)">
+                    {{getVisibility(configBlock.title, configVariable.variable) ? 'visibility_off' : 'visibility'}}
+                  </mat-icon>
                   <mat-icon class="info" matSuffix *ngIf="configVariable.variableComment.length!=0"
-                            title="{{configVariable.variableComment.concat('\n')}}">info
+                    title="{{configVariable.variableComment.concat('\n')}}">info
                   </mat-icon>
                 </mat-form-field>
               </div>
@@ -71,7 +68,7 @@
       <div *ngFor="let configBlock of teilerConfigService.configBlocks">
         <div *ngIf="configBlock.title != null && configBlock.title != undefined">
           <a (click)="toggleSection(configBlock.title, true)" mat-list-item
-             href="{{'#'+configBlock.title}}">{{configBlock.title}}</a>
+            href="{{'#'+configBlock.title}}">{{configBlock.title}}</a>
         </div>
       </div>
     </mat-nav-list>
