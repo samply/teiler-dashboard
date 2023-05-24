@@ -1,12 +1,22 @@
+
 <div class="content" role="main">
 
   <div *ngIf="!isLoggedIn">
     <teiler-welcome></teiler-welcome>
   </div>
+
+  <div class="tabs">
+    <div [ngStyle]="{'color': selected.color}" >
   <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
-    <h2 i18n>Lokale Apps</h2>
   </div>
-  <div class="card-container">
+
+    <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="x1">Local Apps</div>
+          </ng-template>
+              <div class="slider-wrap">
+                <div class="slider-main">
     <div *ngFor="let teilerApp of teilerService.teilerApps">
       <div *ngIf="teilerApp.local && teilerApp.inMenu">
         <div *ngIf="!teilerApp.externLink">
@@ -22,10 +32,17 @@
       </div>
     </div>
   </div>
+              </div>
+        </mat-tab>
+
   <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
-    <h2 i18n>Zentrale Apps</h2>
   </div>
-  <div class="card-container">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="x1">Central Apps</div>
+        </ng-template>
+              <div class="slider-wrap">
+                <div class="slider-main">
     <div class="card-wrapper" *ngFor="let teilerApp of teilerService.teilerApps">
       <div *ngIf="!teilerApp.local && teilerApp.inMenu">
         <div *ngIf="!teilerApp.externLink">
@@ -41,4 +58,12 @@
       </div>
     </div>
   </div>
+
+    </div>
+</mat-tab>
+</mat-tab-group>
+
+  </div>
+</div>
+
 </div>

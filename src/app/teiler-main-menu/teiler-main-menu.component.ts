@@ -7,7 +7,8 @@ import {from} from "rxjs";
 @Component({
   selector: 'teiler-main-menu',
   templateUrl: './teiler-main-menu.component.html',
-  styleUrls: ['./teiler-main-menu.component.css']
+  styleUrls: ['./teiler-main-menu.component.css'],
+
 })
 export class TeilerMainMenuComponent implements OnInit {
 
@@ -19,7 +20,7 @@ export class TeilerMainMenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   existLocalAndCentralTeilerAppsAtTheSameTime() {
     if (this.teilerService.teilerApps.length > 0) {
       let isLocal = this.teilerService.teilerApps[0].local;
@@ -31,5 +32,24 @@ export class TeilerMainMenuComponent implements OnInit {
     }
     return false;
   }
-
+  selected= {
+    name: 'Default',
+    color: 'grey',
+  }
+  data = [{
+    name: 'Lilac',
+    color: 'rgb(216, 191, 216)',
+  }, {
+    name: 'Blue',
+    color: 'rgb(30,144,255)'
+  }, {
+    name: 'Green',
+    color: 'rgb(46,139,87)'
+  }, {
+    name: 'Brown',
+    color: 'rgb(222,184,135)'
+  }]
+  compareObjects(o1: any, o2: any): boolean {
+    return o1.color === o2.color
+  }
 }

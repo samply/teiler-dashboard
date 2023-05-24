@@ -1,21 +1,18 @@
-<mat-card appearance="outlined" class="teiler-box" [style.background]="teilerApp.backgroundColor">
-  <mat-card-header>
-    <div mat-card-avatar>
-      <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
-        <i class="{{teilerApp.iconClass}}"></i>
-      </div>
-      <div class="teiler-box-image" *ngIf="teilerApp.iconSourceUrl != undefined">
-        <img src="{{teilerApp.iconSourceUrl}}">
-      </div>
+<div class="teiler-box">
+  <div class="text">
+    <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined" [ngStyle]="{'color': selected.color}" >
+      <i class="{{teilerApp.iconClass}}" [ngStyle]="{'color': selected.color}" ></i>
     </div>
-      <mat-card-title>
-          {{teilerApp.title}}
-    </mat-card-title>
-    <mat-card-subtitle>
-      {{teilerApp.description}}
-    </mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-footer>
-    <i class="{{getCheckIconClass()}}" title="{{getCheckIconTitle()}}"></i>
-  </mat-card-footer>
-</mat-card>
+    <div class="teiler-box-image" *ngIf="teilerApp.iconSourceUrl != undefined">
+      <img src="{{teilerApp.iconSourceUrl}}">
+    </div>
+    <h3>{{teilerApp.title}}</h3>
+    <div class="strich" [ngStyle]="{'color': selected.color}">
+      <hr [ngStyle]="{'background-color': selected.color}" >
+    </div>
+    <p>{{teilerApp.description}}</p>
+  </div>
+  <div class="icon-footer">
+  <i class="{{getCheckIconClass()}}" title="{{getCheckIconTitle()}}"></i>
+  </div>
+</div>

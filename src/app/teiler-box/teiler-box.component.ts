@@ -19,7 +19,7 @@ export class TeilerBoxComponent implements OnInit {
 
   constructor() {
   }
-  
+
   ngOnInit(): void {
     this.teilerApp.backgroundColor = this.teilerApp.backgroundColor || BackgroundColors.GREEN;
   }
@@ -103,4 +103,24 @@ export class TeilerBoxComponent implements OnInit {
     return (this.hasVariableAValue(this.teilerApp.backendReachable) || (this.teilerApp.externLink && this.hasVariableAValue(this.teilerApp.backendUrl)));
   }
 
+  selected= {
+    name: 'Default',
+    color: 'grey',
+  }
+  data = [{
+    name: 'Lilac',
+    color: 'rgb(216, 191, 216)',
+  }, {
+    name: 'Blue',
+    color: 'rgb(30,144,255)'
+  }, {
+    name: 'Green',
+    color: 'rgb(46,139,87)'
+  }, {
+    name: 'Brown',
+    color: 'rgb(222,184,135)'
+  }]
+  compareObjects(o1: any, o2: any): boolean {
+    return o1.color === o2.color
+  }
 }
