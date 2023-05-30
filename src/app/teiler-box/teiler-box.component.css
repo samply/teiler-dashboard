@@ -4,16 +4,19 @@
 
 h3{
   color: black;
-  margin-top: 5%;
   font-size: 130%;
+  margin:0;
 }
 
 .teiler-box-image img{
-  width: 100%;
+width: 80px;
+  height: 85px;
+  margin-left: 25%;
 }
 p{
   color: black;
   font-size: 110%;
+  margin: 0;
 }
 .teiler-box-icon {
   font-size: 470%;
@@ -28,7 +31,7 @@ float:left;
   margin-top: 3%;
   margin-bottom: 2%;
   min-width: 250px;
-  min-height: 260px;
+  min-height: 270px;
   position: relative;
   border-radius: 2%;
   box-shadow: 6px 5px 15px 1px lightgrey;
@@ -48,7 +51,7 @@ float:left;
 
 .text{
   position: absolute;
-  top:12%;
+  top: 14%;
   left: 6%;
   right: 5%;
   text-align: left;
@@ -60,9 +63,6 @@ float:left;
   transform-origin:left;
   transform:scaleX(0);
   transition: transform 200ms ease;
-   top: 0;
-   bottom: 0;
-
 }
 hr{
   height: 1px;

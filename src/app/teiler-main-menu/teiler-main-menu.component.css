@@ -5,40 +5,81 @@ body{
 }
 teiler-welcome{
   width: 30%;
+  position:sticky;
 }
 .content {
-  margin-top: 5%;
-  margin-left: 2%;
+  margin-top: 4%;
+  margin-left: 4%;
   display:flex;
 }
+
 .x1{
   font-size:25px;
   height: 30px;
 }
 
 .tabs{
-  width: 75%;
+  min-width: 50%;
   margin-right: 5%;
   transition: all 2s ease;
-  padding: 2%;
-  text-align: center;
-  align-content: center;
+  padding: 5%;
+  display: block;
 }
+
 .slider-wrap{
   position: relative;
   overflow: hidden;
   min-height: 550px;
-margin: 5%;
+  padding: 2%;
 }
 .slider-main{
-  width: 1250px;
+  margin-left: 4%;
+  min-width: 100%;
   text-align: center;
   align-content: center;
+
 }
 
 .card-container a {
   display: inline-flex;
 }
-
+@media(max-width : 90em){
+  teiler-welcome{
+    width: 93%;
+    margin-left: 5%;
+    margin-right: 4%;
+  }
+  teiler-box{
+    min-width: 220px;
+    min-height: 260px;
+    position: relative;
+    border-radius: 2%;
+    box-shadow: 10px 6px 10px 1px lightgrey ;
+  }
+  .text{
+    position: absolute;
+    top:12%;
+    left: 2%;
+  }
+  .bi-x-circle{
+    position: absolute;
+    margin-top: 105%;
+    left: 91%;
+    transform: translate(-50%, -50%);
+    color: palevioletred;
+    font-size: 140%;
+  }
+  .tabs{
+    width: 90%;
+    margin-left:2%;
+    margin-right: 4%;
+  }
+  .content{
+    margin-top: 3%;
+    margin-right: 0;
+    display: block;
+    margin-left:0;
+  }
+}
 
 

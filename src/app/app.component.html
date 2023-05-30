@@ -24,12 +24,6 @@
       <div>
         <language-selector></language-selector>
       </div>
-      <select [(ngModel)]="selected" [compareWith]="compareObjects"
-              style="padding: 2%; font-size: 100%;  margin-right: 55%">
-        <option *ngFor="let datas of data" [ngStyle]="{'color': datas.color}" [ngValue]="datas">
-          {{datas.name}}
-        </option>
-      </select>
     </div>
   </div>
   <app-sidebar></app-sidebar>

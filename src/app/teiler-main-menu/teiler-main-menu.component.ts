@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {TeilerService} from "../teiler/teiler.service";
 import {TeilerAuthService} from "../security/teiler-auth.service";
 import {from} from "rxjs";

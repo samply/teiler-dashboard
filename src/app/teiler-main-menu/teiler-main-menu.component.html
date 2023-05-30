@@ -1,12 +1,12 @@
 
 <div class="content" role="main">
-
   <div *ngIf="!isLoggedIn">
     <teiler-welcome></teiler-welcome>
   </div>
 
   <div class="tabs">
-    <div [ngStyle]="{'color': selected.color}" >
+
+
   <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
   </div>
 
@@ -64,6 +64,4 @@
 </mat-tab-group>
 
   </div>
-</div>
-
 </div>

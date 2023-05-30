@@ -1,15 +1,13 @@
 .content {
     border-left: solid 1px #e0e0e0;
-    border-radius: solid 1px #e0e0e0;
-    padding: 32px;
-
+  min-width: 100%;
 }
 
 .main-content {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
     height: 100%;
-    position: relative;
+    min-width: 100%;
+    position: absolute;
 }
 
 .side-nav {
@@ -22,6 +20,7 @@
     z-index: 2;
     padding: 0 0 0 16px;
 }
+
 
 .burger-menu-button-open {
     text-align: right;

@@ -29,7 +29,9 @@ h6 {
   grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
-
+body{
+  background-image: url("../../src/assets/images/Backgrounds_Boxes.svg");
+}
 /* header */
 
 .toolbar {
