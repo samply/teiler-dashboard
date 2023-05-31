@@ -4,8 +4,9 @@ body{
 
 }
 teiler-welcome{
-  width: 30%;
+  width: 40%;
   position:sticky;
+  display: block;
 }
 .content {
   margin-top: 4%;
@@ -18,13 +19,7 @@ teiler-welcome{
   height: 30px;
 }
 
-.tabs{
-  min-width: 50%;
-  margin-right: 5%;
-  transition: all 2s ease;
-  padding: 5%;
-  display: block;
-}
+
 
 .slider-wrap{
   position: relative;
@@ -33,17 +28,18 @@ teiler-welcome{
   padding: 2%;
 }
 .slider-main{
-  margin-left: 4%;
   min-width: 100%;
-  text-align: center;
-  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+gap: 20px;
 
 }
 
 .card-container a {
   display: inline-flex;
 }
-@media(max-width : 90em){
+@media(max-width : 1200px){
   teiler-welcome{
     width: 93%;
     margin-left: 5%;
@@ -71,8 +67,11 @@ teiler-welcome{
   }
   .tabs{
     width: 90%;
-    margin-left:2%;
-    margin-right: 4%;
+    min-width: 50%;
+    transition: all 2s ease;
+    padding: 5%;
+    display: block;
+    margin: auto;
   }
   .content{
     margin-top: 3%;
@@ -80,6 +79,8 @@ teiler-welcome{
     display: block;
     margin-left:0;
   }
+
+  
 }
 
 

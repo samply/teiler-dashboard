@@ -1,6 +1,9 @@
 .content {
     border-left: solid 1px #e0e0e0;
-  min-width: 100%;
+  /* min-width: 100%; */
+  flex: 1;
+  padding-top: 40px;
+  margin-bottom: 40px;
 }
 
 .main-content {
