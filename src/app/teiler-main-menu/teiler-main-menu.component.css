@@ -4,7 +4,7 @@ body{
 
 }
 teiler-welcome{
-  width: 40%;
+  /* width: 80%; */
   position:sticky;
   display: block;
 }
@@ -41,9 +41,12 @@ gap: 20px;
 }
 @media(max-width : 1200px){
   teiler-welcome{
-    width: 93%;
-    margin-left: 5%;
-    margin-right: 4%;
+    /* width: 93%; */
+    /* margin-left: 5%; */
+    /* margin-right: 4%; */
+  }
+  .welcome-text{
+    flex: 1;
   }
   teiler-box{
     min-width: 220px;
@@ -72,6 +75,7 @@ gap: 20px;
     padding: 5%;
     display: block;
     margin: auto;
+    flex: 2;
   }
   .content{
     margin-top: 3%;
