@@ -1,4 +1,3 @@
-
 <div class="content" role="main">
   <div *ngIf="!isLoggedIn">
     <teiler-welcome></teiler-welcome>
@@ -7,61 +6,61 @@
   <div class="tabs">
 
 
-  <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
-  </div>
+    <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
+    </div>
 
     <mat-tab-group>
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <div class="x1">Local Apps</div>
-          </ng-template>
-              <div class="slider-wrap">
-                <div class="slider-main">
-    <div *ngFor="let teilerApp of teilerService.teilerApps">
-      <div *ngIf="teilerApp.local && teilerApp.inMenu">
-        <div *ngIf="!teilerApp.externLink">
-          <a routerLink="{{'/'+teilerApp.routerLink}}">
-            <teiler-box [teilerApp]="teilerApp"></teiler-box>
-          </a>
-        </div>
-        <div *ngIf="teilerApp.externLink">
-          <a routerLink="{{'/'+teilerApp.routerLink}}" [externalLink]="teilerApp.sourceUrl??''">
-            <teiler-box [teilerApp]="teilerApp"></teiler-box>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-              </div>
-        </mat-tab>
-
-  <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
-  </div>
       <mat-tab>
         <ng-template mat-tab-label>
-          <div class="x1">Central Apps</div>
+          <div class="x1" i18n>Lokale Apps</div>
         </ng-template>
-              <div class="slider-wrap">
-                <div class="slider-main">
-    <div class="card-wrapper" *ngFor="let teilerApp of teilerService.teilerApps">
-      <div *ngIf="!teilerApp.local && teilerApp.inMenu">
-        <div *ngIf="!teilerApp.externLink">
-          <a routerLink="{{'/'+teilerApp.routerLink}}">
-            <teiler-box [teilerApp]="teilerApp"></teiler-box>
-          </a>
+        <div class="slider-wrap">
+          <div class="slider-main">
+            <div *ngFor="let teilerApp of teilerService.teilerApps">
+              <div *ngIf="teilerApp.local && teilerApp.inMenu">
+                <div *ngIf="!teilerApp.externLink">
+                  <a routerLink="{{'/'+teilerApp.routerLink}}">
+                    <teiler-box [teilerApp]="teilerApp"></teiler-box>
+                  </a>
+                </div>
+                <div *ngIf="teilerApp.externLink">
+                  <a routerLink="{{'/'+teilerApp.routerLink}}" [externalLink]="teilerApp.sourceUrl??''">
+                    <teiler-box [teilerApp]="teilerApp"></teiler-box>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div *ngIf="teilerApp.externLink">
-          <a routerLink="{{'/'+teilerApp.routerLink}}" [externalLink]="teilerApp.sourceUrl??''">
-            <teiler-box [teilerApp]="teilerApp"></teiler-box>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+      </mat-tab>
 
-    </div>
-</mat-tab>
-</mat-tab-group>
+      <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
+      </div>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="x1" i18n>Zentrale Apps</div>
+        </ng-template>
+        <div class="slider-wrap">
+          <div class="slider-main">
+            <div class="card-wrapper" *ngFor="let teilerApp of teilerService.teilerApps">
+              <div *ngIf="!teilerApp.local && teilerApp.inMenu">
+                <div *ngIf="!teilerApp.externLink">
+                  <a routerLink="{{'/'+teilerApp.routerLink}}">
+                    <teiler-box [teilerApp]="teilerApp"></teiler-box>
+                  </a>
+                </div>
+                <div *ngIf="teilerApp.externLink">
+                  <a routerLink="{{'/'+teilerApp.routerLink}}" [externalLink]="teilerApp.sourceUrl??''">
+                    <teiler-box [teilerApp]="teilerApp"></teiler-box>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </mat-tab>
+    </mat-tab-group>
 
   </div>
 </div>

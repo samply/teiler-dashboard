@@ -7,13 +7,13 @@
   </div>
   <button mat-stroked-button (click)="reload()"><i class="bi bi-arrow-clockwise"></i>
   </button>
-    <div class="search">
-      <div><span i18n>Suche</span>:
-        <label class="matinput">
-          <input matInput style="border:1px solid dimgrey; width: 175px; border-radius:4px; padding: 2px;">
-        </label>
-      </div>
+  <div class="search">
+    <div><span i18n>Suche</span>:
+      <label class="matinput">
+        <input matInput style="border:1px solid dimgrey; width: 175px; border-radius:4px; padding: 2px;">
+      </label>
     </div>
+  </div>
   <div class="wholetable">
     <table mat-table [dataSource]="inquiries" class="mat-elevation-z8">
       <div *ngFor="let column of getInquiriesTableItemColumnsToDisplay()">

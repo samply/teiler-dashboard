@@ -619,7 +619,7 @@
     </unit>
     <unit id="6631852761620844734">
       <notes>
-        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:7</note>
+        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:16</note>
       </notes>
       <segment>
         <source>Lokale Apps</source>
@@ -627,7 +627,7 @@
     </unit>
     <unit id="2598281716737340252">
       <notes>
-        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:26</note>
+        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:42</note>
       </notes>
       <segment>
         <source>Zentrale Apps</source>

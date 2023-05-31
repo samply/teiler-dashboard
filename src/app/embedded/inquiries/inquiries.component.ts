@@ -32,7 +32,7 @@ export abstract class InquiriesComponent implements OnInit {
 
   abstract getInquiriesTableItemColumnsToDisplay(): InquiriesTableItemColumn[];
 
-  getTitel(): string{
+  getTitel(): string {
     return this.inquiriesService.title;
   }
 
@@ -53,6 +53,7 @@ export abstract class InquiriesComponent implements OnInit {
   getRouterLink(inquiry: Inquiry): string {
     return '/' + createRouterLinkForBase(EmbeddedTeilerApps.INQUIRY + '/' + inquiry.id);
   }
+
   reload() {
     window.location.reload();
     // any other execution
