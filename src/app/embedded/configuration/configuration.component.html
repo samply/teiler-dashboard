@@ -25,28 +25,59 @@
         <div *ngFor="let configBlock of teilerConfigService.configBlocks; let index=index">
           <div class="heading">
             <div class="arrow" *ngIf="configBlock.title" (click)="toggleSection(configBlock.title)">
+            <!-- Pfeil für Überschrift -->
               <i class="bi bi-caret-right" [class.bi-caret-right]="!configBlock.open"
                  [class.bi-caret-down]="configBlock.open"></i>
             </div>
+            <!-- Überschrift für Collapse -->
             <h2 id="{{configBlock.title}}" (click)="toggleSection(configBlock.title)">
               {{configBlock.title}}
             </h2>
+            <!-- info zeichen von Überschrift -->
             <mat-icon class="info" matSuffix
                       *ngIf="configBlock.titleComment.length>0 && configBlock.titleComment[0].length > 0"
                       title="{{configBlock.titleComment.filter(isNotEmpty).concat('\n')}}">info
             </mat-icon>
           </div>
+          <!-- Inhalt-->
           <div *ngIf="configBlock.open">
             <div *ngFor="let configVariable of configBlock.variables">
               <div [formGroup]="variableValueFormMap.get(configVariable.variable) ?? defaultValueFormGroup"
                    [ngClass]="'form-field-wrapper'">
                 <mat-form-field class="config-full-width">
-                  <mat-label>{{configVariable.variable}}</mat-label>
-                  <div *ngIf="!isPassword(configVariable.variable)">
-                    <input type="text" matInput formControlName="configValue" value="configCariable.value">
+
+
+
+                  <!-- Inputs für Variable-->
+
+                  <div style="float: left; display:flex; flex-flow:row; gap:10px">
+                    <mat-label>{{configVariable.variable}}</mat-label> <div class="buttons">
+                    <button mat-button (click)="openDialog()"> <span class="material-icons" style="padding:2px; ">mode_edit</span></button>
+                    <button mat-button (click)="openDialog()"><span class="material-icons">delete</span></button>
+                    <button mat-button (click)="openDialog()"><span class="material-icons">help</span></button>
                   </div>
+                    <div style="float: left; display:flex; flex-flow:row; gap:10px">
+                     <mat-icon matSuffix >
+<!--                       <span class="material-symbols-outlined" style="font-size: 15px; ">border_color</span>-->
+
+
+                     </mat-icon>
+
+                      <mat-icon matSuffix
+                                *ngIf="configBlock.titleComment.length>0 && configBlock.titleComment[0].length > 0"
+                                title="{{configBlock.titleComment.filter(isNotEmpty).concat('\n')}}">
+                      </mat-icon>
+                       </div>
+                  </div>
+
+                  <div *ngIf="!isPassword(configVariable.variable)">
+                    <input appearance="outline" type="text" matInput formControlName="configValue" value="configCariable.value">
+                    <!-- Edit Button -->
+                  </div>
+
+                  <!-- Input für Passwort mit Auge Icon -->
                   <div *ngIf="isPassword(configVariable.variable)">
-                    <input matInput
+                    <input appearance="outline" matInput
                            [type]="getVisibility(configBlock.title, configVariable.variable) ? 'text' : 'password'"
                            name="password">
                     <mat-icon class="pwIcon" matSuffix
@@ -54,12 +85,25 @@
                       {{getVisibility(configBlock.title, configVariable.variable) ? 'visibility_off' : 'visibility'}}
                     </mat-icon>
                   </div>
-                  <mat-icon class="info" matSuffix *ngIf="configVariable.variableComment.length!=0"
-                            title="{{configVariable.variableComment.concat('\n')}}">info
-                  </mat-icon>
+
+
+
+
                 </mat-form-field>
+
+
+
               </div>
+
             </div>
+            <div style="display:flex; flex-direction: row; justify-content: center; margin-bottom: 25px">
+            <hr>
+            <button style="border:none; background: none" class="hfIcon">
+              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="control_point"></mat-icon>
+            </button>
+            <hr>
+
+          </div>
           </div>
 
         </div>

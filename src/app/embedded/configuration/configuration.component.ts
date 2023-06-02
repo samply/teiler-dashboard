@@ -2,6 +2,8 @@ import {AfterViewChecked, Component} from '@angular/core';
 import {ConfigBlock, ConfigVariable, TeilerConfigService} from "../../teiler/teiler-config.service";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {DialogBoxComponent} from "../dialog-box/dialog-box.component";
 
 
 @Component({
@@ -25,12 +27,23 @@ export class ConfigurationComponent implements AfterViewChecked {
 
   constructor(public teilerConfigService: TeilerConfigService,
               private domSanitizer: DomSanitizer,
-              private formBuilder: FormBuilder) {
-    teilerConfigService.configBlocksbehaviorSubject.subscribe(configBlocks => {
+              private formBuilder: FormBuilder,private matDialog: MatDialog) {
+      teilerConfigService.configBlocksbehaviorSubject.subscribe(configBlocks => {
       this.updateConfigFileUrl();
       this.updateVariableValueFormMap(configBlocks);
     });
   }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.position = {
+      top: '0',
+      left: '0'
+    };
+    this.matDialog.open(DialogBoxComponent, dialogConfig);
+  }
+
+
 
   isNotEmpty(line: string): boolean {
     return line.length > 0;
@@ -170,3 +183,4 @@ export class ConfigurationComponent implements AfterViewChecked {
   }
 
 }
+

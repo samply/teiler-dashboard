@@ -38,7 +38,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {BarChartModule} from "@swimlane/ngx-charts";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatTabsModule} from "@angular/material/tabs";
-import {MatDialogModule} from "@angular/material/dialog";
+import { DialogBoxComponent } from './embedded/dialog-box/dialog-box.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     TeilerAppPluginOrchestratorComponent,
     ExternalLinkDirective,
     TeilerBoxComponent,
-    TeilerWelcomeComponent
+    TeilerWelcomeComponent,
+    DialogBoxComponent
   ],
   imports: [
     AppRoutingModule,
@@ -82,7 +85,6 @@ import {MatDialogModule} from "@angular/material/dialog";
     ParcelModule,
     ReactiveFormsModule,
     TeilerModule,
-
   ],
   providers: [
     {
@@ -92,7 +94,9 @@ import {MatDialogModule} from "@angular/material/dialog";
       deps: [KeycloakService]
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogBoxComponent]
+
 })
 export class AppModule {
 }
