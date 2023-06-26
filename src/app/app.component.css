@@ -7,6 +7,7 @@
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   /* You can add global styles to this file, and also import other style files */
 
   --color-blue: #1B9AAA;
@@ -29,9 +30,7 @@ h6 {
   grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
-body{
-  background-image: url("../../src/assets/images/Backgrounds_Boxes.svg");
-}
+
 /* header */
 
 .toolbar {

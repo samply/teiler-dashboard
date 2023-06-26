@@ -1,44 +1,73 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 /*@import "~bootstrap-icons/font/bootstrap-icons.css";*/
-body{
 
-}
 teiler-welcome{
   /* width: 80%; */
   position:sticky;
   display: block;
+  width:80%;
+  margin-left: 4%;
 }
 .content {
-  margin-top: 4%;
-  margin-left: 4%;
   display:flex;
+  justify-content: center;
+  vertical-align: middle;
 }
-
 .x1{
   font-size:25px;
   height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  align-content: center;
+}
+.tabs{
+  min-width: 50%;
+  margin-left:4%;
+  margin-right:4%;
+  text-align: center;
+  align-content: center;
+  transition: all 2s ease;
+
+}
+.apps{
+ padding-left: 15%;
+  padding-right: 16%;
+}
+.tabs1 .index {
+  display: flex;
+  font-size: 25px;
+  width: 110%;
 }
 
-
-
+.tabs1 .index .active{
+  padding-bottom: 0.5%;
+  border-bottom: 1px solid lightgrey;
+}
 .slider-wrap{
   position: relative;
   overflow: hidden;
   min-height: 550px;
-  padding: 2%;
+  padding-bottom: 2%;
+  padding-top: 3%;
+  text-align: center;
+  align-content: center;
 }
 .slider-main{
-  min-width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-gap: 20px;
-
+  position: relative;
+  width: 100%;
+  text-align: center;
+  align-content: center;
 }
 
 .card-container a {
   display: inline-flex;
 }
+@media(max-width : 1740px) {
+  .content {
+    zoom: 75%;
+  }
+}
+
 @media(max-width : 1200px){
   teiler-welcome{
     /* width: 93%; */
@@ -77,14 +106,34 @@ gap: 20px;
     margin: auto;
     flex: 2;
   }
+  .apps{
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+  .tabs1 .index {
+    display: flex;
+    font-size: 25px;
+    width: 100%;
+  }
+
+  .tabs1 .index .active{
+    padding-bottom: 0.5%;
+    border-bottom: 1px solid lightgrey;
+  }
+
   .content{
     margin-top: 3%;
     margin-right: 0;
     display: block;
     margin-left:0;
   }
-
-  
+  .slider-wrap{
+    position: relative;
+    overflow: hidden;
+    min-height: 550px;
+    padding-top: 3%;
+    padding-left: 0;
+  }
 }
 
 

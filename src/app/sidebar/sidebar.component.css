@@ -1,58 +1,129 @@
 .content {
-    border-left: solid 1px #e0e0e0;
+  border-left: solid 1px #e0e0e0;
   /* min-width: 100%; */
   flex: 1;
-  padding-top: 40px;
-  margin-bottom: 40px;
-}
+  vertical-align: middle;
+  z-index:1;
+  position: relative;
+  overflow:hidden;
 
+}
 .main-content {
     display: flex;
     height: 100%;
     min-width: 100%;
-    position: absolute;
+  position: absolute;
+  z-index:2;
 }
-
+.ng-star-inserted{
+  display: inline-flex;
+}
 .side-nav {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: white;
     z-index: 2;
-    padding: 0 0 0 16px;
+  width: 280px;
+}
+.router-style, .b-img{
+  position: absolute;
+}
+.router-style{
+  margin-top: 6%;
+  z-index: 2;
+}
+.b-img{
+  z-index: 1;
+}
+.sidebar {
+  font-size: 18px;
+  transition: all 3ms ease;
+  border-bottom: 1px solid lightgrey;
+  width: 100%;
+}
+.extern:hover{
+  transform: scale(1.1);
+}
+.extern{
+  margin-left: 20px;
+  width: 90%;
+  transition: all 40ms ease-in-out !important;
+}
+.intern:hover{
+  transform: scale(1.1);
+}
+.intern{
+  margin-left: 20px;
+  width: 90%;
+  transition: all 40ms ease-in-out !important;
+}
+.teiler-box-image{
+}
+img{
+  width: 25px;
+  margin-right: 5px;
+  height: 30px;
+  margin-left: 15px;
+  margin-top: 12px;
 }
 
-
-.burger-menu-button-open {
-    text-align: right;
-    margin: 8px 16px;
+.teiler-box-icon i{
+  width: 30px;
+  height: 30px;
+  margin-left: 37px;
+  margin-top: 12px;
 }
-
-.burger-menu-button-close {
-    text-align: right;
-    margin: 8px 16px 28px;
-}
-
-a {
-    font-size: 16px;
-}
-
 @media screen and (min-width: 769px) {
+
     .side-nav {
         position: static;
-        padding-top: 24px;
     }
     .main-content {
         grid-template-columns: auto 1fr;
-    }
-    .sidenav-container {
-        position: static;
     }
     .side-nav-menu-container {
         position: sticky;
         top: 20px;
     }
 }
-
+@media(max-width : 769px){
+  .side-nav-container{
+    width: 0;
+  }
+  .content{
+    overflow: visible;
+  }
+  .burger-menu-button-open, .burger-menu-button-close{
+    position: absolute;
+    float: left;
+    text-align: left;
+    height: 40px;
+    width: 40px;
+    z-index: 2;
+    margin-bottom: 4%;
+  }
+  .burger-menu-button-close{
+    background-color: white;
+    z-index: 3;
+    width: 10%;
+  }
+  .bi bi-x{
+    font-size: 200%;
+  }
+ .side-nav {
+    width:100%;
+    margin-right: 0;
+    height: 100%;
+   margin-top: 6%;
+   padding-top: 3%;
+   z-index: 2;
+   position: absolute;
+   transition: all 4s ease-in-out !important;
+ }
+ .burger-menu-button-open:checked{
+   opacity: 0;
+ }
+}

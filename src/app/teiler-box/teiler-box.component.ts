@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BackgroundColors, EmptyTeilerApp, TeilerApp} from "../teiler/teiler-app";
+import {AppComponent} from "../app.component";
 
 
 enum TeilerAppStatus {
@@ -103,6 +104,8 @@ export class TeilerBoxComponent implements OnInit {
     return (this.hasVariableAValue(this.teilerApp.backendReachable) || (this.teilerApp.externLink && this.hasVariableAValue(this.teilerApp.backendUrl)));
   }
 
+  protected readonly AppComponent = AppComponent;
+
   selected= {
     name: 'Default',
     color: 'grey',
@@ -120,7 +123,5 @@ export class TeilerBoxComponent implements OnInit {
     name: 'Brown',
     color: 'rgb(222,184,135)'
   }]
-  compareObjects(o1: any, o2: any): boolean {
-    return o1.color === o2.color
-  }
+
 }

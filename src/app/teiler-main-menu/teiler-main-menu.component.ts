@@ -11,6 +11,7 @@ import {from} from "rxjs";
 
 })
 export class TeilerMainMenuComponent implements OnInit {
+  tab = 1;
 
   isLoggedIn: boolean = false;
 

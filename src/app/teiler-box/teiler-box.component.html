@@ -1,14 +1,15 @@
+
 <div class="teiler-box">
   <div [ngStyle]="{'color': selected.color}" >
   <div class="text">
-    <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined" [ngStyle]="{'color': selected.color}" >
-      <i class="{{teilerApp.iconClass}}" [ngStyle]="{'color': selected.color}" ></i>
+    <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
+      <i class="{{teilerApp.iconClass}}" ></i>
     </div>
     <div class="teiler-box-image" *ngIf="teilerApp.iconSourceUrl != undefined">
       <img i src="{{teilerApp.iconSourceUrl}}">
     </div>
     <h3>{{teilerApp.title}}</h3>
-    <div class="strich" [ngStyle]="{'color': selected.color}">
+    <div class="strich">
       <hr [ngStyle]="{'background-color': selected.color}"  >
     </div>
     <p>{{teilerApp.description}}</p>

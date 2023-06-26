@@ -7,9 +7,8 @@ h3{
   font-size: 130%;
   margin:0;
 }
-
 .teiler-box-image img{
-width: 80px;
+  width: 80px;
   height: 85px;
   margin-left: 25%;
 }
@@ -21,18 +20,23 @@ p{
 .teiler-box-icon {
   font-size: 470%;
   margin-left: 32%;
-  transition: transform 5s ease;
+  transition: transform 50ms ease;
 }
 .teiler-box {
-float:left;
+  float:left;
   display:flex;
   flex-wrap: wrap;
   min-width: 250px;
   min-height: 270px;
+  margin: 1.25%;
   position: relative;
   border-radius: 2%;
   box-shadow: 6px 5px 15px 1px lightgrey;
   transition: transform 150ms ease;
+  vertical-align: middle;
+  text-align: center;
+  align-content: center;
+  background-color: white;
 }
 .teiler-box._mat-animation-noopable {
   transition: all 1ms ease-in-out !important;
@@ -45,15 +49,13 @@ float:left;
 .teiler-box:hover .strich{
   transform:scaleX(1);
 }
-
 .text{
   position: absolute;
-  top: 14%;
+  top: 16%;
   left: 6%;
   right: 5%;
   text-align: left;
 }
-
 .strich{
   padding-bottom: 0.5%;
   margin-right:4%;
@@ -78,20 +80,16 @@ hr{
   border-radius: 50% 0 0 0;
   transition: all 0.3s ease-in-out !important;
 }
-
 .teiler-box:hover .icon-footer{
   transform: translate(5px);
   box-shadow: -4px -1px 13px rgba(0, 0, 0, 0.35)
 }
-
 .bi-check-circle {
   color: green;
 }
-
 .bi-x-circle {
   color: red;
 }
-
 .bi-clock {
   color: orange;
 }

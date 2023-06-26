@@ -21,29 +21,30 @@ h2{
   margin-top: 1.5%;
 }
 button{
-  background-color: cornflowerblue;
   color: white;
   font-size: 14px;
   border-radius: 10px;
-  font-family: Roboto, Helvetica Neue, sans-serif;
   padding: 0.5%;
+  padding-left: 1%;
+  padding-right: 1%;
+  background-color: #002772;
 }
 .button{
   margin-top:1.5%;
-  font-family: Roboto, Helvetica Neue, sans-serif;
   text-align: left;
   font-size: 14px;
   width: 100%;
+
 }
 progress{
   background-color: blue;
 }
 
 .search{
-  font-family: Roboto, Helvetica Neue, sans-serif;
   font-size: 16px;
   margin-top: 0.5%;
-  margin-left: 960px;
+  margin-left: 80%;
+  display: flex;
 }
 
 table{
@@ -60,8 +61,15 @@ table{
   font-size: 115%;
   text-align: center;
 }
-.paginator{
-  background-color: #fafafa;
+mat-paginator{
+  opacity: 0.75;
 }
 
-
+@media(max-width : 1400px){
+  .search{
+    font-size: 16px;
+    margin-top: 0.5%;
+    margin-left: 60%;
+    display: flex;
+  }
+}

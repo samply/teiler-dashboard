@@ -1,4 +1,4 @@
-import {Component, OnInit, HostListener} from '@angular/core';
+import {Component, OnInit, HostListener, ViewChild, ElementRef} from '@angular/core';
 import {TeilerService} from "../teiler/teiler.service";
 import {createMainRouterLink} from "../route/route-utils";
 import { lastValueFrom } from 'rxjs';
@@ -9,6 +9,7 @@ import { lastValueFrom } from 'rxjs';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+
 
   public innerWidth: any;
   public menuVisibleMobile: boolean = false;
