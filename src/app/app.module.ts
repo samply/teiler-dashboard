@@ -39,6 +39,7 @@ import {BarChartModule} from "@swimlane/ngx-charts";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatDialogModule} from "@angular/material/dialog";
+import {ColorSchemeService} from "./color-scheme.service";
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 
   ],
   providers: [
+    ColorSchemeService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,

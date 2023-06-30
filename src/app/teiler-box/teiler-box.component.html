@@ -1,6 +1,5 @@
 
 <div class="teiler-box">
-  <div [ngStyle]="{'color': selected.color}" >
   <div class="text">
     <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
       <i class="{{teilerApp.iconClass}}" ></i>
@@ -10,7 +9,7 @@
     </div>
     <h3>{{teilerApp.title}}</h3>
     <div class="strich">
-      <hr [ngStyle]="{'background-color': selected.color}"  >
+      <hr>
     </div>
     <p>{{teilerApp.description}}</p>
   </div>
@@ -18,4 +17,4 @@
   <i class="{{getCheckIconClass()}}" title="{{getCheckIconTitle()}}"></i>
   </div>
 </div>
-</div>
+

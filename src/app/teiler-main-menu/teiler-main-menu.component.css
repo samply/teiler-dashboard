@@ -2,7 +2,6 @@
 /*@import "~bootstrap-icons/font/bootstrap-icons.css";*/
 
 teiler-welcome{
-  /* width: 80%; */
   position:sticky;
   display: block;
   width:80%;
@@ -16,9 +15,6 @@ teiler-welcome{
 .x1{
   font-size:25px;
   height: 30px;
-  vertical-align: middle;
-  text-align: center;
-  align-content: center;
 }
 .tabs{
   min-width: 50%;
@@ -26,8 +22,8 @@ teiler-welcome{
   margin-right:4%;
   text-align: center;
   align-content: center;
-  transition: all 2s ease;
-
+  display: block;
+  margin-top: 1%;
 }
 .apps{
  padding-left: 15%;
@@ -53,7 +49,6 @@ teiler-welcome{
   align-content: center;
 }
 .slider-main{
-  position: relative;
   width: 100%;
   text-align: center;
   align-content: center;
@@ -64,7 +59,26 @@ teiler-welcome{
 }
 @media(max-width : 1740px) {
   .content {
-    zoom: 75%;
+    zoom: 67%;
+  }
+  .tabs1 .index {
+    display: flex;
+    font-size: 25px;
+    width: 120%;
+  }
+  .slider-wrap{
+    position: relative;
+    overflow: hidden;
+    min-height: 550px;
+    padding-bottom: 2%;
+    padding-top: 3%;
+    text-align: center;
+    align-content: center;
+  }
+  .slider-main{
+    width: 100%;
+    text-align: center;
+    align-content: center;
   }
 }
 
@@ -98,7 +112,7 @@ teiler-welcome{
     font-size: 140%;
   }
   .tabs{
-    width: 90%;
+    width: 95%;
     min-width: 50%;
     transition: all 2s ease;
     padding: 5%;
@@ -113,14 +127,13 @@ teiler-welcome{
   .tabs1 .index {
     display: flex;
     font-size: 25px;
-    width: 100%;
+    width: 110%;
   }
 
   .tabs1 .index .active{
     padding-bottom: 0.5%;
     border-bottom: 1px solid lightgrey;
   }
-
   .content{
     margin-top: 3%;
     margin-right: 0;
@@ -132,8 +145,11 @@ teiler-welcome{
     overflow: hidden;
     min-height: 550px;
     padding-top: 3%;
-    padding-left: 0;
+    margin-left: 5%;
+  }
+  .slider-main{
+    width: 100%;
+    text-align: center;
+    align-content: center;
   }
 }
-
-

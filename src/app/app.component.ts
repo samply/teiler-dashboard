@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouteManagerService} from "./route/route-manager.service";
 import {TeilerAuthService} from "./security/teiler-auth.service";
-import {from} from "rxjs";
+import {from, Observable} from "rxjs";
+import { ColorSchemeService } from './color-scheme.service';
 
 
 @Component({
@@ -10,13 +11,14 @@ import {from} from "rxjs";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  selectedColor: string = 'lightgrey';
 
   title = 'teiler-ui';
   isLoggedIn: boolean = false;
   user: string = '';
 
 
-  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService) {
+  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService,private colorSchemeService: ColorSchemeService) {
     from(authService.isLoggedId()).subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       if (isLoggedIn){
@@ -24,24 +26,7 @@ export class AppComponent {
       }
     });
   }
-  selected= {
-    name: 'Default',
-    color: 'grey',
-  }
-  data = [{
-    name: 'Lilac',
-    color: 'rgb(216, 191, 216)',
-  }, {
-    name: 'Blue',
-    color: 'rgb(30,144,255)'
-  }, {
-    name: 'Green',
-    color: 'rgb(46,139,87)'
-  }, {
-    name: 'Brown',
-    color: 'rgb(222,184,135)'
-  }]
-  compareObjects(o1: any, o2: any): boolean {
-    return o1.color === o2.color
+  changeColor() {
+    this.colorSchemeService.setColor(this.selectedColor);
   }
 }

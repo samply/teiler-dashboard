@@ -21,6 +21,7 @@ p{
   font-size: 470%;
   margin-left: 32%;
   transition: transform 50ms ease;
+  color: grey;
 }
 .teiler-box {
   float:left;
@@ -66,6 +67,7 @@ p{
 hr{
   height: 1px;
   border: none;
+  background-color: grey;
 }
 .icon-footer {
   position: absolute;
