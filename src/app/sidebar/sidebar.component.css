@@ -2,7 +2,6 @@
   border-left: solid 1px #e0e0e0;
   /* min-width: 100%; */
   flex: 1;
-  vertical-align: middle;
   z-index:1;
   position: relative;
   overflow: hidden;

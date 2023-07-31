@@ -7,10 +7,9 @@
   display: flex;
   flex-direction: column;
 }
-.over{
-  width: 100%;
-  margin-right: 10%;
-  color: grey;
+.title {
+  border-bottom: 3px solid black;
+  margin-bottom: 20px;
 }
 h1{
   color: white;
@@ -21,7 +20,7 @@ h1{
 h2{
   text-align: left;
   font-family: Roboto, Helvetica Neue, sans-serif;
-  font-size: 32px;
+  font-size: 30px;
   margin-top: 1.5%;
 }
 .over{

@@ -26,8 +26,13 @@ teiler-welcome{
   margin-top: 1%;
 }
 .apps{
- padding-left: 15%;
-  padding-right: 16%;
+ padding-left: 8%;
+  padding-right: 8%;
+  margin: 0 8%;
+  cursor: pointer;
+}
+.apps:hover{
+  border-bottom: 3px solid lightgrey;
 }
 .tabs1 .index {
   display: flex;
@@ -37,7 +42,7 @@ teiler-welcome{
 
 .tabs1 .index .active{
   padding-bottom: 0.5%;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 3px solid black;
 }
 .slider-wrap{
   position: relative;
@@ -57,6 +62,12 @@ teiler-welcome{
 .card-container a {
   display: inline-flex;
 }
+.contents h3 {
+  font-size: 25px;
+  margin-bottom: 5px;
+  font-weight: normal;
+}
+
 @media(max-width : 1740px) {
   .content {
     zoom: 67%;
@@ -121,8 +132,9 @@ teiler-welcome{
     flex: 2;
   }
   .apps{
-    padding-left: 12%;
-    padding-right: 12%;
+    padding-left: 6%;
+    padding-right: 6%;
+    margin: 0 6%;
   }
   .tabs1 .index {
     display: flex;
@@ -132,8 +144,9 @@ teiler-welcome{
 
   .tabs1 .index .active{
     padding-bottom: 0.5%;
-    border-bottom: 1px solid lightgrey;
+    border-bottom: 3px solid black;
   }
+
   .content{
     margin-top: 3%;
     margin-right: 0;

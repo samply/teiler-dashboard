@@ -617,22 +617,6 @@
         <source>Uploads</source>
       </segment>
     </unit>
-    <unit id="6631852761620844734">
-      <notes>
-        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:16</note>
-      </notes>
-      <segment>
-        <source>Lokale Apps</source>
-      </segment>
-    </unit>
-    <unit id="2598281716737340252">
-      <notes>
-        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:42</note>
-      </notes>
-      <segment>
-        <source>Zentrale Apps</source>
-      </segment>
-    </unit>
     <unit id="2068445951425750817">
       <notes>
         <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:26</note>
