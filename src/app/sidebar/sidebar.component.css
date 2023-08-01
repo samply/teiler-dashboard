@@ -20,7 +20,7 @@
   margin-top: -6.5%;
 }
 
-.ng-star-inserted{
+.sidebar-element {
   display: inline-flex;
 }
 .side-nav {
@@ -50,6 +50,7 @@
   transition: all 3ms ease;
   border-bottom: 1px solid lightgrey;
   width: 100%;
+  padding: 5px 0px;
 }
 .extern:hover{
   transform: scale(1.1);
@@ -69,18 +70,23 @@
   transition: all 40ms ease-in-out !important;
 }
 
-img{
-  width: 25px;
-  margin-right: 5px;
+.teiler-box-image img{
   height: 30px;
-  margin-left: 15px;
+  margin-left: 5px;
   margin-top: 12px;
 }
+.teiler-box-icon {
+  width: 25px;
+}
+.sidebar-text {
+  width: 230px;
+  padding-right: 0;
+}
 .teiler-box-icon i{
-  width: 30px;
-  height: 30px;
-  margin-left: 37px;
-  margin-top: 12px;
+  margin-left: 5px;
+  margin-top: 10px;
+  display: block;
+  font-size: 24px;
 }
 @media screen and (min-width: 769px) {
 

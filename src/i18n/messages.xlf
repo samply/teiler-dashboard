@@ -53,8 +53,8 @@
     </unit>
     <unit id="3840739858389961694">
       <notes>
-        <note category="location">src/app/embedded/event-log/event-log.component.html:25</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:32</note>
+        <note category="location">src/app/embedded/event-log/event-log.component.html:22</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
       </notes>
       <segment>
         <source>Zeitstempel</source>
@@ -62,7 +62,7 @@
     </unit>
     <unit id="5644795770167690835">
       <notes>
-        <note category="location">src/app/embedded/event-log/event-log.component.html:31</note>
+        <note category="location">src/app/embedded/event-log/event-log.component.html:28</note>
       </notes>
       <segment>
         <source>Nachricht</source>
@@ -78,10 +78,10 @@
     </unit>
     <unit id="354905689195417146">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:14</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:48</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:82</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:104</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:11</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:45</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:79</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:101</note>
       </notes>
       <segment>
         <source>Erreichbarkeit prüfen</source>
@@ -89,10 +89,10 @@
     </unit>
     <unit id="2005703878417580473">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:20</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:53</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:85</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:108</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:17</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:50</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:82</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:105</note>
       </notes>
       <segment>
         <source>Sendet einen HTTP GET request an die<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>konfigurierte Adresse, um zu prüfen,<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>ob der Dienst erreichbar ist.</source>
@@ -100,14 +100,14 @@
     </unit>
     <unit id="1539356813894688208">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:22</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:34</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:54</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:67</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:87</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:110</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:121</note>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:132</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:19</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:31</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:51</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:64</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:84</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:107</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:118</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:129</note>
       </notes>
       <segment>
         <source>Prüfen</source>
@@ -115,7 +115,7 @@
     </unit>
     <unit id="1249069311610531659">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:27</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:24</note>
       </notes>
       <segment>
         <source>Testpatient hochladen und anschließend löschen</source>
@@ -123,7 +123,7 @@
     </unit>
     <unit id="4451878019720049961">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:32</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:29</note>
       </notes>
       <segment>
         <source>Sendet einen einfachen Testpatienten<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>Datensatz zur zentralen MDS Datenbank<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>hoch und löscht diesen anschließend wieder.</source>
@@ -131,7 +131,7 @@
     </unit>
     <unit id="9151298699074996487">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:41</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:38</note>
       </notes>
       <segment>
         <source>Verbindung zum ID-Manager prüfen</source>
@@ -139,7 +139,7 @@
     </unit>
     <unit id="2265664420876464338">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:59</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:56</note>
       </notes>
       <segment>
         <source>Export ID anfordern</source>
@@ -147,7 +147,7 @@
     </unit>
     <unit id="5847200314441653915">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:62</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:59</note>
       </notes>
       <segment>
         <source>Holt ein Exportpseudonym für eine<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>gegebene DKTK-Standort ID ab.<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>Die zu prüfende ID bitte nachfolgend angeben.</source>
@@ -155,7 +155,7 @@
     </unit>
     <unit id="1046397744290011920">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:63</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:60</note>
       </notes>
       <segment>
         <source>DKTK-Standort ID</source>
@@ -163,7 +163,7 @@
     </unit>
     <unit id="9039741579547034529">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:75</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:72</note>
       </notes>
       <segment>
         <source>Verbindung zum lokalen Datenmanagement prüfen</source>
@@ -171,7 +171,7 @@
     </unit>
     <unit id="3354861079372292445">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:94</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:91</note>
       </notes>
       <segment>
         <source>Verbindung zu dem/den Suchbroker(n) prüfen</source>
@@ -179,7 +179,7 @@
     </unit>
     <unit id="2142741714265462168">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:115</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:112</note>
       </notes>
       <segment>
         <source>Testanfrage herunterladen</source>
@@ -187,7 +187,7 @@
     </unit>
     <unit id="4441106115486149030">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:119</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:116</note>
       </notes>
       <segment>
         <source>Lädt eine einfache, vom<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>Suchbroker generierte, Testanfrage<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>herunter.</source>
@@ -195,7 +195,7 @@
     </unit>
     <unit id="7614582309936894316">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:126</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:123</note>
       </notes>
       <segment>
         <source>Testanfrage herunterladen und ausführen</source>
@@ -203,7 +203,7 @@
     </unit>
     <unit id="4584408393196436744">
       <notes>
-        <note category="location">src/app/embedded/function-tests/function-tests.component.html:130</note>
+        <note category="location">src/app/embedded/function-tests/function-tests.component.html:127</note>
       </notes>
       <segment>
         <source>Lädt eine einfache, vom<ph id="0" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>Suchbroker generierte Testanfrage<ph id="1" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>herunter und schickt diese an<ph id="2" equiv="LINE_BREAK" type="fmt" disp="&lt;br&gt;"/>das lokale Datenmanagement.</source>
@@ -211,11 +211,11 @@
     </unit>
     <unit id="9098454119754693999">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiries.component.html:11</note>
-        <note category="location">src/app/embedded/inquiries/inquiries.component.html:11</note>
-        <note category="location">src/app/embedded/inquiries/inquiries.component.html:11</note>
-        <note category="location">src/app/embedded/inquiries/inquiries.component.html:11</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
+        <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
+        <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
+        <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
+        <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
       </notes>
       <segment>
         <source>Suche</source>
@@ -223,7 +223,7 @@
     </unit>
     <unit id="5368569711274766465">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:19</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:16</note>
       </notes>
       <segment>
         <source>Keine Validierung vornehmen. Das erzeugte Dokument kann deshalb Einträge enthalten, die nicht konform zu den MDR hinterlegten Validierungsinformationen sind.</source>
@@ -231,7 +231,7 @@
     </unit>
     <unit id="4823182825482999580">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:22</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:19</note>
       </notes>
       <segment>
         <source>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden nicht in das erzeugte Dokument aufgenommen.</source>
@@ -239,7 +239,7 @@
     </unit>
     <unit id="469909917545407381">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:25</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:22</note>
       </notes>
       <segment>
         <source>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden im erzeugten Dokument orange hinterlegt.</source>
@@ -247,7 +247,7 @@
     </unit>
     <unit id="4885766104050604377">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:29</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:26</note>
       </notes>
       <segment>
         <source> Anfrage erneut ausfüllen</source>
@@ -255,7 +255,7 @@
     </unit>
     <unit id="7644487670693293606">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:31</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:28</note>
       </notes>
       <segment>
         <source>Ergebnisliste erzeugen (Excel)</source>
@@ -263,7 +263,7 @@
     </unit>
     <unit id="3047453899515192138">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:32</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:29</note>
       </notes>
       <segment>
         <source>Ergebnisliste erzeugen (CSV)</source>
@@ -271,7 +271,7 @@
     </unit>
     <unit id="5425384892297548117">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:33</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:30</note>
       </notes>
       <segment>
         <source>Nur Anzahl abfragen</source>
@@ -279,7 +279,7 @@
     </unit>
     <unit id="9179449244500388247">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:35</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:32</note>
       </notes>
       <segment>
         <source>Bereits beantwortet</source>
@@ -287,7 +287,7 @@
     </unit>
     <unit id="6275450215073900352">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:38</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:35</note>
       </notes>
       <segment>
         <source>Archivieren</source>
@@ -295,7 +295,7 @@
     </unit>
     <unit id="7034201329736814695">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:48</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:45</note>
       </notes>
       <segment>
         <source>Der Anfragesteller hat keinen Beschreibungstext eingegeben.</source>
@@ -303,7 +303,7 @@
     </unit>
     <unit id="118024421195624369">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:50</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:47</note>
       </notes>
       <segment>
         <source>Expóse herunterladen</source>
@@ -311,7 +311,7 @@
     </unit>
     <unit id="7814399578676262996">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:53</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:50</note>
       </notes>
       <segment>
         <source>Keine Dokumente angehängt</source>
@@ -319,7 +319,7 @@
     </unit>
     <unit id="8953033926734869941">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:59</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:56</note>
       </notes>
       <segment>
         <source>Name</source>
@@ -327,7 +327,7 @@
     </unit>
     <unit id="681866609203884162">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:60</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:57</note>
       </notes>
       <segment>
         <source>Telefonnummer</source>
@@ -335,7 +335,7 @@
     </unit>
     <unit id="8115083664628466958">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:61</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:58</note>
       </notes>
       <segment>
         <source>E-Mail</source>
@@ -343,7 +343,7 @@
     </unit>
     <unit id="2598039109801317313">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:62</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:59</note>
       </notes>
       <segment>
         <source>Einrichtung</source>
@@ -351,7 +351,7 @@
     </unit>
     <unit id="422776820557165963">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:65</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:62</note>
       </notes>
       <segment>
         <source>Beantwortet am</source>
@@ -359,7 +359,7 @@
     </unit>
     <unit id="4220537191485568025">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:65</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:62</note>
       </notes>
       <segment>
         <source>Antwort</source>
@@ -367,7 +367,7 @@
     </unit>
     <unit id="789555460980371940">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:77</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:74</note>
       </notes>
       <segment>
         <source>Suchkriterien</source>
@@ -376,7 +376,7 @@
     <unit id="3914344858413020487">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:4</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:12</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:9</note>
       </notes>
       <segment>
         <source>Startzeit</source>
@@ -385,7 +385,7 @@
     <unit id="3206897127516304134">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:5</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:12</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:9</note>
       </notes>
       <segment>
         <source>Verstrichene Laufzeit</source>
@@ -394,7 +394,7 @@
     <unit id="2869773054150578799">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:6</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:12</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:9</note>
       </notes>
       <segment>
         <source>Restlaufzeit</source>
@@ -404,8 +404,8 @@
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:14</note>
         <note category="location">src/app/embedded/pop-ups/dialog-uploads/dialog-uploads.component.html:13</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:17</note>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:80</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:14</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:74</note>
       </notes>
       <segment>
         <source>Abbrechen</source>
@@ -422,7 +422,7 @@
     <unit id="4687226433765004136">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-uploads/dialog-uploads.component.html:4</note>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:74</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:68</note>
       </notes>
       <segment>
         <source>Fortschritt</source>
@@ -447,7 +447,7 @@
     </unit>
     <unit id="2551151927873073463">
       <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:10</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:7</note>
       </notes>
       <segment>
         <source>Generieren</source>
@@ -455,7 +455,7 @@
     </unit>
     <unit id="2724055831234181057">
       <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:37</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:34</note>
       </notes>
       <segment>
         <source>Version</source>
@@ -471,7 +471,7 @@
     </unit>
     <unit id="5428675302325885572">
       <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:11</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:8</note>
       </notes>
       <segment>
         <source>Upload manuell ausführen</source>
@@ -479,9 +479,9 @@
     </unit>
     <unit id="914304656572352050">
       <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:22</note>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:35</note>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:49</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:16</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:29</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:43</note>
       </notes>
       <segment>
         <source>Auswahl</source>
@@ -489,8 +489,8 @@
     </unit>
     <unit id="6955197012374967605">
       <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:28</note>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:42</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:22</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:36</note>
       </notes>
       <segment>
         <source>Nächste</source>
@@ -498,8 +498,8 @@
     </unit>
     <unit id="8930526198656004715">
       <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:41</note>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:55</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:35</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:49</note>
       </notes>
       <segment>
         <source>Zurück</source>
@@ -507,8 +507,8 @@
     </unit>
     <unit id="6802674628954006174">
       <notes>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:50</note>
         <note category="location">src/app/embedded/uploads/uploads.component.html:56</note>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:62</note>
       </notes>
       <segment>
         <source>Ihre Auswahl</source>
@@ -516,7 +516,7 @@
     </unit>
     <unit id="1089358809969161036">
       <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:68</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:62</note>
       </notes>
       <segment>
         <source>Auswahl zurücksetzen</source>
@@ -524,7 +524,7 @@
     </unit>
     <unit id="9014462461386938922">
       <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:69</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:63</note>
       </notes>
       <segment>
         <source>Starten</source>
@@ -532,7 +532,7 @@
     </unit>
     <unit id="3273461864129851578">
       <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:107</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:97</note>
       </notes>
       <segment>
         <source>Gestartet am</source>
@@ -540,7 +540,7 @@
     </unit>
     <unit id="4319219110345032132">
       <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:112</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:102</note>
       </notes>
       <segment>
         <source>Gestartet von</source>
@@ -548,7 +548,7 @@
     </unit>
     <unit id="197680319909290273">
       <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:117</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:107</note>
       </notes>
       <segment>
         <source>Stand</source>

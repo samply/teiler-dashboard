@@ -8,9 +8,9 @@ h3{
   margin:0;
 }
 .teiler-box-image img{
-  width: 80px;
-  height: 85px;
-  margin-left: 25%;
+  display: block;
+  height: 60px;
+  margin: 0 auto 20px auto;
 }
 p{
   color: black;
