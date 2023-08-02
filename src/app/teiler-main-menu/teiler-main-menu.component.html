@@ -10,10 +10,10 @@
         <div class="index">
           <div tabindex="0" role="tab"
                (click)="tab=1" (keyup.enter)="tab=1"
-               [ngClass]="{active: tab===1}" class="apps">Lokale Apps</div>
+               [ngClass]="{active: tab===1}" class="apps" i18n>Lokale Apps</div>
           <div tabindex="0" role="tab"
                (click)="tab=2" (keyup.enter)="tab=2"
-               [ngClass]="{active: tab===2}" class="apps">Zentrale Apps</div>
+               [ngClass]="{active: tab===2}" class="apps" i18n>Zentrale Apps</div>
         </div>
 
         <div class="contents">
@@ -63,7 +63,7 @@
 
     <div class="section-header" *ngIf="!existLocalAndCentralTeilerAppsAtTheSameTime()">
         <div class="contents">
-          <h3>Lokale Apps</h3>
+          <h3 i18n>Lokale Apps</h3>
           <hr>
             <div class="slider-wrap">
               <div class="slider-main">
