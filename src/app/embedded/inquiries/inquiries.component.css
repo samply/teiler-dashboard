@@ -50,4 +50,9 @@ button{
 .mat-mdc-paginator{
   background-color:#fafafa;
 }
-
+.matinput input {
+  border:1px solid dimgrey;
+  width: 175px;
+  border-radius:4px;
+  padding: 2px;
+}

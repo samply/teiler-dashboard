@@ -10,7 +10,9 @@
   -->
   <div class="x1">
     <div class="first">
-      <button mat-button [matMenuTriggerFor]="menu" style="padding-left:6%; padding-right: 6%" [disabled]="!executionUrl">Exportieren</button>
+      <button mat-button [matMenuTriggerFor]="menu" style="padding-left:6%; padding-right: 6%"
+              [disabled]="!executionUrl">Exportieren
+      </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="createExport()">
           <span i18n>Keine Validierung vornehmen. Das erzeugte Dokument kann deshalb Einträge enthalten, die nicht konform zu den MDR hinterlegten Validierungsinformationen sind.</span>
@@ -29,7 +31,9 @@
         <button mat-menu-item (click)="postCsvRequest()" i18n>Ergebnisliste erzeugen (CSV)</button>
         <button mat-menu-item [disabled]="true" i18n>Nur Anzahl abfragen</button>
       </mat-menu>
-      <button mat-button [matMenuTriggerFor]="menu2" disabled style="margin-left:120px;padding-left:4%; padding-right: 4%" i18n>Bereits beantwortet</button>
+      <button mat-button [matMenuTriggerFor]="menu2" disabled
+              style="margin-left:120px;padding-left:4%; padding-right: 4%" i18n>Bereits beantwortet
+      </button>
       <mat-menu #menu2="matMenu">
       </mat-menu>
       <button mat-button style="padding-left:6.5%; padding-right: 6.5%" [disabled]="true" i18n>Archivieren</button>
@@ -40,16 +44,18 @@
           <mat-tab-group>
             <mat-tab label="Beschreibung">
               <br>
-              <div *ngIf="inquiry.description != null && inquiry.description.length > 0;then content else other_content"></div>
+              <div
+                *ngIf="inquiry.description != null && inquiry.description.length > 0;then content else other_content"></div>
               <ng-template #content>{{inquiry.description}}</ng-template>
-              <ng-template #other_content><p i18n>Der Anfragesteller hat keinen Beschreibungstext eingegeben.</p></ng-template>
+              <ng-template #other_content><p i18n>Der Anfragesteller hat keinen Beschreibungstext eingegeben.</p>
+              </ng-template>
               <hr>
               <p i18n>Expóse herunterladen</p>
             </mat-tab>
             <mat-tab label="Dokumente">
               <br><span i18n>Keine Dokumente angehängt</span>
               <hr>
-              <input type="file" class="file-upload" onchange="console.log(event.target.files)" >
+              <input type="file" class="file-upload" onchange="console.log(event.target.files)">
             </mat-tab>
             <mat-tab label="Kontakt">
               <br>
@@ -65,579 +71,339 @@
         </div>
         <br>
 
-    <div class="fifth">
-      <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false" class="expand" style="float:left;width:100%">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-             <span i18n>Suchkriterien</span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="and_or">
-            <select name="and" id="and_one" disabled>
-              <option value="AND">AND</option>
-            </select>
-          </div>
-          <br>
-          <div class="div1">
-            <div class="and_or">
-              <select name="and" id="or_one" disabled>
-                <option value="AND">OR</option>
-              </select>
-            </div>
-            <br>
-            <div class="div2">
+        <div class="fifth">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false" class="expand" style="float:left;width:100%">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span i18n>Suchkriterien</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
               <div class="and_or">
-                <select name="and" id="and_two" disabled>
+                <select name="and" id="and_one" disabled>
                   <option value="AND">AND</option>
                 </select>
               </div>
               <br>
-              <div class="div3">
+              <div class="div1">
                 <div class="and_or">
-                  <select name="or" id="or_two" disabled>
-                    <option value="OR">OR</option>
+                  <select name="and" id="or_one" disabled>
+                    <option value="AND">OR</option>
                   </select>
                 </div>
                 <br>
-                <div class="div4littleone">
+                <div class="div2">
                   <div class="and_or">
-                    Diganose
-                    <select name="include" id="include" style="margin-left:30%;" disabled>
-                      <option value="include">Enthält</option>
-                    </select>
-                    <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
-                  </div>
-                </div>
-                <div class="div4littleone">
-                  <div class="and_or">
-                    Diganose
-                    <select name="include" id="include_two" style="margin-left:30%;" disabled>
-                      <option value="include">Enthält</option>
-                    </select>
-                    <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
-                  </div>
-                </div>
-              </div>
-              <div class="div5">
-                <div class="and_or">
-                  <select name="and" id="and_one" disabled>
-                    <option value="AND">AND</option>
-                  </select>
-                </div>
-                <br>
-                <div class="div1">
-                  <div class="and_or">
-                    <select name="and" id="or_one" disabled>
-                      <option value="AND">OR</option>
+                    <select name="and" id="and_two" disabled>
+                      <option value="AND">AND</option>
                     </select>
                   </div>
                   <br>
-                  <div class="div2">
+                  <div class="div3">
                     <div class="and_or">
-                      <select name="and" id="and_two" disabled>
-                        <option value="AND">AND</option>
+                      <select name="or" id="or_two" disabled>
+                        <option value="OR">OR</option>
                       </select>
                     </div>
                     <br>
-                    <div class="div3">
+                    <div class="div4littleone">
                       <div class="and_or">
-                        <select name="or" id="or_two" disabled>
-                          <option value="OR">OR</option>
+                        Diganose
+                        <select name="include" id="include" style="margin-left:30%;" disabled>
+                          <option value="include">Enthält</option>
                         </select>
-                      </div>
-                      <br>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
-                        </div>
-                      </div>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_two" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
-                        </div>
+                        <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
                       </div>
                     </div>
-                    <div class="div5">
-                      <br>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_three" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
-                        </div>
+                    <div class="div4littleone">
+                      <div class="and_or">
+                        Diganose
+                        <select name="include" id="include_two" style="margin-left:30%;" disabled>
+                          <option value="include">Enthält</option>
+                        </select>
+                        <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
                       </div>
                     </div>
                   </div>
-                  <div class="div6">
+                  <div class="div5">
                     <div class="and_or">
-                      <select name="and" id="and_five" disabled>
+                      <select name="and" id="and_one" disabled>
                         <option value="AND">AND</option>
                       </select>
                     </div>
                     <br>
-                    <div class="div7">
+                    <div class="div1">
                       <div class="and_or">
-                        <select name="or" id="or_four" disabled>
-                          <option value="OR">OR</option>
+                        <select name="and" id="or_one" disabled>
+                          <option value="AND">OR</option>
                         </select>
                       </div>
                       <br>
-                      <div class="div4littleone">
+                      <div class="div2">
                         <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_six" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
+                          <select name="and" id="and_two" disabled>
+                            <option value="AND">AND</option>
                           </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C25." disabled>
+                        </div>
+                        <br>
+                        <div class="div3">
+                          <div class="and_or">
+                            <select name="or" id="or_two" disabled>
+                              <option value="OR">OR</option>
+                            </select>
+                          </div>
+                          <br>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
+                            </div>
+                          </div>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_two" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="div5">
+                          <br>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_three" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C41." disabled>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="div4littleone">
+                      <div class="div6">
                         <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_seven" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
+                          <select name="and" id="and_five" disabled>
+                            <option value="AND">AND</option>
                           </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C30." disabled>
                         </div>
-                      </div>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_eight" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;"
-                                 placeholder="C31." disabled>
-                        </div>
-                      </div>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_nine" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C49." disabled>
-                        </div>
-                      </div>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_ten" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C51." disabled>
-                        </div>
-                      </div>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_eleven" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C52." disabled>
-                        </div>
-                      </div>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_twelve" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C71." disabled>
-                        </div>
-                      </div>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_thirdten" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C72." disabled>
-                        </div>
-                      </div>
-                      <div class="div4littleone">
-                        <div class="and_or">
-                          Diganose
-                          <select name="include" id="include_fourten" style="margin-left:30%;" disabled>
-                            <option value="include">Enthält</option>
-                          </select>
-                          <input type="text" style="margin-left:5%;" placeholder="C74." disabled>
+                        <br>
+                        <div class="div7">
+                          <div class="and_or">
+                            <select name="or" id="or_four" disabled>
+                              <option value="OR">OR</option>
+                            </select>
+                          </div>
+                          <br>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_six" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C25." disabled>
+                            </div>
+                          </div>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_seven" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C30." disabled>
+                            </div>
+                          </div>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_eight" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;"
+                                     placeholder="C31." disabled>
+                            </div>
+                          </div>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_nine" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C49." disabled>
+                            </div>
+                          </div>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_ten" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C51." disabled>
+                            </div>
+                          </div>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_eleven" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C52." disabled>
+                            </div>
+                          </div>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_twelve" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C71." disabled>
+                            </div>
+                          </div>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_thirdten" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C72." disabled>
+                            </div>
+                          </div>
+                          <div class="div4littleone">
+                            <div class="and_or">
+                              Diganose
+                              <select name="include" id="include_fourten" style="margin-left:30%;" disabled>
+                                <option value="include">Enthält</option>
+                              </select>
+                              <input type="text" style="margin-left:5%;" placeholder="C74." disabled>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-    <br>
-    <div class="diagramm">
-      <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false" style="float:left; width:100%">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Diagramme
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="row">
-            <div class="diagram_one">
-              <ngx-charts-bar-vertical
-                [view]="[400,200]"
-                [results]="data1"
-                [scheme]="'aqua'"
-                [legend]="false"
-                [legendTitle]="'Legende'"
-                [xAxis]="true"
-                [yAxis]="true"
-                [showXAxisLabel]="true"
-                [showYAxisLabel]="true"
-                [xAxisLabel]="'Alter in Jahren'"
-                [yAxisLabel]="'Ergebnisse'"
-                [showDataLabel]="true">
-              </ngx-charts-bar-vertical>
-            </div>
-            <div class="diagram_two">
-              <ngx-charts-bar-vertical
-                [view]="[400,200]"
-                [results]="data2"
-                [scheme]="'aqua'"
-                [legend]="false"
-                [legendTitle]="'Legende'"
-                [xAxis]="true"
-                [yAxis]="true"
-                [showXAxisLabel]="true"
-                [showYAxisLabel]="true"
-                [xAxisLabel]="'Geschlecht'"
-                [yAxisLabel]="'Ergebnisse'"
-                [showDataLabel]="true">
-              </ngx-charts-bar-vertical>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <br>
-    </div>
-    <br>
-    <div class="datasets">
-      <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false" class="datensätze" style="float:left;width:100%;">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Passende Datensätze
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="div1_dataset">
-            <div class="patient">
-              <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true"
-                                     (closed)="panelOpenState = false" style="width:100%; margin-left:0%;">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      Patient KRZJH7TK
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <div class="div_little_dataset">
-                    <table class="table_config">
-                      <tr>
-                        <th>Datum des letztbekannten Vitalstatus:<br></th>
-                        <th style="margin-left:40%;">12.2012</th>
-                      </tr>
-                      <tr>
-                        <th>Vitalstatus:</th>
-                        <th>verstorben</th>
-                      </tr>
-                      <tr>
-                        <th>Geschlecht:</th>
-                        <th>weiblich</th>
-                      </tr>
-                      <tr>
-                        <th>Geburtsdatum:</th>
-                        <th>01.01.1929</th>
-                      </tr>
-                    </table>
-                    <div>
-                      <mat-accordion>
-                        <mat-expansion-panel (opened)="panelOpenState = true"
-                                             (closed)="panelOpenState = false" style="width:100%; margin-left:0%;">
-                          <mat-expansion-panel-header>
-                            <mat-panel-title>
-                              Diagnosis
-                            </mat-panel-title>
-                          </mat-expansion-panel-header>
-                          <div class="div2_dataset_charts">
-                            <table class="table_config">
-                              <tr>
-                                <th>Alter bei Erstdiagnose:<br></th>
-                                <th style="margin-left:40%;">82</th>
-                              </tr>
-                              <tr>
-                                <th>ICD-Katalog (Version):</th>
-                                <th>ICD-General 2015</th>
-                              </tr>
-                              <tr>
-                                <th> Tumor Diagnosedatum:</th>
-                                <th>2011</th>
-                              </tr>
-                              <tr>
-                                <th>Diagnose:</th>
-                                <th>C46.0</th>
-                              </tr>
-                            </table>
-                            <mat-accordion>
-                              <mat-expansion-panel (opened)="panelOpenState = true"
-                                                   (closed)="panelOpenState = false" style="width:100%; margin-left:0%">
-                                <mat-expansion-panel-header>
-                                  <mat-panel-title>
-                                    Histology3088
-                                  </mat-panel-title>
-                                </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        <br>
+        <div class="diagramm">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false" style="float:left; width:100%">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Diagramme
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="diagram_one">
+                  <ngx-charts-bar-vertical
+                    [view]="[400,200]"
+                    [results]="data1"
+                    [scheme]="'aqua'"
+                    [legend]="false"
+                    [legendTitle]="'Legende'"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    [showXAxisLabel]="true"
+                    [showYAxisLabel]="true"
+                    [xAxisLabel]="'Alter in Jahren'"
+                    [yAxisLabel]="'Ergebnisse'"
+                    [showDataLabel]="true">
+                  </ngx-charts-bar-vertical>
+                </div>
+                <div class="diagram_two">
+                  <ngx-charts-bar-vertical
+                    [view]="[400,200]"
+                    [results]="data2"
+                    [scheme]="'aqua'"
+                    [legend]="false"
+                    [legendTitle]="'Legende'"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    [showXAxisLabel]="true"
+                    [showYAxisLabel]="true"
+                    [xAxisLabel]="'Geschlecht'"
+                    [yAxisLabel]="'Ergebnisse'"
+                    [showDataLabel]="true">
+                  </ngx-charts-bar-vertical>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <br>
+        </div>
+        <br>
+        <div class="datasets">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false" class="datensätze" style="float:left;width:100%;">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Passende Datensätze
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="div1_dataset">
+                <div class="patient">
+                  <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false" style="width:100%; margin-left:0%;">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Patient KRZJH7TK
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div class="div_little_dataset">
+                        <table class="table_config">
+                          <tr>
+                            <th>Datum des letztbekannten Vitalstatus:<br></th>
+                            <th style="margin-left:40%;">12.2012</th>
+                          </tr>
+                          <tr>
+                            <th>Vitalstatus:</th>
+                            <th>verstorben</th>
+                          </tr>
+                          <tr>
+                            <th>Geschlecht:</th>
+                            <th>weiblich</th>
+                          </tr>
+                          <tr>
+                            <th>Geburtsdatum:</th>
+                            <th>01.01.1929</th>
+                          </tr>
+                        </table>
+                        <div>
+                          <mat-accordion>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                                                 (closed)="panelOpenState = false" style="width:100%; margin-left:0%;">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Diagnosis
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <div class="div2_dataset_charts">
                                 <table class="table_config">
                                   <tr>
-                                    <th>ICD-O Katalog Morphologie (Version):<br></th>
-                                    <th style="margin-left:40%;">ICD-O-3</th>
+                                    <th>Alter bei Erstdiagnose:<br></th>
+                                    <th style="margin-left:40%;">82</th>
                                   </tr>
                                   <tr>
-                                    <th>KMorphologie:</th>
-                                    <th> 9140/3</th>
-                                  </tr>
-                                </table>
-                              </mat-expansion-panel>
-                            </mat-accordion>
-                            <mat-accordion>
-                              <mat-expansion-panel (opened)="panelOpenState = true"
-                                                   (closed)="panelOpenState = false" style="width:100%; margin-left:0%">
-                                <mat-expansion-panel-header>
-                                  <mat-panel-title>
-                                    Tnm 84984
-                                  </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <table class="table_config">
-                                  <tr>
-                                    <th>TNM-r-Symbol:<br></th>
-                                    <th style="margin-left:40%;">native Klassifikation vor Eintreten eines Rezidivs</th>
+                                    <th>ICD-Katalog (Version):</th>
+                                    <th>ICD-General 2015</th>
                                   </tr>
                                   <tr>
-                                    <th>TNM-M:</th>
-                                    <th>0</th>
+                                    <th> Tumor Diagnosedatum:</th>
+                                    <th>2011</th>
                                   </tr>
                                   <tr>
-                                    <th>c/p/u-Präfix N:</th>
-                                    <th>Kategorie wurde durch klinische Angaben festgestellt</th>
-                                  </tr>
-                                  <tr>
-                                    <th>TNM-Version:</th>
-                                    <th>7</th>
-                                  </tr>
-                                  <tr>
-                                    <th>TNM-T:</th>
-                                    <th>1</th>
-                                  </tr>
-                                  <tr>
-                                    <th>UICC Stadium:</th>
-                                    <th>I</th>
-                                  </tr>
-                                  <tr>
-                                    <th>TNM-y-Symbol:</th>
-                                    <th>native Klassifikation</th>
-                                  </tr>
-                                  <tr>
-                                    <th>c/p/u-Präfix M:</th>
-                                    <th>Kategorie wurde durch klinische Angaben festgestellt</th>
-                                  </tr>
-                                  <tr>
-                                    <th>c/p/u-Präfix T:</th>
-                                    <th>Kategorie wurde durch klinische Angaben festgestellt</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum der TNM-Dokumentation/Datum Befund:</th>
-                                    <th>23.11.2011</th>
-                                  </tr>
-                                  <tr>
-                                    <th>TNM-m-Symbol:</th>
-                                    <th></th>
-                                  </tr>
-                                  <tr>
-                                    <th>TNM-N</th>
-                                    <th>0</th>
-                                  </tr>
-                                </table>
-                              </mat-expansion-panel>
-                            </mat-accordion>
-                            <mat-accordion>
-                              <mat-expansion-panel (opened)="panelOpenState = true"
-                                                   (closed)="panelOpenState = false" style="width:100%; margin-left:0%">
-                                <mat-expansion-panel-header>
-                                  <mat-panel-title>
-                                    <mat-progress-spinner
-                                      diameter="20" mode="indeterminate"></mat-progress-spinner>
-                                    Progress 6167
-                                  </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <table class="table_config">
-                                  <tr>
-                                    <th>Immuntherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Knochenmarktransplantation:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum Lymphknoten-Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">13.01.2012</th>
-                                  </tr>
-                                  <tr>
-                                    <th>OP:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>:<br>Synthetischer Progresseintrag</th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Lymphknoten-Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">Fehlende Angabe</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum Fernmetastasen:<br></th>
-                                    <th style="margin-left:40%;">13.01.2012</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Ansprechen im Verlauf:<br></th>
-                                    <th style="margin-left:40%;">Fehlende Angabe</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Strahlentherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Fernmetastasen:<br></th>
-                                    <th style="margin-left:40%;">Fehlende Angabe</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Hormontherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Untersuchungs-/ Befunddatum im Verlauf:<br></th>
-                                    <th style="margin-left:40%;">13.01.2012</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Chemotherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Lokales/regionäres Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">Fehlende Angabe</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum lokales/regionäres Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">13.01.2012</th>
-                                  </tr>
-                                </table>
-                              </mat-expansion-panel>
-                            </mat-accordion>
-                            <mat-accordion>
-                              <mat-expansion-panel (opened)="panelOpenState = true"
-                                                   (closed)="panelOpenState = false" style="width:100%; margin-left:0%">
-                                <mat-expansion-panel-header>
-                                  <mat-panel-title>
-                                    <mat-progress-spinner
-                                      diameter="20" mode="indeterminate"></mat-progress-spinner>
-                                    Progress 6165
-                                  </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <table class="table_config">
-                                  <tr>
-                                    <th>Immuntherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Knochenmarktransplantation:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Intention OP:<br></th>
-                                    <th style="margin-left:40%;">kurativ</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum Lymphknoten-Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">23.11.2011</th>
-                                  </tr>
-                                  <tr>
-                                    <th>OP:<br></th>
-                                    <th style="margin-left:40%;">true</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Synthetischer Progresseintrag:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Lymphknoten-Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">Kein Lymphknotenbefall nachweisbar</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum Fernmetastasen:<br></th>
-                                    <th style="margin-left:40%;">23.11.2011</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Ansprechen im Verlauf:<br></th>
-                                    <th style="margin-left:40%;">Teilremission / mindestens 50% Rückgang des Tumors
-                                      (partial remission, PR)
-                                    </th>
-                                  </tr>
-                                  <tr>
-                                    <th>Strahlentherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Fernmetastasen:<br></th>
-                                    <th style="margin-left:40%;">Keine Fernmetastasen nachweisbar</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Hormontherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Fernmetastasen:<br></th>
-                                    <th style="margin-left:40%;">Keine Fernmetastasen nachweisbar</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Hormontherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Untersuchungs-/ Befunddatum im Verlauf:<br></th>
-                                    <th style="margin-left:40%;">23.11.2011</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Chemotherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Lokales/regionäres Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">Tumorreste (Residualtumor)</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum lokales/regionäres Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">23.11.2011</th>
+                                    <th>Diagnose:</th>
+                                    <th>C46.0</th>
                                   </tr>
                                 </table>
                                 <mat-accordion>
@@ -646,131 +412,378 @@
                                                        style="width:100%; margin-left:0%">
                                     <mat-expansion-panel-header>
                                       <mat-panel-title>
-                                        Surgery3651
+                                        Histology3088
                                       </mat-panel-title>
                                     </mat-expansion-panel-header>
                                     <table class="table_config">
                                       <tr>
-                                        <th>Gesamtbeurteilung Resttumor:<br></th>
-                                        <th style="margin-left:40%;">Mikroskopischer Residualtumor</th>
+                                        <th>ICD-O Katalog Morphologie (Version):<br></th>
+                                        <th style="margin-left:40%;">ICD-O-3</th>
+                                      </tr>
+                                      <tr>
+                                        <th>KMorphologie:</th>
+                                        <th> 9140/3</th>
                                       </tr>
                                     </table>
                                   </mat-expansion-panel>
                                 </mat-accordion>
-                              </mat-expansion-panel>
-                            </mat-accordion>
-                            <mat-accordion>
-                              <mat-expansion-panel (opened)="panelOpenState = true"
-                                                   (closed)="panelOpenState = false" style="width:100%; margin-left:0%">
-                                <mat-expansion-panel-header>
-                                  <mat-panel-title>
-                                    <mat-progress-spinner
-                                      diameter="20" mode="indeterminate"></mat-progress-spinner>
-                                    Progress 6166
-                                  </mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <table class="table_config">
-                                  <tr>
-                                    <th>Immuntherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Knochenmarktransplantation:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Intention OP:<br></th>
-                                    <th style="margin-left:40%;">kurativ</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum Lymphknoten-Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">09.12.2011</th>
-                                  </tr>
-                                  <tr>
-                                    <th>OP:<br></th>
-                                    <th style="margin-left:40%;">true</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Synthetischer Progresseintrag:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Lymphknoten-Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">Kein Lymphknotenbefall nachweisbar</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum Fernmetastasen:<br></th>
-                                    <th style="margin-left:40%;">09.12.2011</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Ansprechen im Verlauf:<br></th>
-                                    <th style="margin-left:40%;">Vollremission (complete remission, CR)</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Strahlentherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Fernmetastasen:<br></th>
-                                    <th style="margin-left:40%;">Keine Fernmetastasen nachweisbar</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Hormontherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Untersuchungs-/ Befunddatum im Verlauf:<br></th>
-                                    <th style="margin-left:40%;">09.12.2011</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Chemotherapie:<br></th>
-                                    <th style="margin-left:40%;">false</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Lokales/regionäres Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">Kein Tumor nachweisbar</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Datum lokales/regionäres Rezidiv:<br></th>
-                                    <th style="margin-left:40%;">09.12.2011</th>
-                                  </tr>
-                                </table>
                                 <mat-accordion>
                                   <mat-expansion-panel (opened)="panelOpenState = true"
                                                        (closed)="panelOpenState = false"
                                                        style="width:100%; margin-left:0%">
                                     <mat-expansion-panel-header>
                                       <mat-panel-title>
-                                        Surgery3651
+                                        Tnm 84984
                                       </mat-panel-title>
                                     </mat-expansion-panel-header>
                                     <table class="table_config">
                                       <tr>
-                                        <th>Gesamtbeurteilung Resttumor:<br></th>
-                                        <th style="margin-left:40%;">kein Residualtumor</th>
+                                        <th>TNM-r-Symbol:<br></th>
+                                        <th style="margin-left:40%;">native Klassifikation vor Eintreten eines
+                                          Rezidivs
+                                        </th>
                                       </tr>
                                       <tr>
-                                        <th>Lokale Beurteilung Resttumor:<br></th>
-                                        <th style="margin-left:40%;">kein Residualtumor</th>
+                                        <th>TNM-M:</th>
+                                        <th>0</th>
+                                      </tr>
+                                      <tr>
+                                        <th>c/p/u-Präfix N:</th>
+                                        <th>Kategorie wurde durch klinische Angaben festgestellt</th>
+                                      </tr>
+                                      <tr>
+                                        <th>TNM-Version:</th>
+                                        <th>7</th>
+                                      </tr>
+                                      <tr>
+                                        <th>TNM-T:</th>
+                                        <th>1</th>
+                                      </tr>
+                                      <tr>
+                                        <th>UICC Stadium:</th>
+                                        <th>I</th>
+                                      </tr>
+                                      <tr>
+                                        <th>TNM-y-Symbol:</th>
+                                        <th>native Klassifikation</th>
+                                      </tr>
+                                      <tr>
+                                        <th>c/p/u-Präfix M:</th>
+                                        <th>Kategorie wurde durch klinische Angaben festgestellt</th>
+                                      </tr>
+                                      <tr>
+                                        <th>c/p/u-Präfix T:</th>
+                                        <th>Kategorie wurde durch klinische Angaben festgestellt</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum der TNM-Dokumentation/Datum Befund:</th>
+                                        <th>23.11.2011</th>
+                                      </tr>
+                                      <tr>
+                                        <th>TNM-m-Symbol:</th>
+                                        <th></th>
+                                      </tr>
+                                      <tr>
+                                        <th>TNM-N</th>
+                                        <th>0</th>
                                       </tr>
                                     </table>
                                   </mat-expansion-panel>
                                 </mat-accordion>
-                              </mat-expansion-panel>
-                            </mat-accordion>
-                          </div>
-                        </mat-expansion-panel>
-                      </mat-accordion>
-                    </div>
-                  </div>
-                </mat-expansion-panel>
-              </mat-accordion>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+                                <mat-accordion>
+                                  <mat-expansion-panel (opened)="panelOpenState = true"
+                                                       (closed)="panelOpenState = false"
+                                                       style="width:100%; margin-left:0%">
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        <mat-progress-spinner
+                                          diameter="20" mode="indeterminate"></mat-progress-spinner>
+                                        Progress 6167
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <table class="table_config">
+                                      <tr>
+                                        <th>Immuntherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Knochenmarktransplantation:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum Lymphknoten-Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">13.01.2012</th>
+                                      </tr>
+                                      <tr>
+                                        <th>OP:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>:<br>Synthetischer Progresseintrag</th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Lymphknoten-Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">Fehlende Angabe</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum Fernmetastasen:<br></th>
+                                        <th style="margin-left:40%;">13.01.2012</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Ansprechen im Verlauf:<br></th>
+                                        <th style="margin-left:40%;">Fehlende Angabe</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Strahlentherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Fernmetastasen:<br></th>
+                                        <th style="margin-left:40%;">Fehlende Angabe</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Hormontherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Untersuchungs-/ Befunddatum im Verlauf:<br></th>
+                                        <th style="margin-left:40%;">13.01.2012</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Chemotherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Lokales/regionäres Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">Fehlende Angabe</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum lokales/regionäres Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">13.01.2012</th>
+                                      </tr>
+                                    </table>
+                                  </mat-expansion-panel>
+                                </mat-accordion>
+                                <mat-accordion>
+                                  <mat-expansion-panel (opened)="panelOpenState = true"
+                                                       (closed)="panelOpenState = false"
+                                                       style="width:100%; margin-left:0%">
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        <mat-progress-spinner
+                                          diameter="20" mode="indeterminate"></mat-progress-spinner>
+                                        Progress 6165
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <table class="table_config">
+                                      <tr>
+                                        <th>Immuntherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Knochenmarktransplantation:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Intention OP:<br></th>
+                                        <th style="margin-left:40%;">kurativ</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum Lymphknoten-Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">23.11.2011</th>
+                                      </tr>
+                                      <tr>
+                                        <th>OP:<br></th>
+                                        <th style="margin-left:40%;">true</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Synthetischer Progresseintrag:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Lymphknoten-Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">Kein Lymphknotenbefall nachweisbar</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum Fernmetastasen:<br></th>
+                                        <th style="margin-left:40%;">23.11.2011</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Ansprechen im Verlauf:<br></th>
+                                        <th style="margin-left:40%;">Teilremission / mindestens 50% Rückgang des Tumors
+                                          (partial remission, PR)
+                                        </th>
+                                      </tr>
+                                      <tr>
+                                        <th>Strahlentherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Fernmetastasen:<br></th>
+                                        <th style="margin-left:40%;">Keine Fernmetastasen nachweisbar</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Hormontherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Fernmetastasen:<br></th>
+                                        <th style="margin-left:40%;">Keine Fernmetastasen nachweisbar</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Hormontherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Untersuchungs-/ Befunddatum im Verlauf:<br></th>
+                                        <th style="margin-left:40%;">23.11.2011</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Chemotherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Lokales/regionäres Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">Tumorreste (Residualtumor)</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum lokales/regionäres Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">23.11.2011</th>
+                                      </tr>
+                                    </table>
+                                    <mat-accordion>
+                                      <mat-expansion-panel (opened)="panelOpenState = true"
+                                                           (closed)="panelOpenState = false"
+                                                           style="width:100%; margin-left:0%">
+                                        <mat-expansion-panel-header>
+                                          <mat-panel-title>
+                                            Surgery3651
+                                          </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <table class="table_config">
+                                          <tr>
+                                            <th>Gesamtbeurteilung Resttumor:<br></th>
+                                            <th style="margin-left:40%;">Mikroskopischer Residualtumor</th>
+                                          </tr>
+                                        </table>
+                                      </mat-expansion-panel>
+                                    </mat-accordion>
+                                  </mat-expansion-panel>
+                                </mat-accordion>
+                                <mat-accordion>
+                                  <mat-expansion-panel (opened)="panelOpenState = true"
+                                                       (closed)="panelOpenState = false"
+                                                       style="width:100%; margin-left:0%">
+                                    <mat-expansion-panel-header>
+                                      <mat-panel-title>
+                                        <mat-progress-spinner
+                                          diameter="20" mode="indeterminate"></mat-progress-spinner>
+                                        Progress 6166
+                                      </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <table class="table_config">
+                                      <tr>
+                                        <th>Immuntherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Knochenmarktransplantation:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Intention OP:<br></th>
+                                        <th style="margin-left:40%;">kurativ</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum Lymphknoten-Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">09.12.2011</th>
+                                      </tr>
+                                      <tr>
+                                        <th>OP:<br></th>
+                                        <th style="margin-left:40%;">true</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Synthetischer Progresseintrag:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Lymphknoten-Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">Kein Lymphknotenbefall nachweisbar</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum Fernmetastasen:<br></th>
+                                        <th style="margin-left:40%;">09.12.2011</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Ansprechen im Verlauf:<br></th>
+                                        <th style="margin-left:40%;">Vollremission (complete remission, CR)</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Strahlentherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Fernmetastasen:<br></th>
+                                        <th style="margin-left:40%;">Keine Fernmetastasen nachweisbar</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Hormontherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Untersuchungs-/ Befunddatum im Verlauf:<br></th>
+                                        <th style="margin-left:40%;">09.12.2011</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Chemotherapie:<br></th>
+                                        <th style="margin-left:40%;">false</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Lokales/regionäres Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">Kein Tumor nachweisbar</th>
+                                      </tr>
+                                      <tr>
+                                        <th>Datum lokales/regionäres Rezidiv:<br></th>
+                                        <th style="margin-left:40%;">09.12.2011</th>
+                                      </tr>
+                                    </table>
+                                    <mat-accordion>
+                                      <mat-expansion-panel (opened)="panelOpenState = true"
+                                                           (closed)="panelOpenState = false"
+                                                           style="width:100%; margin-left:0%">
+                                        <mat-expansion-panel-header>
+                                          <mat-panel-title>
+                                            Surgery3651
+                                          </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <table class="table_config">
+                                          <tr>
+                                            <th>Gesamtbeurteilung Resttumor:<br></th>
+                                            <th style="margin-left:40%;">kein Residualtumor</th>
+                                          </tr>
+                                          <tr>
+                                            <th>Lokale Beurteilung Resttumor:<br></th>
+                                            <th style="margin-left:40%;">kein Residualtumor</th>
+                                          </tr>
+                                        </table>
+                                      </mat-expansion-panel>
+                                    </mat-accordion>
+                                  </mat-expansion-panel>
+                                </mat-accordion>
+                              </div>
+                            </mat-expansion-panel>
+                          </mat-accordion>
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   </div>
 </div>
