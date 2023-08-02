@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BackgroundColors, EmptyTeilerApp, TeilerApp} from "../teiler/teiler-app";
 
-
 enum TeilerAppStatus {
   WORKING,
   NOT_WORKING,
@@ -19,11 +18,12 @@ export class TeilerBoxComponent implements OnInit {
 
   constructor() {
   }
-  
-  ngOnInit(): void {
-    this.teilerApp.backgroundColor = this.teilerApp.backgroundColor || BackgroundColors.GREEN;
-  }
 
+
+  ngOnInit() {
+    this.teilerApp.backgroundColor = this.teilerApp.backgroundColor || BackgroundColors.GREEN;
+
+  }
 
   getCheckIconClass(): string {
     switch (this.isTeilerAppWorking()) {

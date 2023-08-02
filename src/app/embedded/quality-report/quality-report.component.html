@@ -3,9 +3,6 @@
   <div class="title">
     <h2 i18n>Qualit&auml;tsbericht</h2>
   </div>
-  <div class ="over">
-    <hr>
-  </div>
   <div class="button">
     <button mat-stroked-button (click)=toggleDisplayDivIf() i18n>Generieren</button>
     <div *ngIf="!isShowDivIf">
@@ -20,8 +17,8 @@
   </div>
   <div class="search">
     <span i18n>Suche</span>:
-    <label class="matinput" >
-      <input matInput style="border:1px solid dimgrey; width: 175px; border-radius:4px; padding: 2px;">
+    <label class="matinput">
+      <input matInput>
     </label>
   </div>
 
@@ -30,12 +27,12 @@
 
       <ng-container matColumnDef="zeitstempel">
         <th mat-header-cell *matHeaderCellDef><div i18n>Zeitstempel</div> </th>
-        <td mat-cell *matCellDef="let element" style="font-family: Segoe Ui, serif;color: dimgray;"> {{element.zeitstempel}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.zeitstempel}} </td>
       </ng-container>
 
       <ng-container matColumnDef="version">
         <th mat-header-cell *matHeaderCellDef i18n>Version</th>
-        <td mat-cell *matCellDef="let element" style="font-family: Segoe Ui, serif;color: dimgray;"> {{element.version}} </td>
+        <td mat-cell *matCellDef="let element" > {{element.version}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -47,6 +44,6 @@
         #paginator
         [pageSizeOptions]="[5,10,25,100]"
         showFirstLastButtons
-         style="background-color: #fafafa;"></mat-paginator>
+         ></mat-paginator>
   </div>
 </div>

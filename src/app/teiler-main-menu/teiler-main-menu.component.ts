@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {TeilerService} from "../teiler/teiler.service";
 import {TeilerAuthService} from "../security/teiler-auth.service";
 import {from} from "rxjs";
@@ -7,9 +7,11 @@ import {from} from "rxjs";
 @Component({
   selector: 'teiler-main-menu',
   templateUrl: './teiler-main-menu.component.html',
-  styleUrls: ['./teiler-main-menu.component.css']
+  styleUrls: ['./teiler-main-menu.component.css'],
+
 })
 export class TeilerMainMenuComponent implements OnInit {
+  tab = 1;
 
   isLoggedIn: boolean = false;
 
@@ -19,7 +21,7 @@ export class TeilerMainMenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   existLocalAndCentralTeilerAppsAtTheSameTime() {
     if (this.teilerService.teilerApps.length > 0) {
       let isLocal = this.teilerService.teilerApps[0].local;
@@ -31,5 +33,4 @@ export class TeilerMainMenuComponent implements OnInit {
     }
     return false;
   }
-
 }

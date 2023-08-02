@@ -1,19 +1,20 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css");
-
 .main{
-  width: 1200px;
+  width: 80%;
   margin-left:auto;
   margin-right:auto;
+  display: flex;
+  flex-direction: column;
 }
-.over{
-  margin-top: 1%;
-  color: dimgrey;
+.title {
+  border-bottom: 3px solid black;
+  margin-bottom: 20px;
 }
 h2{
   text-align: left;
   font-family: Roboto, Helvetica Neue, sans-serif;
-  font-size: 32px;
+  font-size: 30px;
   margin-top: 1.5%;
 }
 h3{
@@ -37,6 +38,7 @@ mat-expansion-panel {
 
 .downloadandselector {
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 table{

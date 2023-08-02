@@ -2,67 +2,77 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";*/
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 
-
-.teiler-box-icon i {
-  font-size: 45px;
+h3{
   color: black;
+  font-size: 130%;
+  margin:0;
 }
-
-.teiler-box-image img {
-  width: 100%;
+.teiler-box-image img{
+  display: block;
+  height: 60px;
+  margin: 0 auto 20px auto;
 }
-
+p{
+  color: black;
+  font-size: 110%;
+  margin: 0;
+}
+.teiler-box-icon {
+  font-size: 470%;
+  margin-left: 32%;
+  transition: transform 50ms ease;
+  color: grey;
+}
 .teiler-box {
-  width: 300px;
-  margin: 0 8px 16px;
-  height: 120px;
-  box-shadow: none;
+  float:left;
+  display:flex;
+  flex-wrap: wrap;
+  min-width: 250px;
+  min-height: 270px;
+  margin: 1.25%;
+  position: relative;
+  border-radius: 2%;
+  box-shadow: 6px 5px 15px 1px lightgrey;
+  transition: transform 150ms ease;
+  vertical-align: middle;
+  text-align: center;
+  align-content: center;
+  background-color: white;
 }
-
-.teiler-box.mat-mdc-card._mat-animation-noopable {
-  transition: all 0.2s ease-in-out !important;
+.teiler-box._mat-animation-noopable {
+  transition: all 1ms ease-in-out !important;
 }
 
 .teiler-box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+  box-shadow: 6px 5px 15px 1px lightgrey;
+  transform: scale(1.05);
 }
-
-.teiler-box.highlight-card {
-  /* background-color: #1976d2; */
-  color: white;
-  font-weight: 600;
-  border: none;
-  width: auto;
-  min-width: 30%;
-  position: relative;
+.teiler-box:hover .strich{
+  transform:scaleX(1);
 }
-
-.teiler-box.card.highlight-card span {
-  margin-left: 60px;
-}
-
-.mat-mdc-card-avatar {
-  width: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center
-}
-
-.teiler-box-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mat-mdc-card-title {
-  font-size:
-}
-
-.mat-mdc-card-footer {
+.text{
   position: absolute;
-  bottom: -11px;
-  right: -11px;
+  top: 16%;
+  left: 6%;
+  right: 5%;
+  text-align: left;
+}
+.strich{
+  padding-bottom: 0.5%;
+  margin-right:4%;
+  transform-origin:left;
+  transform:scaleX(0);
+  transition: transform 200ms ease;
+}
+hr{
+  height: 1px;
+  border: none;
+  background-color: grey;
+}
+.icon-footer {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
   background: white;
   height: 40px;
   width: 40px;
@@ -72,21 +82,16 @@
   border-radius: 50% 0 0 0;
   transition: all 0.3s ease-in-out !important;
 }
-
-
-.teiler-box:hover .mat-mdc-card-footer{
-  transform: translateY(-5px);
+.teiler-box:hover .icon-footer{
+  transform: translate(5px);
   box-shadow: -4px -1px 13px rgba(0, 0, 0, 0.35)
 }
-
 .bi-check-circle {
   color: green;
 }
-
 .bi-x-circle {
   color: red;
 }
-
 .bi-clock {
   color: orange;
 }

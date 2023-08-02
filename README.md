@@ -63,5 +63,5 @@ ng serve --configuration=development
 
 # For developers:
 ## Internationalization
-ng extract-i18n --output-path src/i18n --format=xlf2
+`ng extract-i18n --output-path src/i18n --format=xlf2`  
 After that: Compare messages.en.xlf with the new messages.xlf: Update and add new entries
