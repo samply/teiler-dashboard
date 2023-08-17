@@ -62,23 +62,23 @@ export class TeilerService {
       dialogQualiService,
       dialogUploadsService,
       dialogTestsService];
-    this.fetchTeilerCoreAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
-    router.events.subscribe(myEvent => this.fetchTeilerCoreAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
+    this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
+    router.events.subscribe(myEvent => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
   }
 
-  fetchTeilerCoreAppsUrlAndUpdateTeilerApps(embeddedTeilerApps: TeilerApp[]) {
-    this.httpClient.get<TeilerApp[]>(this.getTeilerCoreAppsUrl()).subscribe(teilerApps => {
+  fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps: TeilerApp[]) {
+    this.httpClient.get<TeilerApp[]>(this.getTeilerDashboardAppsUrl()).subscribe(teilerApps => {
       this.allTeilerApps = [];
       embeddedTeilerApps.forEach(teilerApp => this.allTeilerApps.push(teilerApp));
-      this.addTeilerCoreApps(teilerApps);
+      this.addTeilerDashboardApps(teilerApps);
       this.sortTeilerApps();
       this.filterTeilerApps()
       this.teilerAppBehaviorSubject.next(this.teilerApps);
     });
   }
 
-  getTeilerCoreAppsUrl() {
-    return environment.config.TEILER_CORE_URL + '/apps/' + getLocale();
+  getTeilerDashboardAppsUrl() {
+    return environment.config.TEILER_BACKEND_URL + '/apps/' + getLocale();
   }
 
   filterTeilerApps() {
@@ -106,23 +106,23 @@ export class TeilerService {
     return isAuthorized;
   }
 
-  addTeilerCoreApps(teilerCoreApps: TeilerApp[]) {
+  addTeilerDashboardApps(teilerDashboardApps: TeilerApp[]) {
 
     let embeddedTeilerAppsMap = new Map(this.allTeilerApps.map(teilerApp => [teilerApp.name, teilerApp]));
-    teilerCoreApps.forEach(teilerCoreApp => {
-      if (embeddedTeilerAppsMap.has(teilerCoreApp.name)) {
+    teilerDashboardApps.forEach(teilerDashboardApp => {
+      if (embeddedTeilerAppsMap.has(teilerDashboardApp.name)) {
         // @ts-ignore
-        this.mergeTeilerApps(embeddedTeilerAppsMap.get(teilerCoreApp.name), teilerCoreApp);
+        this.mergeTeilerApps(embeddedTeilerAppsMap.get(teilerDashboardApp.name), teilerDashboardApp);
       } else {
-        this.allTeilerApps.push(teilerCoreApp);
+        this.allTeilerApps.push(teilerDashboardApp);
       }
     });
 
   }
 
-  mergeTeilerApps(embeddedTeilerApp: TeilerApp, teilerCoreApp: TeilerApp) {
-    Reflect.ownKeys(teilerCoreApp).forEach(property => {
-      let teilerCorAppValue = Reflect.get(teilerCoreApp, property);
+  mergeTeilerApps(embeddedTeilerApp: TeilerApp, teilerDashboardApp: TeilerApp) {
+    Reflect.ownKeys(teilerDashboardApp).forEach(property => {
+      let teilerCorAppValue = Reflect.get(teilerDashboardApp, property);
       if (teilerCorAppValue !== null && teilerCorAppValue !== undefined) {
         Reflect.set(embeddedTeilerApp, property, teilerCorAppValue);
       }

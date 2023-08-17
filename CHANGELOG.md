@@ -70,3 +70,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add http relative path (compatible with traefik)
 - Rename developer to develop
 - Rename: Teiler Dashboard
+- Rename: Teiler Orchestrator and Teiler Dashboard

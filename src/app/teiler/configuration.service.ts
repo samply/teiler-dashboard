@@ -18,7 +18,7 @@ export class ConfigurationService extends EmbeddedTeilerApp {
   roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
 
   /*
-  backendUrl: string | undefined = undefined; // TODO: set teiler-core URL
+  backendUrl: string | undefined = undefined; // TODO: set teiler-backend URL
 */
 
 }

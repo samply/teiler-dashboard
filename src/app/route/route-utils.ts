@@ -26,8 +26,8 @@ function createRouterLinkForBaseWithLocale(locale: string, base: string) {
     locale = '';
   }
   let root = '';
-  if (environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH && environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH.length > 0) {
-    root = (environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH[0] == '/') ? environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH.substring(1) : environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH;
+  if (environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH && environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH.length > 0) {
+    root = (environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH[0] == '/') ? environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH.substring(1) : environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH;
     if (locale.length > 0 || base.length > 0){
       root += '/';
     }
@@ -51,9 +51,9 @@ export function getLocale(): string {
 }
 
 export function removeHttpRelativePath(url: string){
-  if (environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH && environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH.length > 0){
-    let httpRelativePath = (environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH[0] == '/') ? environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH.substring(1) : environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH;
-    url = url.replace(environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH, "");
+  if (environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH && environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH.length > 0){
+    let httpRelativePath = (environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH[0] == '/') ? environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH.substring(1) : environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH;
+    url = url.replace(environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH, "");
     url = url.replace(httpRelativePath, "");
   }
   return url;
@@ -79,5 +79,5 @@ function ignoreFirstSlash(url: string) {
 }
 
 export function getHref(routerLink: string) {
-  return removeHttpRelativePath(window.location.origin) + environment.config.TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH + ((routerLink.length > 0) ? '/' + removeHttpRelativePath(routerLink) : '');
+  return removeHttpRelativePath(window.location.origin) + environment.config.TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH + ((routerLink.length > 0) ? '/' + removeHttpRelativePath(routerLink) : '');
 }
