@@ -47,7 +47,7 @@ export class LanguageSelectorComponent implements OnInit {
   getAvailableLocales(): string[] {
     let locales: string[] = [];
     // @ts-ignore
-    let i18n = require('angular.json').projects["teiler-ui"].i18n;
+    let i18n = require('angular.json').projects["teiler-dashboard"].i18n;
     locales.push(i18n.sourceLocale);
     for (let locale in i18n.locales) {
       locales.push(locale);

@@ -6,14 +6,14 @@ import { ColorSchemeService } from './color-scheme.service';
 
 
 @Component({
-  selector: 'teiler-ui',
+  selector: 'teiler-dashboard',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   selectedColor: string = 'lightgrey';
 
-  title = 'teiler-ui';
+  title = 'teiler-dashboard';
   isLoggedIn: boolean = false;
   user: string = '';
 

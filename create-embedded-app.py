@@ -9,7 +9,7 @@ POSSIBLE_ROLES = ["PUBLIC", "USER", "ADMIN"] # the first value should be the def
 
 # Create the parser
 parser = argparse.ArgumentParser(prog="create-embedded-app",
-                                 description="Creates an embedded app in the Teiler-UI.")
+                                 description="Creates an embedded app in the Teiler-Dashboard.")
 
 parser.add_argument("-n",
                     dest="NAME",
@@ -321,7 +321,7 @@ with open(TEILER_APP, "w") as file:
 """----------------------------------------------------
 8. Extend Service to EbeddedTeilerApp in XXX.service.ts
 8.1 Implement properties
-8.2 Add EmbeddedTeilerApps to constructor 
+8.2 Add EmbeddedTeilerApps to constructor
 ----------------------------------------------------"""
 print(f"\nExtending Service to EbeddedTeilerApp in XXX.service.ts...")
 

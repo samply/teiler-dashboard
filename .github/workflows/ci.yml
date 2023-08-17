@@ -18,7 +18,7 @@ jobs:
     uses: samply/github-workflows/.github/workflows/docker-ci.yml@main
     with:
       # The Docker Hub Repository you want eventually push to, e.g samply/share-client
-      image-name: "samply/teiler-ui"
+      image-name: "samply/teiler-dashboard"
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

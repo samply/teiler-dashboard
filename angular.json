@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "teiler-ui": {
+    "teiler-dashboard": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -19,7 +19,7 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/teiler-ui",
+            "outputPath": "dist/teiler-dashboard",
             "index": "src/index.html",
             "main": "src/main.single-spa.ts",
             "localize": true,
@@ -37,7 +37,7 @@
             "scripts": [],
             "customWebpackConfig": {
               "path": "extra-webpack.config.js",
-              "libraryName": "teiler-ui",
+              "libraryName": "teiler-dashboard",
               "libraryTarget": "umd"
             },
             "baseHref": "http://localhost:4200/"
@@ -87,13 +87,13 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "teiler-ui:build:production"
+              "browserTarget": "teiler-dashboard:build:production"
             },
             "development": {
-              "browserTarget": "teiler-ui:build:development"
+              "browserTarget": "teiler-dashboard:build:development"
             },
             "en": {
-              "browserTarget": "teiler-ui:build:en"
+              "browserTarget": "teiler-dashboard:build:en"
             }
 
           },
@@ -102,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "teiler-ui:build"
+            "browserTarget": "teiler-dashboard:build"
           }
         },
         "test": {

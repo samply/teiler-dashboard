@@ -2,8 +2,8 @@ version: "3"
 
 services:
 
-  teiler-ui:
-#    image: teiler-ui
+  teiler-dashboard:
+#    image: teiler-dashboard
     build: .
 
 #    depends_on:
@@ -14,8 +14,8 @@ services:
       DEFAULT_LANGUAGE: "DE"
       TEILER_CORE_URL: "http://localhost:8085"
       KEYCLOAK_URL: "http://localhost:8380/login"
-      KEYCLOAK_REALM: "teiler-ui"
-      KEYCLOAK_CLIENT_ID: "teiler-ui"
+      KEYCLOAK_REALM: "teiler-dashboard"
+      KEYCLOAK_CLIENT_ID: "teiler-dashboard"
       TEILER_ADMIN_NAME: "Max Mustermann"
       TEILER_ADMIN_EMAIL: "max.mustermann@teiler-example.com"
       TEILER_ADMIN_PHONE: "+49 123 456789"

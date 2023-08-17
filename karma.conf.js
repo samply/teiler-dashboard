@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/teiler-ui'),
+      dir: require('path').join(__dirname, './coverage/teiler-dashboard'),
       subdir: '.',
       reporters: [
         { type: 'html' },
