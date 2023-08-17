@@ -18,7 +18,7 @@ export function initializeKeycloak(keycloak: KeycloakService){
       checkLoginIframe: false,
     },
 
-    bearerExcludedUrls: [environment.config.TEILER_CORE_URL]
+    bearerExcludedUrls: [environment.config.TEILER_BACKEND_URL]
 
   });
 

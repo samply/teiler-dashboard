@@ -1,5 +1,5 @@
 {
-  "name": "teiler-ui",
+  "name": "teiler-dashboard",
   "version": "1.0.0-SNAPSHOT",
   "scripts": {
     "ng": "ng",
@@ -7,8 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:single-spa:teiler-ui": "ng build teiler-ui --configuration production",
-    "serve:single-spa:teiler-ui": "ng s --project teiler-ui --disable-host-check --port 4200 --live-reload false"
+    "build:single-spa:teiler-dashboard": "ng build teiler-dashboard --configuration production",
+    "serve:single-spa:teiler-dashboard": "ng s --project teiler-dashboard --disable-host-check --port 4200 --live-reload false"
   },
   "private": true,
   "dependencies": {

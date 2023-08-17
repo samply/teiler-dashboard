@@ -26,14 +26,14 @@ export class TeilerConfigService {
   configBlocksbehaviorSubject = new BehaviorSubject(this.configBlocks);
 
   constructor(httpClient: HttpClient) {
-    httpClient.get<ConfigBlock[]>(this.getTeilerCoreConfigUrl()).subscribe(configBlocks => {
+    httpClient.get<ConfigBlock[]>(this.getTeilerBackendConfigUrl()).subscribe(configBlocks => {
       this.configBlocks = configBlocks;
       this.configBlocksbehaviorSubject.next(configBlocks);
     });
   }
 
-  getTeilerCoreConfigUrl() {
-    return environment.config.TEILER_CORE_URL + '/config';
+  getTeilerBackendConfigUrl() {
+    return environment.config.TEILER_BACKEND_URL + '/config';
   }
 
 }

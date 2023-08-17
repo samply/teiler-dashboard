@@ -19,7 +19,7 @@ const lifecycles = singleSpaAngular({
     singleSpaPropsSubject.next(singleSpaProps);
     return platformBrowserDynamic(getSingleSpaExtraProviders()).bootstrapModule(AppModule);
   },
-  template: '<teiler-ui />',
+  template: '<teiler-dashboard />',
   Router,
   NavigationStart,
   NgZone,

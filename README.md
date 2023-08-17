@@ -12,7 +12,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Generate an embedded app
 
-Run `python create-embedded-app.py [parameters]` to automatically perform all steps needed to integrate an embedded app into the Teiler-UI. 
+Run `python create-embedded-app.py [parameters]` to automatically perform all steps needed to integrate an embedded app into the Teiler-Dashboard. 
 There are 3 ways to specify the parameters:
 - by using the CLI arguments (explained below)
 - interactively during the runtime
@@ -51,8 +51,8 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ## Docker
-docker build -t teiler-ui .
-docker run teiler-ui -p 8085:80
+docker build -t teiler-dashboard .
+docker run teiler-dashboard -p 8085:80
 
 # Docker-compose
 docker-compose build

@@ -2,28 +2,28 @@ version: "3"
 
 services:
 
-  teiler-ui:
-#    image: teiler-ui
+  teiler-dashboard:
+#    image: teiler-dashboard
     build: .
 
 #    depends_on:
-#      - teiler-core
+#      - teiler-backend
     ports:
       - 4200:80
     environment:
       DEFAULT_LANGUAGE: "DE"
-      TEILER_CORE_URL: "http://localhost:8085"
+      TEILER_BACKEND_URL: "http://localhost:8085"
       KEYCLOAK_URL: "http://localhost:8380/login"
-      KEYCLOAK_REALM: "teiler-ui"
-      KEYCLOAK_CLIENT_ID: "teiler-ui"
+      KEYCLOAK_REALM: "teiler"
+      KEYCLOAK_CLIENT_ID: "teiler"
       TEILER_ADMIN_NAME: "Max Mustermann"
       TEILER_ADMIN_EMAIL: "max.mustermann@teiler-example.com"
       TEILER_ADMIN_PHONE: "+49 123 456789"
       TEILER_PROJECT: "DKTK"
-      TEILER_UI_SERVER_NAME: "localhost"
-      TEILER_ROOT_CONFIG_URL: "http://localhost:9000"
-      TEILER_UI_HTTP_RELATIVE_PATH: ""
-      TEILER_ROOT_CONFIG_HTTP_RELATIVE_PATH: ""
+      TEILER_DASHBOARD_SERVER_NAME: "localhost"
+      TEILER_ORCHESTRATOR_URL: "http://localhost:9000"
+      TEILER_DASHBOARD_HTTP_RELATIVE_PATH: ""
+      TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH: ""
 
-#  teiler-core :
-#    image: teiler-core
+#  teiler-backend :
+#    image: teiler-backend

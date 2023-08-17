@@ -22,7 +22,7 @@ EXPOSE 80
 WORKDIR /usr/share/nginx/html
 
 ### Copy project from node image to nginx image
-COPY --from=build /app/dist/teiler-ui .
+COPY --from=build /app/dist/teiler-dashboard .
 COPY docker/env.template.js         ./assets/
 ADD docker/start.sh                 /samply/
 RUN chmod +x                        /samply/start.sh
