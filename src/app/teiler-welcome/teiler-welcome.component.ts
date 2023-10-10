@@ -25,7 +25,7 @@ export class TeilerWelcomeComponent implements OnInit {
 
   welcomeTitle1: string = $localize`Willkommen auf Ihrem`
   welcomeTitle2: string = $localize`Brückenkopf`
-  welcomeTitle: string = this.welcomeTitle1 + " " + environment.config.TEILER_PROJECT + " " + this.welcomeTitle2;
+  welcomeTitle: string = this.welcomeTitle1 + " " + environment.config.TEILER_PROJECT.toUpperCase() + "-" + this.welcomeTitle2;
 
   welcomeMessage1: string = $localize`
     Sie befinden sich auf der Einstiegsseite des Brückenkopfes am Standort.

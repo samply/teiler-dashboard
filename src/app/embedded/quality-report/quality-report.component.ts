@@ -1,16 +1,33 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 
 import {DatePipe} from '@angular/common';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
-
+import {QualityReportService, reportLog} from "../../teiler/quality-report.service";
+import {Subscription} from "rxjs";
 
 export interface QualityReports {
-  zeitstempel: string;
-  version: string;
+  id: string;
+  path: string;
+  timestamp: string;
+  "template-id": string;
 }
 
+export interface QBResponse {
+  responseUrl: URL;
+}
+export interface Templates {
+  value: string;
+  display: string
+}
+export enum QBStatus {
+  OK = "OK",
+  RUNNING = "RUNNING",
+  NOT_FOUND = "NOT_FOUND",
+  EMPTY = "EMPTY",
+  ERROR = "ERROR"
+}
 
 @Component({
   selector: 'quality-report-app',
@@ -19,51 +36,33 @@ export interface QualityReports {
 })
 
 
-export class QualityReportComponent implements OnInit {
-  EmpData: QualityReports[] = [
-    {zeitstempel: '2022-09-27 10:25:43', version: '002'},
-    {zeitstempel: '2022-07-29 14:37:31', version: '002'},
-    {zeitstempel: '2022-02-28 10:27:22', version: '002'},
-    {zeitstempel: '2022-02-08 17:31:11', version: '002'},
-    {zeitstempel: '2022-02-07 14:27:01', version: '002'},
-    {zeitstempel: '2021-10-30 19:46:54', version: '002'},
-    {zeitstempel: '2021-10-25 08:18:20', version: '002'},
-    {zeitstempel: '2021-10-21 15:28:43', version: '002'},
-    {zeitstempel: '2021-10-21 10:25:10', version: '002'},
-    {zeitstempel: '2021-10-01 10:37:27', version: '002'},
-    {zeitstempel: '2021-06-10 15:45:21', version: '002'},
-    {zeitstempel: '2021-06-10 15:45:19', version: '002'},
-    {zeitstempel: '2020-09-18 11:50:05', version: '002'},
-    {zeitstempel: '2020-08-07 13:53:58', version: '002'},
-    {zeitstempel: '2019-10-01 15:18:20', version: '002'},
-    {zeitstempel: '2019-08-16 11:35:56', version: '002'},
-    {zeitstempel: '2019-08-15 16:32:11', version: '002'},
-    {zeitstempel: '2019-08-15 16:00:17', version: '002'},
-    {zeitstempel: '2019-08-15 14:25:09', version: '002'},
-    {zeitstempel: '2019-08-09 09:51:30', version: '002'},
-
-  ];
+export class QualityReportComponent implements OnInit, OnDestroy {
   //table
-  displayedColumns: string[] = ['zeitstempel', 'version'];
-  dataSource =new MatTableDataSource(this.EmpData);
-  numberOfItemsToBeDisplayedDefault = "zero";
-
-  //toggle
-  isShowDivIf = true;
-
-  toggleDisplayDivIf() {
-    this.isShowDivIf = !this.isShowDivIf;
-  }
+  displayedColumns: string[] = ['timestamp', 'templateid', 'link'];
+  dataSource = new MatTableDataSource<QualityReports>();
 
   //generator
   title = 'appComponent';
 
-  //date
-  today: Date = new Date();
-  pipe = new DatePipe('en-US');
-  todayWithPipe = null;
+  private subscriptionGenerateQB: Subscription | undefined
+  private subscriptionGetReports: Subscription | undefined
+  private subscriptionGetReportStatus: Subscription | undefined
+  private subscriptionFetchLogs: Subscription | undefined
+  private subscriptionGetRunningReports: Subscription | undefined
+  private subscriptionGetTemplateIDs: Subscription | undefined
 
-  constructor(private route: ActivatedRoute) {
+  private intervall: number | undefined
+  reportLog: reportLog[] = [];
+  QBStatus: typeof QBStatus = QBStatus;
+  qbStatus: QBStatus = QBStatus.EMPTY
+  reportUrl = "";
+  buttonDisabled: boolean = false;
+  fileName: string | undefined;
+  importTemplate: string = "";
+  selectedTemplate: string = "ccp";
+  templateIDs: Templates[] = []
+
+  constructor(private route: ActivatedRoute, private qualityReportService: QualityReportService) {
   }
   // @ts-ignore
   @ViewChild('paginator') paginator: MatPaginator;
@@ -72,8 +71,184 @@ export class QualityReportComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   ngOnInit() {
-    // @ts-ignore
-    this.todayWithPipe = this.pipe.transform(Date.now(), 'dd/MM/yyyy h:mm:ss a zzzz');
+    this.reportUrl = this.qualityReportService.getReporterURL() + "/";
+    this.getTemplateIDs();
+    this.getReports();
+    this.getRunningReports();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptionGenerateQB?.unsubscribe();
+    this.subscriptionGetReports?.unsubscribe();
+    this.subscriptionGetReportStatus?.unsubscribe();
+    this.subscriptionFetchLogs?.unsubscribe();
+    this.subscriptionGetRunningReports?.unsubscribe();
+    this.subscriptionGetTemplateIDs?.unsubscribe();
+    window.clearInterval(this.intervall);
+  }
+
+  doImportFromFile(event: Event): void {
+    // @ts-ignore
+    const file: File = (event.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+    reader.onload = this.onReaderLoad.bind(this);
+    reader.readAsText(file);
+    this.fileName = file.name;
+  }
+  onReaderLoad(event: any): void {
+    this.importTemplate = event.target.result;
+    this.generateQB();
+  }
+
+  generateQB() {
+    this.buttonDisabled = true;
+    this.subscriptionGenerateQB = this.qualityReportService.generateQB(this.selectedTemplate, this.importTemplate).subscribe({
+      next: (response:QBResponse) => {
+        const url = new URL(response.responseUrl)
+        const id = url.searchParams.get("report-id");
+        this.qbStatus = QBStatus.RUNNING
+        if (id) {
+          this.pollingStatusAndLogs(id, false);
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {}
+    });
+  }
+
+  getReports(): void {
+    this.subscriptionGetReports?.unsubscribe();
+    this.subscriptionGetReports = this.qualityReportService.getReports().subscribe({
+      next: (reportList:QualityReports[]) => {
+        const tempQBs: QualityReports[] = [];
+        let tempID;
+        reportList.forEach((report) => {
+          report["template-id"] === "null" ? tempID = "unbekannt" : tempID = report["template-id"]
+          tempQBs.push({id: report.id, path: report.path, timestamp: this.transformDate(report.timestamp), "template-id": tempID})
+        })
+        tempQBs.sort((a,b) =>  Number(b.timestamp) - Number(a.timestamp))
+        this.dataSource.data = tempQBs;
+        this.dataSource._updateChangeSubscription();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {}
+    })
+  }
+
+  pollingStatusAndLogs(id: string, init: boolean): void {
+    this.subscriptionGenerateQB?.unsubscribe();
+    this.subscriptionGetReportStatus?.unsubscribe();
+    this.subscriptionFetchLogs?.unsubscribe();
+
+    const reportDiv = document.getElementById("reportDiv");
+    const exportDiv = document.getElementById("exportDiv");
+    this.intervall = window.setInterval(() => {
+      this.subscriptionGetReportStatus = this.qualityReportService.getReportStatus(id).subscribe({
+        next: (status) => {
+          console.log(status)
+          if (!init || status !== QBStatus.OK) {this.qbStatus = status;}
+          if (status !== QBStatus.RUNNING) {
+            window.clearInterval(this.intervall);
+            this.buttonDisabled = false;
+            if (status === QBStatus.OK && !init) {
+              this.reportLog = [];
+              this.downloadReport(id);
+              this.getReports();
+            }
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {}
+      });
+      if (this.qbStatus === QBStatus.RUNNING) {
+        init = false;
+        this.subscriptionFetchLogs = this.qualityReportService.fetchLogs(1000).subscribe({
+          next: (response) => {
+            this.reportLog = response;
+            for (const repexpDiv of [reportDiv, exportDiv]) {
+              this.scrollToEndOfLog(repexpDiv)
+            }
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {
+          }
+        });
+      }
+    }, 2000)
+  }
+
+  downloadReport(id: string): void {
+    window.location.href=this.reportUrl + 'report?report-id=' + id;
+  }
+
+  transformDate(dateLog: string): string {
+    return new Date(dateLog.substring(0,4) + "-" + dateLog.substring(4,6) + "-" + dateLog.substring(6,8) + "T" + dateLog.substring(9,11) + ":" + dateLog.substring(12,14) + "+00:00").getTime().toString();
+  }
+
+
+  scrollToEndOfLog(element: HTMLElement | null): void {
+    if (element) {
+      const isScrolledToBottomReport = element.scrollHeight - element.clientHeight <= element.scrollTop + 1;
+      setTimeout(function () {
+        if (isScrolledToBottomReport) {
+          element.scrollTop = element.scrollHeight - element.clientHeight;
+        }
+      }, 200);
+    }
+  }
+
+  getRunningReports(): void {
+    this.subscriptionGetRunningReports?.unsubscribe();
+    this.subscriptionGetRunningReports = this.qualityReportService.getRunningReports().subscribe({
+      next: (reportList:QualityReports[]) => {
+        const tempQBs: QualityReports[] = []
+        reportList.forEach((report) => {
+          tempQBs.push({id: report.id, path: report.path, timestamp: this.transformDate(report.timestamp), "template-id": report["template-id"]})
+        })
+        tempQBs.sort((a,b) =>  Number(b.timestamp) - Number(a.timestamp))
+        if (tempQBs.length > 0) {
+          this.buttonDisabled = true;
+          this.pollingStatusAndLogs(tempQBs[0].id, true)
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {}
+    })
+  }
+
+  getTemplateIDs(): void {
+    this.subscriptionGetTemplateIDs?.unsubscribe();
+    this.subscriptionGetTemplateIDs = this.qualityReportService.getReportTemplates().subscribe({
+      next: (templateList:string[]) => {
+        templateList.forEach((template) => {
+          this.templateIDs.push({value: template, display: template})
+        })
+        this.templateIDs.push({value: "custom", display:"Eigenes Template"})
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {}
+    })
+  }
+
+  cancelQB(): void {
+    window.clearInterval(this.intervall);
+    this.buttonDisabled = false;
+    this.qbStatus = QBStatus.EMPTY;
+  }
+
+  downloadTemplate(): void {
+    window.location.href = this.reportUrl + 'report-template?template-id=' + this.selectedTemplate;
+  }
 }
