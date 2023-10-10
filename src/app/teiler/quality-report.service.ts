@@ -78,8 +78,8 @@ export class QualityReportService extends EmbeddedTeilerApp {
   getReports(): Observable<QualityReports[]> {
     return this.http.get<QualityReports[]>(this.getReporterURL()+"/reports-list" );
   }
-  getReporterURL(): string {
-    return environment.config.TEILER_REPORTER_URL;
+  getReporterURL(): string | undefined {
+    return this.backendUrl;
   }
   getRunningReports(): Observable<QualityReports[]> {
     return this.http.get<QualityReports[]>(this.getReporterURL()+"/running-reports" );
