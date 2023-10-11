@@ -54,7 +54,7 @@
     <unit id="3840739858389961694">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:22</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:49</note>
       </notes>
       <segment>
         <source>Zeitstempel</source>
@@ -215,7 +215,6 @@
         <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
         <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
         <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
       </notes>
       <segment>
         <source>Suche</source>
@@ -223,7 +222,7 @@
     </unit>
     <unit id="5368569711274766465">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:16</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:18</note>
       </notes>
       <segment>
         <source>Keine Validierung vornehmen. Das erzeugte Dokument kann deshalb Einträge enthalten, die nicht konform zu den MDR hinterlegten Validierungsinformationen sind.</source>
@@ -231,7 +230,7 @@
     </unit>
     <unit id="4823182825482999580">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:19</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:21</note>
       </notes>
       <segment>
         <source>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden nicht in das erzeugte Dokument aufgenommen.</source>
@@ -239,7 +238,7 @@
     </unit>
     <unit id="469909917545407381">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:22</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:24</note>
       </notes>
       <segment>
         <source>Werte, die nicht konform zu den im MDR hinterlegten Validierungsinformationen sind, werden im erzeugten Dokument orange hinterlegt.</source>
@@ -247,7 +246,7 @@
     </unit>
     <unit id="4885766104050604377">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:26</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:28</note>
       </notes>
       <segment>
         <source> Anfrage erneut ausfüllen</source>
@@ -255,7 +254,7 @@
     </unit>
     <unit id="7644487670693293606">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:28</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:30</note>
       </notes>
       <segment>
         <source>Ergebnisliste erzeugen (Excel)</source>
@@ -263,7 +262,7 @@
     </unit>
     <unit id="3047453899515192138">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:29</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:31</note>
       </notes>
       <segment>
         <source>Ergebnisliste erzeugen (CSV)</source>
@@ -271,23 +270,23 @@
     </unit>
     <unit id="5425384892297548117">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:30</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:32</note>
       </notes>
       <segment>
         <source>Nur Anzahl abfragen</source>
       </segment>
     </unit>
-    <unit id="9179449244500388247">
+    <unit id="1022348842509737827">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:32</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:35,36</note>
       </notes>
       <segment>
-        <source>Bereits beantwortet</source>
+        <source>Bereits beantwortet </source>
       </segment>
     </unit>
     <unit id="6275450215073900352">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:35</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:39</note>
       </notes>
       <segment>
         <source>Archivieren</source>
@@ -295,7 +294,7 @@
     </unit>
     <unit id="7034201329736814695">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:45</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:50</note>
       </notes>
       <segment>
         <source>Der Anfragesteller hat keinen Beschreibungstext eingegeben.</source>
@@ -303,7 +302,7 @@
     </unit>
     <unit id="118024421195624369">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:47</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:53</note>
       </notes>
       <segment>
         <source>Expóse herunterladen</source>
@@ -311,7 +310,7 @@
     </unit>
     <unit id="7814399578676262996">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:50</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:56</note>
       </notes>
       <segment>
         <source>Keine Dokumente angehängt</source>
@@ -319,7 +318,7 @@
     </unit>
     <unit id="8953033926734869941">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:56</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:62</note>
       </notes>
       <segment>
         <source>Name</source>
@@ -327,7 +326,7 @@
     </unit>
     <unit id="681866609203884162">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:57</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:63</note>
       </notes>
       <segment>
         <source>Telefonnummer</source>
@@ -335,7 +334,7 @@
     </unit>
     <unit id="8115083664628466958">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:58</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:64</note>
       </notes>
       <segment>
         <source>E-Mail</source>
@@ -343,7 +342,7 @@
     </unit>
     <unit id="2598039109801317313">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:59</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:65</note>
       </notes>
       <segment>
         <source>Einrichtung</source>
@@ -351,7 +350,7 @@
     </unit>
     <unit id="422776820557165963">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:62</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:68</note>
       </notes>
       <segment>
         <source>Beantwortet am</source>
@@ -359,7 +358,7 @@
     </unit>
     <unit id="4220537191485568025">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:62</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:68</note>
       </notes>
       <segment>
         <source>Antwort</source>
@@ -367,7 +366,7 @@
     </unit>
     <unit id="789555460980371940">
       <notes>
-        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:74</note>
+        <note category="location">src/app/embedded/inquiries/inquiry/inquiry.component.html:80</note>
       </notes>
       <segment>
         <source>Suchkriterien</source>
@@ -376,7 +375,6 @@
     <unit id="3914344858413020487">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:4</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:9</note>
       </notes>
       <segment>
         <source>Startzeit</source>
@@ -385,7 +383,6 @@
     <unit id="3206897127516304134">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:5</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:9</note>
       </notes>
       <segment>
         <source>Verstrichene Laufzeit</source>
@@ -394,7 +391,6 @@
     <unit id="2869773054150578799">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:6</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:9</note>
       </notes>
       <segment>
         <source>Restlaufzeit</source>
@@ -404,7 +400,6 @@
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:14</note>
         <note category="location">src/app/embedded/pop-ups/dialog-uploads/dialog-uploads.component.html:13</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:14</note>
         <note category="location">src/app/embedded/uploads/uploads.component.html:74</note>
       </notes>
       <segment>
@@ -439,26 +434,90 @@
     <unit id="8960936367812691745">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:4</note>
-        <note category="location">src/app/teiler/quality-report.service.ts:13</note>
+        <note category="location">src/app/teiler/quality-report.service.ts:22</note>
       </notes>
       <segment>
         <source>Qualitätsbericht</source>
       </segment>
     </unit>
-    <unit id="2551151927873073463">
+    <unit id="4894648697918868112">
       <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:7</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:14</note>
       </notes>
       <segment>
-        <source>Generieren</source>
+        <source>abbrechen</source>
       </segment>
     </unit>
-    <unit id="2724055831234181057">
+    <unit id="2198706399477955343">
       <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:34</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:15</note>
       </notes>
       <segment>
-        <source>Version</source>
+        <source>neuen QB generieren</source>
+      </segment>
+    </unit>
+    <unit id="3600220182293352906">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
+      </notes>
+      <segment>
+        <source>Template auswählen und neuen QB generieren</source>
+      </segment>
+    </unit>
+    <unit id="7851488990126524246">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
+      </notes>
+      <segment>
+        <source>Template herunterladen</source>
+      </segment>
+    </unit>
+    <unit id="7502293677528705372">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:26</note>
+      </notes>
+      <segment>
+        <source>QB wird erstellt ...</source>
+      </segment>
+    </unit>
+    <unit id="5122976901342026593">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
+      </notes>
+      <segment>
+        <source>QB wurde erfolgreich erstellt.</source>
+      </segment>
+    </unit>
+    <unit id="3585007716010513758">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
+      </notes>
+      <segment>
+        <source>QB wurde nicht gefunden.</source>
+      </segment>
+    </unit>
+    <unit id="5070539244098019882">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
+      </notes>
+      <segment>
+        <source>Ein Fehler ist aufgetreten.</source>
+      </segment>
+    </unit>
+    <unit id="2348254711380854005">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
+      </notes>
+      <segment>
+        <source>Template-ID</source>
+      </segment>
+    </unit>
+    <unit id="2981219928115418649">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:59</note>
+      </notes>
+      <segment>
+        <source>Link</source>
       </segment>
     </unit>
     <unit id="6445536054910475490">
@@ -736,7 +795,7 @@
     </unit>
     <unit id="1447758518246009372">
       <notes>
-        <note category="location">src/app/teiler/quality-report.service.ts:10</note>
+        <note category="location">src/app/teiler/quality-report.service.ts:19</note>
       </notes>
       <segment>
         <source>Qualitätsberichte erzeugen und ansehen</source>

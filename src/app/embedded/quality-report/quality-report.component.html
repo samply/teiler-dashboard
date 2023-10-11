@@ -15,12 +15,9 @@
       <button class="generate-button" mat-raised-button color="primary" (click)=generateQB() [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && !buttonDisabled) }" i18n>neuen QB generieren</button>
       <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
         <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
-        <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled" i18n>
-          <!--<mat-icon fontIcon="download" i18n>Herunterladen</mat-icon>
-          <span class="file-upload-text">Template hochladen</span>-->
-          Template auswählen und neuen QB generieren
+        <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled">
+          <span i18n>Template auswählen und neuen QB generieren</span>
         </button>
-        <!--<div class="file-name">{{ fileName }}</div>-->
       </div>
       <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
 
