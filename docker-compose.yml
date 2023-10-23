@@ -24,6 +24,9 @@ services:
       TEILER_ORCHESTRATOR_URL: "http://localhost:9000"
       TEILER_DASHBOARD_HTTP_RELATIVE_PATH: ""
       TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH: ""
+      REPORTER_DEFAULT_TEMPLATE_ID: "ccp-qb"
+      EXPORTER_DEFAULT_TEMPLATE_ID: "ccp"
+
 
 #  teiler-backend :
 #    image: teiler-backend
