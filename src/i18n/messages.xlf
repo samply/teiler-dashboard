@@ -520,6 +520,14 @@
         <source>Link</source>
       </segment>
     </unit>
+    <unit id="8722084746247976035">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.ts:237</note>
+      </notes>
+      <segment>
+        <source>Eigenes Template</source>
+      </segment>
+    </unit>
     <unit id="6445536054910475490">
       <notes>
         <note category="location">src/app/embedded/uploads/uploads.component.html:5</note>
