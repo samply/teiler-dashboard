@@ -1,0 +1,43 @@
+.main{
+  width: 80%;
+  margin-left:auto;
+  margin-right:auto;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  border-bottom: 3px solid black;
+  margin-bottom: 20px;
+}
+h2{
+  text-align: left;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: 30px;
+  margin-top: 1.5%;
+}
+table{
+  text-align: center;
+  width: 100%;
+  margin-top: 2%;
+}
+.mat-mdc-row .mat-mdc-cell {
+  cursor: pointer;
+}
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: red;
+}
+mat-paginator{
+  opacity: 0.75;
+}
+.tablePatients {
+  margin-top: 7em;
+}
+@media(max-width : 1400px){
+  .main{
+    width: 80%;
+    margin-left:auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
