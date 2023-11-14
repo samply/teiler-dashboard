@@ -93,17 +93,30 @@ export class TeilerService {
     let teilerAppRoles = new Set(teilerApp.roles);
     if (teilerAppRoles.size == 0) {
       isAuthorized = true;
-    } else if (teilerAppRoles.has(TeilerRole.TEILER_PUBLIC) && this.authService.getRoles().length == 0) {
+    //} else if (teilerAppRoles.has(TeilerRole.TEILER_PUBLIC) && this.authService.getRoles().length == 0) {
+    } else if (teilerAppRoles.has(TeilerRole.TEILER_PUBLIC)) {
       isAuthorized = true;
     } else {
-      for (let role of this.authService.getRoles()) {
-        if (teilerAppRoles.has(TeilerRole[role as keyof typeof TeilerRole])) {
+      //for (let role of this.authService.getRoles()) {
+      for (let role of this.authService.getGroups()) {
+        let mappedRole = this.fetchRoleFromEnvironment(role);
+        if (mappedRole != undefined && teilerAppRoles.has(mappedRole)) {
           return true;
         }
       }
     }
 
     return isAuthorized;
+  }
+
+  fetchRoleFromEnvironment(role: string): TeilerRole | undefined {
+    if (role === environment.config.TEILER_USER) {
+      return TeilerRole.TEILER_USER;
+    } else if (role === environment.config.TEILER_ADMIN) {
+      return TeilerRole.TEILER_ADMIN;
+    } else {
+      return undefined; // Role doesn't match any enum values
+    }
   }
 
   addTeilerDashboardApps(teilerDashboardApps: TeilerApp[]) {

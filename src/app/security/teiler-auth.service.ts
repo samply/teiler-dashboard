@@ -31,4 +31,17 @@ export class TeilerAuthService {
     return this.keycloakService.loadUserProfile();
   }
 
+  public getGroups(): string[] {
+    const keycloakInstance = this.keycloakService.getKeycloakInstance();
+    const result = keycloakInstance?.tokenParsed?.['groups'] || [];
+
+    return result.map((group: string) => {
+      if (typeof group === 'string' && group.charAt(0) === '/') {
+        return group.substring(1); // Remove the first character if it's '/'
+      }
+      return group;
+    });
+  }
+
+
 }
