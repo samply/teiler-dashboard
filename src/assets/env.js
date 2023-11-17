@@ -8,6 +8,7 @@
     "KEYCLOAK_URL": "https://login.verbis.dkfz.de",
     "KEYCLOAK_REALM": "test-realm-01",
     "KEYCLOAK_CLIENT_ID": "bridgehead-test",
+    "KEYCLOAK_TOKEN_GROUP": "groups",
     "TEILER_ADMIN_NAME": "Max Mustermann",
     "TEILER_ADMIN_EMAIL": "max.mustermann@teiler-example.com",
     "TEILER_ADMIN_PHONE": "+49 123 456789",

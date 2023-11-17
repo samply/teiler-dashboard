@@ -55,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gitignore
 - Default template variable for exporter and reporter
 - Central Keycloak configuration based on groups
+- KEYCLOAK_TOKEN_GROUP
 
 ## Fixed
 - Update teiler apps in sidebar
