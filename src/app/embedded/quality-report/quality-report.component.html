@@ -7,19 +7,19 @@
     <div class="button-status">
       <mat-form-field class="template_dropdown">
         <mat-label>Template</mat-label>
-        <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" [disabled]="buttonDisabled">
+        <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" [disabled]="buttonDisabled" (change)="changeTemplateSelection()">
           <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
         </select>
       </mat-form-field>
       <button class="cancel-button" mat-raised-button color="primary" (click)=cancelQB() [ngClass]="{ 'visible-button': buttonDisabled }" i18n>abbrechen</button>
       <button class="generate-button" mat-raised-button color="primary" (click)=generateQB() [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && !buttonDisabled) }" i18n>neuen QB generieren</button>
-      <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
+      <div class="upload-button" [ngClass]="{ 'visible': (selectedTemplate === 'custom' && !buttonDisabled) }">
         <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
         <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled">
           <span i18n>Template auswählen und neuen QB generieren</span>
         </button>
       </div>
-      <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
+      <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" [disabled]="buttonDisabled" i18n>Template herunterladen</button>
 
       <div class="status">
         <ng-container *ngIf="qbStatus === QBStatus.EMPTY"><span class="status-empty"></span></ng-container>

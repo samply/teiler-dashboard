@@ -1,11 +1,10 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-
-import {DatePipe} from '@angular/common';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {QualityReportService, reportLog} from "../../teiler/quality-report.service";
 import {Subscription} from "rxjs";
+import {environment} from "../../../environments/environment";
 
 export interface QualityReports {
   id: string;
@@ -59,7 +58,7 @@ export class QualityReportComponent implements OnInit, OnDestroy {
   buttonDisabled: boolean = false;
   fileName: string | undefined;
   importTemplate: string = "";
-  selectedTemplate: string = "ccp";
+  selectedTemplate: string = environment.config.REPORTER_DEFAULT_TEMPLATE_ID;
   templateIDs: Templates[] = []
 
   constructor(private route: ActivatedRoute, private qualityReportService: QualityReportService) {
@@ -104,15 +103,17 @@ export class QualityReportComponent implements OnInit, OnDestroy {
     this.buttonDisabled = true;
     this.subscriptionGenerateQB = this.qualityReportService.generateQB(this.selectedTemplate, this.importTemplate).subscribe({
       next: (response:QBResponse) => {
-        const url = new URL(response.responseUrl)
+        const url = new URL(response.responseUrl);
         const id = url.searchParams.get("report-id");
-        this.qbStatus = QBStatus.RUNNING
+        this.qbStatus = QBStatus.RUNNING;
         if (id) {
           this.pollingStatusAndLogs(id, false);
         }
       },
       error: (error) => {
         console.log(error);
+        this.buttonDisabled = false;
+        this.qbStatus = QBStatus.ERROR;
       },
       complete: () => {}
     });
@@ -233,7 +234,7 @@ export class QualityReportComponent implements OnInit, OnDestroy {
         templateList.forEach((template) => {
           this.templateIDs.push({value: template, display: template})
         })
-        this.templateIDs.push({value: "custom", display:"Eigenes Template"})
+        this.templateIDs.push({value: "custom", display:$localize`Eigenes Template`})
       },
       error: (error) => {
         console.log(error);
@@ -250,5 +251,9 @@ export class QualityReportComponent implements OnInit, OnDestroy {
 
   downloadTemplate(): void {
     window.location.href = this.reportUrl + 'report-template?template-id=' + this.selectedTemplate;
+  }
+
+  changeTemplateSelection(): void {
+    this.qbStatus = QBStatus.EMPTY;
   }
 }

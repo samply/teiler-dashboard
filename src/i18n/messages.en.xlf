@@ -60,6 +60,7 @@
     <unit id="3840739858389961694">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:22</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:9</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:49</note>
       </notes>
       <segment>
@@ -74,6 +75,115 @@
       <segment>
         <source>Nachricht</source>
         <target>Message</target>
+      </segment>
+    </unit>
+    <unit id="6923600030472929661">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Exporter Ausführungen</source>
+		<source>Exporter Executions</source>
+      </segment>
+    </unit>
+    <unit id="2876674083968644556">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:10</note>
+      </notes>
+      <segment>
+        <source>ausgeführt am</source>
+		<source>executed at</source>
+      </segment>
+    </unit>
+    <unit id="5611592591303869712">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:15</note>
+      </notes>
+      <segment>
+        <source>Status</source>
+		<source>status</source>
+      </segment>
+    </unit>
+    <unit id="2348254711380854005">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:20</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
+      </notes>
+      <segment>
+        <source>Template-ID</source>
+		<source>template-ID</source>
+      </segment>
+    </unit>
+    <unit id="6525583106874020108">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:25</note>
+      </notes>
+      <segment>
+        <source>Ausgabeformat</source>
+		<source>output format</source>
+      </segment>
+    </unit>
+    <unit id="1625247474442792703">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:46</note>
+      </notes>
+      <segment>
+        <source>Patienten-ID</source>
+		<source>Patient-ID</source>
+      </segment>
+    </unit>
+    <unit id="2460741640340645221">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:51</note>
+      </notes>
+      <segment>
+        <source>Geschlecht</source>
+		<source>gender</source>
+      </segment>
+    </unit>
+    <unit id="8158385069489789677">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:56</note>
+      </notes>
+      <segment>
+        <source>Geburtsdatum</source>
+		<source>birthday</source>
+      </segment>
+    </unit>
+    <unit id="1869993821535292461">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:61</note>
+      </notes>
+      <segment>
+        <source>Vitalstatus</source>
+		<source>vital status</source>
+      </segment>
+    </unit>
+    <unit id="1812217803963994414">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Exporter Anfragen</source>
+		<source>Exporter Queries</source>
+      </segment>
+    </unit>
+    <unit id="4109205891084963566">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:14</note>
+      </notes>
+      <segment>
+        <source>Anfrage</source>
+		<source>Query</source>
+      </segment>
+    </unit>
+    <unit id="7513076467032912668">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:19</note>
+      </notes>
+      <segment>
+        <source>Format</source>
+		<source>format</source>
       </segment>
     </unit>
     <unit id="8332823385826673272">
@@ -239,7 +349,6 @@
         <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
         <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
         <note category="location">src/app/embedded/inquiries/inquiries.component.html:8</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
       </notes>
       <segment>
         <source>Suche</source>
@@ -420,7 +529,6 @@
     <unit id="3914344858413020487">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:4</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:9</note>
       </notes>
       <segment>
         <source>Startzeit</source>
@@ -430,7 +538,6 @@
     <unit id="3206897127516304134">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:5</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:9</note>
       </notes>
       <segment>
         <source>Verstrichene Laufzeit</source>
@@ -440,7 +547,6 @@
     <unit id="2869773054150578799">
       <notes>
         <note category="location">src/app/embedded/pop-ups/dialog-quali/dialog-quali.component.html:6</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:9</note>
       </notes>
       <segment>
         <source>Restlaufzeit</source>
@@ -566,15 +672,6 @@
       <segment>
         <source>Ein Fehler ist aufgetreten.</source>
 		<target>failed</target>
-      </segment>
-    </unit>
-    <unit id="2348254711380854005">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
-      </notes>
-      <segment>
-        <source>Template-ID</source>
-		<target>template-ID</target>
       </segment>
     </unit>
     <unit id="2981219928115418649">
