@@ -54,6 +54,7 @@
     <unit id="3840739858389961694">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:22</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:9</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:49</note>
       </notes>
       <segment>
@@ -66,6 +67,103 @@
       </notes>
       <segment>
         <source>Nachricht</source>
+      </segment>
+    </unit>
+    <unit id="3961458998482856934">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Exporter Ausführungen</source>
+      </segment>
+    </unit>
+    <unit id="2876674083968644556">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:10</note>
+      </notes>
+      <segment>
+        <source>ausgeführt am</source>
+      </segment>
+    </unit>
+    <unit id="5611592591303869712">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:15</note>
+      </notes>
+      <segment>
+        <source>Status</source>
+      </segment>
+    </unit>
+    <unit id="2348254711380854005">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:20</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
+      </notes>
+      <segment>
+        <source>Template-ID</source>
+      </segment>
+    </unit>
+    <unit id="6525583106874020108">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:25</note>
+      </notes>
+      <segment>
+        <source>Ausgabeformat</source>
+      </segment>
+    </unit>
+    <unit id="1625247474442792703">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:46</note>
+      </notes>
+      <segment>
+        <source>Patienten-ID</source>
+      </segment>
+    </unit>
+    <unit id="2460741640340645221">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:51</note>
+      </notes>
+      <segment>
+        <source>Geschlecht</source>
+      </segment>
+    </unit>
+    <unit id="8158385069489789677">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:56</note>
+      </notes>
+      <segment>
+        <source>Geburtsdatum</source>
+      </segment>
+    </unit>
+    <unit id="1869993821535292461">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:61</note>
+      </notes>
+      <segment>
+        <source>Vitalstatus</source>
+      </segment>
+    </unit>
+    <unit id="6929842044884591868">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Exporter Anfragen</source>
+      </segment>
+    </unit>
+    <unit id="7402705001602102733">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:14</note>
+      </notes>
+      <segment>
+        <source>Anfrage</source>
+      </segment>
+    </unit>
+    <unit id="7513076467032912668">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:19</note>
+      </notes>
+      <segment>
+        <source>Format</source>
       </segment>
     </unit>
     <unit id="8332823385826673272">
@@ -502,14 +600,6 @@
       </notes>
       <segment>
         <source>Ein Fehler ist aufgetreten.</source>
-      </segment>
-    </unit>
-    <unit id="2348254711380854005">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
-      </notes>
-      <segment>
-        <source>Template-ID</source>
       </segment>
     </unit>
     <unit id="2981219928115418649">
