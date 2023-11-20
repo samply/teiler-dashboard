@@ -2,6 +2,111 @@
   <div class="title">
     <h2 i18n>Exporter Ausführungen</h2>
   </div>
+  <div class="generate-div">
+    <div class="query-input">
+      <div class="input-left">
+        <mat-form-field appearance="outline" class="query-label">
+          <mat-label>Label</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="queryLabel"
+            (ngModelChange)="generateButtonStatus()"
+          />
+        </mat-form-field>
+        <div>
+          <div>Beschreibung</div>
+          <textarea
+            class="query-textfield"
+            name="query-textfield"
+            rows="6"
+            cols="40"
+            [(ngModel)]="queryDescription"
+            (ngModelChange)="generateButtonStatus()"
+          ></textarea>
+        </div>
+      </div>
+      <div>
+        <div>Query</div>
+        <textarea
+          class="query-textfield"
+          name="query-textfield"
+          rows="12"
+          cols="50"
+          [(ngModel)]="query"
+          (ngModelChange)="generateButtonStatus()"
+        ></textarea>
+      </div>
+      <div class="query-input-right">
+        <div class="dropdowns">
+          <div class="dropdowns-left">
+            <mat-form-field class="queryformat_dropdown">
+              <mat-label>Query-Format</mat-label>
+              <select class="queryformat-select" matNativeControl required [(ngModel)]="selectedQueryFormat" >
+                <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
+              </select>
+            </mat-form-field>
+            <mat-form-field class="outputformat_dropdown">
+              <mat-label>Ausgabeformat</mat-label>
+              <select class="outputformat-select" matNativeControl required [(ngModel)]="selectedOutputFormat" >
+                <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
+              </select>
+            </mat-form-field>
+          </div>
+          <div class="dropdowns-right">
+            <mat-form-field appearance="outline" class="query-expiration-date">
+              <mat-label>Ablaufdatum</mat-label>
+              <input
+                matInput
+                [matDatepicker]="dateStartPicker"
+                [(ngModel)]="expirationDate"
+              />
+              <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
+              <mat-datepicker #dateStartPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="template_dropdown">
+              <mat-label>Template</mat-label>
+              <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" >
+                <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
+              </select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="button-status">
+
+          <button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>neue Query generieren</button>
+          <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
+            <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
+            <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled">
+              <span i18n>Template auswählen und neue Query generieren</span>
+            </button>
+          </div>
+          <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="status">
+      <ng-container *ngIf="exportStatus === ExportStatus.EMPTY"><span class="status-empty"></span></ng-container>
+      <ng-container *ngIf="exportStatus === ExportStatus.RUNNING"><span class="status-running" i18n>Report wird erstellt ...</span></ng-container>
+      <ng-container *ngIf="exportStatus === ExportStatus.OK"><span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span></ng-container>
+      <ng-container *ngIf="exportStatus === ExportStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span></ng-container>
+      <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span></ng-container>
+    </div>
+
+    <div class="log-div">
+      <div class="log-exporter" [ngClass]="{ 'visible': buttonDisabled }">
+        <div class="log-header">Exporter Log:</div>
+        <div id="exportDiv" class="log-reports"><div *ngFor="let log of exportLog[1]?.lastLines">{{log}}</div></div>
+      </div>
+    </div>
+
+  </div>
+
+
+
   <div>
     <div class="tablex">
       <table mat-table [dataSource]="dataSourceExecutions" class="mat-elevation-z8">
@@ -27,7 +132,7 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumnsExecutions"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumnsExecutions;" (click)="openExecution(row)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsExecutions;" (click)="loadExecutionData(row)"></tr>
       </table>
     </div>
     <div class="paginator">
@@ -38,33 +143,93 @@
       ></mat-paginator>
     </div>
   </div>
-  <div>
-    <div *ngIf="dataSourcePatients.data.length > 0" class="tablePatients">
-      <table mat-table [dataSource]="dataSourcePatients" class="mat-elevation-z8">
 
-        <ng-container matColumnDef="Patient-ID">
-          <th mat-header-cell *matHeaderCellDef><div i18n>Patienten-ID</div> </th>
-          <td mat-cell *matCellDef="let element"> {{element['Patient-ID'] }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Geschlecht">
-          <th mat-header-cell *matHeaderCellDef><div i18n>Geschlecht</div> </th>
-          <td mat-cell *matCellDef="let element"> {{element.Geschlecht}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Geburtsdatum">
-          <th mat-header-cell *matHeaderCellDef i18n>Geburtsdatum</th>
-          <td mat-cell *matCellDef="let element" > {{element.Geburtsdatum}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Vitalstatus">
-          <th mat-header-cell *matHeaderCellDef i18n>Vitalstatus</th>
-          <td mat-cell *matCellDef="let element" > {{element.Vitalstatus}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumnsPatients"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumnsPatients;"></tr>
-      </table>
+  <div class="patient-box">
+    <div *ngIf="dataSourcePatients.data.length > 0" class="patient-box-line">
+      <ng-container *ngFor="let column of displayedColumnsPatients">
+        <span></span>
+      </ng-container>
     </div>
+  </div>
+  <div class="accordion">
+    <!--<button mat-raised-button (click)="switchToPatient()"> Patienten </button>
+    <button mat-raised-button (click)="switchToDiag()"> Diagnosen </button>-->
+
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Patients
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="dataSourcePatients.data.length > 0" class="tablePatients">
+          <section class="patient-container mat-elevation-z8" tabindex="0">
+          <table mat-table [dataSource]="dataSourcePatients" class="mat-elevation-z8">
+
+            <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumnsPatients">
+              <ng-container *ngIf="column === '#'">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="toggleCheckbox($event, row)"
+                                [checked]="selection.isSelected(row)"
+                  >
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+              <ng-container *ngIf="column !== '#'">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+              </ng-container>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsPatients"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsPatients;"></tr>
+          </table>
+          </section>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Diagnosen
+          </mat-panel-title>
+          <mat-panel-description>
+            <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="dataSourceDiagnosis.data.length > 0" class="tablePatients">
+          <section class="patient-container mat-elevation-z8" tabindex="0">
+            <table mat-table [dataSource]="dataSourceDiagnosis" class="mat-elevation-z8">
+
+              <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumnsDiagnosis">
+                <ng-container *ngIf="column === '#'">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="$event ? selection.toggle(row) : null"
+                                  [checked]="selection.isSelected(row)"
+                    >
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="column !== '#'">
+                  <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+                </ng-container>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsDiagnosis"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsDiagnosis;"></tr>
+            </table>
+          </section>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
 </div>

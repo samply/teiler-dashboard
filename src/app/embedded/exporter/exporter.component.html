@@ -2,6 +2,97 @@
   <div class="title">
     <h2 i18n>Exporter Anfragen</h2>
   </div>
+  <div class="generate-div">
+    <div class="query-input">
+      <div class="input-left">
+        <mat-form-field appearance="outline" class="query-label">
+          <mat-label>Label</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="queryLabel"
+            (ngModelChange)="generateButtonStatus()"
+          />
+        </mat-form-field>
+        <div>
+          <div>Beschreibung</div>
+          <textarea
+            class="query-textfield"
+            name="query-textfield"
+            rows="6"
+            cols="40"
+            [(ngModel)]="queryDescription"
+            (ngModelChange)="generateButtonStatus()"
+          ></textarea>
+        </div>
+      </div>
+      <div>
+        <div>Query</div>
+        <textarea
+          class="query-textfield"
+          name="query-textfield"
+          rows="12"
+          cols="50"
+          [(ngModel)]="query"
+          (ngModelChange)="generateButtonStatus()"
+        ></textarea>
+      </div>
+      <div class="query-input-right">
+        <div class="dropdowns">
+          <div class="dropdowns-left">
+            <mat-form-field class="queryformat_dropdown">
+              <mat-label>Query-Format</mat-label>
+              <select class="queryformat-select" matNativeControl required [(ngModel)]="selectedQueryFormat" >
+                <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
+              </select>
+            </mat-form-field>
+            <mat-form-field class="outputformat_dropdown">
+              <mat-label>Ausgabeformat</mat-label>
+              <select class="outputformat-select" matNativeControl required [(ngModel)]="selectedOutputFormat" >
+                <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
+              </select>
+            </mat-form-field>
+          </div>
+          <div class="dropdowns-right">
+            <mat-form-field appearance="outline" class="query-expiration-date">
+              <mat-label>Ablaufdatum</mat-label>
+              <input
+                matInput
+                [matDatepicker]="dateStartPicker"
+                [(ngModel)]="expirationDate"
+              />
+              <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
+              <mat-datepicker #dateStartPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="template_dropdown">
+              <mat-label>Template</mat-label>
+              <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" >
+                <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
+              </select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="button-status">
+
+          <button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>neue Query generieren</button>
+          <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
+            <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
+            <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled">
+              <span i18n>Template auswählen und neue Query generieren</span>
+            </button>
+          </div>
+          <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+  </div>
+
   <div class="tablex">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

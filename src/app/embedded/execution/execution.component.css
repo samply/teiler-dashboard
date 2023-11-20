@@ -29,8 +29,12 @@ table{
 mat-paginator{
   opacity: 0.75;
 }
-.tablePatients {
+.accordion {
   margin-top: 7em;
+}
+.patient-container {
+  height: 400px;
+  overflow: auto;
 }
 @media(max-width : 1400px){
   .main{

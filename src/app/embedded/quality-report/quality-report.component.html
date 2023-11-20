@@ -7,25 +7,25 @@
     <div class="button-status">
       <mat-form-field class="template_dropdown">
         <mat-label>Template</mat-label>
-        <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" [disabled]="buttonDisabled" (change)="changeTemplateSelection()">
+        <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" [disabled]="buttonDisabled">
           <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
         </select>
       </mat-form-field>
       <button class="cancel-button" mat-raised-button color="primary" (click)=cancelQB() [ngClass]="{ 'visible-button': buttonDisabled }" i18n>abbrechen</button>
-      <button class="generate-button" mat-raised-button color="primary" (click)=generateQB() [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && !buttonDisabled) }" i18n>neuen QB generieren</button>
-      <div class="upload-button" [ngClass]="{ 'visible': (selectedTemplate === 'custom' && !buttonDisabled) }">
+      <button class="generate-button" mat-raised-button color="primary" (click)=generateQB() [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && !buttonDisabled) }" i18n>neuen Report generieren</button>
+      <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
         <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
         <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled">
-          <span i18n>Template auswählen und neuen QB generieren</span>
+          <span i18n>Template auswählen und neuen Report generieren</span>
         </button>
       </div>
-      <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" [disabled]="buttonDisabled" i18n>Template herunterladen</button>
+      <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
 
       <div class="status">
         <ng-container *ngIf="qbStatus === QBStatus.EMPTY"><span class="status-empty"></span></ng-container>
-        <ng-container *ngIf="qbStatus === QBStatus.RUNNING"><span class="status-running" i18n>QB wird erstellt ...</span></ng-container>
-        <ng-container *ngIf="qbStatus === QBStatus.OK"><span class="status-ok" i18n>QB wurde erfolgreich erstellt.</span></ng-container>
-        <ng-container *ngIf="qbStatus === QBStatus.NOT_FOUND"><span class="status-not-found" i18n>QB wurde nicht gefunden.</span></ng-container>
+        <ng-container *ngIf="qbStatus === QBStatus.RUNNING"><span class="status-running" i18n>Report wird erstellt ...</span></ng-container>
+        <ng-container *ngIf="qbStatus === QBStatus.OK"><span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span></ng-container>
+        <ng-container *ngIf="qbStatus === QBStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span></ng-container>
         <ng-container *ngIf="qbStatus === QBStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span></ng-container>
       </div>
     </div>
@@ -57,7 +57,7 @@
 
       <ng-container matColumnDef="link">
         <th mat-header-cell *matHeaderCellDef i18n>Link</th>
-        <td mat-cell *matCellDef="let element" > <a target="_blank" href = "{{reportUrl + 'report?report-id=' + element.id}}"> Download </a></td>
+        <td mat-cell *matCellDef="let element" > <a class="download-link" target="_blank" href = "{{reportUrl + 'report?report-id=' + element.id}}"> Download </a></td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

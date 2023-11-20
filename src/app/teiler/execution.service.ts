@@ -25,11 +25,17 @@ export class ExecutionService extends EmbeddedTeilerApp {
   }
 
   getExecutionList(queryID?:number): Observable<ExporterExecutions[]> {
-    return this.http.get<ExporterExecutions[]>(this.getExporterURL() + "/query-executions", {headers: this.httpHeaders});
+    if (queryID) {
+      return this.http.get<ExporterExecutions[]>(this.getExporterURL() + "/query-executions?query-id=" + queryID, {headers: this.httpHeaders});
+    } else {
+      return this.http.get<ExporterExecutions[]>(this.getExporterURL() + "/query-executions", {headers: this.httpHeaders});
+    }
   }
-
   getExecutionData(execID:number): Observable<any[]> {
     return this.http.get<any[]>(this.getExporterURL() + "/response?merge-files=true&in-body=true&query-execution-id=" + execID, {headers: this.httpHeaders});
+  }
+  getTemplateGraph(execID: number): Observable<any> {
+    return this.http.get<any[]>(this.getExporterURL() + "/template-graph?query-execution-id=" + execID);
   }
   getExporterURL(): string | undefined {
     return this.backendUrl;

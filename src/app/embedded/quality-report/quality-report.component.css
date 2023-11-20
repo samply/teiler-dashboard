@@ -116,6 +116,9 @@ table{
   height: 55px;
   padding: 5px;
 }
+.generate-button {
+  background-color: #2BCDD563 !important;
+}
 .download-button {
   margin-left: 2%;
 }
@@ -127,6 +130,7 @@ table{
   color: black;
   display: flex;
   padding: 5px;
+  background-color: #2BCDD563 !important;
 }
 .file-upload-text {
   margin: 8px 5px;
@@ -145,6 +149,10 @@ mat-paginator{
 }
 .template-select {
   margin-top: 5px;
+}
+.download-link {
+  font-weight: bold;
+  color: #0AADB5;
 }
 @media(max-width : 1400px){
   .search{

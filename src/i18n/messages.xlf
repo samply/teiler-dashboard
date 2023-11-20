@@ -546,20 +546,20 @@
         <source>abbrechen</source>
       </segment>
     </unit>
-    <unit id="2198706399477955343">
+    <unit id="5328032877550100106">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:15</note>
       </notes>
       <segment>
-        <source>neuen QB generieren</source>
+        <source>neuen Report generieren</source>
       </segment>
     </unit>
-    <unit id="3600220182293352906">
+    <unit id="3271337664865371216">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
       </notes>
       <segment>
-        <source>Template auswählen und neuen QB generieren</source>
+        <source>Template auswählen und neuen Report generieren</source>
       </segment>
     </unit>
     <unit id="7851488990126524246">
@@ -570,28 +570,28 @@
         <source>Template herunterladen</source>
       </segment>
     </unit>
-    <unit id="7502293677528705372">
+    <unit id="3299498505798542378">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:26</note>
       </notes>
       <segment>
-        <source>QB wird erstellt ...</source>
+        <source>Report wird erstellt ...</source>
       </segment>
     </unit>
-    <unit id="5122976901342026593">
+    <unit id="5111784551733870059">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
       </notes>
       <segment>
-        <source>QB wurde erfolgreich erstellt.</source>
+        <source>Report wurde erfolgreich erstellt.</source>
       </segment>
     </unit>
-    <unit id="3585007716010513758">
+    <unit id="961812481581959030">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
       </notes>
       <segment>
-        <source>QB wurde nicht gefunden.</source>
+        <source>Report wurde nicht gefunden.</source>
       </segment>
     </unit>
     <unit id="5070539244098019882">
