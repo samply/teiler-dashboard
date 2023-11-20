@@ -21,8 +21,8 @@ export class QualityReportService extends EmbeddedTeilerApp {
   iconSourceUrl: string | undefined = undefined;
   title: string = $localize`Qualitätsbericht`;
   roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
-  httpHeaders: HttpHeaders = new HttpHeaders().append("x-api-key", environment.config.EXPORTER_API_KEY);
-  httpHeadersXML: HttpHeaders = new HttpHeaders().append("x-api-key", environment.config.EXPORTER_API_KEY).append("Content-Type",  "application/xml");
+  httpHeaders: HttpHeaders = new HttpHeaders();
+  httpHeadersXML: HttpHeaders = new HttpHeaders().append("Content-Type",  "application/xml");
   constructor(router: Router, private http: HttpClient) {
     super(EmbeddedTeilerApps.QUALITY_REPORT, router);
   }
