@@ -7,7 +7,7 @@
     <div class="button-status">
       <mat-form-field class="template_dropdown">
         <mat-label>Template</mat-label>
-        <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" [disabled]="buttonDisabled">
+        <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" (ngModelChange)="changeTemplateSelection()" [disabled]="buttonDisabled">
           <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
         </select>
       </mat-form-field>
