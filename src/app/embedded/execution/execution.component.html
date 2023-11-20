@@ -6,7 +6,7 @@
     <div class="query-input">
       <div class="input-left">
         <mat-form-field appearance="outline" class="query-label">
-          <mat-label>Label</mat-label>
+          <mat-label>Titel</mat-label>
           <input
             matInput
             type="text"
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div>
-        <div>Query</div>
+        <div>Anfrage</div>
         <textarea
           class="query-textfield"
           name="query-textfield"
@@ -41,7 +41,7 @@
         <div class="dropdowns">
           <div class="dropdowns-left">
             <mat-form-field class="queryformat_dropdown">
-              <mat-label>Query-Format</mat-label>
+              <mat-label>Anfrageformat</mat-label>
               <select class="queryformat-select" matNativeControl required [(ngModel)]="selectedQueryFormat" >
                 <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
               </select>
@@ -74,11 +74,11 @@
         </div>
         <div class="button-status">
 
-          <button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>neue Query generieren</button>
+          <button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>Anfrage ausführen</button>
           <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
             <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
             <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled">
-              <span i18n>Template auswählen und neue Query generieren</span>
+              <span i18n>Template auswählen und Anfrage ausführen</span>
             </button>
           </div>
           <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>

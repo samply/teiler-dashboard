@@ -54,7 +54,7 @@
     <unit id="3840739858389961694">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:22</note>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:9</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:100</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:49</note>
       </notes>
       <segment>
@@ -77,9 +77,72 @@
         <source>Exporter Ausführungen</source>
       </segment>
     </unit>
+    <unit id="7273812294011829379">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:77</note>
+      </notes>
+      <segment>
+        <source>Anfrage ausführen</source>
+      </segment>
+    </unit>
+    <unit id="355818971023978767">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:81</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:81</note>
+      </notes>
+      <segment>
+        <source>Template auswählen und Anfrage ausführen</source>
+      </segment>
+    </unit>
+    <unit id="7851488990126524246">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:84</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:84</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
+      </notes>
+      <segment>
+        <source>Template herunterladen</source>
+      </segment>
+    </unit>
+    <unit id="3299498505798542378">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:93</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Report wird erstellt ...</source>
+      </segment>
+    </unit>
+    <unit id="5111784551733870059">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:94</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
+      </notes>
+      <segment>
+        <source>Report wurde erfolgreich erstellt.</source>
+      </segment>
+    </unit>
+    <unit id="961812481581959030">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:95</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
+      </notes>
+      <segment>
+        <source>Report wurde nicht gefunden.</source>
+      </segment>
+    </unit>
+    <unit id="5070539244098019882">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:96</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
+      </notes>
+      <segment>
+        <source>Ein Fehler ist aufgetreten.</source>
+      </segment>
+    </unit>
     <unit id="2876674083968644556">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:10</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:115</note>
       </notes>
       <segment>
         <source>ausgeführt am</source>
@@ -87,7 +150,7 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:15</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:120</note>
       </notes>
       <segment>
         <source>Status</source>
@@ -95,7 +158,7 @@
     </unit>
     <unit id="2348254711380854005">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:20</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:125</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
       </notes>
       <segment>
@@ -104,42 +167,10 @@
     </unit>
     <unit id="6525583106874020108">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:25</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:130</note>
       </notes>
       <segment>
         <source>Ausgabeformat</source>
-      </segment>
-    </unit>
-    <unit id="1625247474442792703">
-      <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:46</note>
-      </notes>
-      <segment>
-        <source>Patienten-ID</source>
-      </segment>
-    </unit>
-    <unit id="2460741640340645221">
-      <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:51</note>
-      </notes>
-      <segment>
-        <source>Geschlecht</source>
-      </segment>
-    </unit>
-    <unit id="8158385069489789677">
-      <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:56</note>
-      </notes>
-      <segment>
-        <source>Geburtsdatum</source>
-      </segment>
-    </unit>
-    <unit id="1869993821535292461">
-      <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:61</note>
-      </notes>
-      <segment>
-        <source>Vitalstatus</source>
       </segment>
     </unit>
     <unit id="6929842044884591868">
@@ -150,9 +181,17 @@
         <source>Exporter Anfragen</source>
       </segment>
     </unit>
+    <unit id="7921144482025087022">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:77</note>
+      </notes>
+      <segment>
+        <source>neue Anfrage ausführen</source>
+      </segment>
+    </unit>
     <unit id="7402705001602102733">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:14</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:105</note>
       </notes>
       <segment>
         <source>Anfrage</source>
@@ -160,7 +199,7 @@
     </unit>
     <unit id="7513076467032912668">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:19</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:110</note>
       </notes>
       <segment>
         <source>Format</source>
@@ -562,46 +601,6 @@
         <source>Template auswählen und neuen Report generieren</source>
       </segment>
     </unit>
-    <unit id="7851488990126524246">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
-      </notes>
-      <segment>
-        <source>Template herunterladen</source>
-      </segment>
-    </unit>
-    <unit id="3299498505798542378">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:26</note>
-      </notes>
-      <segment>
-        <source>Report wird erstellt ...</source>
-      </segment>
-    </unit>
-    <unit id="5111784551733870059">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
-      </notes>
-      <segment>
-        <source>Report wurde erfolgreich erstellt.</source>
-      </segment>
-    </unit>
-    <unit id="961812481581959030">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
-      </notes>
-      <segment>
-        <source>Report wurde nicht gefunden.</source>
-      </segment>
-    </unit>
-    <unit id="5070539244098019882">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
-      </notes>
-      <segment>
-        <source>Ein Fehler ist aufgetreten.</source>
-      </segment>
-    </unit>
     <unit id="2981219928115418649">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:59</note>
@@ -612,7 +611,7 @@
     </unit>
     <unit id="8722084746247976035">
       <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.ts:237</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.ts:238</note>
       </notes>
       <segment>
         <source>Eigenes Template</source>
@@ -864,6 +863,14 @@
       </notes>
       <segment>
         <source>Ereignislog</source>
+      </segment>
+    </unit>
+    <unit id="3915297817681245218">
+      <notes>
+        <note category="location">src/app/teiler/exporter.service.ts:20</note>
+      </notes>
+      <segment>
+        <source>Exportiert Anfragen in verschiedenen Formaten</source>
       </segment>
     </unit>
     <unit id="1018606136972574138">

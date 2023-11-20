@@ -17,8 +17,8 @@ export interface exportLog {
 })
 export class ExporterService extends EmbeddedTeilerApp {
 
-	description: string = "";
-	iconClass: string | undefined = 'bi bi-person-rolodex';
+	description: string = $localize`Exportiert Anfragen in verschiedenen Formaten`;
+	iconClass: string | undefined = 'bi bi-download';
 	iconSourceUrl: string | undefined = undefined;
 	title: string = "Exporter";
 	roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
