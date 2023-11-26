@@ -41,6 +41,21 @@ export class ExporterService extends EmbeddedTeilerApp {
   getQueryFormats(): Observable<string[]> {
     return this.http.get<string[]>(this.getExporterURL() + "/input-formats");
   }
+  public createQuery(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, templateID: string, template?:string): Observable<ExportResponse> {
+    let qLabel: string = "";
+    let qDesc: string = "";
+    if (queryLabel && queryLabel !== "") {
+      qLabel = "&query-label=" + queryLabel
+    }
+    if (queryDescription && queryDescription !== "") {
+      qDesc = "&query-description=" + queryDescription
+    }
+    if (templateID === "custom") {
+      return this.http.post<ExportResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc, template, {headers: this.httpHeadersXML});
+    } else {
+      return this.http.post<ExportResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc, null, {headers: this.httpHeaders});
+    }
+  }
   public generateExport(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, templateID: string, template?:string): Observable<ExportResponse> {
     let qLabel: string = "";
     let qDesc: string = "";

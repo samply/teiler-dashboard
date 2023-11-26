@@ -48,6 +48,8 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   private subscriptionGetOutputFormats: Subscription | undefined
   private subscriptionGetQueryFormats: Subscription | undefined
   private subscriptionGetTemplateIDs: Subscription | undefined
+  private subscriptionGetExportStatus: Subscription | undefined
+  private subscriptionFetchLogs: Subscription | undefined
   queryID: number = 0;
   patients:any[] = [];
   diagnosen:any[] = [];
@@ -56,7 +58,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   ExportStatus: typeof ExportStatus = ExportStatus;
   exportStatus: ExportStatus = ExportStatus.EMPTY;
   exportLog: exportLog[] = [];
-  buttonDisabled: boolean = true;
+  buttonDisabled: boolean = false;
   private intervall: number | undefined;
   expirationDate: Date | undefined;
   query: string = "";
@@ -179,12 +181,22 @@ export class ExecutionComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.exportUrl = this.exporterService.getExporterURL() + "/";
+    this.getTemplateIDs();
+    this.getOutputFormats();
+    this.getQueryFormats();
 
     this.route.params.subscribe(params => {
       this.queryID = params['id'];
-      console.log(params['id'])
+      console.log(params['id']);
+      this.query = window.history.state.query;
+      this.queryLabel = window.history.state.label;
+      this.queryDescription = window.history.state.description;
+      this.selectedQueryFormat = window.history.state.selectedQueryFormat.toUpperCase();
+      //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
+      //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
       if (window.history.state.newQueryID) {
-
+        this.buttonDisabled = true;
+        this.pollingStatusAndLogs(this.queryID.toString(), false);
       } else {
         this.getQueryExecutions();
       }
@@ -198,6 +210,8 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.subscriptionGetOutputFormats?.unsubscribe();
     this.subscriptionGetQueryFormats?.unsubscribe();
     this.subscriptionGetTemplateIDs?.unsubscribe();
+    this.subscriptionGetExportStatus?.unsubscribe();
+    this.subscriptionFetchLogs?.unsubscribe();
   }
 
   getQueryExecutions(): void {
@@ -230,6 +244,57 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     })
   }
 
+  pollingStatusAndLogs(id: string, init: boolean): void {
+    this.subscriptionGetExportStatus?.unsubscribe();
+    this.subscriptionFetchLogs?.unsubscribe();
+
+    const exportDiv = document.getElementById("exportDiv");
+    this.intervall = window.setInterval(() => {
+      this.subscriptionGetExportStatus = this.exporterService.getExportStatus(id).subscribe({
+        next: (status) => {
+          console.log(status)
+          if (!init || status !== ExportStatus.OK) {this.exportStatus = status;}
+          if (status !== ExportStatus.RUNNING) {
+            window.clearInterval(this.intervall);
+            this.buttonDisabled = false;
+            if (status === ExportStatus.OK && !init) {
+              this.exportLog = [];
+              //this.downloadReport(id);
+              this.getQueryExecutions();
+            }
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {}
+      });
+      if (this.exportStatus === ExportStatus.RUNNING) {
+        init = false;
+        this.subscriptionFetchLogs = this.exporterService.fetchLogs(1000).subscribe({
+          next: (response) => {
+            this.exportLog = response;
+            this.scrollToEndOfLog(exportDiv)
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {
+          }
+        });
+      }
+    }, 2000)
+  }
+  scrollToEndOfLog(element: HTMLElement | null): void {
+    if (element) {
+      const isScrolledToBottomReport = element.scrollHeight - element.clientHeight <= element.scrollTop + 1;
+      setTimeout(function () {
+        if (isScrolledToBottomReport) {
+          element.scrollTop = element.scrollHeight - element.clientHeight;
+        }
+      }, 200);
+    }
+  }
   loadExecutionData(exec:ExporterExecutions): void {
     this.subscriptionGetExecution?.unsubscribe();
     this.subscriptionGetExecution = this.executionService.getExecutionData(exec.id).subscribe({

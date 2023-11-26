@@ -103,16 +103,20 @@ button{
 .file-input {
   display: none;
 }
-.generate-button, .cancel-button, .download-button {
+.create-buttons {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.generate-button, .cancel-button, .download-button, .create-button, .edit-button {
   width: 200px;
-  height: 50px;
+  height: 45px;
   padding: 5px;
   font-size: 14px;
 }
-.generate-button {
+.generate-button, .create-button, .edit-button {
   background-color: #2BCDD563 !important;
 }
-.download-button {
+.download-button, .edit-button {
   margin-left: 2%;
 }
 .file-upload {

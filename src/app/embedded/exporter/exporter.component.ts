@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {EmbeddedTeilerApps} from "../../teiler/teiler-app";
 import {QBResponse, Templates} from "../quality-report/quality-report.component";
 import {environment} from "../../../environments/environment";
+import {SelectionModel} from "@angular/cdk/collections";
 
 export interface ExporterQueries {
   id: number;
@@ -47,10 +48,12 @@ export class ExporterComponent implements OnInit, OnDestroy {
   private subscriptionGenerateExport: Subscription | undefined
   private subscriptionGetExportStatus: Subscription | undefined
   private subscriptionFetchLogs: Subscription | undefined
-  displayedColumns: string[] = ['timestamp', 'querysource', 'format'];
+  displayedColumns: string[] = ['#', 'timestamp', 'querysource', 'format'];
   dataSource = new MatTableDataSource<ExporterQueries>();
   clickedRows = new Set<ExporterQueries>();
   buttonDisabled: boolean = true;
+  editButtonDisabled: boolean = true;
+  editModus: boolean = false;
   exportLog: exportLog[] = [];
   templateIDs: Templates[] = [];
   outputFormats: DropdownFormat[] = [];
@@ -68,6 +71,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   query: string = "";
   queryLabel: string = "";
   queryDescription: string = "";
+  selection = new SelectionModel<any>(false, []);
 
   constructor(private exporterService: ExporterService, private router: Router) {
   }
@@ -118,7 +122,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   openQuery(query:ExporterQueries): void {
     console.log(query)
-    this.router.navigate([EmbeddedTeilerApps.EXECUTION, query.id])
+//    this.router.navigate([EmbeddedTeilerApps.EXECUTION, query.id], {state: { query: query.query, label: query.label, description: query.description, selectedQueryFormat: query.format, selectedOutputFormat: "", selectedTemplate: ""}})
   }
   transformDate(date: string): string {
     return new Date(date).getTime().toString();
@@ -132,7 +136,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
         const id = url.searchParams.get("query-execution-id");
         //this.exportStatus = ExportStatus.RUNNING
         if (id) {
-          this.router.navigate([EmbeddedTeilerApps.EXECUTION, id], {state: { newQueryID: id}})
+          this.router.navigate([EmbeddedTeilerApps.EXECUTION, id], {state: { newQueryID: id, query: this.query, label: this.queryLabel, description: this.queryDescription, selectedQueryFormat: this.selectedQueryFormat, selectedOutputFormat: this.selectedOutputFormat, selectedTemplate: this.selectedTemplate}})
           //this.pollingStatusAndLogs(id, false);
         }
       },
@@ -143,58 +147,6 @@ export class ExporterComponent implements OnInit, OnDestroy {
     });
   }
 
-  pollingStatusAndLogs(id: string, init: boolean): void {
-    this.subscriptionGenerateExport?.unsubscribe();
-    this.subscriptionGetExportStatus?.unsubscribe();
-    this.subscriptionFetchLogs?.unsubscribe();
-
-    const exportDiv = document.getElementById("exportDiv");
-    this.intervall = window.setInterval(() => {
-      this.subscriptionGetExportStatus = this.exporterService.getExportStatus(id).subscribe({
-        next: (status) => {
-          console.log(status)
-          if (!init || status !== ExportStatus.OK) {this.exportStatus = status;}
-          if (status !== ExportStatus.RUNNING) {
-            window.clearInterval(this.intervall);
-            this.buttonDisabled = false;
-            if (status === ExportStatus.OK && !init) {
-              this.exportLog = [];
-              //this.downloadReport(id);
-              this.getReports();
-            }
-          }
-        },
-        error: (error) => {
-          console.log(error);
-        },
-        complete: () => {}
-      });
-      if (this.exportStatus === ExportStatus.RUNNING) {
-        init = false;
-        this.subscriptionFetchLogs = this.exporterService.fetchLogs(1000).subscribe({
-          next: (response) => {
-            this.exportLog = response;
-            this.scrollToEndOfLog(exportDiv)
-          },
-          error: (error) => {
-            console.log(error);
-          },
-          complete: () => {
-          }
-        });
-      }
-    }, 2000)
-  }
-  scrollToEndOfLog(element: HTMLElement | null): void {
-    if (element) {
-      const isScrolledToBottomReport = element.scrollHeight - element.clientHeight <= element.scrollTop + 1;
-      setTimeout(function () {
-        if (isScrolledToBottomReport) {
-          element.scrollTop = element.scrollHeight - element.clientHeight;
-        }
-      }, 200);
-    }
-  }
   getTemplateIDs(): void {
     this.subscriptionGetTemplateIDs?.unsubscribe();
     this.subscriptionGetTemplateIDs = this.exporterService.getExporterTemplates().subscribe({
@@ -258,5 +210,37 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
   downloadTemplate(): void {
     window.location.href = this.exportUrl + 'template?template-id=' + this.selectedTemplate;
+  }
+
+  toggleCheckbox(event: any, row: any): void {
+    event ? this.selection.toggle(row) : null;
+
+    console.log('selection')
+    console.log(this.selection.selected)
+    console.log(row)
+
+    this.loadQuery(row);
+  }
+  loadQuery(query: ExporterQueries): void {
+    this.query = query.query;
+    this.queryDescription = query.description;
+    this.queryLabel = query.label;
+    this.selectedQueryFormat = query.format;
+    this.editButtonDisabled = false;
+  }
+
+  createNewQuery(): void {
+    this.editModus = true;
+    this.queryLabel = "";
+    this.queryDescription = "";
+    this.query = "";
+    this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
+    this.selectedOutputFormat = "JSON";
+    this.selectedQueryFormat = "FHIR_SEARCH";
+    this.expirationDate = undefined;
+  }
+
+  editQuery(): void {
+    this.editModus = true;
   }
 }
