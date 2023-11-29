@@ -65,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Redirect to main if router link not found
 - Copy Assets env.js in Docker
 - Reporter Cors
+- TEILER_USER and TEILER_ADMIN as default values for docker
 
 ## CHANGED
 - Check for both frontend and backend
