@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
     import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {ExporterQueries, ExportResponse, ExportStatus} from "../embedded/exporter/exporter.component";
+import {ExporterQueries, ExportResponse, ExportStatus, QueryResponse} from "../embedded/exporter/exporter.component";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {createRouterLinkForBase} from "../route/route-utils";
@@ -41,19 +41,17 @@ export class ExporterService extends EmbeddedTeilerApp {
   getQueryFormats(): Observable<string[]> {
     return this.http.get<string[]>(this.getExporterURL() + "/input-formats");
   }
-  public createQuery(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, templateID: string, template?:string): Observable<ExportResponse> {
+  public createQuery(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, contactID: string | undefined, templateID: string, template?:string): Observable<QueryResponse> {
     let qLabel: string = "";
     let qDesc: string = "";
-    if (queryLabel && queryLabel !== "") {
-      qLabel = "&query-label=" + queryLabel
-    }
-    if (queryDescription && queryDescription !== "") {
-      qDesc = "&query-description=" + queryDescription
-    }
+    let contactid = "";
+    if (queryLabel && queryLabel !== "") {qLabel = "&query-label=" + queryLabel}
+    if (queryDescription && queryDescription !== "") {qDesc = "&query-description=" + queryDescription}
+    if (contactID && contactID !== "") {contactid = "&query-contact-id=" + contactID}
     if (templateID === "custom") {
-      return this.http.post<ExportResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc, template, {headers: this.httpHeadersXML});
+      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc + contactid, template, {headers: this.httpHeadersXML});
     } else {
-      return this.http.post<ExportResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc, null, {headers: this.httpHeaders});
+      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc + contactid, null, {headers: this.httpHeaders});
     }
   }
   public generateExport(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, templateID: string, template?:string): Observable<ExportResponse> {
@@ -67,6 +65,19 @@ export class ExporterService extends EmbeddedTeilerApp {
       return this.http.post<ExportResponse>(this.getExporterURL() + "/request?query="+ query +"&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc, null, {headers: this.httpHeaders});
     }
   }
+
+  public updateQuery(queryID: string, queryLabel: string, queryDescription: string): Observable<any> {
+    let qLabel: string = "";
+    let qDesc: string = "";
+    if (queryLabel && queryLabel !== "") {
+      qLabel = "&query-label=" + queryLabel
+    }
+    if (queryDescription && queryDescription !== "") {
+      qDesc = "&query-description=" + queryDescription
+    }
+    return this.http.post<any>(this.getExporterURL() + "/update-query?query-id=" + queryID + qLabel + qDesc , null, {headers: this.httpHeaders});
+  }
+
   getExportStatus(exexID: string): Observable<ExportStatus> {
     return this.http.get<ExportStatus>(this.getExporterURL()+"/status?query-execution-id=" + exexID ,{headers: this.httpHeaders});
   }

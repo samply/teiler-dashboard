@@ -2,91 +2,123 @@
   <div class="title">
     <h2 i18n>Exporter Ausführungen</h2>
   </div>
-  <div class="generate-div">
-    <div class="query-input">
-      <div class="input-left">
-        <mat-form-field appearance="outline" class="query-label">
-          <mat-label>Titel</mat-label>
-          <input
-            matInput
-            type="text"
-            [(ngModel)]="queryLabel"
-            (ngModelChange)="generateButtonStatus()"
-          />
-        </mat-form-field>
+
+    <div class="create-buttons">
+      <div class="buttons-left">
+        <button class="create-button" mat-raised-button color="primary" (click)=executeQuery() i18n>Anfrage ausführen</button>
+      </div>
+      <div class="buttons-right">
+
+        <!--<button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>neue Anfrage ausführen</button>-->
+        <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
+          <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
+          <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()">
+            <span i18n>Template auswählen</span>
+          </button>
+          <div class="file-name">{{ fileName }}</div>
+        </div>
+        <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
+      </div>
+    </div>
+    <div class="generate-div">
+      <div class="query-input">
+        <div class="input-left">
+          <mat-form-field appearance="outline" class="query-label">
+            <mat-label>Titel</mat-label>
+            <input
+              matInput
+              type="text"
+              [(ngModel)]="queryLabel"
+              (ngModelChange)="generateButtonStatus()"
+              [disabled] = "true"
+            />
+          </mat-form-field>
+          <!--<mat-form-field class="query-textfield">
+            <mat-label>Beschreibung</mat-label>
+            <textarea
+              matInput
+              [(ngModel)]="queryDescription"
+              (ngModelChange)="generateButtonStatus()"
+              [disabled] = "!editModus"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="2"
+              cdkAutosizeMaxRows="5"
+            ></textarea>
+          </mat-form-field>-->
+          <div>
+            <div>Beschreibung</div>
+            <textarea
+              class="query-textfield"
+              name="query-textfield"
+              rows="6"
+              cols="40"
+              [(ngModel)]="queryDescription"
+              (ngModelChange)="generateButtonStatus()"
+              [disabled] = "true"
+            ></textarea>
+          </div>
+        </div>
         <div>
-          <div>Beschreibung</div>
+          <div>Anfrage</div>
           <textarea
             class="query-textfield"
             name="query-textfield"
-            rows="6"
-            cols="40"
-            [(ngModel)]="queryDescription"
+            rows="13"
+            cols="50"
+            [(ngModel)]="query"
             (ngModelChange)="generateButtonStatus()"
+            [disabled] = "true"
           ></textarea>
         </div>
-      </div>
-      <div>
-        <div>Anfrage</div>
-        <textarea
-          class="query-textfield"
-          name="query-textfield"
-          rows="12"
-          cols="50"
-          [(ngModel)]="query"
-          (ngModelChange)="generateButtonStatus()"
-        ></textarea>
-      </div>
-      <div class="query-input-right">
-        <div class="dropdowns">
-          <div class="dropdowns-left">
-            <mat-form-field class="queryformat_dropdown">
-              <mat-label>Anfrageformat</mat-label>
-              <select class="queryformat-select" matNativeControl required [(ngModel)]="selectedQueryFormat" >
-                <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
-              </select>
-            </mat-form-field>
-            <mat-form-field class="outputformat_dropdown">
-              <mat-label>Ausgabeformat</mat-label>
-              <select class="outputformat-select" matNativeControl required [(ngModel)]="selectedOutputFormat" >
-                <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
-              </select>
-            </mat-form-field>
-          </div>
-          <div class="dropdowns-right">
-            <mat-form-field appearance="outline" class="query-expiration-date">
-              <mat-label>Ablaufdatum</mat-label>
-              <input
-                matInput
-                [matDatepicker]="dateStartPicker"
-                [(ngModel)]="expirationDate"
-              />
-              <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
-              <mat-datepicker #dateStartPicker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="template_dropdown">
-              <mat-label>Template</mat-label>
-              <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" >
-                <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
-              </select>
-            </mat-form-field>
+        <div class="query-input-right">
+          <div class="dropdowns">
+            <div class="dropdowns-left">
+              <mat-form-field class="queryformat_dropdown">
+                <mat-label>Anfrageformat</mat-label>
+                <select class="queryformat-select" matNativeControl required [(ngModel)]="selectedQueryFormat" [disabled] = "true">
+                  <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
+                </select>
+              </mat-form-field>
+              <mat-form-field class="outputformat_dropdown">
+                <mat-label>Ausgabeformat</mat-label>
+                <select class="outputformat-select" matNativeControl required [(ngModel)]="selectedOutputFormat" >
+                  <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
+                </select>
+              </mat-form-field>
+              <mat-form-field class="template_dropdown">
+                <mat-label>Template</mat-label>
+                <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" >
+                  <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
+                </select>
+              </mat-form-field>
+            </div>
+            <div class="dropdowns-right">
+              <mat-form-field appearance="outline" class="query-expiration-date">
+                <mat-label>Ablaufdatum</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="dateStartPicker"
+                  [(ngModel)]="expirationDate"
+                  [disabled] = "true"
+                />
+                <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
+                <mat-datepicker #dateStartPicker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="query-contactid">
+                <mat-label i18n>Kontakt-ID</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="contactID"
+                  [disabled] = "true"
+                />
+              </mat-form-field>
+            </div>
           </div>
         </div>
-        <div class="button-status">
 
-          <button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>Anfrage ausführen</button>
-          <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
-            <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
-            <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled">
-              <span i18n>Template auswählen und Anfrage ausführen</span>
-            </button>
-          </div>
-          <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
 
-        </div>
       </div>
-
-    </div>
 
     <div class="status">
       <ng-container *ngIf="exportStatus === ExportStatus.EMPTY"><span class="status-empty"></span></ng-container>
@@ -138,6 +170,7 @@
     <div class="paginator">
       <mat-paginator
         #paginator
+        [pageSize]="10"
         [pageSizeOptions]="[5,10,25,100]"
         showFirstLastButtons
       ></mat-paginator>
@@ -155,7 +188,7 @@
     <!--<button mat-raised-button (click)="switchToPatient()"> Patienten </button>
     <button mat-raised-button (click)="switchToDiag()"> Diagnosen </button>-->
 
-
+<!--
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -201,7 +234,7 @@
           </mat-panel-title>
           <mat-panel-description>
             <!--Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
-          </mat-panel-description>
+<!--          </mat-panel-description>
         </mat-expansion-panel-header>
         <div *ngIf="dataSourceDiagnosis.data.length > 0" class="tablePatients">
           <section class="patient-container mat-elevation-z8" tabindex="0">
@@ -230,6 +263,6 @@
           </section>
         </div>
       </mat-expansion-panel>
-    </mat-accordion>
+    </mat-accordion>-->
   </div>
 </div>

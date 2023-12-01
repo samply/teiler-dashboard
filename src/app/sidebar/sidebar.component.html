@@ -32,9 +32,14 @@
             <div class="extern">
               <div *ngIf="teilerApp.externLink" class="sidebar-element">
                 <!--<i class="{{teilerApp.iconClass}}"></i>-->
-                <div class="teiler-box-image" *ngIf="teilerApp.iconSourceUrl != undefined">
+                <div class="teiler-box-image" *ngIf="teilerApp.iconSourceUrl != undefined; else iconClass">
                   <img i src="{{teilerApp.iconSourceUrl}}">
                 </div>
+                <ng-template #iconClass>
+                  <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
+                    <i class="{{teilerApp.iconClass}}"></i>
+                  </div>
+                </ng-template>
                 <a mat-list-item routerLink="{{'/'+teilerApp.routerLink}}"
                    [externalLink]="teilerApp.sourceUrl??''" class="sidebar-text">{{teilerApp.title}}</a>
               </div>

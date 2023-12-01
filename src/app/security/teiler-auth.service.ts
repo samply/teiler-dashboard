@@ -3,6 +3,7 @@ import {KeycloakService} from "keycloak-angular";
 import {KeycloakProfile} from "keycloak-js";
 import {getHref, getLocale} from "../route/route-utils";
 import {environment} from "../../environments/environment";
+import {Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class TeilerAuthService {
     this.keycloakService.logout(getHref('/' + getLocale()));
   }
 
-  public isLoggedId() {
-    return this.keycloakService.isLoggedIn();
+  public isLoggedId():Observable<boolean> {
+    return of(this.keycloakService.isLoggedIn());
   }
 
   public getRoles(): string[] {

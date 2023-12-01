@@ -113,11 +113,19 @@ table{
 }
 .generate-button, .cancel-button, .download-button {
   width: 200px;
-  height: 55px;
+  height: 45px;
   padding: 5px;
+  font-size: 14px;
+  color: black!important;
 }
-.generate-button {
+.generate-button, .cancel-button, .download-button {
   background-color: #2BCDD563 !important;
+}
+.generate-button:disabled, .cancel-button:disabled, .download-button:disabled {
+  color: darkgrey!important;
+}
+.generate-button, .cancel-button {
+  width: 220px;
 }
 .download-button {
   margin-left: 2%;
@@ -147,6 +155,10 @@ table{
 /* TODO(mdc-migration): The following rule targets internal classes of paginator that may no longer apply for the MDC version. */
 mat-paginator{
   opacity: 0.75;
+}
+::ng-deep .template_dropdown .mat-mdc-form-field-infix {
+  padding-top: 18px!important;
+  padding-bottom: 2px!important;
 }
 .template-select {
   margin-top: 5px;

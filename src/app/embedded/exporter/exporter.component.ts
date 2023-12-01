@@ -2,12 +2,14 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {ExporterService, exportLog} from "../../teiler/exporter.service";
-import {Subscription} from "rxjs";
+import {from, Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {EmbeddedTeilerApps} from "../../teiler/teiler-app";
 import {QBResponse, Templates} from "../quality-report/quality-report.component";
 import {environment} from "../../../environments/environment";
 import {SelectionModel} from "@angular/cdk/collections";
+import {TeilerAuthService} from "../../security/teiler-auth.service";
+import {TeilerService} from "../../teiler/teiler.service";
 
 export interface ExporterQueries {
   id: number;
@@ -22,6 +24,9 @@ export interface ExporterQueries {
 }
 export interface ExportResponse {
   responseUrl: URL;
+}
+export interface QueryResponse {
+  queryId: string;
 }
 export interface DropdownFormat {
   value: string;
@@ -48,7 +53,9 @@ export class ExporterComponent implements OnInit, OnDestroy {
   private subscriptionGenerateExport: Subscription | undefined
   private subscriptionGetExportStatus: Subscription | undefined
   private subscriptionFetchLogs: Subscription | undefined
-  displayedColumns: string[] = ['#', 'timestamp', 'querysource', 'format'];
+  private subscriptionUpdateQuery: Subscription | undefined
+  private subscriptionCreateQuery: Subscription | undefined;
+  displayedColumns: string[] = ['#', 'timestamp', 'querytitle', 'querysource', 'format', 'executions'];
   dataSource = new MatTableDataSource<ExporterQueries>();
   clickedRows = new Set<ExporterQueries>();
   buttonDisabled: boolean = true;
@@ -71,9 +78,19 @@ export class ExporterComponent implements OnInit, OnDestroy {
   query: string = "";
   queryLabel: string = "";
   queryDescription: string = "";
+  contactID: string | undefined;
   selection = new SelectionModel<any>(false, []);
+  executeOnSaving: boolean = true;
+  saveButtonText: Map<boolean, string> = new Map([[false, "Anfrage speichern"], [true, "Anfrage speichern und ausführen"]]);
+  loadedQueryID: string = "";
+  activeQueries: boolean = true;
+  archivedQueries: boolean = true;
+  queryList:ExporterQueries[] = [];
+  executionLink: string = EmbeddedTeilerApps.EXECUTION;
+  panelOpenState: boolean = false;
 
-  constructor(private exporterService: ExporterService, private router: Router) {
+  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService) {
+    from(authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
   }
   // @ts-ignore
   @ViewChild('paginator') paginator: MatPaginator;
@@ -83,7 +100,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.exportUrl = this.exporterService.getExporterURL() + "/";
-    this.getReports();
+    this.getQueries();
     this.getTemplateIDs();
     this.getOutputFormats();
     this.getQueryFormats();
@@ -97,27 +114,45 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.subscriptionGenerateExport?.unsubscribe();
     this.subscriptionGetExportStatus?.unsubscribe();
     this.subscriptionFetchLogs?.unsubscribe();
+    this.subscriptionUpdateQuery?.unsubscribe();
+    this.subscriptionCreateQuery?.unsubscribe();
     window.clearInterval(this.intervall);
   }
 
-  getReports(): void {
+  getQueries(): void {
     this.subscriptionGetQueries?.unsubscribe();
     this.subscriptionGetQueries = this.exporterService.getReports().subscribe({
       next: (queryList:ExporterQueries[]) => {
-        console.log(queryList)
-        const tempEQs: ExporterQueries[] = [];
-        queryList.forEach((query) => {
-          tempEQs.push({id: query.id, query: query.query, format: query.format, label: query.label, description: query.description, contactId: query.contactId, expirationDate: query.expirationDate, createdAt: this.transformDate(query.createdAt), archivedAt: query.archivedAt})
-        })
-        tempEQs.sort((a,b) =>  Number(b.createdAt) - Number(a.createdAt))
-        this.dataSource.data = tempEQs;
-        this.dataSource._updateChangeSubscription();
+        this.queryList = queryList;
+        this.filterQueries();
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {}
     })
+  }
+
+  filterQueries(): void {
+    const tempEQs: ExporterQueries[] = [];
+    this.queryList.forEach((query) => {
+      if ((this.activeQueries && query.archivedAt === null) || (this.archivedQueries && query.archivedAt !== null)) {
+        tempEQs.push({
+          id: query.id,
+          query: query.query,
+          format: query.format,
+          label: query.label,
+          description: query.description,
+          contactId: query.contactId,
+          expirationDate: this.transformDate(query.expirationDate),
+          createdAt: this.transformDate(query.createdAt),
+          archivedAt: this.transformDate(query.archivedAt)
+        });
+      }
+    })
+    tempEQs.sort((a,b) =>  Number(b.createdAt) - Number(a.createdAt))
+    this.dataSource.data = tempEQs;
+    this.dataSource._updateChangeSubscription();
   }
 
   openQuery(query:ExporterQueries): void {
@@ -128,15 +163,25 @@ export class ExporterComponent implements OnInit, OnDestroy {
     return new Date(date).getTime().toString();
   }
 
-  generateExport() {
-    this.buttonDisabled = true;
+  executeQuery() {
+    this.subscriptionGenerateExport?.unsubscribe();
     this.subscriptionGenerateExport = this.exporterService.generateExport(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.selectedTemplate, this.importTemplate).subscribe({
-      next: (response:QBResponse) => {
+      next: (response: QBResponse) => {
         const url = new URL(response.responseUrl)
         const id = url.searchParams.get("query-execution-id");
         //this.exportStatus = ExportStatus.RUNNING
         if (id) {
-          this.router.navigate([EmbeddedTeilerApps.EXECUTION, id], {state: { newQueryID: id, query: this.query, label: this.queryLabel, description: this.queryDescription, selectedQueryFormat: this.selectedQueryFormat, selectedOutputFormat: this.selectedOutputFormat, selectedTemplate: this.selectedTemplate}})
+          this.router.navigate([this.executionLink, id], {
+            state: {
+              newQueryID: id,
+              query: this.query,
+              label: this.queryLabel,
+              description: this.queryDescription,
+              selectedQueryFormat: this.selectedQueryFormat,
+              selectedOutputFormat: this.selectedOutputFormat,
+              selectedTemplate: this.selectedTemplate
+            }
+          })
           //this.pollingStatusAndLogs(id, false);
         }
       },
@@ -145,6 +190,41 @@ export class ExporterComponent implements OnInit, OnDestroy {
       },
       complete: () => {}
     });
+  }
+
+  saveQuery() {
+    this.subscriptionUpdateQuery?.unsubscribe();
+    this.subscriptionCreateQuery?.unsubscribe();
+
+    this.buttonDisabled = true;
+
+    if (this.executeOnSaving) {
+      this.executeQuery();
+    } else {
+      if (this.loadedQueryID !== "") {
+        this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.loadedQueryID, this.queryLabel, this.queryDescription).subscribe({
+          next: (response: any) => {
+            this.getQueries();
+            this.editModus = false;
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {}
+        });
+      } else {
+        this.subscriptionCreateQuery = this.exporterService.createQuery(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.contactID, this.selectedTemplate, this.importTemplate).subscribe({
+          next: (response: QueryResponse) => {
+            this.getQueries();
+            this.editModus = false;
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {}
+        });
+      }
+    }
   }
 
   getTemplateIDs(): void {
@@ -197,7 +277,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
   onReaderLoad(event: any): void {
     this.importTemplate = event.target.result;
-    this.generateExport();
+    //this.generateExport();
   }
 
   cancelExport(): void {
@@ -213,20 +293,35 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
 
   toggleCheckbox(event: any, row: any): void {
-    event ? this.selection.toggle(row) : null;
-
-    console.log('selection')
-    console.log(this.selection.selected)
-    console.log(row)
-
-    this.loadQuery(row);
+    if (!this.editModus) {
+      event ? this.selection.toggle(row) : null;
+      this.loadQuery();
+    }
   }
-  loadQuery(query: ExporterQueries): void {
-    this.query = query.query;
-    this.queryDescription = query.description;
-    this.queryLabel = query.label;
-    this.selectedQueryFormat = query.format;
-    this.editButtonDisabled = false;
+  loadQuery(): void {
+    const query: ExporterQueries[] = this.selection.selected
+    if(query.length > 0) {
+      this.query = query[0].query;
+      this.queryDescription = query[0].description;
+      this.queryLabel = query[0].label;
+      this.selectedQueryFormat = query[0].format;
+      this.contactID = query[0].contactId;
+      this.editButtonDisabled = false;
+      this.executeOnSaving = true;
+      this.buttonDisabled = false;
+      this.loadedQueryID = query[0].id.toString();
+      this.panelOpenState = true;
+    }
+    else {
+      this.query = "";
+      this.queryDescription = "";
+      this.queryLabel = "";
+      from(this.authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
+      this.selectedQueryFormat = "FHIR_SEARCH";
+      this.editButtonDisabled = true;
+      this.buttonDisabled = true;
+      this.loadedQueryID = "";
+    }
   }
 
   createNewQuery(): void {
@@ -234,13 +329,25 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.queryLabel = "";
     this.queryDescription = "";
     this.query = "";
+    from(this.authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
     this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
     this.selectedOutputFormat = "JSON";
     this.selectedQueryFormat = "FHIR_SEARCH";
     this.expirationDate = undefined;
+    this.loadedQueryID = "";
+    this.panelOpenState = true;
+    this.generateButtonStatus();
   }
 
   editQuery(): void {
     this.editModus = true;
+    this.panelOpenState = true;
+    this.generateButtonStatus();
+  }
+  saveButtonMenu(modus: boolean) {
+    this.executeOnSaving = modus;
+  }
+  cancelEdit(): void {
+    this.editModus = false;
   }
 }

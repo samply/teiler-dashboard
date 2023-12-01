@@ -50,6 +50,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   private subscriptionGetTemplateIDs: Subscription | undefined
   private subscriptionGetExportStatus: Subscription | undefined
   private subscriptionFetchLogs: Subscription | undefined
+  private subscriptionGetQuery: Subscription | undefined
   queryID: number = 0;
   patients:any[] = [];
   diagnosen:any[] = [];
@@ -73,6 +74,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   outputFormats: DropdownFormat[] = [];
   queryFormats: DropdownFormat[] = [];
   templateIDs: Templates[] = [];
+  contactID: string | undefined;
   templateGraph = {
     "containers" : [ {
       "linked-attribute" : [ {
@@ -191,13 +193,14 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       this.query = window.history.state.query;
       this.queryLabel = window.history.state.label;
       this.queryDescription = window.history.state.description;
-      this.selectedQueryFormat = window.history.state.selectedQueryFormat.toUpperCase();
+      this.selectedQueryFormat = window.history.state.selectedQueryFormat?.toUpperCase();
       //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
       //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
       if (window.history.state.newQueryID) {
         this.buttonDisabled = true;
         this.pollingStatusAndLogs(this.queryID.toString(), false);
       } else {
+        this.getQuery();
         this.getQueryExecutions();
       }
     })
@@ -212,8 +215,24 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.subscriptionGetTemplateIDs?.unsubscribe();
     this.subscriptionGetExportStatus?.unsubscribe();
     this.subscriptionFetchLogs?.unsubscribe();
+    this.subscriptionGetQuery?.unsubscribe();
   }
 
+  getQuery(): void {
+    this.subscriptionGetQuery?.unsubscribe();
+    this.subscriptionGetQuery = this.executionService.getQuery(this.queryID).subscribe({
+      next: (query) => {
+        this.query = query.query;
+        this.queryLabel = query.label;
+        this.queryDescription = query.description;
+        this.selectedQueryFormat = query.format;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {}
+    })
+  }
   getQueryExecutions(): void {
     this.subscriptionGetExecutionList?.unsubscribe();
     this.subscriptionGetExecutionList = this.executionService.getExecutionList(this.queryID).subscribe({
@@ -239,15 +258,18 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.log(error);
       },
-      complete: () => {
-      }
+      complete: () => {}
     })
   }
 
+  executeQuery(): void {
+    this.buttonDisabled = true;
+    this.pollingStatusAndLogs(this.queryID.toString(), false);
+  }
   pollingStatusAndLogs(id: string, init: boolean): void {
     this.subscriptionGetExportStatus?.unsubscribe();
     this.subscriptionFetchLogs?.unsubscribe();
-
+    this.exportStatus = ExportStatus.RUNNING
     const exportDiv = document.getElementById("exportDiv");
     this.intervall = window.setInterval(() => {
       this.subscriptionGetExportStatus = this.exporterService.getExportStatus(id).subscribe({
