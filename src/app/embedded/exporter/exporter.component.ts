@@ -163,7 +163,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     return new Date(date).getTime().toString();
   }
 
-  executeQuery() {
+  createAndExecuteQuery() {
     this.subscriptionGenerateExport?.unsubscribe();
     this.subscriptionGenerateExport = this.exporterService.generateExport(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.selectedTemplate, this.importTemplate).subscribe({
       next: (response: QBResponse) => {
@@ -191,7 +191,34 @@ export class ExporterComponent implements OnInit, OnDestroy {
       complete: () => {}
     });
   }
-
+  executeQuery() {
+    this.subscriptionGenerateExport?.unsubscribe();
+    this.subscriptionGenerateExport = this.exporterService.executeQuery(this.loadedQueryID, this.selectedOutputFormat, this.selectedTemplate, this.importTemplate).subscribe({
+      next: (response: QBResponse) => {
+        const url = new URL(response.responseUrl)
+        const id = url.searchParams.get("query-execution-id");
+        //this.exportStatus = ExportStatus.RUNNING
+        if (id) {
+          this.router.navigate([this.executionLink, id], {
+            state: {
+              newExecID: id,
+              query: this.query,
+              label: this.queryLabel,
+              description: this.queryDescription,
+              selectedQueryFormat: this.selectedQueryFormat,
+              selectedOutputFormat: this.selectedOutputFormat,
+              selectedTemplate: this.selectedTemplate
+            }
+          })
+          //this.pollingStatusAndLogs(id, false);
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {}
+    });
+  }
   saveQuery() {
     this.subscriptionUpdateQuery?.unsubscribe();
     this.subscriptionCreateQuery?.unsubscribe();
@@ -199,16 +226,19 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.buttonDisabled = true;
 
     if (this.executeOnSaving) {
-      this.executeQuery();
+      this.createAndExecuteQuery();
     } else {
       if (this.loadedQueryID !== "") {
         this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.loadedQueryID, this.queryLabel, this.queryDescription).subscribe({
           next: (response: any) => {
             this.getQueries();
             this.editModus = false;
+            this.buttonDisabled = false;
           },
           error: (error) => {
             console.log(error);
+            this.editModus = false;
+            this.buttonDisabled = false;
           },
           complete: () => {}
         });
@@ -217,9 +247,12 @@ export class ExporterComponent implements OnInit, OnDestroy {
           next: (response: QueryResponse) => {
             this.getQueries();
             this.editModus = false;
+            this.buttonDisabled = false;
           },
           error: (error) => {
             console.log(error);
+            this.editModus = false;
+            this.buttonDisabled = false;
           },
           complete: () => {}
         });

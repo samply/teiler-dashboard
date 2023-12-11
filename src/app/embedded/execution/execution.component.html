@@ -2,24 +2,28 @@
   <div class="title">
     <h2 i18n>Exporter Ausführungen</h2>
   </div>
+  <mat-accordion class="button-accordion">
+    <mat-expansion-panel [(expanded)]="panelOpenState">
+      <mat-expansion-panel-header>
 
-    <div class="create-buttons">
-      <div class="buttons-left">
-        <button class="create-button" mat-raised-button color="primary" (click)=executeQuery() i18n>Anfrage ausführen</button>
-      </div>
-      <div class="buttons-right">
+        <div class="create-buttons">
 
-        <!--<button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>neue Anfrage ausführen</button>-->
-        <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
-          <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
-          <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()">
-            <span i18n>Template auswählen</span>
-          </button>
-          <div class="file-name">{{ fileName }}</div>
+          <button class="create-button" mat-raised-button color="primary" (click)="executeQuery();$event.stopPropagation();" i18n>Anfrage ausführen</button>
+
+            <!--<button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>neue Anfrage ausführen</button>-->
+            <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
+              <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
+              <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click();$event.stopPropagation();">
+                <span i18n>Template auswählen</span>
+              </button>
+              <div class="file-name">{{ fileName }}</div>
+            </div>
+            <button class="download-button" mat-raised-button color="primary" (click)="downloadTemplate();$event.stopPropagation();" [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
+
         </div>
-        <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
-      </div>
-    </div>
+
+      </mat-expansion-panel-header>
+
     <div class="generate-div">
       <div class="query-input">
         <div class="input-left">
@@ -137,7 +141,8 @@
 
   </div>
 
-
+    </mat-expansion-panel>
+  </mat-accordion>
 
   <div>
     <div class="tablex">
@@ -164,7 +169,7 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumnsExecutions"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumnsExecutions;" (click)="loadExecutionData(row)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsExecutions;" (click)="getExecutionDataInBody(row)"></tr>
       </table>
     </div>
     <div class="paginator">

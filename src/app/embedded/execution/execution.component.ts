@@ -8,7 +8,7 @@ import {SelectionModel} from "@angular/cdk/collections";
 import {environment} from "../../../environments/environment";
 import {ExporterService} from "../../teiler/exporter.service";
 import {DropdownFormat} from "../exporter/exporter.component";
-import {Templates} from "../quality-report/quality-report.component";
+import {QBResponse, Templates} from "../quality-report/quality-report.component";
 
 
 export interface ExporterExecutions {
@@ -51,6 +51,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   private subscriptionGetExportStatus: Subscription | undefined
   private subscriptionFetchLogs: Subscription | undefined
   private subscriptionGetQuery: Subscription | undefined
+  private subscriptionExecuteQuery: Subscription | undefined
   queryID: number = 0;
   patients:any[] = [];
   diagnosen:any[] = [];
@@ -196,7 +197,8 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       this.selectedQueryFormat = window.history.state.selectedQueryFormat?.toUpperCase();
       //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
       //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
-      if (window.history.state.newQueryID) {
+      if (window.history.state.newExecID) {
+        this.panelOpenState = true;
         this.buttonDisabled = true;
         this.pollingStatusAndLogs(this.queryID.toString(), false);
       } else {
@@ -216,6 +218,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.subscriptionGetExportStatus?.unsubscribe();
     this.subscriptionFetchLogs?.unsubscribe();
     this.subscriptionGetQuery?.unsubscribe();
+    this.subscriptionExecuteQuery?.unsubscribe();
   }
 
   getQuery(): void {
@@ -264,7 +267,23 @@ export class ExecutionComponent implements OnInit, OnDestroy {
 
   executeQuery(): void {
     this.buttonDisabled = true;
-    this.pollingStatusAndLogs(this.queryID.toString(), false);
+    this.panelOpenState = true;
+    this.subscriptionExecuteQuery?.unsubscribe();
+    this.subscriptionExecuteQuery = this.exporterService.executeQuery(this.queryID.toString(), this.selectedOutputFormat, this.selectedTemplate, this.importTemplate).subscribe({
+      next: (response: QBResponse) => {
+        const url = new URL(response.responseUrl)
+        const id = url.searchParams.get("query-execution-id");
+        //this.exportStatus = ExportStatus.RUNNING
+        if (id) {
+          this.pollingStatusAndLogs(id, false);
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {}
+    });
+
   }
   pollingStatusAndLogs(id: string, init: boolean): void {
     this.subscriptionGetExportStatus?.unsubscribe();
@@ -317,9 +336,9 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       }, 200);
     }
   }
-  loadExecutionData(exec:ExporterExecutions): void {
+  getExecutionDataInBody(exec:ExporterExecutions): void {
     this.subscriptionGetExecution?.unsubscribe();
-    this.subscriptionGetExecution = this.executionService.getExecutionData(exec.id).subscribe({
+    this.subscriptionGetExecution = this.executionService.getExecutionDataInBody(exec.id).subscribe({
       next: (data) => {
         this.subscriptionGetTemplateGraph = this.executionService.getTemplateGraph(exec.id).subscribe({
           next: (templGraph) => {
@@ -332,7 +351,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
           }
         })
 
-        this.getContainerData(data, this.templateGraph);
+        //this.getContainerData(data, this.templateGraph);
 /*
             data[0].Patients.forEach((patient: any) => {
               const diag = [...data[1].Diagnoses.filter((x: any)=> x["Patient-ID"] === patient["Patient-ID"])];  //... = spread operator, shallow copy

@@ -114,9 +114,11 @@ button{
 }
 .buttons-right {
   display: flex;
-  margin-left: auto;
-  right: 60px;
   position: absolute;
+  right: 50px;
+  /*margin-left: auto;
+  right: 60px;
+  position: absolute;*/
 }
 .generate-button-group {
   margin-right: 10px;
@@ -124,7 +126,7 @@ button{
   display: none;
   border-radius: 10px;
 }
-.generate-button, .cancel-button, .download-button, .create-button, .edit-button, .execute-button, .cancel-edit-button, .upload-button {
+.generate-button, .cancel-button, .download-button, .create-button, .edit-button, .execute-button, .cancel-edit-button {
   width: 200px;
   height: 45px;
   padding: 5px;
@@ -134,7 +136,7 @@ button{
 .generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled {
   color: darkgrey!important;
 }
-.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .upload-button {
+.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button {
   background-color: #2BCDD563 !important;
 }
 .download-button, .edit-button, .cancel-edit-button, .upload-button {
@@ -150,7 +152,7 @@ button{
 .file-upload {
   text-transform: none !important;
   width: 200px;
-  height: 55px;
+  height: 45px;
   font-size: 13px;
   color: black!important;
   display: flex;

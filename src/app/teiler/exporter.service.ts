@@ -49,6 +49,7 @@ export class ExporterService extends EmbeddedTeilerApp {
     if (queryDescription && queryDescription !== "") {qDesc = "&query-description=" + queryDescription}
     if (contactID && contactID !== "") {contactid = "&query-contact-id=" + contactID}
     if (templateID === "custom") {
+      const templateBody ="<request><query>" + query + "</query>" + template + "</request>"
       return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc + contactid, template, {headers: this.httpHeadersXML});
     } else {
       return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc + contactid, null, {headers: this.httpHeaders});
@@ -60,12 +61,20 @@ export class ExporterService extends EmbeddedTeilerApp {
     if (queryLabel && queryLabel !== "") { qLabel = "&query-label=" + queryLabel}
     if (queryDescription && queryDescription !== "") { qDesc = "&query-description=" + queryDescription}
     if (templateID === "custom") {
-      return this.http.post<ExportResponse>(this.getExporterURL()+"/request?query="+ query +"&query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc, template, {headers: this.httpHeadersXML});
+      const templateBody ="<request><query>" + query + "</query>" + template + "</request>"
+      return this.http.post<ExportResponse>(this.getExporterURL()+"/request?query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc, templateBody, {headers: this.httpHeadersXML});
     } else {
       return this.http.post<ExportResponse>(this.getExporterURL() + "/request?query="+ query +"&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc, null, {headers: this.httpHeaders});
     }
   }
-
+public executeQuery(queryID: string, outputFormat: string, templateID: string, template?:string ): Observable<ExportResponse> {
+  if (templateID === "custom") {
+    const templateBody ="<request>" + template + "</request>"
+    return this.http.post<ExportResponse>(this.getExporterURL()+"/request?query-id="+ queryID + "&output-format=" + outputFormat, templateBody, {headers: this.httpHeadersXML});
+  } else {
+    return this.http.post<ExportResponse>(this.getExporterURL() + "/request?query-id="+ queryID + "&output-format=" + outputFormat + "&template-id=" + templateID, null, {headers: this.httpHeaders});
+  }
+}
   public updateQuery(queryID: string, queryLabel: string, queryDescription: string): Observable<any> {
     let qLabel: string = "";
     let qDesc: string = "";
