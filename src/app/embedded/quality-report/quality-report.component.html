@@ -57,7 +57,11 @@
 
       <ng-container matColumnDef="link">
         <th mat-header-cell *matHeaderCellDef i18n>Link</th>
-        <td mat-cell *matCellDef="let element" > <a class="download-link" target="_blank" href = "{{reportUrl + 'report?report-id=' + element.id}}"> Download </a></td>
+        <td mat-cell *matCellDef="let element" >
+          <a class="download-link" target="_blank" href = "{{reportUrl + 'report?report-id=' + element.id}}">
+            <i class="link-icon bi bi-download"></i>
+          </a>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -90,8 +90,8 @@ public executeQuery(queryID: string, outputFormat: string, templateID: string, t
   getExportStatus(exexID: string): Observable<ExportStatus> {
     return this.http.get<ExportStatus>(this.getExporterURL()+"/status?query-execution-id=" + exexID ,{headers: this.httpHeaders});
   }
-  public fetchLogs(logSize: number, lastLineRep?: string, lastLineExp?: string): Observable<exportLog[]> {
-    return this.http.get<exportLog[]>(this.getExporterURL()+"/logs?logs-size=" + logSize ,{headers: this.httpHeaders});
+  public fetchLogs(logSize: number, lastLineRep?: string, lastLineExp?: string): Observable<string[]> {
+    return this.http.get<string[]>(this.getExporterURL()+"/logs?logs-size=" + logSize ,{headers: this.httpHeaders});
   }
   getExporterURL(): string | undefined {
     return this.backendUrl;

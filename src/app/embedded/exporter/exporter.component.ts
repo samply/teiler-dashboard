@@ -199,7 +199,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
         const id = url.searchParams.get("query-execution-id");
         //this.exportStatus = ExportStatus.RUNNING
         if (id) {
-          this.router.navigate([this.executionLink, id], {
+          this.router.navigate([this.executionLink, this.loadedQueryID], {
             state: {
               newExecID: id,
               query: this.query,

@@ -23,9 +23,6 @@ table{
 .mat-mdc-row .mat-mdc-cell {
   cursor: pointer;
 }
-.mat-mdc-row:hover .mat-mdc-cell {
-  border-color: red;
-}
 mat-paginator{
   opacity: 0.75;
 }
@@ -256,7 +253,7 @@ button{
 .visible {
   display: block;
 }
-.file-input, .execute-button, .cancel-edit-button, .edit-button {
+.file-input, .execute-button, .cancel-edit-button, .edit-button, .create-button {
   display: none;
 }
 .visible-button {
@@ -273,7 +270,7 @@ button{
   height: 45px;
   display: none;
 }
-.generate-button, .cancel-button, .download-button, .create-button, .edit-button, .execute-button, .cancel-edit-button {
+.generate-button, .cancel-button, .download-button, .create-button, .edit-button, .execute-button, .cancel-edit-button, .cancel-button {
   width: 200px;
   height: 45px;
   padding: 5px;
@@ -283,7 +280,7 @@ button{
 .generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled {
   color: darkgrey!important;
 }
-.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button {
+.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .cancel-button {
   background-color: #2BCDD563 !important;
 }
 .download-button, .edit-button, .cancel-edit-button, .upload-button {
@@ -363,7 +360,7 @@ button{
   margin-right: 15px;
 }
 .link-icon {
-  font-size: 24px;
+  font-size: 22px;
 }
 .button-accordion {
   margin-bottom: 50px;

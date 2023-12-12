@@ -7,8 +7,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import {SelectionModel} from "@angular/cdk/collections";
 import {environment} from "../../../environments/environment";
 import {ExporterService} from "../../teiler/exporter.service";
-import {DropdownFormat} from "../exporter/exporter.component";
-import {QBResponse, Templates} from "../quality-report/quality-report.component";
+import {DropdownFormat, ExportResponse} from "../exporter/exporter.component";
+import {Templates} from "../quality-report/quality-report.component";
 
 
 export interface ExporterExecutions {
@@ -26,17 +26,14 @@ export enum ExportStatus {
   EMPTY = "EMPTY",
   ERROR = "ERROR"
 }
-export interface exportLog {
-  source: string,
-  lastLines: String[]
-}
+
 @Component({
   selector: 'execution',
   templateUrl: './execution.component.html',
   styleUrls: ['./execution.component.css']
 })
 export class ExecutionComponent implements OnInit, OnDestroy {
-  displayedColumnsExecutions: string[] = ['executedAt', 'status', 'templateId', 'outputFormat'];
+  displayedColumnsExecutions: string[] = ['executedAt', 'status', 'templateId', 'outputFormat', 'link'];
   displayedColumnsPatients: string[] = ['#', 'Patient-ID', 'Geschlecht', 'Geburtsdatum', 'Vitalstatus', 'DKTK-ID-Lokal'];
   displayedColumnsDiagnosis: string[] = ['#', 'Diagnosis-ID', 'Primärdiagnose', 'Tumor Diagnosedatum', 'Version des ICD-10-Katalogs'];
   dataSourceExecutions = new MatTableDataSource<ExporterExecutions>();
@@ -59,7 +56,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   selection = new SelectionModel<any>(false, []);
   ExportStatus: typeof ExportStatus = ExportStatus;
   exportStatus: ExportStatus = ExportStatus.EMPTY;
-  exportLog: exportLog[] = [];
+  exportLog: string[] = [];
   buttonDisabled: boolean = false;
   private intervall: number | undefined;
   expirationDate: Date | undefined;
@@ -197,13 +194,13 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       this.selectedQueryFormat = window.history.state.selectedQueryFormat?.toUpperCase();
       //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
       //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
+      this.getQueryExecutions();
       if (window.history.state.newExecID) {
         this.panelOpenState = true;
         this.buttonDisabled = true;
         this.pollingStatusAndLogs(this.queryID.toString(), false);
       } else {
         this.getQuery();
-        this.getQueryExecutions();
       }
     })
     console.log(this.dataSourcePatients.data)
@@ -254,7 +251,6 @@ export class ExecutionComponent implements OnInit, OnDestroy {
             tempExecs.sort((a,b) =>  Number(b.executedAt) - Number(a.executedAt))
             this.dataSourceExecutions.data = tempExecs;
             this.dataSourceExecutions._updateChangeSubscription();
-            console.log(this.dataSourceExecutions.data)
           }
         })
       },
@@ -270,10 +266,10 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.panelOpenState = true;
     this.subscriptionExecuteQuery?.unsubscribe();
     this.subscriptionExecuteQuery = this.exporterService.executeQuery(this.queryID.toString(), this.selectedOutputFormat, this.selectedTemplate, this.importTemplate).subscribe({
-      next: (response: QBResponse) => {
+      next: (response: ExportResponse) => {
         const url = new URL(response.responseUrl)
         const id = url.searchParams.get("query-execution-id");
-        //this.exportStatus = ExportStatus.RUNNING
+        this.exportStatus = ExportStatus.RUNNING
         if (id) {
           this.pollingStatusAndLogs(id, false);
         }
@@ -300,8 +296,11 @@ export class ExecutionComponent implements OnInit, OnDestroy {
             this.buttonDisabled = false;
             if (status === ExportStatus.OK && !init) {
               this.exportLog = [];
-              //this.downloadReport(id);
-              this.getQueryExecutions();
+              this.downloadExport(id);
+              setTimeout(() => {
+                this.getQueryExecutions();
+              }, 2000);
+
             }
           }
         },
@@ -314,6 +313,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
         init = false;
         this.subscriptionFetchLogs = this.exporterService.fetchLogs(1000).subscribe({
           next: (response) => {
+            console.log(response)
             this.exportLog = response;
             this.scrollToEndOfLog(exportDiv)
           },
@@ -415,6 +415,12 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.importTemplate = event.target.result;
     this.generateExport();
   }
+
+  cancelExecution(): void {
+    window.clearInterval(this.intervall);
+    this.buttonDisabled = false;
+    this.exportStatus = ExportStatus.EMPTY;
+  }
   switchToPatient():void {
     this.displayedColumnsPatients = ['Patient-ID', 'Geschlecht', 'Geburtsdatum', 'Vitalstatus'];
     this.dataSourcePatients.data = this.patients;
@@ -482,5 +488,8 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   }
   downloadTemplate(): void {
     window.location.href = this.exportUrl + 'template?template-id=' + this.selectedTemplate;
+  }
+  downloadExport(id: string): void {
+    window.location.href=this.exportUrl + 'response?query-execution-id=' + id;
   }
 }
