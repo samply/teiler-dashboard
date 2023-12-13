@@ -50,7 +50,7 @@
                   </div>
                 </ng-template>
                 <a mat-list-item routerLink="{{'/'+teilerApp.routerLink}}"
-                   [externalLink]="teilerApp.sourceUrl??''" class="sidebar-text">{{teilerApp.title}}</a>
+                   [externalLinkBlank]="teilerApp.sourceUrl??''" class="sidebar-text">{{teilerApp.title}}</a>
               </div>
             </div>
           </div>
@@ -593,4 +593,3 @@
     </div>
   </div>
 </div>
-
