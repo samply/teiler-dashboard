@@ -1,0 +1,17 @@
+.wrapper {
+  margin: auto;
+  width: 80%;
+  margin-top: 10%;
+  font-size: 120%;
+  margin-bottom: 3%;
+  /** Hinterlegung vom Text
+  opacity: 1;
+  padding: 2.5%;
+  background: rgba(255,255,255,0.5);
+   */
+}
+
+h2{
+  font-size: 150%;
+  margin-bottom: 2%;
+}

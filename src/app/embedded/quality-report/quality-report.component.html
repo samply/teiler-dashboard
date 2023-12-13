@@ -1,0 +1,79 @@
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
+<div class="main">
+  <div class="title">
+    <h2 i18n>Qualit&auml;tsbericht</h2>
+  </div>
+  <div class="generate-div">
+    <div class="button-status">
+      <mat-form-field class="template_dropdown">
+        <mat-label>Template</mat-label>
+        <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" (ngModelChange)="changeTemplateSelection()" [disabled]="buttonDisabled">
+          <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
+        </select>
+      </mat-form-field>
+      <button class="cancel-button" mat-raised-button color="primary" (click)=cancelQB() [ngClass]="{ 'visible-button': buttonDisabled }" i18n>abbrechen</button>
+      <button class="generate-button" mat-raised-button color="primary" (click)=generateQB() [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && !buttonDisabled) }" i18n>neuen Report generieren</button>
+      <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
+        <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
+        <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled">
+          <span i18n>Template auswählen und neuen Report generieren</span>
+        </button>
+      </div>
+      <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
+
+      <div class="status">
+        <ng-container *ngIf="qbStatus === QBStatus.EMPTY"><span class="status-empty"></span></ng-container>
+        <ng-container *ngIf="qbStatus === QBStatus.RUNNING"><span class="status-running" i18n>Report wird erstellt ...</span></ng-container>
+        <ng-container *ngIf="qbStatus === QBStatus.OK"><span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span></ng-container>
+        <ng-container *ngIf="qbStatus === QBStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span></ng-container>
+        <ng-container *ngIf="qbStatus === QBStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span></ng-container>
+      </div>
+    </div>
+    <div class="log-div">
+      <div class="log-reporter" [ngClass]="{ 'visible': buttonDisabled }">
+        <div class="log-header">Reporter Log:</div>
+        <div id="reportDiv" class="log-reports"><div *ngFor="let log of reportLog[0]?.lastLines">{{log}}</div></div>
+      </div>
+      <div class="log-exporter" [ngClass]="{ 'visible': buttonDisabled }">
+        <div class="log-header">Exporter Log:</div>
+        <div id="exportDiv" class="log-reports"><div *ngFor="let log of reportLog[1]?.lastLines">{{log}}</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tablex">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef><div i18n>Zeitstempel</div> </th>
+        <td mat-cell *matCellDef="let element"> {{element.timestamp | date: 'medium'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="templateid">
+        <th mat-header-cell *matHeaderCellDef><div i18n>Template-ID</div> </th>
+        <td mat-cell *matCellDef="let element"> {{element['template-id']}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="link">
+        <th mat-header-cell *matHeaderCellDef i18n>Link</th>
+        <td mat-cell *matCellDef="let element" >
+          <a class="download-link" target="_blank" href = "{{reportUrl + 'report?report-id=' + element.id}}">
+            <i class="link-icon bi bi-download"></i>
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div class="paginator">
+    <mat-paginator
+      #paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5,10,25,100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

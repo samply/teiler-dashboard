@@ -1,0 +1,89 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+/*@import "~bootstrap-icons/font/bootstrap-icons.css";*/
+
+.main{
+  width: 80%;
+  margin-left:auto;
+  margin-right:auto;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  border-bottom: 3px solid black;
+  margin-bottom: 20px;
+}
+h2{
+  text-align: left;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: 30px;
+  margin-top: 1.5%;
+}
+.line{
+  color: lightgrey;
+}
+
+.x1{
+  margin-top: 1%;
+  width:100%;
+  text-align: left;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: 18px;
+  padding: 0.5%;
+}
+.inhalt{
+  text-align: left;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: 14px;
+}
+.inside{
+  width:99%;
+  padding: 1%;
+  float:left;
+}
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+/*TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+mat-card {
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  padding-right: 2%;
+}
+.float{
+  width: 49%;
+  margin-top: 2%;
+  float: left;
+  margin-bottom: 2%;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size:14px;
+}
+
+button{
+  background-color: royalblue;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  color: white;
+  padding: 0.01%;
+  margin-left: 85%;
+}
+.infb{
+  background-color: lightgrey;
+  margin-right:3%;
+}
+
+h3{
+  text-align: left;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: 22px;
+  margin-top: 1.5%;
+}
+.icons{
+  color: limegreen;
+  font-size: 600%;
+}
+.one{
+  font-family: Roboto, Helvetica Neue, sans-serif;
+margin-top:26%;
+}
+.two{
+  margin-top: 29%;
+}
+.three{
+  margin-top:25%;
+}

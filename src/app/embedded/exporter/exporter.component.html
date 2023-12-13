@@ -1,0 +1,199 @@
+<div class="main">
+  <div class="title">
+    <h2 i18n>Exporter Anfragen</h2>
+  </div>
+  <mat-accordion class="button-accordion">
+    <mat-expansion-panel [(expanded)]="panelOpenState">
+      <mat-expansion-panel-header>
+
+        <div class="create-buttons">
+          <div class="buttons-left">
+            <button class="create-button" mat-raised-button color="primary" [disabled]="editModus" (click)="createNewQuery();$event.stopPropagation();" i18n>neue Anfrage erstellen</button>
+            <button class="edit-button" mat-raised-button color="primary" [disabled]="editButtonDisabled" [ngClass]="{ 'visible-button': ((!editButtonDisabled || panelOpenState ) && !editModus) }" (click)="editQuery();$event.stopPropagation();" i18n>Anfrage editieren</button>
+            <button class="cancel-edit-button" mat-raised-button color="primary" [ngClass]="{ 'visible-button': (editModus) }" (click)="cancelEdit();$event.stopPropagation();" i18n>abbrechen</button>
+          </div>
+          <div class="buttons-right">
+            <button class="execute-button" mat-raised-button color="primary" [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': ((!buttonDisabled || panelOpenState) && !editModus) }" (click)="executeQuery();$event.stopPropagation();" i18n>Anfrage ausführen</button>
+            <mat-button-toggle-group class="generate-button-group" [ngClass]="{ 'visible-button-group': (editModus) }" >
+              <mat-button-toggle class="generate-button" (click)="saveQuery();$event.stopPropagation();" [disabled]="buttonDisabled">{{saveButtonText.get(executeOnSaving)}}</mat-button-toggle>
+              <mat-button-toggle class="generate-button-dropdown drop-down-button" (click) = "$event.stopPropagation();" [disabled]="buttonDisabled" [matMenuTriggerFor]="dropdownMenuOne">
+                <i class="bi bi-caret-down-fill"></i>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <mat-menu #dropdownMenuOne="matMenu">
+              <button mat-menu-item (click)="saveButtonMenu(false)">{{saveButtonText.get(false)}}</button>
+              <button mat-menu-item (click)="saveButtonMenu(true)">{{saveButtonText.get(true)}}</button>
+            </mat-menu>
+            <!--<button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>neue Anfrage ausführen</button>-->
+            <div class="upload-button" [ngClass]="{ 'visible': (selectedTemplate === 'custom' && panelOpenState) }">
+              <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
+              <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click();$event.stopPropagation();">
+                <span i18n>Template auswählen</span>
+              </button>
+              <div class="file-name">{{ fileName }}</div>
+            </div>
+            <button class="download-button" mat-raised-button color="primary" (click)="downloadTemplate();$event.stopPropagation();" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && panelOpenState) }" i18n>Template herunterladen</button>
+          </div>
+        </div>
+
+      </mat-expansion-panel-header>
+
+      <div class="generate-div">
+        <div class="query-input">
+          <div class="input-left">
+            <mat-form-field appearance="outline" class="query-label">
+              <mat-label>Titel</mat-label>
+              <input
+                matInput
+                type="text"
+                [(ngModel)]="queryLabel"
+                (ngModelChange)="generateButtonStatus()"
+                [disabled] = "!editModus"
+              />
+            </mat-form-field>
+            <!--<mat-form-field class="query-textfield">
+              <mat-label>Beschreibung</mat-label>
+              <textarea
+                matInput
+                [(ngModel)]="queryDescription"
+                (ngModelChange)="generateButtonStatus()"
+                [disabled] = "!editModus"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="2"
+                cdkAutosizeMaxRows="5"
+              ></textarea>
+            </mat-form-field>-->
+            <div>
+              <div>Beschreibung</div>
+              <textarea
+                class="query-textfield"
+                name="query-textfield"
+                rows="6"
+                cols="40"
+                [(ngModel)]="queryDescription"
+                (ngModelChange)="generateButtonStatus()"
+                [disabled] = "!editModus"
+              ></textarea>
+            </div>
+          </div>
+          <div>
+            <div>Anfrage</div>
+            <textarea
+              class="query-textfield"
+              name="query-textfield"
+              rows="13"
+              cols="50"
+              [(ngModel)]="query"
+              (ngModelChange)="generateButtonStatus()"
+              [disabled] = "!editModus"
+            ></textarea>
+          </div>
+          <div class="query-input-right">
+            <div class="dropdowns">
+              <div class="dropdowns-left">
+                <mat-form-field class="queryformat_dropdown">
+                  <mat-label>Anfrageformat</mat-label>
+                  <select class="queryformat-select" matNativeControl required [(ngModel)]="selectedQueryFormat" [disabled] = "!editModus">
+                    <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
+                  </select>
+                </mat-form-field>
+                <mat-form-field class="outputformat_dropdown">
+                  <mat-label>Ausgabeformat</mat-label>
+                  <select class="outputformat-select" matNativeControl required [(ngModel)]="selectedOutputFormat" >
+                    <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
+                  </select>
+                </mat-form-field>
+                <mat-form-field class="template_dropdown">
+                  <mat-label>Template</mat-label>
+                  <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" >
+                    <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
+                  </select>
+                </mat-form-field>
+              </div>
+              <div class="dropdowns-right">
+                <mat-form-field appearance="outline" class="query-expiration-date">
+                  <mat-label>Ablaufdatum</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="dateStartPicker"
+                    [(ngModel)]="expirationDate"
+                    [disabled] = "!editModus"
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #dateStartPicker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="query-contactid">
+                  <mat-label i18n>Anfragende</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [(ngModel)]="contactID"
+                    [disabled] = "true"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="tablex">
+    <section class="query-selection">
+      <mat-checkbox class="active-queries" [(ngModel)]="activeQueries" (change)="filterQueries()" i18n>aktive Anfragen</mat-checkbox>
+      <mat-checkbox class="archived-queries" [(ngModel)]="archivedQueries" (change)="filterQueries()" i18n>archivierte Anfragen</mat-checkbox>
+    </section>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="#">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="toggleCheckbox($event, row)"
+                        [checked]="selection.isSelected(row)"
+                        [disabled]="editModus"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef><div i18n>Zeitstempel</div> </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'medium'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="querytitle">
+        <th mat-header-cell *matHeaderCellDef><div i18n>Label</div> </th>
+        <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="querysource">
+        <th mat-header-cell *matHeaderCellDef><div i18n>Anfrage</div> </th>
+        <td mat-cell *matCellDef="let element"> {{element.query}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="format">
+        <th mat-header-cell *matHeaderCellDef i18n>Format</th>
+        <td mat-cell *matCellDef="let element" > {{element.format}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="executions">
+        <th mat-header-cell class="table-link-column" *matHeaderCellDef i18n>Ausführungen</th>
+        <td mat-cell class="table-link-column" *matCellDef="let element" > <a [routerLink]="['/' + executionLink, element.id]"><i class="link-icon bi bi-box-arrow-in-right"></i></a> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleCheckbox($event, row)"></tr>
+    </table>
+  </div>
+  <div class="paginator">
+    <mat-paginator
+      #paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5,10,25,100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

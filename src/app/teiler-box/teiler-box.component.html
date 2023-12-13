@@ -1,0 +1,20 @@
+
+<div class="teiler-box">
+  <div class="text">
+    <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
+      <i class="{{teilerApp.iconClass}}" ></i>
+    </div>
+    <div class="teiler-box-image" *ngIf="teilerApp.iconSourceUrl != undefined">
+      <img alt="" src="{{teilerApp.iconSourceUrl}}">
+    </div>
+    <h3>{{teilerApp.title}}</h3>
+    <div class="strich">
+      <hr>
+    </div>
+    <p class="teiler-box-description">{{teilerApp.description}}</p>
+  </div>
+  <div class="icon-footer">
+  <i class="{{getCheckIconClass()}}" title="{{getCheckIconTitle()}}"></i>
+  </div>
+</div>
+

@@ -1,0 +1,15 @@
+<div class="translate-wrapper">
+
+  <button mat-icon-button (click)="toggleLanguageMenu()">
+    <i class="bi bi-translate"></i>
+  </button>
+
+  <div class="menu-wrapper" *ngIf="menuVisible">
+    <div class="menu-item" *ngFor="let languageHref of getAvailableLanguageHrefs()">
+      <a routerLink="/placeholder" [externalLink]="languageHref.href">
+        <span>{{languageHref.language}}</span>
+      </a>
+    </div>
+  </div>
+  
+</div>

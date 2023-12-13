@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+:root {
+    --color-blue: #1B9AAA;
+    --color-yellow: #FFC43D;
+    --color-pink: #EF476F;
+    --color-green: #06D6A0;
+}
+

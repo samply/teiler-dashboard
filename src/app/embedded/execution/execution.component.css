@@ -1,0 +1,375 @@
+.main{
+  width: 80%;
+  margin-left:auto;
+  margin-right:auto;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  border-bottom: 3px solid black;
+  margin-bottom: 20px;
+}
+h2{
+  text-align: left;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  font-size: 30px;
+  margin-top: 1.5%;
+}
+table{
+  text-align: center;
+  width: 100%;
+  margin-top: 2%;
+}
+.mat-mdc-row .mat-mdc-cell {
+  cursor: pointer;
+  max-width: 200px;
+  white-space: nowrap;
+}
+.mat-mdc-header-cell {
+  background-color: #2BCDD563!important;
+}
+mat-paginator{
+  opacity: 0.75;
+}
+button{
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 1.5%;
+  background-color: white!important;
+}
+.generate-div {
+  margin-top: 1.5%;
+  margin-bottom: 2%;
+  text-align: left;
+  font-size: 14px;
+  width: 100%;
+}
+.log-div {
+  margin-top: 20px;
+  display:flex;
+}
+.button-status {
+  display: flex;
+  margin-top: 10px;
+}
+.status {
+  margin: 1.4% 0 0 3%;
+}
+.log-exporter {
+  border: 1px solid #333333;
+  width: 49%;
+  padding: 1% 2%;
+  background-color: white;
+  height: 300px;
+  display: none;
+  margin-top: 20px;
+}
+
+.log-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.log-reports {
+  height: 250px;
+  max-height: 300px;
+  overflow: auto;
+}
+.matinput {
+  margin-left: 2%;
+}
+.matinput input {
+  border:1px solid dimgrey;
+  min-width: 45%;
+  border-radius:4px;
+  padding: 2px;
+}
+.mat-column-version {
+  font-size: 115%;
+  text-align: center;
+}
+.upload-button, .download-button, .generate-button, .cancel-button {
+  display: none;
+}
+.download-button-div {
+  width: 10%;
+  margin-top: 15px;
+}
+.visible {
+  display: block;
+}
+.visible-button {
+  display: flex;
+}
+.file-input {
+  display: none;
+}
+.generate-button, .cancel-button, .download-button {
+  width: 200px;
+  height: 50px;
+  padding: 5px;
+  font-size: 14px;
+}
+.generate-button {
+  background-color: #2BCDD563 !important;
+}
+.download-button {
+  margin-left: 2%;
+}
+.file-upload {
+  text-transform: none !important;
+  width: 200px;
+  height: 55px;
+  font-size: 13px;
+  color: black;
+  display: flex;
+  padding: 5px;
+  background-color: #2BCDD563 !important;
+}
+.file-upload-text {
+  margin: 8px 5px;
+}
+.file-name {
+  color: black;
+  margin: 5px;
+  height: 20px;
+}
+.template_dropdown, .outputformat_dropdown {
+  margin: 0 2%;
+  /*width: 20%;*/
+}
+
+.template-select, .outputformat-select {
+  margin-top: 5px;
+}
+.download-link {
+  font-weight: bold;
+  color: #0AADB5;
+}
+.query-input {
+  display: flex;
+  margin-bottom: 30px;
+}
+.query-input-right {
+  display: grid;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+::ng-deep .query-label .mat-mdc-text-field-wrapper, ::ng-deep .query-expiration-date .mat-mdc-text-field-wrapper {
+  flex: unset!important;
+}
+.query-label {
+  width: 100%;
+}
+.input-left {
+  margin-right: 30px;
+  margin-top: 20px;
+}
+.dropdowns {
+  display: flex;
+}
+.accordion {
+  margin-top: 7em;
+}
+.patient-container {
+  height: 400px;
+  overflow: auto;
+}
+@media(max-width : 1400px){
+  .main{
+    width: 80%;
+    margin-left:auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  cursor: pointer;
+}
+.mat-mdc-row:hover .mat-mdc-cell {
+  background-color: #2BCDD563;
+}
+
+button{
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 1.5%;
+  background-color: white!important;
+}
+.generate-div {
+  margin-top: 1.5%;
+  margin-bottom: 2%;
+  text-align: left;
+  font-size: 14px;
+  width: 100%;
+}
+.log-div {
+  margin-top: 20px;
+  display:flex;
+}
+.button-status {
+  display: flex;
+  margin-top: 10px;
+}
+.status {
+  margin: 1.4% 0 0 3%;
+}
+.log-exporter, .log-reporter {
+  border: 1px solid #333333;
+  width: 49%;
+  padding: 1% 2%;
+  background-color: white;
+  height: 300px;
+  display: none;
+}
+.log-exporter {
+  margin-left: 2%;
+}
+.log-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.log-reports {
+  height: 250px;
+  max-height: 300px;
+  overflow: auto;
+}
+.matinput {
+  margin-left: 2%;
+}
+.matinput input {
+  border:1px solid dimgrey;
+  min-width: 45%;
+  border-radius:4px;
+  padding: 2px;
+}
+.mat-column-version {
+  font-size: 115%;
+  text-align: center;
+}
+
+.download-button-div {
+  width: 10%;
+  margin-top: 15px;
+}
+.visible {
+  display: block;
+}
+.file-input, .execute-button, .cancel-edit-button, .edit-button, .create-button {
+  display: none;
+}
+.visible-button {
+  display: inline-flex;
+}
+.create-buttons {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.generate-button-group {
+  margin-right: 10px;
+  height: 45px;
+  display: none;
+}
+.generate-button, .cancel-button, .download-button, .create-button, .edit-button, .execute-button, .cancel-edit-button, .cancel-button {
+  width: 200px;
+  height: 45px;
+  padding: 5px;
+  font-size: 14px;
+  color: black!important;
+}
+.generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled {
+  color: darkgrey!important;
+}
+.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .cancel-button {
+  background-color: #2BCDD563 !important;
+}
+.download-button, .edit-button, .cancel-edit-button, .upload-button {
+  margin-left: 2%;
+}
+.visible-button-group {
+  display: inline-flex;
+}
+.file-upload {
+  text-transform: none !important;
+  width: 200px;
+  height: 45px;
+  font-size: 13px;
+  color: black!important;
+  display: flex;
+  padding: 5px;
+  background-color: #2BCDD563 !important;
+}
+.file-upload-text {
+  margin: 8px 5px;
+}
+.file-name {
+  color: black;
+  margin: 5px;
+  height: 20px;
+}
+.template_dropdown, .outputformat_dropdown {
+  margin: 0 2%;
+  /*width: 20%;*/
+}
+.mat-mdc-menu-item {
+  color: black;
+}
+::ng-deep .query-input .mat-mdc-text-field-wrapper {
+  background-color: #f5f5f5;
+  min-width: 300px;
+}
+
+.download-link {
+  font-weight: bold;
+  color: #0AADB5;
+}
+.query-input {
+  display: flex;
+  margin-bottom: 30px;
+  max-width: 1250px;
+}
+.query-input-right {
+  display: grid;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.query-label {
+  width: 100%;
+}
+.input-left {
+  margin-right: 30px;
+  margin-top: 20px;
+}
+.dropdowns {
+  display: flex;
+}
+.dropdowns-left {
+  margin-right: 20px;
+}
+.query-contactid {
+  font-size: 15px;
+}
+::ng-deep .query-input .mat-mdc-form-field-infix {
+  padding-top: 18px!important;
+  padding-bottom: 2px!important;
+}
+::ng-deep .query-selection .mdc-label {
+  padding-left: 0;
+}
+::ng-deep .query-selection .mat-mdc-checkbox {
+  margin-right: 15px;
+}
+.link-icon {
+  font-size: 22px;
+}
+.button-accordion {
+  margin-bottom: 50px;
+}
+mat-expansion-panel-header {
+  padding: 15px 20px 25px 20px;
+}
