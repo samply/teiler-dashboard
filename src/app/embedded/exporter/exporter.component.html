@@ -181,7 +181,7 @@
 
       <ng-container matColumnDef="executions">
         <th mat-header-cell class="table-link-column" *matHeaderCellDef i18n>Ausführungen</th>
-        <td mat-cell class="table-link-column" *matCellDef="let element" > <a [routerLink]="['/' + executionLink, element.id]"><i class="link-icon bi bi-box-arrow-in-right"></i></a> </td>
+        <td mat-cell class="table-link-column" *matCellDef="let element" > <a routerLink="{{getRouterLink(element.id)}}"><i class="link-icon bi bi-box-arrow-in-right"></i></a> </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
