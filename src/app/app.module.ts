@@ -45,6 +45,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
     SidebarComponent,
     TeilerAppPluginOrchestratorComponent,
     ExternalLinkDirective,
+    ExternalLinkBlankDirective,
     TeilerBoxComponent,
     TeilerWelcomeComponent
   ],
