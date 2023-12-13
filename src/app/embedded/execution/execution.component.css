@@ -22,6 +22,11 @@ table{
 }
 .mat-mdc-row .mat-mdc-cell {
   cursor: pointer;
+  max-width: 200px;
+  white-space: nowrap;
+}
+.mat-mdc-header-cell {
+  background-color: #2BCDD563!important;
 }
 mat-paginator{
   opacity: 0.75;
