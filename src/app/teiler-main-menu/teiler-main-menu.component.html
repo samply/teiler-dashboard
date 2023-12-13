@@ -75,7 +75,7 @@
                       </a>
                     </div>
                     <div *ngIf="teilerApp.externLink">
-                      <a target="_blank" routerLink="{{'/'+teilerApp.routerLink}}" [externalLink]="teilerApp.sourceUrl??''">
+                      <a routerLink="{{'/'+teilerApp.routerLink}}" [externalLink]="teilerApp.sourceUrl??''">
                         <teiler-box [teilerApp]="teilerApp"></teiler-box>
                       </a>
                     </div>

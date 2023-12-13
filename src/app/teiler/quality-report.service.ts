@@ -16,10 +16,10 @@ export interface reportLog {
 })
 export class QualityReportService extends EmbeddedTeilerApp {
 
-  description: string = $localize`Qualitätsberichte erzeugen und ansehen`;
+  description: string = $localize`Nutzen Sie den Reporter, um detaillierte Berichte zu erstellen. Erkennen Sie Auffälligkeiten und Abweichungen von Spezifikationen in Ihren Daten im Form eines Qualitätsberichts.`;
   iconClass: string = "bi bi-file-earmark-excel-fill";
   iconSourceUrl: string | undefined = undefined;
-  title: string = $localize`Qualitätsbericht`;
+  title: string = $localize`Reporter`;
   roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
   httpHeaders: HttpHeaders = new HttpHeaders();
   httpHeadersXML: HttpHeaders = new HttpHeaders().append("Content-Type",  "application/xml");
