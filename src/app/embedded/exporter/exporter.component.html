@@ -143,8 +143,8 @@
 
   <div class="tablex">
     <section class="query-selection">
-      <mat-checkbox class="active-queries" [(ngModel)]="activeQueries" (change)="filterQueries()" i18n>aktive Queries</mat-checkbox>
-      <mat-checkbox class="archived-queries" [(ngModel)]="archivedQueries" (change)="filterQueries()" i18n>archivierte Queries</mat-checkbox>
+      <mat-checkbox class="active-queries" [(ngModel)]="activeQueries" (change)="filterQueries()" i18n>aktive Anfragen</mat-checkbox>
+      <mat-checkbox class="archived-queries" [(ngModel)]="archivedQueries" (change)="filterQueries()" i18n>archivierte Anfragen</mat-checkbox>
     </section>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

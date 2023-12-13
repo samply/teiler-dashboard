@@ -16,7 +16,7 @@ export interface reportLog {
 })
 export class QualityReportService extends EmbeddedTeilerApp {
 
-  description: string = $localize`Nutzen Sie den Reporter, um detaillierte Berichte sowie spezifizierte Qualitätsreports zu erstellen`;
+  description: string = $localize`Nutzen Sie den Reporter, um detaillierte Berichte sowie spezifizierte Qualitätsreports zu erstellen.`;
   iconClass: string = "bi bi-file-earmark-excel-fill";
   iconSourceUrl: string | undefined = undefined;
   title: string = $localize`Reporter`;

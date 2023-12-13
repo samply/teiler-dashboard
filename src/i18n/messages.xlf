@@ -233,20 +233,20 @@
         <source>Anfragende</source>
       </segment>
     </unit>
-    <unit id="491713908766645694">
+    <unit id="2418404773112079564">
       <notes>
         <note category="location">src/app/embedded/exporter/exporter.component.html:146</note>
       </notes>
       <segment>
-        <source>aktive Queries</source>
+        <source>aktive Anfragen</source>
       </segment>
     </unit>
-    <unit id="77444127256497041">
+    <unit id="3304523725276948030">
       <notes>
         <note category="location">src/app/embedded/exporter/exporter.component.html:147</note>
       </notes>
       <segment>
-        <source>archivierte Queries</source>
+        <source>archivierte Anfragen</source>
       </segment>
     </unit>
     <unit id="4077520913910941990">
@@ -965,12 +965,12 @@
         <source>Tests</source>
       </segment>
     </unit>
-    <unit id="3280981187253880523">
+    <unit id="8646600000800724551">
       <notes>
         <note category="location">src/app/teiler/quality-report.service.ts:19</note>
       </notes>
       <segment>
-        <source>Nutzen Sie den Reporter, um detaillierte Berichte sowie spezifizierte Qualitätsreports zu erstellen</source>
+        <source>Nutzen Sie den Reporter, um detaillierte Berichte sowie spezifizierte Qualitätsreports zu erstellen.</source>
       </segment>
     </unit>
     <unit id="730589419287534524">
