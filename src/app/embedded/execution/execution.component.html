@@ -18,7 +18,7 @@
               </button>
               <div class="file-name">{{ fileName }}</div>
             </div>
-            <button class="download-button" mat-raised-button color="primary" (click)="downloadTemplate();$event.stopPropagation();" [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
+            <button class="download-button" mat-raised-button color="primary" (click)="downloadTemplate();$event.stopPropagation();" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && panelOpenState) }" i18n>Template herunterladen</button>
 
         </div>
 

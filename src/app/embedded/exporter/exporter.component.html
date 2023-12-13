@@ -9,11 +9,11 @@
         <div class="create-buttons">
           <div class="buttons-left">
             <button class="create-button" mat-raised-button color="primary" [disabled]="editModus" (click)="createNewQuery();$event.stopPropagation();" i18n>neue Anfrage erstellen</button>
-            <button class="edit-button" mat-raised-button color="primary" [disabled]="editButtonDisabled" [ngClass]="{ 'visible-button': (!editModus) }" (click)="editQuery();$event.stopPropagation();" i18n>Anfrage editieren</button>
+            <button class="edit-button" mat-raised-button color="primary" [disabled]="editButtonDisabled" [ngClass]="{ 'visible-button': ((!editButtonDisabled || panelOpenState ) && !editModus) }" (click)="editQuery();$event.stopPropagation();" i18n>Anfrage editieren</button>
             <button class="cancel-edit-button" mat-raised-button color="primary" [ngClass]="{ 'visible-button': (editModus) }" (click)="cancelEdit();$event.stopPropagation();" i18n>abbrechen</button>
           </div>
           <div class="buttons-right">
-            <button class="execute-button" mat-raised-button color="primary" [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (!editModus) }" (click)="executeQuery();$event.stopPropagation();" i18n>Anfrage ausführen</button>
+            <button class="execute-button" mat-raised-button color="primary" [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': ((!buttonDisabled || panelOpenState) && !editModus) }" (click)="executeQuery();$event.stopPropagation();" i18n>Anfrage ausführen</button>
             <mat-button-toggle-group class="generate-button-group" [ngClass]="{ 'visible-button-group': (editModus) }" >
               <mat-button-toggle class="generate-button" (click)="saveQuery();$event.stopPropagation();" [disabled]="buttonDisabled">{{saveButtonText.get(executeOnSaving)}}</mat-button-toggle>
               <mat-button-toggle class="generate-button-dropdown drop-down-button" (click) = "$event.stopPropagation();" [disabled]="buttonDisabled" [matMenuTriggerFor]="dropdownMenuOne">
@@ -26,14 +26,14 @@
               <button mat-menu-item (click)="saveButtonMenu(true)">{{saveButtonText.get(true)}}</button>
             </mat-menu>
             <!--<button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>neue Anfrage ausführen</button>-->
-            <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
+            <div class="upload-button" [ngClass]="{ 'visible': (selectedTemplate === 'custom' && panelOpenState) }">
               <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
               <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click();$event.stopPropagation();">
                 <span i18n>Template auswählen</span>
               </button>
               <div class="file-name">{{ fileName }}</div>
             </div>
-            <button class="download-button" mat-raised-button color="primary" (click)="downloadTemplate();$event.stopPropagation();" [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
+            <button class="download-button" mat-raised-button color="primary" (click)="downloadTemplate();$event.stopPropagation();" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && panelOpenState) }" i18n>Template herunterladen</button>
           </div>
         </div>
 
