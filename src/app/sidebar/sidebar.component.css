@@ -74,8 +74,12 @@
   margin-left: 5px;
   margin-top: 12px;
 }
+.teiler-box-image {
+  width: 35px;
+  overflow: clip;
+}
 .teiler-box-icon {
-  width: 25px;
+  width: 30px;
 }
 .sidebar-text {
   width: 230px;
@@ -86,6 +90,9 @@
   margin-top: 10px;
   display: block;
   font-size: 24px;
+}
+.home-button {
+  font-weight: bold;
 }
 @media screen and (min-width: 769px) {
 

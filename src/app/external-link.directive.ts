@@ -10,8 +10,8 @@ export class ExternalLinkDirective {
 
   constructor(private routerLinkWithHref: RouterLink) {
     routerLinkWithHref.onClick = () => {
-      if (this.externalLink != null && this.externalLink != undefined && this.externalLink.length > 0){
-        window.location.href=this.externalLink;
+      if (this.externalLink != null && this.externalLink != undefined && this.externalLink.length > 0) {
+        window.open(this.externalLink, '_blank');
         return false;
       }
       return true;

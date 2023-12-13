@@ -20,7 +20,9 @@ export enum EmbeddedTeilerApps {
   DIALOG_QUALI = 'dialog-quali',
   DIALOG_UPLOADS ='dialog-uploads',
   INQUIRY_DIALOG = 'inquiry-dialog',
-  DIALOG_TESTS = 'dialog-tests'
+  DIALOG_TESTS = 'dialog-tests',
+	EXPORTER = 'exporter',
+	EXECUTION = 'execution'
 }
 
 export enum BackgroundColors {

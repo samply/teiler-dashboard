@@ -15,6 +15,8 @@ import {DialogUploadsService} from "./dialog-uploads.service";
 import {DialogQualiService} from "./dialog-quali.service";
 import {InquiryDialogService} from "./inquiry-dialog.service";
 import {DialogTestsService} from "./dialog-tests.service";
+import {ExporterService} from "./exporter.service";
+import {ExecutionService} from "./execution.service";
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import {DialogTestsService} from "./dialog-tests.service";
     DialogUploadsService,
     DialogQualiService,
     InquiryDialogService,
-    DialogTestsService]
+    DialogTestsService,
+		ExporterService,
+		ExecutionService]
 })
 export class TeilerModule {
 }

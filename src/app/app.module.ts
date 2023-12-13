@@ -11,7 +11,7 @@ import {AppComponent} from './app.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from "@angular/material/list";
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
+
 import {MatSelectModule} from "@angular/material/select";
 import {HttpClientModule} from "@angular/common/http";
 import {
@@ -40,6 +40,11 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ColorSchemeService} from "./color-scheme.service";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 @NgModule({
   declarations: [
@@ -51,40 +56,44 @@ import {ColorSchemeService} from "./color-scheme.service";
     TeilerBoxComponent,
     TeilerWelcomeComponent
   ],
-  imports: [
-    AppRoutingModule,
-    BarChartModule,
-    BrowserModule,
-    FlexLayoutModule,
-    FormsModule,
-    HttpClientModule,
-    KeycloakAngularModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatStepperModule,
-    MatTabsModule,
-    MatTableModule,
-    MatToolbarModule,
-    NoopAnimationsModule,
-    ParcelModule,
-    ReactiveFormsModule,
-    TeilerModule,
+    imports: [
+        AppRoutingModule,
+        BarChartModule,
+        BrowserModule,
+        FlexLayoutModule,
+        FormsModule,
+        HttpClientModule,
+        KeycloakAngularModule,
+        MatButtonModule,
+        MatCardModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatStepperModule,
+        MatTabsModule,
+        MatTableModule,
+        MatToolbarModule,
+        NoopAnimationsModule,
+        ParcelModule,
+        ReactiveFormsModule,
+        TeilerModule,
+        MatCheckboxModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatButtonToggleModule
 
-  ],
+    ],
   providers: [
     ColorSchemeService,
     {

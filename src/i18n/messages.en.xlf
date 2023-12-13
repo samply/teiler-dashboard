@@ -60,7 +60,7 @@
     <unit id="3840739858389961694">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:22</note>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:9</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:163</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:49</note>
       </notes>
       <segment>
@@ -77,113 +77,241 @@
         <target>Message</target>
       </segment>
     </unit>
-    <unit id="6923600030472929661">
+    <unit id="3961458998482856934">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:3</note>
       </notes>
       <segment>
         <source>Exporter Ausführungen</source>
-		<source>Exporter Executions</source>
+		<target>Exporter Executions</target>
+      </segment>
+    </unit>
+    <unit id="7273812294011829379">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:11</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:16</note>
+      </notes>
+      <segment>
+        <source>Anfrage ausführen</source>
+		<target>execute query</target>
+      </segment>
+    </unit>
+    <unit id="4894648697918868112">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:12</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:13</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:14</note>
+      </notes>
+      <segment>
+        <source>abbrechen</source>
+		<target>cancel</target>
+      </segment>
+    </unit>
+    <unit id="4796891122277612580">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:17</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:32</note>
+      </notes>
+      <segment>
+        <source>Template auswählen</source>
+		<target>select template</target>
+      </segment>
+    </unit>
+    <unit id="7851488990126524246">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:21</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:36</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
+      </notes>
+      <segment>
+        <source>Template herunterladen</source>
+		<target>download template</target>
+      </segment>
+    </unit>
+    <unit id="376996191072718920">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:112</note>
+      </notes>
+      <segment>
+        <source>Kontakt-ID</source>
+		<target>contact-ID</target>
+      </segment>
+    </unit>
+    <unit id="3299498505798542378">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:129</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Report wird erstellt ...</source>
+		<target>Generating report ...</target>							 
+      </segment>
+    </unit>
+    <unit id="5111784551733870059">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:130</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
+      </notes>
+      <segment>
+        <source>Report wurde erfolgreich erstellt.</source>
+		<target>Report generated correctly.</target>						 
+      </segment>
+    </unit>
+    <unit id="961812481581959030">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:131</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
+      </notes>
+      <segment>
+        <source>Report wurde nicht gefunden.</source>
+		<target>Report not found.</target>
+      </segment>
+    </unit>
+    <unit id="5070539244098019882">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:132</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
+      </notes>
+      <segment>
+        <source>Ein Fehler ist aufgetreten.</source>
+		<target>Failed.</target>								
       </segment>
     </unit>
     <unit id="2876674083968644556">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:10</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:152</note>
       </notes>
       <segment>
         <source>ausgeführt am</source>
-		<source>executed at</source>
+		<target>executed at</target>
       </segment>
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:15</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:157</note>
       </notes>
       <segment>
         <source>Status</source>
-		<source>status</source>
+		<target>status</target>
       </segment>
     </unit>
     <unit id="2348254711380854005">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:20</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:162</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
       </notes>
       <segment>
         <source>Template-ID</source>
-		<source>template-ID</source>
+		<target>template-ID</target>
       </segment>
     </unit>
     <unit id="6525583106874020108">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:25</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:167</note>
       </notes>
       <segment>
         <source>Ausgabeformat</source>
-		<source>output format</source>
+		<target>output format</target>
       </segment>
     </unit>
-    <unit id="1625247474442792703">
+    <unit id="2981219928115418649">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:46</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:172</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:59</note>
       </notes>
       <segment>
-        <source>Patienten-ID</source>
-		<source>Patient-ID</source>
+        <source>Link</source>
+		<target>link</target>
       </segment>
     </unit>
-    <unit id="2460741640340645221">
-      <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:51</note>
-      </notes>
-      <segment>
-        <source>Geschlecht</source>
-		<source>gender</source>
-      </segment>
-    </unit>
-    <unit id="8158385069489789677">
-      <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:56</note>
-      </notes>
-      <segment>
-        <source>Geburtsdatum</source>
-		<source>birthday</source>
-      </segment>
-    </unit>
-    <unit id="1869993821535292461">
-      <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:61</note>
-      </notes>
-      <segment>
-        <source>Vitalstatus</source>
-		<source>vital status</source>
-      </segment>
-    </unit>
-    <unit id="1812217803963994414">
+    <unit id="6929842044884591868">
       <notes>
         <note category="location">src/app/embedded/exporter/exporter.component.html:3</note>
       </notes>
       <segment>
         <source>Exporter Anfragen</source>
-		<source>Exporter Queries</source>
+		<target>Exporter Queries</target>
       </segment>
     </unit>
-    <unit id="4109205891084963566">
+    <unit id="5925221156741738325">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:14</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:11</note>
+      </notes>
+      <segment>
+        <source>neue Anfrage erstellen</source>
+		<target>create new query</target>
+      </segment>
+    </unit>
+    <unit id="5982156537551348856">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:12</note>
+      </notes>
+      <segment>
+        <source>Anfrage editieren</source>
+		<target>edit query</target>
+      </segment>
+    </unit>
+    <unit id="3463363001050057731">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:127</note>
+      </notes>
+      <segment>
+        <source>Anfragende</source>
+		<target>requester</target>
+      </segment>
+    </unit>
+    <unit id="2418404773112079564">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:146</note>
+      </notes>
+      <segment>
+        <source>aktive Anfragen</source>
+		<target>active queries</target>
+      </segment>
+    </unit>
+    <unit id="3304523725276948030">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:147</note>
+      </notes>
+      <segment>
+        <source>archivierte Anfragen</source>
+		<target>archived queries</target>
+      </segment>
+    </unit>
+    <unit id="4077520913910941990">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:168</note>
+      </notes>
+      <segment>
+        <source>Label</source>
+		<source>label</source>
+      </segment>
+    </unit>
+    <unit id="7402705001602102733">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:173</note>
       </notes>
       <segment>
         <source>Anfrage</source>
-		<source>Query</source>
+		<target>Query</target>
       </segment>
     </unit>
     <unit id="7513076467032912668">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:19</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:178</note>
       </notes>
       <segment>
         <source>Format</source>
-		<source>format</source>
+		<target>format</target>
+      </segment>
+    </unit>
+    <unit id="4902939987167543469">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:183</note>
+      </notes>
+      <segment>
+        <source>Ausführungen</source>
+		<source>Executions</source>
       </segment>
     </unit>
     <unit id="8332823385826673272">
@@ -595,92 +723,36 @@
     <unit id="8960936367812691745">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:4</note>
-        <note category="location">src/app/teiler/quality-report.service.ts:22</note>
       </notes>
       <segment>
         <source>Qualitätsbericht</source>
         <target>Quality Report</target>
       </segment>
     </unit>
-    <unit id="4894648697918868112">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:14</note>
-      </notes>
-      <segment>
-        <source>abbrechen</source>
-		<target>cancel</target>
-      </segment>
-    </unit>
-    <unit id="2198706399477955343">
+    <unit id="5328032877550100106">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:15</note>
       </notes>
       <segment>
-        <source>neuen QB generieren</source>
-		<target>generate new QR</target>
+        <source>neuen Report generieren</source>
+		<target>generate new report</target>
       </segment>
     </unit>
-    <unit id="3600220182293352906">
+    <unit id="3271337664865371216">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
       </notes>
       <segment>
-        <source>Template auswählen und neuen QB generieren</source>
-		<target>select template and generate new QR</target>
+        <source>Template auswählen und neuen Report generieren</source>
+		<target>select template and generate new report</target>
       </segment>
     </unit>
-    <unit id="7851488990126524246">
+    <unit id="8722084746247976035">
       <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.ts:238</note>
       </notes>
       <segment>
-        <source>Template herunterladen</source>
-		<target>download template</target>
-      </segment>
-    </unit>
-    <unit id="7502293677528705372">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:26</note>
-      </notes>
-      <segment>
-        <source>QB wird erstellt ...</source>
-		<target>generating QR ...</target>
-      </segment>
-    </unit>
-    <unit id="5122976901342026593">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
-      </notes>
-      <segment>
-        <source>QB wurde erfolgreich erstellt.</source>
-		<target>QR successfully generated</target>
-      </segment>
-    </unit>
-    <unit id="3585007716010513758">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
-      </notes>
-      <segment>
-        <source>QB wurde nicht gefunden.</source>
-		<target>QR not found</target>
-      </segment>
-    </unit>
-    <unit id="5070539244098019882">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
-      </notes>
-      <segment>
-        <source>Ein Fehler ist aufgetreten.</source>
-		<target>failed</target>
-      </segment>
-    </unit>
-    <unit id="2981219928115418649">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:59</note>
-      </notes>
-      <segment>
-        <source>Link</source>
-		<target>link</target>
+        <source>Eigenes Template</source>
       </segment>
     </unit>
     <unit id="6445536054910475490">
@@ -857,6 +929,15 @@
         <target>Uploads</target>
       </segment>
     </unit>
+    <unit id="2821179408673282599">
+      <notes>
+        <note category="location">src/app/sidebar/sidebar.component.html:23</note>
+      </notes>
+      <segment>
+        <source>Home</source>
+		<target>Home</target>
+      </segment>
+    </unit>
     <unit id="6631852761620844734">
       <notes>
         <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:13</note>
@@ -969,6 +1050,15 @@
         <target>Event Log</target>
       </segment>
     </unit>
+    <unit id="575960041367571255">
+      <notes>
+        <note category="location">src/app/teiler/exporter.service.ts:20</note>
+      </notes>
+      <segment>
+        <source>Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.</source>
+		<target>Use the exporter to export your data flexibly in different formats and adapt the data to your specific requirements.</target>
+      </segment>
+    </unit>
     <unit id="1018606136972574138">
       <notes>
         <note category="location">src/app/teiler/failed-inquiries.service.ts:13</note>
@@ -997,13 +1087,22 @@
         <target>Tests</target>
       </segment>
     </unit>
-    <unit id="1447758518246009372">
+    <unit id="8646600000800724551">
       <notes>
         <note category="location">src/app/teiler/quality-report.service.ts:19</note>
       </notes>
       <segment>
-        <source>Qualitätsberichte erzeugen und ansehen</source>
-        <target>Generate and download quality reports</target>
+        <source>Nutzen Sie den Reporter, um detaillierte Berichte sowie spezifizierte Qualitätsreports zu erstellen.</source>
+		<target>Use the reporter to create detailed reports and specified quality reports.</target>
+      </segment>
+    </unit>
+    <unit id="730589419287534524">
+      <notes>
+        <note category="location">src/app/teiler/quality-report.service.ts:22</note>
+      </notes>
+      <segment>
+        <source>Reporter</source>
+        <target>Reporter</target>
       </segment>
     </unit>
     <unit id="3806333758103364534">

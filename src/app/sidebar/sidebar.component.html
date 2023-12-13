@@ -14,7 +14,16 @@
         </button>
       </div>
       <mat-nav-list class="side-nav">
-
+        <div class="sidebar">
+          <div class="intern">
+            <div class="sidebar-element home-button">
+              <div class="teiler-box-icon">
+                <i class="bi bi-house"></i>
+              </div>
+              <a mat-list-item routerLink="{{'/' + routeManagerService.mainRouterLink}}" class="sidebar-text" i18n>Home</a>
+            </div>
+          </div>
+        </div>
         <ng-container *ngFor="let teilerApp of teilerService.teilerApps" >
           <div *ngIf="teilerApp.inMenu" class="sidebar">
 
@@ -32,9 +41,14 @@
             <div class="extern">
               <div *ngIf="teilerApp.externLink" class="sidebar-element">
                 <!--<i class="{{teilerApp.iconClass}}"></i>-->
-                <div class="teiler-box-image" *ngIf="teilerApp.iconSourceUrl != undefined">
+                <div class="teiler-box-image" *ngIf="teilerApp.iconSourceUrl != undefined; else iconClass">
                   <img i src="{{teilerApp.iconSourceUrl}}">
                 </div>
+                <ng-template #iconClass>
+                  <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
+                    <i class="{{teilerApp.iconClass}}"></i>
+                  </div>
+                </ng-template>
                 <a mat-list-item routerLink="{{'/'+teilerApp.routerLink}}"
                    [externalLink]="teilerApp.sourceUrl??''" class="sidebar-text">{{teilerApp.title}}</a>
               </div>

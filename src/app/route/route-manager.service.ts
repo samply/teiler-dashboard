@@ -28,6 +28,8 @@ import {InquiryDialogComponent} from "../embedded/pop-ups/inquiry-dialog/inquiry
 import {DialogUploadsComponent} from "../embedded/pop-ups/dialog-uploads/dialog-uploads.component";
 import {DialogQualiComponent} from "../embedded/pop-ups/dialog-quali/dialog-quali.component";
 import {DialogTestsComponent} from "../embedded/pop-ups/dialog-tests/dialog-tests.component";
+import {ExporterComponent} from "../embedded/exporter/exporter.component";
+import {ExecutionComponent} from "../embedded/execution/execution.component";
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +53,9 @@ export class RouteManagerService {
     {name: EmbeddedTeilerApps.INQUIRY_DIALOG, component: InquiryDialogComponent},
     {name: EmbeddedTeilerApps.DIALOG_UPLOADS, component: DialogUploadsComponent},
     {name: EmbeddedTeilerApps.DIALOG_QUALI, component: DialogQualiComponent},
-    {name: EmbeddedTeilerApps.DIALOG_TESTS, component: DialogTestsComponent}
+    {name: EmbeddedTeilerApps.DIALOG_TESTS, component: DialogTestsComponent},
+		{name: EmbeddedTeilerApps.EXPORTER, component: ExporterComponent},
+		{name: EmbeddedTeilerApps.EXECUTION, component: ExecutionComponent}
   ].map(teilerAppComponent => [teilerAppComponent.name, teilerAppComponent.component]));
 
   constructor(teilerService: TeilerService, private router: Router) {

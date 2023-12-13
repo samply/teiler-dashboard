@@ -23,6 +23,8 @@ import {DialogUploadsComponent} from "../embedded/pop-ups/dialog-uploads/dialog-
 import {InquiryDialogComponent} from "../embedded/pop-ups/inquiry-dialog/inquiry-dialog.component";
 import {DialogQualiComponent} from "../embedded/pop-ups/dialog-quali/dialog-quali.component";
 import {DialogTestsComponent} from "../embedded/pop-ups/dialog-tests/dialog-tests.component";
+import { ExporterComponent } from '../embedded/exporter/exporter.component';
+import { ExecutionComponent } from '../embedded/execution/execution.component';
 
 
 
@@ -44,7 +46,9 @@ export const routingComponents = [
   DialogUploadsComponent,
   InquiryDialogComponent,
   DialogQualiComponent,
-  DialogTestsComponent
+  DialogTestsComponent,
+	ExporterComponent,
+	ExecutionComponent
 ]
 
 const routes: Routes = RouteManagerService.fetchBasicRoutes();

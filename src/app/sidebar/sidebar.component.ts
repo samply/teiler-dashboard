@@ -2,6 +2,7 @@ import {Component, OnInit, HostListener, ViewChild, ElementRef} from '@angular/c
 import {TeilerService} from "../teiler/teiler.service";
 import {createMainRouterLink} from "../route/route-utils";
 import {ColorSchemeService} from "../color-scheme.service";
+import {RouteManagerService} from "../route/route-manager.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,7 @@ export class SidebarComponent implements OnInit {
   public innerWidth: any;
   public menuVisibleMobile: boolean = false;
 
-  constructor(public teilerService: TeilerService,private colorSchemeService: ColorSchemeService) {
+  constructor(public teilerService: TeilerService, private colorSchemeService: ColorSchemeService, public routeManagerService: RouteManagerService) {
   }
   isGreyTheme(): boolean {
     return this.colorSchemeService.getColor() === 'rgb(211,211,211)';

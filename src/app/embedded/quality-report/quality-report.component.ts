@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {QualityReportService, reportLog} from "../../teiler/quality-report.service";
@@ -59,7 +60,7 @@ export class QualityReportComponent implements OnInit, OnDestroy {
   fileName: string | undefined;
   importTemplate: string = "";
   selectedTemplate: string = environment.config.REPORTER_DEFAULT_TEMPLATE_ID;
-  templateIDs: Templates[] = []
+  templateIDs: Templates[] = [];
 
   constructor(private route: ActivatedRoute, private qualityReportService: QualityReportService) {
   }

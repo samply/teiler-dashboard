@@ -25,6 +25,17 @@ button{
   padding: 1.5%;
   background-color: white!important;
 }
+.mat-mdc-row .mat-mdc-cell {
+  cursor: pointer;
+  max-width: 200px;
+  white-space: nowrap;
+}
+.mat-mdc-header-cell {
+  background-color: #2BCDD563!important;
+}
+.mat-mdc-row:hover .mat-mdc-cell {
+  background-color: #2BCDD563;
+}
 .generate-div {
   margin-top: 1.5%;
   margin-bottom: 2%;
@@ -113,8 +124,19 @@ table{
 }
 .generate-button, .cancel-button, .download-button {
   width: 200px;
-  height: 55px;
+  height: 45px;
   padding: 5px;
+  font-size: 14px;
+  color: black!important;
+}
+.generate-button, .cancel-button, .download-button {
+  background-color: #2BCDD563 !important;
+}
+.generate-button:disabled, .cancel-button:disabled, .download-button:disabled {
+  color: darkgrey!important;
+}
+.generate-button, .cancel-button {
+  width: 220px;
 }
 .download-button {
   margin-left: 2%;
@@ -127,6 +149,7 @@ table{
   color: black;
   display: flex;
   padding: 5px;
+  background-color: #2BCDD563 !important;
 }
 .file-upload-text {
   margin: 8px 5px;
@@ -140,11 +163,23 @@ table{
   margin: 0 2%;
   width: 20%;
 }
+/* TODO(mdc-migration): The following rule targets internal classes of paginator that may no longer apply for the MDC version. */
 mat-paginator{
   opacity: 0.75;
 }
+::ng-deep .template_dropdown .mat-mdc-form-field-infix {
+  padding-top: 18px!important;
+  padding-bottom: 2px!important;
+}
 .template-select {
   margin-top: 5px;
+}
+.download-link {
+  font-weight: bold;
+  color: #0AADB5;
+}
+.link-icon {
+  font-size: 22px;
 }
 @media(max-width : 1400px){
   .search{

@@ -7,10 +7,15 @@ h3{
   font-size: 130%;
   margin:0;
 }
+.teiler-box-image {
+  min-height: 92px;
+  display: flex;
+  margin-bottom: 5px;
+}
 .teiler-box-image img{
   display: block;
   height: 60px;
-  margin: 0 auto 20px auto;
+  margin: auto;
 }
 p{
   color: black;
@@ -19,16 +24,19 @@ p{
 }
 .teiler-box-icon {
   font-size: 470%;
-  margin-left: 32%;
   transition: transform 50ms ease;
   color: grey;
+  margin: 0 auto 5px auto;
+  width: fit-content;
+  min-height: 92px;
+  display: flex;
 }
 .teiler-box {
   float:left;
   display:flex;
   flex-wrap: wrap;
-  min-width: 250px;
-  min-height: 270px;
+  min-width: 270px;
+  min-height: 290px;
   margin: 1.25%;
   position: relative;
   border-radius: 2%;
@@ -38,6 +46,7 @@ p{
   text-align: center;
   align-content: center;
   background-color: white;
+  overflow: clip;
 }
 .teiler-box._mat-animation-noopable {
   transition: all 1ms ease-in-out !important;
@@ -50,9 +59,12 @@ p{
 .teiler-box:hover .strich{
   transform:scaleX(1);
 }
+.teiler-box-description {
+  font-size: 95%;
+}
 .text{
   position: absolute;
-  top: 16%;
+  top: 10%;
   left: 6%;
   right: 5%;
   text-align: left;

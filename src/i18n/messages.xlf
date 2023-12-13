@@ -54,6 +54,7 @@
     <unit id="3840739858389961694">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:22</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:163</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:49</note>
       </notes>
       <segment>
@@ -66,6 +67,218 @@
       </notes>
       <segment>
         <source>Nachricht</source>
+      </segment>
+    </unit>
+    <unit id="3961458998482856934">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Exporter Ausführungen</source>
+      </segment>
+    </unit>
+    <unit id="7273812294011829379">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:11</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:16</note>
+      </notes>
+      <segment>
+        <source>Anfrage ausführen</source>
+      </segment>
+    </unit>
+    <unit id="4894648697918868112">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:12</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:13</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:14</note>
+      </notes>
+      <segment>
+        <source>abbrechen</source>
+      </segment>
+    </unit>
+    <unit id="4796891122277612580">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:17</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:32</note>
+      </notes>
+      <segment>
+        <source>Template auswählen</source>
+      </segment>
+    </unit>
+    <unit id="7851488990126524246">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:21</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:36</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
+      </notes>
+      <segment>
+        <source>Template herunterladen</source>
+      </segment>
+    </unit>
+    <unit id="376996191072718920">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:112</note>
+      </notes>
+      <segment>
+        <source>Kontakt-ID</source>
+      </segment>
+    </unit>
+    <unit id="3299498505798542378">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:129</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:26</note>
+      </notes>
+      <segment>
+        <source>Report wird erstellt ...</source>
+      </segment>
+    </unit>
+    <unit id="5111784551733870059">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:130</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
+      </notes>
+      <segment>
+        <source>Report wurde erfolgreich erstellt.</source>
+      </segment>
+    </unit>
+    <unit id="961812481581959030">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:131</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
+      </notes>
+      <segment>
+        <source>Report wurde nicht gefunden.</source>
+      </segment>
+    </unit>
+    <unit id="5070539244098019882">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:132</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
+      </notes>
+      <segment>
+        <source>Ein Fehler ist aufgetreten.</source>
+      </segment>
+    </unit>
+    <unit id="2876674083968644556">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:152</note>
+      </notes>
+      <segment>
+        <source>ausgeführt am</source>
+      </segment>
+    </unit>
+    <unit id="5611592591303869712">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:157</note>
+      </notes>
+      <segment>
+        <source>Status</source>
+      </segment>
+    </unit>
+    <unit id="2348254711380854005">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:162</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
+      </notes>
+      <segment>
+        <source>Template-ID</source>
+      </segment>
+    </unit>
+    <unit id="6525583106874020108">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:167</note>
+      </notes>
+      <segment>
+        <source>Ausgabeformat</source>
+      </segment>
+    </unit>
+    <unit id="2981219928115418649">
+      <notes>
+        <note category="location">src/app/embedded/execution/execution.component.html:172</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:59</note>
+      </notes>
+      <segment>
+        <source>Link</source>
+      </segment>
+    </unit>
+    <unit id="6929842044884591868">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:3</note>
+      </notes>
+      <segment>
+        <source>Exporter Anfragen</source>
+      </segment>
+    </unit>
+    <unit id="5925221156741738325">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:11</note>
+      </notes>
+      <segment>
+        <source>neue Anfrage erstellen</source>
+      </segment>
+    </unit>
+    <unit id="5982156537551348856">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:12</note>
+      </notes>
+      <segment>
+        <source>Anfrage editieren</source>
+      </segment>
+    </unit>
+    <unit id="3463363001050057731">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:127</note>
+      </notes>
+      <segment>
+        <source>Anfragende</source>
+      </segment>
+    </unit>
+    <unit id="2418404773112079564">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:146</note>
+      </notes>
+      <segment>
+        <source>aktive Anfragen</source>
+      </segment>
+    </unit>
+    <unit id="3304523725276948030">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:147</note>
+      </notes>
+      <segment>
+        <source>archivierte Anfragen</source>
+      </segment>
+    </unit>
+    <unit id="4077520913910941990">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:168</note>
+      </notes>
+      <segment>
+        <source>Label</source>
+      </segment>
+    </unit>
+    <unit id="7402705001602102733">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:173</note>
+      </notes>
+      <segment>
+        <source>Anfrage</source>
+      </segment>
+    </unit>
+    <unit id="7513076467032912668">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:178</note>
+      </notes>
+      <segment>
+        <source>Format</source>
+      </segment>
+    </unit>
+    <unit id="4902939987167543469">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:183</note>
+      </notes>
+      <segment>
+        <source>Ausführungen</source>
       </segment>
     </unit>
     <unit id="8332823385826673272">
@@ -434,95 +647,30 @@
     <unit id="8960936367812691745">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:4</note>
-        <note category="location">src/app/teiler/quality-report.service.ts:22</note>
       </notes>
       <segment>
         <source>Qualitätsbericht</source>
       </segment>
     </unit>
-    <unit id="4894648697918868112">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:14</note>
-      </notes>
-      <segment>
-        <source>abbrechen</source>
-      </segment>
-    </unit>
-    <unit id="2198706399477955343">
+    <unit id="5328032877550100106">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:15</note>
       </notes>
       <segment>
-        <source>neuen QB generieren</source>
+        <source>neuen Report generieren</source>
       </segment>
     </unit>
-    <unit id="3600220182293352906">
+    <unit id="3271337664865371216">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
       </notes>
       <segment>
-        <source>Template auswählen und neuen QB generieren</source>
-      </segment>
-    </unit>
-    <unit id="7851488990126524246">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
-      </notes>
-      <segment>
-        <source>Template herunterladen</source>
-      </segment>
-    </unit>
-    <unit id="7502293677528705372">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:26</note>
-      </notes>
-      <segment>
-        <source>QB wird erstellt ...</source>
-      </segment>
-    </unit>
-    <unit id="5122976901342026593">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
-      </notes>
-      <segment>
-        <source>QB wurde erfolgreich erstellt.</source>
-      </segment>
-    </unit>
-    <unit id="3585007716010513758">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
-      </notes>
-      <segment>
-        <source>QB wurde nicht gefunden.</source>
-      </segment>
-    </unit>
-    <unit id="5070539244098019882">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
-      </notes>
-      <segment>
-        <source>Ein Fehler ist aufgetreten.</source>
-      </segment>
-    </unit>
-    <unit id="2348254711380854005">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
-      </notes>
-      <segment>
-        <source>Template-ID</source>
-      </segment>
-    </unit>
-    <unit id="2981219928115418649">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:59</note>
-      </notes>
-      <segment>
-        <source>Link</source>
+        <source>Template auswählen und neuen Report generieren</source>
       </segment>
     </unit>
     <unit id="8722084746247976035">
       <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.ts:237</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.ts:238</note>
       </notes>
       <segment>
         <source>Eigenes Template</source>
@@ -684,6 +832,14 @@
         <source>Uploads</source>
       </segment>
     </unit>
+    <unit id="2821179408673282599">
+      <notes>
+        <note category="location">src/app/sidebar/sidebar.component.html:23</note>
+      </notes>
+      <segment>
+        <source>Home</source>
+      </segment>
+    </unit>
     <unit id="6631852761620844734">
       <notes>
         <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:13</note>
@@ -776,6 +932,14 @@
         <source>Ereignislog</source>
       </segment>
     </unit>
+    <unit id="575960041367571255">
+      <notes>
+        <note category="location">src/app/teiler/exporter.service.ts:20</note>
+      </notes>
+      <segment>
+        <source>Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.</source>
+      </segment>
+    </unit>
     <unit id="1018606136972574138">
       <notes>
         <note category="location">src/app/teiler/failed-inquiries.service.ts:13</note>
@@ -801,12 +965,20 @@
         <source>Tests</source>
       </segment>
     </unit>
-    <unit id="1447758518246009372">
+    <unit id="8646600000800724551">
       <notes>
         <note category="location">src/app/teiler/quality-report.service.ts:19</note>
       </notes>
       <segment>
-        <source>Qualitätsberichte erzeugen und ansehen</source>
+        <source>Nutzen Sie den Reporter, um detaillierte Berichte sowie spezifizierte Qualitätsreports zu erstellen.</source>
+      </segment>
+    </unit>
+    <unit id="730589419287534524">
+      <notes>
+        <note category="location">src/app/teiler/quality-report.service.ts:22</note>
+      </notes>
+      <segment>
+        <source>Reporter</source>
       </segment>
     </unit>
     <unit id="3806333758103364534">
