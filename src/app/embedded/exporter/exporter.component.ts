@@ -9,7 +9,7 @@ import {QBResponse, Templates} from "../quality-report/quality-report.component"
 import {environment} from "../../../environments/environment";
 import {SelectionModel} from "@angular/cdk/collections";
 import {TeilerAuthService} from "../../security/teiler-auth.service";
-import {TeilerService} from "../../teiler/teiler.service";
+import {createRouterLinkForBase} from "../../route/route-utils";
 
 export interface ExporterQueries {
   id: number;
@@ -382,5 +382,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
   cancelEdit(): void {
     this.editModus = false;
+  }
+  getRouterLink(id: string): string {
+    return '/' + createRouterLinkForBase(this.executionLink + '/' + id);
   }
 }
