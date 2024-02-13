@@ -8,9 +8,9 @@ export function initializeKeycloak(keycloak: KeycloakService){
 
 
     config: {
-      url: environment.config.KEYCLOAK_URL,
-      realm: environment.config.KEYCLOAK_REALM,
-      clientId: environment.config.KEYCLOAK_CLIENT_ID
+      url: environment.config.OIDC_URL,
+      realm: environment.config.OIDC_REALM,
+      clientId: environment.config.OIDC_CLIENT_ID
     },
 
     initOptions: {
