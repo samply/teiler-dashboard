@@ -102,7 +102,7 @@ export class TeilerService {
     } else if (teilerAppRoles.has(TeilerRole.TEILER_PUBLIC)) {
       isAuthorized = true;
     } else {
-      let roles: string[] = (environment.config.KEYCLOAK_TOKEN_GROUP) ? this.authService.getGroups() : this.authService.getRoles();
+      let roles: string[] = (environment.config.OIDC_TOKEN_GROUP) ? this.authService.getGroups() : this.authService.getRoles();
       for (let role of roles) {
         let mappedRole = this.fetchRoleFromEnvironment(role);
         if (mappedRole != undefined && teilerAppRoles.has(mappedRole)) {
