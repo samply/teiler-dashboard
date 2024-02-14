@@ -35,7 +35,7 @@ export class TeilerAuthService {
 
   public getGroups(): string[] {
     const keycloakInstance = this.keycloakService.getKeycloakInstance();
-    const result = keycloakInstance?.tokenParsed?.[environment.config.KEYCLOAK_TOKEN_GROUP] || [];
+    const result = keycloakInstance?.tokenParsed?.[environment.config.OIDC_TOKEN_GROUP] || [];
 
     return result.map((group: string) => {
       if (typeof group === 'string' && group.charAt(0) === '/') {
