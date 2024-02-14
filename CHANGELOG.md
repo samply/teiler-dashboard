@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OIDC instead of KEYCLOAK
 
 
-## [1.0.1] - 2023-12-13
+## [1.0.1] - 2024-02-14
 ### Fixed
 - Router link blank and router link
 
