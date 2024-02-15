@@ -16,13 +16,11 @@ export class TeilerBoxComponent implements OnInit {
 
   @Input() teilerApp: TeilerApp = new EmptyTeilerApp();
 
-  constructor() {
-  }
+  constructor() {}
 
 
   ngOnInit() {
     this.teilerApp.backgroundColor = this.teilerApp.backgroundColor || BackgroundColors.GREEN;
-
   }
 
   getCheckIconClass(): string {
@@ -33,6 +31,17 @@ export class TeilerBoxComponent implements OnInit {
         return "bi bi-x-circle";
       default:
         return "bi bi-clock"
+    }
+  }
+
+  isAppClickable(): boolean {
+    switch (this.isTeilerAppWorking()) {
+      case TeilerAppStatus.WORKING:
+        return true;
+      case TeilerAppStatus.NOT_WORKING:
+        return false;
+      default:
+        return false
     }
   }
 

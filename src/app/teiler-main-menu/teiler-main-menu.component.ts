@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {TeilerService} from "../teiler/teiler.service";
 import {TeilerAuthService} from "../security/teiler-auth.service";
 import {from} from "rxjs";
+import {TeilerApp} from "../teiler/teiler-app";
 
 
 @Component({
@@ -32,5 +33,11 @@ export class TeilerMainMenuComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  isClickable(app:TeilerApp): boolean {
+    return !!((app.backendReachable && app.frontendReachable) ||
+      (app.backendReachable === undefined && app.frontendReachable) ||
+      (app.backendReachable === null && app.frontendReachable));
   }
 }

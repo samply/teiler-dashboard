@@ -294,24 +294,6 @@ button{
 .visible-button-group {
   display: inline-flex;
 }
-.file-upload {
-  text-transform: none !important;
-  width: 200px;
-  height: 45px;
-  font-size: 13px;
-  color: black!important;
-  display: flex;
-  padding: 5px;
-  background-color: #2BCDD563 !important;
-}
-.file-upload-text {
-  margin: 8px 5px;
-}
-.file-name {
-  color: black;
-  margin: 5px;
-  height: 20px;
-}
 .template_dropdown, .outputformat_dropdown {
   margin: 0 2%;
   /*width: 20%;*/

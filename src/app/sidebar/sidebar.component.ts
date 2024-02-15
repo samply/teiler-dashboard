@@ -3,6 +3,7 @@ import {TeilerService} from "../teiler/teiler.service";
 import {createMainRouterLink} from "../route/route-utils";
 import {ColorSchemeService} from "../color-scheme.service";
 import {RouteManagerService} from "../route/route-manager.service";
+import {TeilerApp} from "../teiler/teiler-app";
 
 @Component({
   selector: 'app-sidebar',
@@ -52,5 +53,11 @@ export class SidebarComponent implements OnInit {
   isMainSite() {
     let mainRouterLink = createMainRouterLink();
     return window.location.pathname === '/' + mainRouterLink;
+  }
+
+  isClickable(app:TeilerApp): boolean {
+    return !!((app.backendReachable && app.frontendReachable) ||
+      (app.backendReachable === undefined && app.frontendReachable) ||
+      (app.backendReachable === null && app.frontendReachable));
   }
 }

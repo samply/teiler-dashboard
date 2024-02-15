@@ -67,8 +67,8 @@
             <div>
               <div>Beschreibung</div>
               <textarea
-                class="query-textfield"
-                name="query-textfield"
+                class="description-textfield"
+                name="description-textfield"
                 rows="6"
                 cols="40"
                 [(ngModel)]="queryDescription"
@@ -94,19 +94,19 @@
               <div class="dropdowns-left">
                 <mat-form-field class="queryformat_dropdown">
                   <mat-label>Anfrageformat</mat-label>
-                  <select class="queryformat-select" matNativeControl required [(ngModel)]="selectedQueryFormat" [disabled] = "!editModus">
+                  <select class="queryformat-select" matNativeControl [(ngModel)]="selectedQueryFormat" [disabled] = "!editModus">
                     <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
                   </select>
                 </mat-form-field>
                 <mat-form-field class="outputformat_dropdown">
                   <mat-label>Ausgabeformat</mat-label>
-                  <select class="outputformat-select" matNativeControl required [(ngModel)]="selectedOutputFormat" >
+                  <select class="outputformat-select" matNativeControl [(ngModel)]="selectedOutputFormat" >
                     <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
                   </select>
                 </mat-form-field>
                 <mat-form-field class="template_dropdown">
                   <mat-label>Template</mat-label>
-                  <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" >
+                  <select class="template-select" matNativeControl [(ngModel)]="selectedTemplate" >
                     <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
                   </select>
                 </mat-form-field>
@@ -134,6 +134,37 @@
                 </mat-form-field>
               </div>
             </div>
+            <!--<mat-form-field appearance="outline" class="query-context">
+                  <mat-label i18n>Context</mat-label>-->
+            <div *ngFor="let context of contextArray; let i=index">
+              <mat-form-field appearance="outline" class="query-context">
+                <mat-label i18n>Schlüssel</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="context.key"
+                  [disabled] = "!editModus"
+                />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="query-context">
+                <mat-label i18n>Wert</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="context.value"
+                  [disabled] = "!editModus"
+                />
+              </mat-form-field>
+              <button *ngIf="contextArray.length > 1" mat-raised-button color="primary" class="minus-button"
+                      [disabled] = "!editModus"
+                      (click)="deleteContextInput(i)">-
+              </button>
+              <button *ngIf="i === contextArray.length - 1" mat-raised-button color="primary" class="plus-button"
+                      [disabled] = "!editModus"
+                      (click)="addContextInput()">+
+              </button>
+            </div>
+            <!--</mat-form-field>-->
           </div>
         </div>
       </div>

@@ -45,6 +45,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatSortModule} from "@angular/material/sort";
 import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
 
 @NgModule({
@@ -93,7 +94,8 @@ import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
         MatCheckboxModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
+        MatSortModule
 
     ],
   providers: [

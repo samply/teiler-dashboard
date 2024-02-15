@@ -31,6 +31,13 @@ table {
 .mat-mdc-header-cell {
   background-color: #2BCDD563!important;
 }
+::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  height: 35px !important;
+}
+mat-form-field {
+  font-size: small;
+}
+
 .table-link-column {
   text-align: center;
 }
@@ -144,7 +151,7 @@ button{
 .generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled {
   color: darkgrey!important;
 }
-.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button {
+.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .plus-button, .minus-button {
   background-color: #2BCDD563 !important;
 }
 .download-button, .edit-button, .cancel-edit-button, .upload-button {
@@ -156,6 +163,17 @@ button{
 }
 .visible-button-group {
   display: inline-flex;
+}
+.plus-button, .minus-button {
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  font-size: 14px;
+  color: black!important;
+  min-width: 35px;
+}
+.minus-button {
+  margin-right: 10px;
 }
 .file-upload {
   text-transform: none !important;
@@ -176,7 +194,7 @@ button{
   height: 20px;
 }
 .template_dropdown, .outputformat_dropdown {
-  margin: 0 2%;
+  margin: 0;
   /*width: 20%;*/
 }
 .button-accordion {
@@ -193,9 +211,14 @@ mat-expansion-panel-header {
 }
 ::ng-deep .query-input .mat-mdc-text-field-wrapper {
   background-color: #f5f5f5;
-  min-width: 300px;
+  min-width: 220px;
 }
-
+::ng-deep .query-expiration-date .mat-mdc-text-field-wrapper {
+  width: 220px;
+}
+.query-contactid, .query-context {
+  margin-right: 20px;
+}
 .download-link {
   font-weight: bold;
   color: #0AADB5;
@@ -203,7 +226,7 @@ mat-expansion-panel-header {
 .query-input {
   display: flex;
   margin-bottom: 30px;
-  max-width: 1250px;
+  max-width: 1310px;
 }
 .query-input-right {
   display: grid;
@@ -222,13 +245,17 @@ mat-expansion-panel-header {
 }
 .dropdowns-left {
   margin-right: 20px;
-}
-.query-contactid {
-  font-size: 15px;
+  width: min-content;
 }
 ::ng-deep .query-input .mat-mdc-form-field-infix {
   padding-top: 18px!important;
   padding-bottom: 2px!important;
+  min-height: 52px!important;
+}
+::ng-deep .query-context .mat-mdc-form-field-infix {
+  padding-top: 15px!important;
+  padding-bottom: 2px!important;
+  min-height: 50px!important;
 }
 ::ng-deep .query-selection .mdc-label {
   padding-left: 0;
@@ -236,8 +263,14 @@ mat-expansion-panel-header {
 ::ng-deep .query-selection .mat-mdc-checkbox {
   margin-right: 15px;
 }
+::ng-deep .mat-mdc-floating-label.mdc-floating-label {
+  font-size: small!important;
+}
 .link-icon {
   font-size: 24px;
+}
+.description-textfield {
+  height: 114px;
 }
 @media(max-width : 1400px){
   .main{

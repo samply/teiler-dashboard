@@ -54,8 +54,8 @@
     <unit id="3840739858389961694">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:22</note>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:163</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:49</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:194</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:59</note>
       </notes>
       <segment>
         <source>Zeitstempel</source>
@@ -100,6 +100,7 @@
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:17</note>
         <note category="location">src/app/embedded/exporter/exporter.component.html:32</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
       </notes>
       <segment>
         <source>Template auswählen</source>
@@ -109,7 +110,7 @@
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:21</note>
         <note category="location">src/app/embedded/exporter/exporter.component.html:36</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:22</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:23</note>
       </notes>
       <segment>
         <source>Template herunterladen</source>
@@ -126,7 +127,7 @@
     <unit id="3299498505798542378">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:129</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:26</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
       </notes>
       <segment>
         <source>Report wird erstellt ...</source>
@@ -135,7 +136,7 @@
     <unit id="5111784551733870059">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:130</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
       </notes>
       <segment>
         <source>Report wurde erfolgreich erstellt.</source>
@@ -144,7 +145,7 @@
     <unit id="961812481581959030">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:131</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
       </notes>
       <segment>
         <source>Report wurde nicht gefunden.</source>
@@ -153,7 +154,7 @@
     <unit id="5070539244098019882">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:132</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:30</note>
       </notes>
       <segment>
         <source>Ein Fehler ist aufgetreten.</source>
@@ -178,7 +179,7 @@
     <unit id="2348254711380854005">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:162</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:54</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:64</note>
       </notes>
       <segment>
         <source>Template-ID</source>
@@ -195,7 +196,7 @@
     <unit id="2981219928115418649">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:172</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:59</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:69</note>
       </notes>
       <segment>
         <source>Link</source>
@@ -233,9 +234,25 @@
         <source>Anfragende</source>
       </segment>
     </unit>
+    <unit id="8836082739124677792">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:141</note>
+      </notes>
+      <segment>
+        <source>Schlüssel</source>
+      </segment>
+    </unit>
+    <unit id="5422814021855947257">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:150</note>
+      </notes>
+      <segment>
+        <source>Wert</source>
+      </segment>
+    </unit>
     <unit id="2418404773112079564">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:146</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:177</note>
       </notes>
       <segment>
         <source>aktive Anfragen</source>
@@ -243,7 +260,7 @@
     </unit>
     <unit id="3304523725276948030">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:147</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:178</note>
       </notes>
       <segment>
         <source>archivierte Anfragen</source>
@@ -251,7 +268,7 @@
     </unit>
     <unit id="4077520913910941990">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:168</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:199</note>
       </notes>
       <segment>
         <source>Label</source>
@@ -259,7 +276,7 @@
     </unit>
     <unit id="7402705001602102733">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:173</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:204</note>
       </notes>
       <segment>
         <source>Anfrage</source>
@@ -267,7 +284,7 @@
     </unit>
     <unit id="7513076467032912668">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:178</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:209</note>
       </notes>
       <segment>
         <source>Format</source>
@@ -275,7 +292,7 @@
     </unit>
     <unit id="4902939987167543469">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:183</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:214</note>
       </notes>
       <segment>
         <source>Ausführungen</source>
@@ -660,17 +677,9 @@
         <source>neuen Report generieren</source>
       </segment>
     </unit>
-    <unit id="3271337664865371216">
-      <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
-      </notes>
-      <segment>
-        <source>Template auswählen und neuen Report generieren</source>
-      </segment>
-    </unit>
     <unit id="8722084746247976035">
       <notes>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.ts:238</note>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.ts:255</note>
       </notes>
       <segment>
         <source>Eigenes Template</source>
@@ -840,21 +849,20 @@
         <source>Home</source>
       </segment>
     </unit>
-    <unit id="6631852761620844734">
+    <unit id="3509810287422496680">
       <notes>
-        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:13</note>
-        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:66</note>
+        <note category="location">src/app/teiler-box/teiler-box.component.html:17</note>
       </notes>
       <segment>
-        <source>Lokale Apps</source>
+        <source>lokal</source>
       </segment>
     </unit>
-    <unit id="2598281716737340252">
+    <unit id="4639643027974379168">
       <notes>
-        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:16</note>
+        <note category="location">src/app/teiler-box/teiler-box.component.html:18</note>
       </notes>
       <segment>
-        <source>Zentrale Apps</source>
+        <source>zentral</source>
       </segment>
     </unit>
     <unit id="2068445951425750817">
