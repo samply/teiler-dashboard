@@ -39,6 +39,10 @@ export enum ExportStatus {
   EMPTY = "EMPTY",
   ERROR = "ERROR"
 }
+export interface Context {
+  key: string;
+  value: string;
+}
 @Component({
   selector: 'exporter',
   templateUrl: './exporter.component.html',
@@ -88,6 +92,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   queryList:ExporterQueries[] = [];
   executionLink: string = EmbeddedTeilerApps.EXECUTION;
   panelOpenState: boolean = false;
+  contextArray: Context[] = [{key: "", value: ""}];
 
   constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService) {
     from(authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
@@ -165,7 +170,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   createAndExecuteQuery() {
     this.subscriptionGenerateExport?.unsubscribe();
-    this.subscriptionGenerateExport = this.exporterService.generateExport(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.selectedTemplate, this.importTemplate).subscribe({
+    this.subscriptionGenerateExport = this.exporterService.generateExport(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.selectedTemplate, this.getContext(), this.importTemplate).subscribe({
       next: (response: QBResponse) => {
         const url = new URL(response.responseUrl)
         const id = url.searchParams.get("query-execution-id");
@@ -243,7 +248,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
           complete: () => {}
         });
       } else {
-        this.subscriptionCreateQuery = this.exporterService.createQuery(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.contactID, this.selectedTemplate, this.importTemplate).subscribe({
+        this.subscriptionCreateQuery = this.exporterService.createQuery(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.contactID, this.selectedTemplate, this.getContext(), this.importTemplate).subscribe({
           next: (response: QueryResponse) => {
             this.getQueries();
             this.editModus = false;
@@ -385,5 +390,24 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
   getRouterLink(id: string): string {
     return '/' + createRouterLinkForBase(this.executionLink + '/' + id);
+  }
+  addContextInput(): void {
+    this.contextArray.push({key: "", value: ""} as Context)
+  }
+  deleteContextInput(index: number): void {
+    this.contextArray.splice(index, 1)
+  }
+  getContext(): string {
+    let context: string = "";
+    this.contextArray.forEach(contextPair => {
+      if (contextPair.key.length !== 0 && contextPair.value.length !== 0) {
+        if (context.length !== 0) {
+          context += ";"
+        }
+        context += contextPair.key + "=" + contextPair.value;
+      }
+    })
+    //return Buffer.from(context).toString("base64");
+    return btoa(context);
   }
 }

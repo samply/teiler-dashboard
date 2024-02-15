@@ -85,6 +85,16 @@
   width: 230px;
   padding-right: 0;
 }
+.sidebar-text-span {
+  width: 230px;
+  padding-right: 0;
+  padding-left: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  align-self: center;
+  flex: 1;
+}
 .teiler-box-icon i{
   margin-left: 5px;
   margin-top: 10px;

@@ -79,19 +79,19 @@
             <div class="dropdowns-left">
               <mat-form-field class="queryformat_dropdown">
                 <mat-label>Anfrageformat</mat-label>
-                <select class="queryformat-select" matNativeControl required [(ngModel)]="selectedQueryFormat" [disabled] = "true">
+                <select class="queryformat-select" matNativeControl [(ngModel)]="selectedQueryFormat" [disabled] = "true">
                   <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
                 </select>
               </mat-form-field>
               <mat-form-field class="outputformat_dropdown">
                 <mat-label>Ausgabeformat</mat-label>
-                <select class="outputformat-select" matNativeControl required [(ngModel)]="selectedOutputFormat" >
+                <select class="outputformat-select" matNativeControl [(ngModel)]="selectedOutputFormat" >
                   <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
                 </select>
               </mat-form-field>
               <mat-form-field class="template_dropdown">
                 <mat-label>Template</mat-label>
-                <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" >
+                <select class="template-select" matNativeControl [(ngModel)]="selectedTemplate" >
                   <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
                 </select>
               </mat-form-field>
