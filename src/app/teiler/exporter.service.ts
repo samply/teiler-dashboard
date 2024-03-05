@@ -49,7 +49,7 @@ export class ExporterService extends EmbeddedTeilerApp {
     if (queryLabel && queryLabel !== "") {qLabel = "&query-label=" + queryLabel}
     if (queryDescription && queryDescription !== "") {qDesc = "&query-description=" + queryDescription}
     if (contactID && contactID !== "") {contactid = "&query-contact-id=" + contactID}
-    if (context && context.length !== 0) { qContext = "&query-context =" + context}
+    if (context && context.length !== 0) { qContext = "&query-context=" + context}
     if (templateID === "custom") {
       const templateBody ="<request><query>" + query + "</query>" + template + "</request>"
       return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc + contactid + qContext, template, {headers: this.httpHeadersXML});
