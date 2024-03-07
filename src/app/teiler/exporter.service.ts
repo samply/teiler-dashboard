@@ -63,7 +63,7 @@ export class ExporterService extends EmbeddedTeilerApp {
     let qContext: string = "";
     if (queryLabel && queryLabel !== "") { qLabel = "&query-label=" + queryLabel}
     if (queryDescription && queryDescription !== "") { qDesc = "&query-description=" + queryDescription}
-    if (context && context.length !== 0) { qContext = "&query-context =" + context}
+    if (context && context.length !== 0) { qContext = "&query-context=" + context}
     if (templateID === "custom") {
       const templateBody ="<request><query>" + query + "</query>" + template + "</request>"
       return this.http.post<ExportResponse>(this.getExporterURL()+"/request?query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc + qContext, templateBody, {headers: this.httpHeadersXML});
