@@ -25,49 +25,64 @@
       </mat-expansion-panel-header>
 
       <div class="generate-div">
-      <div class="summary-box">
-        <table class="summary-table">
-          <tbody>
-          <tr>
-            <td class="table-left">Titel:</td>
-            <td class="table-right">{{queryLabel}}</td>
-          </tr>
-          <tr>
-            <td class="table-left">Beschreibung:</td>
-            <td class="table-right">{{queryDescription}}</td>
-          </tr>
-          <tr>
-            <td class="table-left">Anfrage:</td>
-            <td class="table-right">{{query.substring(0, 30)}}</td>
-          </tr>
-          <tr>
-            <td class="table-left">Template:</td>
-            <td class="table-right">{{selectedTemplate}}</td>
-          </tr>
-          <tr>
-            <td class="table-left">Anfrageformat:</td>
-            <td class="table-right">{{selectedQueryFormat}}</td>
-          </tr>
-          <tr>
-            <td class="table-left">Ausgabeformat:</td>
-            <td class="table-right">{{selectedOutputFormat}}</td>
-          </tr>
-          <tr>
-            <td class="table-left">Ablaufdatum:</td>
-            <td class="table-right">{{expirationDate | date: 'mediumDate'}}</td>
-          </tr>
-          <tr>
-            <td class="table-left">Anfragende:</td>
-            <td class="table-right">{{contactID}}</td>
-          </tr>
-          <tr *ngFor="let context of contextArray; let i=index">
-            <td class="table-left table-env"><span *ngIf="i === 0">Umgebungsvariable:</span></td>
-            <td class="table-right table-env">{{context.key}}<span *ngIf="(context.key.length > 0) && (context.value.length > 0)">=</span>{{context.value}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="summary-box">
+          <table class="summary-table">
+            <tbody>
+            <tr>
+              <td class="table-left">Titel:</td>
+              <td class="table-right">{{queryLabel}}</td>
+            </tr>
+            <tr>
+              <td class="table-left">Beschreibung:</td>
+              <td class="table-right">{{queryDescription}}</td>
+            </tr>
+            <tr>
+              <td class="table-left">Anfrage:</td>
+              <td class="table-right">{{query.substring(0, 30)}}</td>
+            </tr>
+            <tr>
+              <td class="table-left">Template:</td>
+              <td class="table-right">{{selectedTemplate}}</td>
+            </tr>
+            <tr>
+              <td class="table-left">Anfrageformat:</td>
+              <td class="table-right">{{selectedQueryFormat}}</td>
+            </tr>
+            <tr>
+              <td class="table-left">Ausgabeformat:</td>
+              <td class="table-right">{{selectedOutputFormat}}</td>
+            </tr>
+            <tr>
+              <td class="table-left">Ablaufdatum:</td>
+              <td class="table-right">{{expirationDate | date: 'mediumDate'}}</td>
+            </tr>
+            <tr>
+              <td class="table-left">Anfragende:</td>
+              <td class="table-right">{{contactID}}</td>
+            </tr>
+            <tr *ngFor="let context of contextArray; let i=index">
+              <td class="table-left table-env"><span *ngIf="i === 0">Umgebungsvariable:</span></td>
+              <td class="table-right table-env">{{context.key}}<span *ngIf="(context.key.length > 0) && (context.value.length > 0)">=</span>{{context.value}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="status-log-div">
+          <div class="status">
+            <ng-container *ngIf="exportStatus === ExportStatus.EMPTY"><span class="status-empty"></span></ng-container>
+            <ng-container *ngIf="exportStatus === ExportStatus.RUNNING"><span class="status-running" i18n>Report wird erstellt ...</span></ng-container>
+            <ng-container *ngIf="exportStatus === ExportStatus.OK"><span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span></ng-container>
+            <ng-container *ngIf="exportStatus === ExportStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span></ng-container>
+            <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span></ng-container>
+          </div>
 
+          <div class="log-div">
+            <div class="log-exporter" [ngClass]="{ 'visible': buttonDisabled }">
+              <div class="log-header">Exporter Log:</div>
+              <div id="exportDiv" class="log-reports"><div *ngFor="let log of exportLog">{{log}}</div></div>
+            </div>
+          </div>
+        </div>
 
       <!--<div class="query-input">
         <div class="input-left">
@@ -155,21 +170,6 @@
 
 
       </div>-->
-
-    <div class="status">
-      <ng-container *ngIf="exportStatus === ExportStatus.EMPTY"><span class="status-empty"></span></ng-container>
-      <ng-container *ngIf="exportStatus === ExportStatus.RUNNING"><span class="status-running" i18n>Report wird erstellt ...</span></ng-container>
-      <ng-container *ngIf="exportStatus === ExportStatus.OK"><span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span></ng-container>
-      <ng-container *ngIf="exportStatus === ExportStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span></ng-container>
-      <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span></ng-container>
-    </div>
-
-    <div class="log-div">
-      <div class="log-exporter" [ngClass]="{ 'visible': buttonDisabled }">
-        <div class="log-header">Exporter Log:</div>
-        <div id="exportDiv" class="log-reports"><div *ngFor="let log of exportLog">{{log}}</div></div>
-      </div>
-    </div>
 
   </div>
 

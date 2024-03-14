@@ -24,6 +24,10 @@ export interface ExporterQueries {
   expirationDate: string;
   createdAt: string;
   archivedAt: string;
+  context: string;
+  defaultTemplateId: string;
+  defaultOutputFormat: string;
+
 }
 export interface ExportResponse {
   responseUrl: URL;
@@ -178,7 +182,10 @@ export class ExporterComponent implements OnInit, OnDestroy {
           contactId: query.contactId,
           expirationDate: this.transformDate(query.expirationDate),
           createdAt: this.transformDate(query.createdAt),
-          archivedAt: this.transformDate(query.archivedAt)
+          archivedAt: this.transformDate(query.archivedAt),
+          defaultTemplateId: "",
+          defaultOutputFormat: "",
+          context: query.context
         });
       }
     })
@@ -193,6 +200,16 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
   transformDate(date: string): string {
     return new Date(date).getTime().toString();
+  }
+
+  transformDateForQuery(date: Date | undefined): string {
+    if (date) {
+      const offset = date.getTimezoneOffset();
+      date = new Date(date.getTime() - (offset*60*1000));
+      return date.toISOString().split('T')[0];
+    } else {
+      return "";
+    }
   }
 
   createAndExecuteQuery() {
@@ -256,10 +273,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.subscriptionCreateQuery?.unsubscribe();
 
     this.buttonDisabled = true;
+    const expDate= this.transformDateForQuery(this.expirationDate);
 
-  //  if (this.executeOnSaving) {
-  //    this.createAndExecuteQuery();
-  //  } else {
       if (this.loadedQueryID !== "") {
         this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.loadedQueryID, this.queryLabel, this.queryDescription).subscribe({
           next: (response: any) => {
@@ -275,14 +290,14 @@ export class ExporterComponent implements OnInit, OnDestroy {
           complete: () => {}
         });
       } else {
-        this.subscriptionCreateQuery = this.exporterService.createQuery(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.contactID, this.selectedTemplate, this.getContext(), this.importTemplate).subscribe({
+        this.subscriptionCreateQuery = this.exporterService.createQuery(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.contactID, this.selectedTemplate, this.getContext(), expDate, this.importTemplate).subscribe({
           next: (response: QueryResponse) => {
             this.getQueries();
             this.editModus = false;
             this.buttonDisabled = false;
             if (this.executeOnSaving) {
               this.loadedQueryID = response.queryId;
-              this.createAndExecuteQuery();
+              this.executeQuery();
             }
 
           },
@@ -294,7 +309,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
           complete: () => {}
         });
       }
- //   }
+
   }
 
   getTemplateIDs(): void {
@@ -370,6 +385,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
   loadQuery(): void {
     const query: ExporterQueries[] = this.selection.selected
+
     if(query.length > 0) {
       this.query = query[0].query;
       this.queryDescription = query[0].description;
@@ -381,6 +397,19 @@ export class ExporterComponent implements OnInit, OnDestroy {
       this.buttonDisabled = false;
       this.loadedQueryID = query[0].id.toString();
       this.panelOpenState = true;
+      query[0].expirationDate !== "0" ? this.expirationDate = new Date(parseInt(query[0].expirationDate)) : this.expirationDate = undefined;
+      if (query[0].context !== null) {
+        this.contextArray = [];
+        atob(query[0].context).split(';').forEach((context) => {
+          const contextPair = context.split('=');
+          this.contextArray.push({key: contextPair[0], value: contextPair[1]} as Context);
+        })
+        this.showPlusButton = true;
+      } else {
+        this.contextArray = [{key: "", value: ""} as Context];
+      }
+
+
     }
     else {
       this.query = "";
@@ -391,7 +420,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
       this.editButtonDisabled = true;
       this.buttonDisabled = true;
       this.loadedQueryID = "";
-      this.contextArray = [{key: "", value: ""}];
+      this.expirationDate = undefined;
+      this.contextArray = [{key: "", value: ""} as Context];
     }
   }
 
@@ -407,7 +437,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.expirationDate = undefined;
     this.loadedQueryID = "";
     this.panelOpenState = true;
-    this.contextArray = [{key: "", value: ""}];
+    this.contextArray = [{key: "", value: ""} as Context];
+    this.selection.clear();
     this.generateButtonStatus();
   }
 

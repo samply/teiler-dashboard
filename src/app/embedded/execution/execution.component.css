@@ -44,6 +44,11 @@ button{
   text-align: left;
   font-size: 14px;
   width: 100%;
+  display: flex;
+}
+.status-log-div {
+  width: 68%;
+  margin-left: auto;
 }
 .log-div {
   margin-top: 20px;
@@ -58,7 +63,7 @@ button{
 }
 .log-exporter {
   border: 1px solid #333333;
-  width: 49%;
+  width: 100%;
   padding: 1% 2%;
   background-color: white;
   height: 300px;

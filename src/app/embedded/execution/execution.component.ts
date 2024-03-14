@@ -196,10 +196,11 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
       //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
       this.getQueryExecutions();
-      if (window.history.state.newExecID) {
+      const execID = window.history.state.newExecID;
+      if (execID) {
         this.panelOpenState = true;
         this.buttonDisabled = true;
-        this.pollingStatusAndLogs(this.queryID.toString(), false);
+        this.pollingStatusAndLogs(execID, false);
       } else {
         this.getQuery();
       }
