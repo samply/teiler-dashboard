@@ -14,7 +14,9 @@
       </div>
       <div>
         <div *ngIf="!isLoggedIn">
-          <a routerLink="{{'/' + routeManagerService.loginRouterLink}}"><span i18n>einloggen</span></a>
+          <span class="login-hint1" i18n>für weitere Apps loggen Sie sich Bitte > </span>
+          <a class="login-link" routerLink="{{'/' + routeManagerService.loginRouterLink}}"><span i18n>hier</span></a>
+          <span class="login-hint2" i18n> < ein</span>
         </div>
         <div *ngIf="isLoggedIn">
           <a routerLink="{{'/' + routeManagerService.logoutRouterLink}}" (click)="authService.logout()"><span

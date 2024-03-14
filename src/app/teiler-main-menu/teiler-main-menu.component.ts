@@ -15,7 +15,8 @@ export class TeilerMainMenuComponent implements OnInit {
   tab = 1;
 
   isLoggedIn: boolean = false;
-
+  showLocalApps: boolean = true;
+  showCentralApps: boolean = true;
   constructor(public teilerService: TeilerService, authService: TeilerAuthService) {
     from(authService.isLoggedId()).subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
   }
@@ -40,4 +41,5 @@ export class TeilerMainMenuComponent implements OnInit {
       (app.backendReachable === undefined && app.frontendReachable) ||
       (app.backendReachable === null && app.frontendReachable));
   }
+
 }

@@ -24,10 +24,15 @@ h5,
 h6 {
   margin: 8px 0;
 }
-
+/*
 .app {
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}*/
+.app {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 /* header */
@@ -39,8 +44,11 @@ h6 {
   grid-template-rows: repeat(2, auto);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /* needed for box-shadow to show */
-  position: relative;
   z-index: 10;
+  position: fixed;
+  top: 0;
+  width: 99%;
+  background-color: white;
 }
 
 .toolbar * {
@@ -85,9 +93,11 @@ h6 {
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 99%;
 }
-
+.login-link span {
+  color: rgb(0, 102, 204);
+}
 @media screen and (min-width: 768px) {
   .toolbar {
     grid-template-columns: auto 1fr auto;

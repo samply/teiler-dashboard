@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {ExporterService, exportLog} from "../../teiler/exporter.service";
-import {from, Subscription} from "rxjs";
+import {from, map, Observable, Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {EmbeddedTeilerApps} from "../../teiler/teiler-app";
 import {QBResponse, Templates} from "../quality-report/quality-report.component";
@@ -10,6 +10,9 @@ import {environment} from "../../../environments/environment";
 import {SelectionModel} from "@angular/cdk/collections";
 import {TeilerAuthService} from "../../security/teiler-auth.service";
 import {createRouterLinkForBase} from "../../route/route-utils";
+import {FormBuilder, Validators} from "@angular/forms";
+import {BreakpointObserver} from "@angular/cdk/layout";
+import {StepperOrientation} from "@angular/cdk/stepper";
 
 export interface ExporterQueries {
   id: number;
@@ -61,11 +64,9 @@ export class ExporterComponent implements OnInit, OnDestroy {
   private subscriptionCreateQuery: Subscription | undefined;
   displayedColumns: string[] = ['#', 'timestamp', 'querytitle', 'querysource', 'format', 'executions'];
   dataSource = new MatTableDataSource<ExporterQueries>();
-  clickedRows = new Set<ExporterQueries>();
   buttonDisabled: boolean = true;
   editButtonDisabled: boolean = true;
   editModus: boolean = false;
-  exportLog: exportLog[] = [];
   templateIDs: Templates[] = [];
   outputFormats: DropdownFormat[] = [];
   queryFormats: DropdownFormat[] = [];
@@ -93,9 +94,33 @@ export class ExporterComponent implements OnInit, OnDestroy {
   executionLink: string = EmbeddedTeilerApps.EXECUTION;
   panelOpenState: boolean = false;
   contextArray: Context[] = [{key: "", value: ""}];
+  showPlusButton: boolean = false;
 
-  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService) {
+
+  firstFormGroup = this._formBuilder.group({
+    queryTitle: [''],
+    queryDescription: ['']
+  });
+  secondFormGroup = this._formBuilder.group({
+    query: [''],
+    queryformat: [''],
+  });
+  thirdFormGroup = this._formBuilder.group({
+    template: [''],
+    outputformat: [''],
+  });
+  forthFormGroup = this._formBuilder.group({
+    expirationDate: [''],
+    contextKey: [''],
+    contextValue: ['']
+  });
+  stepperOrientation: Observable<StepperOrientation>;
+
+  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private ref: ChangeDetectorRef) {
     from(authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
+    this.stepperOrientation = breakpointObserver
+      .observe('(min-width: 800px)')
+      .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
   }
   // @ts-ignore
   @ViewChild('paginator') paginator: MatPaginator;
@@ -123,7 +148,9 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.subscriptionCreateQuery?.unsubscribe();
     window.clearInterval(this.intervall);
   }
-
+  ngAfterContentChecked() {
+    //this.ref.detectChanges();
+  }
   getQueries(): void {
     this.subscriptionGetQueries?.unsubscribe();
     this.subscriptionGetQueries = this.exporterService.getReports().subscribe({
@@ -230,9 +257,9 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
     this.buttonDisabled = true;
 
-    if (this.executeOnSaving) {
-      this.createAndExecuteQuery();
-    } else {
+  //  if (this.executeOnSaving) {
+  //    this.createAndExecuteQuery();
+  //  } else {
       if (this.loadedQueryID !== "") {
         this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.loadedQueryID, this.queryLabel, this.queryDescription).subscribe({
           next: (response: any) => {
@@ -253,6 +280,11 @@ export class ExporterComponent implements OnInit, OnDestroy {
             this.getQueries();
             this.editModus = false;
             this.buttonDisabled = false;
+            if (this.executeOnSaving) {
+              this.loadedQueryID = response.queryId;
+              this.createAndExecuteQuery();
+            }
+
           },
           error: (error) => {
             console.log(error);
@@ -262,7 +294,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
           complete: () => {}
         });
       }
-    }
+ //   }
   }
 
   getTemplateIDs(): void {
@@ -359,6 +391,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
       this.editButtonDisabled = true;
       this.buttonDisabled = true;
       this.loadedQueryID = "";
+      this.contextArray = [{key: "", value: ""}];
     }
   }
 
@@ -374,6 +407,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.expirationDate = undefined;
     this.loadedQueryID = "";
     this.panelOpenState = true;
+    this.contextArray = [{key: "", value: ""}];
     this.generateButtonStatus();
   }
 
@@ -391,11 +425,20 @@ export class ExporterComponent implements OnInit, OnDestroy {
   getRouterLink(id: string): string {
     return '/' + createRouterLinkForBase(this.executionLink + '/' + id);
   }
-  addContextInput(): void {
-    this.contextArray.push({key: "", value: ""} as Context)
+  addContextInput(element: any, index2: number): void {
+    const scrollElement = element.target.parentNode.parentNode.parentNode;
+    this.contextArray.push({key: "", value: ""} as Context);
+    setTimeout(() => {
+      scrollElement.scrollTop = scrollElement.scrollHeight;
+    }, 50);
+    this.showPlusButton = false;
   }
   deleteContextInput(index: number): void {
-    this.contextArray.splice(index, 1)
+    this.contextArray.splice(index, 1);
+    this.checkContext(this.contextArray.length-1);
+  }
+  checkContext(index: number) {
+    this.showPlusButton = this.contextArray[index].key.length > 0 && this.contextArray[index].value.length > 0;
   }
   getContext(): string {
     let context: string = "";
@@ -410,4 +453,5 @@ export class ExporterComponent implements OnInit, OnDestroy {
     //return Buffer.from(context).toString("base64");
     return btoa(context);
   }
+
 }
