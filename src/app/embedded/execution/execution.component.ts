@@ -7,7 +7,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {SelectionModel} from "@angular/cdk/collections";
 import {environment} from "../../../environments/environment";
 import {ExporterService} from "../../teiler/exporter.service";
-import {DropdownFormat, ExportResponse} from "../exporter/exporter.component";
+import {Context, DropdownFormat, ExportResponse} from "../exporter/exporter.component";
 import {Templates} from "../quality-report/quality-report.component";
 
 
@@ -73,6 +73,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   queryFormats: DropdownFormat[] = [];
   templateIDs: Templates[] = [];
   contactID: string | undefined;
+  contextArray: Context[] = [{key: "", value: ""}];
   templateGraph = {
     "containers" : [ {
       "linked-attribute" : [ {
@@ -195,10 +196,11 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
       //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
       this.getQueryExecutions();
-      if (window.history.state.newExecID) {
+      const execID = window.history.state.newExecID;
+      if (execID) {
         this.panelOpenState = true;
         this.buttonDisabled = true;
-        this.pollingStatusAndLogs(this.queryID.toString(), false);
+        this.pollingStatusAndLogs(execID, false);
       } else {
         this.getQuery();
       }

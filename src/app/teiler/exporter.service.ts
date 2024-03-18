@@ -41,20 +41,22 @@ export class ExporterService extends EmbeddedTeilerApp {
   getQueryFormats(): Observable<string[]> {
     return this.http.get<string[]>(this.getExporterURL() + "/input-formats");
   }
-  public createQuery(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, contactID: string | undefined, templateID: string, context: string, template?:string): Observable<QueryResponse> {
+  public createQuery(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, contactID: string | undefined, templateID: string, context: string, expDate: string, template?:string): Observable<QueryResponse> {
     let qLabel: string = "";
     let qDesc: string = "";
     let contactid = "";
     let qContext: string = "";
+    let expiration: string = "";
     if (queryLabel && queryLabel !== "") {qLabel = "&query-label=" + queryLabel}
     if (queryDescription && queryDescription !== "") {qDesc = "&query-description=" + queryDescription}
     if (contactID && contactID !== "") {contactid = "&query-contact-id=" + contactID}
     if (context && context.length !== 0) { qContext = "&query-context=" + context}
+    if (expDate.length > 0) {expiration = "&query-expiration-date=" + expDate}
     if (templateID === "custom") {
       const templateBody ="<request><query>" + query + "</query>" + template + "</request>"
-      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc + contactid + qContext, template, {headers: this.httpHeadersXML});
+      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc + contactid + qContext + expiration, template, {headers: this.httpHeadersXML});
     } else {
-      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc + contactid + qContext, null, {headers: this.httpHeaders});
+      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc + contactid + qContext + expiration, null, {headers: this.httpHeaders});
     }
   }
   public generateExport(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, templateID: string, context: string, template?:string): Observable<ExportResponse> {

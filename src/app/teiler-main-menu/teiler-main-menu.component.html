@@ -15,12 +15,16 @@
                (click)="tab=2" (keyup.enter)="tab=2"
                [ngClass]="{active: tab===2}" class="apps" i18n>Zentrale Apps</div>
         </div>-->
-
+        <section class="app-selection">
+          <mat-checkbox class="local-apps" [(ngModel)]="showLocalApps" i18n>lokale Apps</mat-checkbox>
+          <mat-checkbox class="central-apps" [(ngModel)]="showCentralApps" i18n>zentrale Apps</mat-checkbox>
+        </section>
         <div class="contents">
           <!--<div *ngIf="tab === 1">-->
             <div class="slider-wrap">
               <div class="slider-main">
                 <div *ngFor="let teilerApp of teilerService.teilerApps">
+                  <ng-container *ngIf="(teilerApp.local && showLocalApps) || (!teilerApp.local && showCentralApps)">
                   <div *ngIf="teilerApp.inMenu">
                     <div *ngIf="!teilerApp.externLink">
                       <a *ngIf="isClickable(teilerApp); else nonClickableApp" routerLink="{{'/'+teilerApp.routerLink}}"
@@ -38,6 +42,7 @@
                       <teiler-box [teilerApp]="teilerApp"></teiler-box>
                     </ng-template>
                   </div>
+                  </ng-container>
                 </div>
               </div>
             </div>

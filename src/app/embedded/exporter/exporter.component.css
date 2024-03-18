@@ -32,11 +32,11 @@ table {
   background-color: #2BCDD563!important;
 }
 ::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
-  height: 35px !important;
+  height: 30px !important;
 }
-mat-form-field {
+/*mat-form-field {
   font-size: small;
-}
+}*/
 
 .table-link-column {
   text-align: center;
@@ -151,7 +151,7 @@ button{
 .generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled {
   color: darkgrey!important;
 }
-.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .plus-button, .minus-button {
+.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .plus-button, .minus-button, .next-button, .back-button {
   background-color: #2BCDD563 !important;
 }
 .download-button, .edit-button, .cancel-edit-button, .upload-button {
@@ -175,6 +175,10 @@ button{
 .minus-button {
   margin-right: 10px;
 }
+.next-button, .back-button {
+  font-size: 14px;
+  color: black!important;
+}
 .file-upload {
   text-transform: none !important;
   width: 200px;
@@ -192,10 +196,20 @@ button{
   color: black;
   margin: 5px;
   height: 20px;
+}/*
+.queryformat_dropdown {
+  margin-bottom: 20px;
+  margin-right: 5%;
+  width: 45%;
+}*/
+.queryformat_dropdown{
+  width: 75%;
 }
-.template_dropdown, .outputformat_dropdown {
-  margin: 0;
-  /*width: 20%;*/
+.template_dropdown, .outputformat_dropdown  {
+  width: 50%;
+}
+.template_dropdown {
+  margin-bottom: 5%;
 }
 .button-accordion {
   margin-bottom: 50px;
@@ -209,12 +223,13 @@ mat-expansion-panel-header {
 .mat-mdc-menu-item {
   color: black;
 }
+.query-expiration-date {
+  width: 74%;
+  margin-bottom: 5%;
+}
 ::ng-deep .query-input .mat-mdc-text-field-wrapper {
   background-color: #f5f5f5;
   min-width: 220px;
-}
-::ng-deep .query-expiration-date .mat-mdc-text-field-wrapper {
-  width: 220px;
 }
 .query-contactid, .query-context {
   margin-right: 20px;
@@ -234,7 +249,9 @@ mat-expansion-panel-header {
   margin-top: 20px;
 }
 .query-label {
-  width: 100%;
+  width: 75%;
+  margin-bottom: 12%;
+  height: 50px;
 }
 .input-left {
   margin-right: 30px;
@@ -247,10 +264,114 @@ mat-expansion-panel-header {
   margin-right: 20px;
   width: min-content;
 }
+.upload-button, .download-button {
+  width: 50%;
+  max-width: 200px;
+}
+
+.input-box {
+  display: flex;
+}
+.summary-box {
+  width: 30%;
+  background-color: rgba(197, 197, 197, 0.2);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  margin-right: 5px;
+  height: 480px;
+  overflow: auto;
+}
+.summary-box-left {
+  width: 40%;
+}
+.summary-box-right {
+  width: 60%;
+}
+.summary-table {
+  text-align: left;
+}
+.summary-table td {
+  padding: 6px;
+  border-bottom: #e0e0e0 1px solid;
+}
+.table-left {
+  width: 35%;
+}
+.table-right {
+  width: 65%;
+}
+.table-left.table-env {
+  border-bottom: none!important;
+}
+.stepper {
+  width: 68%;
+  margin-left: auto;
+}
+.textarea {
+  font-size: 11pt!important;
+}
+.textarea-box {
+  width: 75%;
+}
+.textarea-box .mat-mdc-form-field {
+  width: 100%;
+}
+::ng-deep .textarea-box .mat-mdc-form-field .mdc-text-field {
+  padding-right: 0;
+}
+.query-textbox {
+  margin-bottom: 5%;
+}
+.stepper-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+.form-content {
+  height: 350px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.FormGroup-input-div {
+  width: 60%;
+  height: 315px;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+.FormGroup-description-div {
+  width: 40%;
+  font-size: 12pt;
+}
+.FormGroup-description-div ul {
+  margin-top: 0;
+}
+.firstFormGroup-div, .secondFormGroup-div, .thirdFormGroup-div, .forthFormGroup-div {
+  display: flex;
+}
+.template-box {
+  display: flex;
+}
+::ng-deep .mat-horizontal-content-container {
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+/*
+.queryformat-select, .outputformat-select,
 ::ng-deep .query-input .mat-mdc-form-field-infix {
   padding-top: 18px!important;
   padding-bottom: 2px!important;
   min-height: 52px!important;
+}*/
+.query-context {
+  width: 35%;
+}
+
+.stepper-help-header, .stepper-help-hint-header {
+  font-weight: bold;
+}
+.stepper-help-hint-header, .stepper-help-hint-text {
+  font-style: italic;
+  font-size: 11pt;
 }
 ::ng-deep .query-context .mat-mdc-form-field-infix {
   padding-top: 15px!important;
@@ -269,9 +390,10 @@ mat-expansion-panel-header {
 .link-icon {
   font-size: 24px;
 }
-.description-textfield {
+.description-textfield, .query-textfield {
   height: 114px;
 }
+
 @media(max-width : 1400px){
   .main{
     width: 80%;
