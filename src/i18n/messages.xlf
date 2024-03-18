@@ -9,17 +9,33 @@
         <source>Brückenkopf</source>
       </segment>
     </unit>
-    <unit id="8458737915529390534">
+    <unit id="8093331483998775529">
       <notes>
         <note category="location">src/app/app.component.html:17</note>
       </notes>
       <segment>
-        <source>einloggen</source>
+        <source>für weitere Apps loggen Sie sich Bitte &gt; </source>
+      </segment>
+    </unit>
+    <unit id="2109703618206274645">
+      <notes>
+        <note category="location">src/app/app.component.html:18</note>
+      </notes>
+      <segment>
+        <source>hier</source>
+      </segment>
+    </unit>
+    <unit id="8993139119383227937">
+      <notes>
+        <note category="location">src/app/app.component.html:19</note>
+      </notes>
+      <segment>
+        <source> &lt; ein</source>
       </segment>
     </unit>
     <unit id="9065377445413378007">
       <notes>
-        <note category="location">src/app/app.component.html:21</note>
+        <note category="location">src/app/app.component.html:23</note>
       </notes>
       <segment>
         <source>ausloggen</source>
@@ -53,7 +69,7 @@
     <unit id="3840739858389961694">
       <notes>
         <note category="location">src/app/embedded/event-log/event-log.component.html:22</note>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:454</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:359</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:59</note>
       </notes>
       <segment>
@@ -79,6 +95,7 @@
     <unit id="7273812294011829379">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:11</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:17</note>
       </notes>
       <segment>
         <source>Anfrage ausführen</source>
@@ -97,7 +114,7 @@
     <unit id="4796891122277612580">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:17</note>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:195</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:214</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:19</note>
       </notes>
       <segment>
@@ -107,24 +124,15 @@
     <unit id="7851488990126524246">
       <notes>
         <note category="location">src/app/embedded/execution/execution.component.html:21</note>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:199</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:23</note>
       </notes>
       <segment>
         <source>Template herunterladen</source>
       </segment>
     </unit>
-    <unit id="376996191072718920">
-      <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:112</note>
-      </notes>
-      <segment>
-        <source>Kontakt-ID</source>
-      </segment>
-    </unit>
     <unit id="3299498505798542378">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:129</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:73</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
       </notes>
       <segment>
@@ -133,7 +141,7 @@
     </unit>
     <unit id="5111784551733870059">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:130</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:74</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
       </notes>
       <segment>
@@ -142,7 +150,7 @@
     </unit>
     <unit id="961812481581959030">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:131</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:75</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
       </notes>
       <segment>
@@ -151,7 +159,7 @@
     </unit>
     <unit id="5070539244098019882">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:132</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:76</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:30</note>
       </notes>
       <segment>
@@ -160,7 +168,7 @@
     </unit>
     <unit id="2876674083968644556">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:152</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:184</note>
       </notes>
       <segment>
         <source>ausgeführt am</source>
@@ -168,7 +176,7 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:157</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:189</note>
       </notes>
       <segment>
         <source>Status</source>
@@ -176,7 +184,7 @@
     </unit>
     <unit id="2348254711380854005">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:162</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:194</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:64</note>
       </notes>
       <segment>
@@ -185,7 +193,7 @@
     </unit>
     <unit id="6525583106874020108">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:167</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:199</note>
       </notes>
       <segment>
         <source>Ausgabeformat</source>
@@ -193,7 +201,7 @@
     </unit>
     <unit id="2981219928115418649">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:172</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:204</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:69</note>
       </notes>
       <segment>
@@ -224,9 +232,137 @@
         <source>Anfrage editieren</source>
       </segment>
     </unit>
+    <unit id="5733508493886442121">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:112</note>
+      </notes>
+      <segment>
+        <source>Erstellen Sie Ihre Anfrage in 4 Schritten: </source>
+      </segment>
+    </unit>
+    <unit id="3405580705702959483">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:115</note>
+      </notes>
+      <segment>
+        <source>Versehen Sie sie mit einer Überschrift und einer Beschreibung.</source>
+      </segment>
+    </unit>
+    <unit id="1826910816062534043">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:120</note>
+      </notes>
+      <segment>
+        <source>Bestimmen Sie die Anfragesprache und formulieren Sie Ihre Anfrage (Query) entsprechend dem gewählten Format.</source>
+      </segment>
+    </unit>
+    <unit id="3507775477797509308">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:125</note>
+      </notes>
+      <segment>
+        <source>Wählen Sie ein Ausgabeformat und das passende Template.</source>
+      </segment>
+    </unit>
+    <unit id="8984888791991991753">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:130</note>
+      </notes>
+      <segment>
+        <source>Setzen Sie ein Ablaufdatum und fügen Sie zusätzliche Parameter hinzu, falls Ihre Anfrage spezielle Anforderungen hat.</source>
+      </segment>
+    </unit>
+    <unit id="512114589853951663">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:140</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:192</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:253</note>
+      </notes>
+      <segment>
+        <source>Weiter</source>
+      </segment>
+    </unit>
+    <unit id="1234857761141342180">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:178</note>
+      </notes>
+      <segment>
+        <source>Anfrage formulieren: </source>
+      </segment>
+    </unit>
+    <unit id="599060361733804077">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:179</note>
+      </notes>
+      <segment>
+        <source>Legen Sie Ihre Anfrage und das Anfrageformat fest. Verwenden Sie die Syntax, wie sie in unserer Dokumentation beschrieben wird, um Ihre Anfrage korrekt zu strukturieren.</source>
+      </segment>
+    </unit>
+    <unit id="5392630239315548019">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:182</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:243</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:319</note>
+      </notes>
+      <segment>
+        <source>Hinweis: </source>
+      </segment>
+    </unit>
+    <unit id="1160769274970562699">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:183</note>
+      </notes>
+      <segment>
+        <source>Es können nur gültige Anfragen aus den unterstützten Anfrageformaten ausgeführt werden.</source>
+      </segment>
+    </unit>
+    <unit id="8930526198656004715">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:191</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:252</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:328</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:35</note>
+        <note category="location">src/app/embedded/uploads/uploads.component.html:49</note>
+      </notes>
+      <segment>
+        <source>Zurück</source>
+      </segment>
+    </unit>
+    <unit id="1252150231608303148">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:222,223</note>
+      </notes>
+      <segment>
+        <source>Template herunterladen </source>
+      </segment>
+    </unit>
+    <unit id="8451765628208922566">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:239</note>
+      </notes>
+      <segment>
+        <source>Ausgabeformat wählen: </source>
+      </segment>
+    </unit>
+    <unit id="6607100999902612883">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:240</note>
+      </notes>
+      <segment>
+        <source>Wählen Sie das Template und das Format für die Ausgabedaten.</source>
+      </segment>
+    </unit>
+    <unit id="8134710026229208976">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:244</note>
+      </notes>
+      <segment>
+        <source>das Template/Vorlage definiert die Datenstruktur im gewählten Format (json, csv...)</source>
+      </segment>
+    </unit>
     <unit id="8836082739124677792">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:234</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:275</note>
       </notes>
       <segment>
         <source>Schlüssel</source>
@@ -234,15 +370,55 @@
     </unit>
     <unit id="5422814021855947257">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:244</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:287</note>
       </notes>
       <segment>
         <source>Wert</source>
       </segment>
     </unit>
+    <unit id="6985721531220771316">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:309</note>
+      </notes>
+      <segment>
+        <source>Ablaufdatum angeben: </source>
+      </segment>
+    </unit>
+    <unit id="7438568421912103067">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:310</note>
+      </notes>
+      <segment>
+        <source>Bestimmen Sie ein Ablaufdatum für Ihre Anfrage, um festzulegen, wann die Anfrage abgeschlossen sein soll.</source>
+      </segment>
+    </unit>
+    <unit id="9114273420593895411">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:315</note>
+      </notes>
+      <segment>
+        <source>Zusätzliche Parameter: </source>
+      </segment>
+    </unit>
+    <unit id="891297214344396566">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:316</note>
+      </notes>
+      <segment>
+        <source>Falls Ihre Anfrage spezielle Anforderungen hat, können Sie weitere Parameter definieren.</source>
+      </segment>
+    </unit>
+    <unit id="8420811511138319553">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:320</note>
+      </notes>
+      <segment>
+        <source>Detaillierte Informationen zu zusätzlichen Parametern finden Sie ebenfalls in unserer Dokumentation.</source>
+      </segment>
+    </unit>
     <unit id="2418404773112079564">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:437</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:342</note>
       </notes>
       <segment>
         <source>aktive Anfragen</source>
@@ -250,7 +426,7 @@
     </unit>
     <unit id="3304523725276948030">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:438</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:343</note>
       </notes>
       <segment>
         <source>archivierte Anfragen</source>
@@ -258,7 +434,7 @@
     </unit>
     <unit id="4077520913910941990">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:459</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:364</note>
       </notes>
       <segment>
         <source>Label</source>
@@ -266,7 +442,7 @@
     </unit>
     <unit id="7402705001602102733">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:464</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:369</note>
       </notes>
       <segment>
         <source>Anfrage</source>
@@ -274,7 +450,7 @@
     </unit>
     <unit id="7513076467032912668">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:469</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:374</note>
       </notes>
       <segment>
         <source>Format</source>
@@ -282,7 +458,7 @@
     </unit>
     <unit id="4902939987167543469">
       <notes>
-        <note category="location">src/app/embedded/exporter/exporter.component.html:474</note>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:379</note>
       </notes>
       <segment>
         <source>Ausführungen</source>
@@ -710,15 +886,6 @@
         <source>Nächste</source>
       </segment>
     </unit>
-    <unit id="8930526198656004715">
-      <notes>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:35</note>
-        <note category="location">src/app/embedded/uploads/uploads.component.html:49</note>
-      </notes>
-      <segment>
-        <source>Zurück</source>
-      </segment>
-    </unit>
     <unit id="6802674628954006174">
       <notes>
         <note category="location">src/app/embedded/uploads/uploads.component.html:50</note>
@@ -853,6 +1020,22 @@
       </notes>
       <segment>
         <source>zentral</source>
+      </segment>
+    </unit>
+    <unit id="7038085101338331598">
+      <notes>
+        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:19</note>
+      </notes>
+      <segment>
+        <source>lokale Apps</source>
+      </segment>
+    </unit>
+    <unit id="4043473548389871080">
+      <notes>
+        <note category="location">src/app/teiler-main-menu/teiler-main-menu.component.html:20</note>
+      </notes>
+      <segment>
+        <source>zentrale Apps</source>
       </segment>
     </unit>
     <unit id="2068445951425750817">
