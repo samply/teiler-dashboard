@@ -18,8 +18,6 @@
               </button>
               <div class="file-name">{{ fileName }}</div>
             </div>
-            <button class="download-button" mat-raised-button color="primary" (click)="downloadTemplate();$event.stopPropagation();" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && panelOpenState) }" i18n>Template herunterladen</button>
-
         </div>
 
       </mat-expansion-panel-header>
@@ -61,25 +59,37 @@
               <td class="table-right">{{contactID}}</td>
             </tr>
             <tr *ngFor="let context of contextArray; let i=index">
-              <td class="table-left table-env"><span *ngIf="i === 0">Umgebungsvariable:</span></td>
+              <td class="table-left table-env"><span *ngIf="i === 0">Umgebungsvariablen:</span></td>
               <td class="table-right table-env">{{context.key}}<span *ngIf="(context.key.length > 0) && (context.value.length > 0)">=</span>{{context.value}}</td>
             </tr>
             </tbody>
           </table>
         </div>
-        <div class="status-log-div">
-          <div class="status">
-            <ng-container *ngIf="exportStatus === ExportStatus.EMPTY"><span class="status-empty"></span></ng-container>
-            <ng-container *ngIf="exportStatus === ExportStatus.RUNNING"><span class="status-running" i18n>Report wird erstellt ...</span></ng-container>
-            <ng-container *ngIf="exportStatus === ExportStatus.OK"><span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span></ng-container>
-            <ng-container *ngIf="exportStatus === ExportStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span></ng-container>
-            <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span></ng-container>
-          </div>
+        <div class="output-and-log-div">
+          <mat-form-field class="outputformat_dropdown">
+            <mat-label>Ausgabeformat</mat-label>
+            <select class="outputformat-select"
+                    matNativeControl
+                    [(ngModel)]="selectedOutputFormat"
+                    [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
+            </select>
+          </mat-form-field>
 
-          <div class="log-div">
-            <div class="log-exporter" [ngClass]="{ 'visible': buttonDisabled }">
-              <div class="log-header">Exporter Log:</div>
-              <div id="exportDiv" class="log-reports"><div *ngFor="let log of exportLog">{{log}}</div></div>
+          <div class="status-log-div">
+            <div class="status">
+              <ng-container *ngIf="exportStatus === ExportStatus.EMPTY"><span class="status-empty"></span></ng-container>
+              <ng-container *ngIf="exportStatus === ExportStatus.RUNNING"><span class="status-running" i18n>Report wird erstellt ...</span></ng-container>
+              <ng-container *ngIf="exportStatus === ExportStatus.OK"><span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span></ng-container>
+              <ng-container *ngIf="exportStatus === ExportStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span></ng-container>
+              <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span></ng-container>
+            </div>
+
+            <div class="log-div">
+              <div class="log-exporter" [ngClass]="{ 'visible': buttonDisabled }">
+                <div class="log-header">Exporter Log:</div>
+                <div id="exportDiv" class="log-reports"><div *ngFor="let log of exportLog">{{log}}</div></div>
+              </div>
             </div>
           </div>
         </div>

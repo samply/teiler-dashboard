@@ -16,7 +16,7 @@
       </notes>
       <segment>
         <source>für weitere Apps loggen Sie sich Bitte &gt; </source>
-        <target>for further apps please log in &gt; </target>
+        <target>for more apps please log in &gt; </target>
       </segment>
     </unit>
     <unit id="2109703618206274645">
@@ -135,19 +135,9 @@
         <target>select template</target>
       </segment>
     </unit>
-    <unit id="7851488990126524246">
-      <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:21</note>
-        <note category="location">src/app/embedded/quality-report/quality-report.component.html:23</note>
-      </notes>
-      <segment>
-        <source>Template herunterladen</source>
-        <target>download template</target>
-      </segment>
-    </unit>
     <unit id="3299498505798542378">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:73</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:82</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:27</note>
       </notes>
       <segment>
@@ -157,7 +147,7 @@
     </unit>
     <unit id="5111784551733870059">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:74</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:83</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:28</note>
       </notes>
       <segment>
@@ -167,7 +157,7 @@
     </unit>
     <unit id="961812481581959030">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:75</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:84</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:29</note>
       </notes>
       <segment>
@@ -177,7 +167,7 @@
     </unit>
     <unit id="5070539244098019882">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:76</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:85</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:30</note>
       </notes>
       <segment>
@@ -187,7 +177,7 @@
     </unit>
     <unit id="2876674083968644556">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:184</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:194</note>
       </notes>
       <segment>
         <source>ausgeführt am</source>
@@ -196,7 +186,7 @@
     </unit>
     <unit id="5611592591303869712">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:189</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:199</note>
       </notes>
       <segment>
         <source>Status</source>
@@ -205,7 +195,7 @@
     </unit>
     <unit id="2348254711380854005">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:194</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:204</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:64</note>
       </notes>
       <segment>
@@ -215,7 +205,7 @@
     </unit>
     <unit id="6525583106874020108">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:199</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:209</note>
       </notes>
       <segment>
         <source>Ausgabeformat</source>
@@ -224,7 +214,7 @@
     </unit>
     <unit id="2981219928115418649">
       <notes>
-        <note category="location">src/app/embedded/execution/execution.component.html:204</note>
+        <note category="location">src/app/embedded/execution/execution.component.html:214</note>
         <note category="location">src/app/embedded/quality-report/quality-report.component.html:69</note>
       </notes>
       <segment>
@@ -312,7 +302,7 @@
       </notes>
       <segment>
         <source>Weiter</source>
-        <target>Next</target>
+        <target>next</target>
       </segment>
     </unit>
     <unit id="1234857761141342180">
@@ -363,7 +353,7 @@
       </notes>
       <segment>
         <source>Zurück</source>
-        <target>Back</target>
+        <target>back</target>
       </segment>
     </unit>
     <unit id="1252150231608303148">
@@ -489,7 +479,7 @@
       </notes>
       <segment>
         <source>Label</source>
-        <source>label</source>
+        <target>label</target>
       </segment>
     </unit>
     <unit id="7402705001602102733">
@@ -516,7 +506,7 @@
       </notes>
       <segment>
         <source>Ausführungen</source>
-        <source>Executions</source>
+        <target>Executions</target>
       </segment>
     </unit>
     <unit id="8332823385826673272">
@@ -721,7 +711,7 @@
       </notes>
       <segment>
         <source> Anfrage erneut ausfüllen</source>
-        <target>Execute request again</target>
+        <target> Execute request again</target>
       </segment>
     </unit>
     <unit id="7644487670693293606">
@@ -943,6 +933,15 @@
         <target>generate new report</target>
       </segment>
     </unit>
+    <unit id="7851488990126524246">
+      <notes>
+        <note category="location">src/app/embedded/quality-report/quality-report.component.html:23</note>
+      </notes>
+      <segment>
+        <source>Template herunterladen</source>
+        <target>Download template</target>
+      </segment>
+    </unit>
     <unit id="8722084746247976035">
       <notes>
         <note category="location">src/app/embedded/quality-report/quality-report.component.ts:255</note>
@@ -1158,7 +1157,7 @@
       </notes>
       <segment>
         <source>zentrale Apps</source>
-        <target>central apps</target>
+        <target>cental apps</target>
       </segment>
     </unit>
     <unit id="2068445951425750817">
@@ -1261,8 +1260,8 @@
         <note category="location">src/app/teiler/exporter.service.ts:20</note>
       </notes>
       <segment>
-        <source>Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.</source>
-        <target>Use the exporter to export your data flexibly in different formats and adapt the data to your specific requirements.</target>
+        <source>Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.</source>
+        <target>Use the exporter to export your data flexibly in different formats and adapt the data to your specific requirements. Use the exporter to export your data flexibly in different formats and adapt the data to your specific requirements.</target>
       </segment>
     </unit>
     <unit id="1018606136972574138">

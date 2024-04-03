@@ -19,6 +19,11 @@ export interface ExporterExecutions {
   status: string;
   executedAt: string;
 }
+export interface ExecutionError {
+  id: number;
+  queryExecutionId: number;
+  error: string;
+}
 export enum ExportStatus {
   OK = "OK",
   RUNNING = "RUNNING",
@@ -189,23 +194,27 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.queryID = params['id'];
       console.log(params['id']);
-      this.query = window.history.state.query;
-      this.queryLabel = window.history.state.label;
-      this.queryDescription = window.history.state.description;
-      this.selectedQueryFormat = window.history.state.selectedQueryFormat?.toUpperCase();
-      //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
-      //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
-      this.getQueryExecutions();
-      const execID = window.history.state.newExecID;
-      if (execID) {
-        this.panelOpenState = true;
-        this.buttonDisabled = true;
-        this.pollingStatusAndLogs(execID, false);
-      } else {
+      if (window.history.state.query) {
+        this.query = window.history.state.query;
+        this.queryLabel = window.history.state.label;
+        this.queryDescription = window.history.state.description;
+        this.selectedQueryFormat = window.history.state.selectedQueryFormat?.toUpperCase();
+        //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
+        //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
+        const execID = window.history.state.newExecID;
+        if (execID) {
+          this.panelOpenState = true;
+          this.buttonDisabled = true;
+          this.pollingStatusAndLogs(execID, false);
+        }
+      }
+       else {
         this.getQuery();
       }
+      this.getQueryExecutions();
     })
-    console.log(this.dataSourcePatients.data)
+    this.getExecutionError(1)
+    //console.log(this.dataSourcePatients.data)
   }
   ngOnDestroy(): void {
     this.subscriptionGetExecutionList?.unsubscribe();
@@ -228,6 +237,19 @@ export class ExecutionComponent implements OnInit, OnDestroy {
         this.queryLabel = query.label;
         this.queryDescription = query.description;
         this.selectedQueryFormat = query.format;
+        this.contactID = query.contactId;
+        query.expirationDate !== null ? this.expirationDate = new Date(query.expirationDate) : this.expirationDate = undefined;
+
+        if (query.context !== null) {
+          this.contextArray = [];
+          atob(query.context).split(';').forEach((context) => {
+            const contextPair = context.split('=');
+            this.contextArray.push({key: contextPair[0], value: contextPair[1]} as Context);
+          })
+        } else {
+          this.contextArray = [{key: "", value: ""} as Context];
+        }
+
       },
       error: (error) => {
         console.log(error);
@@ -338,6 +360,20 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       }, 200);
     }
   }
+
+  getExecutionError(execID: number): void {
+    this.executionService.getExecutionError(execID).subscribe({
+      next: (execError) => {
+        console.log(execError[0].error)
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
+  }
+
   getExecutionDataInBody(exec:ExporterExecutions): void {
     this.subscriptionGetExecution?.unsubscribe();
     this.subscriptionGetExecution = this.executionService.getExecutionDataInBody(exec.id).subscribe({
