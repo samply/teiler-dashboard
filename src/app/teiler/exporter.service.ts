@@ -17,7 +17,7 @@ export interface exportLog {
 })
 export class ExporterService extends EmbeddedTeilerApp {
 
-	description: string = $localize`Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.`;
+	description: string = $localize`Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.`;
 	iconClass: string | undefined = 'bi bi-download';
 	iconSourceUrl: string | undefined = undefined;
 	title: string = "Exporter";

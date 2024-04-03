@@ -67,7 +67,7 @@
               <td class="table-right">{{contactID}}</td>
             </tr>
             <tr *ngFor="let context of contextArray; let i=index">
-              <td class="table-left table-env"><span *ngIf="i === 0">Umgebungsvariable:</span></td>
+              <td class="table-left table-env"><span *ngIf="i === 0">Umgebungsvariablen:</span></td>
               <td class="table-right table-env">{{context.key}}<span *ngIf="(context.key.length > 0) && (context.value.length > 0)">=</span>{{context.value}}</td>
             </tr>
             </tbody>

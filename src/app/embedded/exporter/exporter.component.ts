@@ -13,6 +13,7 @@ import {createRouterLinkForBase} from "../../route/route-utils";
 import {FormBuilder, Validators} from "@angular/forms";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {StepperOrientation} from "@angular/cdk/stepper";
+import {ViewportScroller} from "@angular/common";
 
 export interface ExporterQueries {
   id: number;
@@ -120,7 +121,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   });
   stepperOrientation: Observable<StepperOrientation>;
 
-  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private ref: ChangeDetectorRef) {
+  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private viewport: ViewportScroller) {
     from(authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -131,6 +132,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.viewport.scrollToPosition([0,0]);
   }
   ngOnInit(): void {
     this.exportUrl = this.exporterService.getExporterURL() + "/";

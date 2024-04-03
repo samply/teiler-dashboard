@@ -8,7 +8,7 @@ h3{
   margin:0;
 }
 .teiler-box-image {
-  min-height: 92px;
+  min-height: 88px;
   display: flex;
   margin-bottom: 5px;
 }
@@ -28,7 +28,7 @@ p{
   color: grey;
   margin: 0 auto 5px auto;
   width: fit-content;
-  min-height: 92px;
+  min-height: 88px;
   display: flex;
 }
 .teiler-box {
@@ -63,7 +63,12 @@ p{
   transform:scaleX(1);
 }
 .teiler-box-description {
-  font-size: 95%;
+  font-size: 90%;
+  max-height: 88px;
+  overflow: hidden;
+}
+.teiler-box-description:hover {
+  overflow: auto;
 }
 .text{
   position: absolute;

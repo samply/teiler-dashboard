@@ -203,7 +203,7 @@ button{
   width: 45%;
 }*/
 .queryformat_dropdown{
-  width: 75%;
+  width: 80%;
 }
 .template_dropdown, .outputformat_dropdown  {
   width: 50%;
@@ -249,7 +249,7 @@ mat-expansion-panel-header {
   margin-top: 20px;
 }
 .query-label {
-  width: 75%;
+  width: 80%;
   margin-bottom: 12%;
   height: 50px;
 }
@@ -310,7 +310,7 @@ mat-expansion-panel-header {
   font-size: 11pt!important;
 }
 .textarea-box {
-  width: 75%;
+  width: 80%;
 }
 .textarea-box .mat-mdc-form-field {
   width: 100%;
@@ -333,14 +333,16 @@ mat-expansion-panel-header {
   flex-direction: column;
 }
 .FormGroup-input-div {
-  width: 60%;
+  width: 55%;
   height: 315px;
   overflow: auto;
   margin-bottom: 10px;
 }
 .FormGroup-description-div {
-  width: 40%;
-  font-size: 12pt;
+  width: 45%;
+  font-size: 11pt;
+  max-height: 315px;
+  overflow: auto;
 }
 .FormGroup-description-div ul {
   margin-top: 0;
