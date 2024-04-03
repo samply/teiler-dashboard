@@ -185,8 +185,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
           expirationDate: this.transformDate(query.expirationDate),
           createdAt: this.transformDate(query.createdAt),
           archivedAt: this.transformDate(query.archivedAt),
-          defaultTemplateId: "",
-          defaultOutputFormat: "",
+          defaultTemplateId: query.defaultTemplateId,
+          defaultOutputFormat: query.defaultOutputFormat,
           context: query.context
         });
       }
@@ -398,6 +398,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
       this.executeOnSaving = true;
       this.buttonDisabled = false;
       this.loadedQueryID = query[0].id.toString();
+      query[0].defaultOutputFormat !== null && query[0].defaultOutputFormat !== undefined ? this.selectedOutputFormat = query[0].defaultOutputFormat : this.selectedOutputFormat = "JSON";
+      query[0].defaultTemplateId !== null && query[0].defaultTemplateId !== undefined ? this.selectedTemplate = query[0].defaultTemplateId : this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
       this.panelOpenState = true;
       query[0].expirationDate !== "0" ? this.expirationDate = new Date(parseInt(query[0].expirationDate)) : this.expirationDate = undefined;
       if (query[0].context !== null) {
@@ -423,6 +425,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
       this.buttonDisabled = true;
       this.loadedQueryID = "";
       this.expirationDate = undefined;
+      this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
+      this.selectedOutputFormat = "JSON";
       this.contextArray = [{key: "", value: ""} as Context];
     }
   }
