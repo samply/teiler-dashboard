@@ -253,15 +253,14 @@ export class ExporterComponent implements OnInit, OnDestroy {
           this.router.navigate([this.executionLink, this.loadedQueryID], {
             state: {
               newExecID: id,
-              query: this.query,
-              label: this.queryLabel,
-              description: this.queryDescription,
-              selectedQueryFormat: this.selectedQueryFormat,
-              selectedOutputFormat: this.selectedOutputFormat,
-              selectedTemplate: this.selectedTemplate
+              //query: this.query,
+              //label: this.queryLabel,
+              //description: this.queryDescription,
+              //selectedQueryFormat: this.selectedQueryFormat,
+              //selectedOutputFormat: this.selectedOutputFormat,
+              //selectedTemplate: this.selectedTemplate
             }
           })
-          //this.pollingStatusAndLogs(id, false);
         }
       },
       error: (error) => {
@@ -283,6 +282,9 @@ export class ExporterComponent implements OnInit, OnDestroy {
             this.getQueries();
             this.editModus = false;
             this.buttonDisabled = false;
+            if (this.executeOnSaving) {
+              this.executeQuery();
+            }
           },
           error: (error) => {
             console.log(error);
@@ -412,7 +414,6 @@ export class ExporterComponent implements OnInit, OnDestroy {
       } else {
         this.contextArray = [{key: "", value: ""} as Context];
       }
-
 
     }
     else {

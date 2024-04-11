@@ -194,26 +194,24 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.queryID = params['id'];
       console.log(params['id']);
-      if (window.history.state.query) {
-        this.query = window.history.state.query;
-        this.queryLabel = window.history.state.label;
-        this.queryDescription = window.history.state.description;
-        this.selectedQueryFormat = window.history.state.selectedQueryFormat?.toUpperCase();
-        //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
-        //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
-        const execID = window.history.state.newExecID;
-        if (execID) {
-          this.panelOpenState = true;
-          this.buttonDisabled = true;
-          this.pollingStatusAndLogs(execID, false);
-        }
+
+      this.getQuery();
+      //this.query = window.history.state.query;
+      //this.queryLabel = window.history.state.label;
+      //this.queryDescription = window.history.state.description;
+      //this.selectedQueryFormat = window.history.state.selectedQueryFormat?.toUpperCase();
+      //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
+      //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
+      const execID = window.history.state.newExecID;
+      if (execID) {
+        this.panelOpenState = true;
+        this.buttonDisabled = true;
+        this.pollingStatusAndLogs(execID, false);
       }
-       else {
-        this.getQuery();
-      }
+
       this.getQueryExecutions();
     })
-    this.getExecutionError(1)
+    //this.getExecutionError(1)
     //console.log(this.dataSourcePatients.data)
   }
   ngOnDestroy(): void {
@@ -238,6 +236,9 @@ export class ExecutionComponent implements OnInit, OnDestroy {
         this.queryDescription = query.description;
         this.selectedQueryFormat = query.format;
         this.contactID = query.contactId;
+        query.defaultOutputFormat !== null && query.defaultOutputFormat !== undefined ? this.selectedOutputFormat = query.defaultOutputFormat : this.selectedOutputFormat = "JSON";
+        query.defaultTemplateId !== null && query.defaultTemplateId !== undefined ? this.selectedTemplate = query.defaultTemplateId : this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
+
         query.expirationDate !== null ? this.expirationDate = new Date(query.expirationDate) : this.expirationDate = undefined;
 
         if (query.context !== null) {
@@ -293,7 +294,6 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       next: (response: ExportResponse) => {
         const url = new URL(response.responseUrl)
         const id = url.searchParams.get("query-execution-id");
-        this.exportStatus = ExportStatus.RUNNING
         if (id) {
           this.pollingStatusAndLogs(id, false);
         }
@@ -308,6 +308,9 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   pollingStatusAndLogs(id: string, init: boolean): void {
     this.subscriptionGetExportStatus?.unsubscribe();
     this.subscriptionFetchLogs?.unsubscribe();
+    setTimeout(() => {
+      this.getQueryExecutions();
+    }, 1000);
     this.exportStatus = ExportStatus.RUNNING
     const exportDiv = document.getElementById("exportDiv");
     this.intervall = window.setInterval(() => {
