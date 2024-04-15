@@ -277,7 +277,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     const expDate= this.transformDateForQuery(this.expirationDate);
 
       if (this.loadedQueryID !== "") {
-        this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.loadedQueryID, this.queryLabel, this.queryDescription).subscribe({
+        this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.loadedQueryID, this.query, this.queryLabel, this.queryDescription, this.selectedOutputFormat, this.selectedTemplate, this.getContext(), expDate, this.importTemplate).subscribe({
           next: (response: any) => {
             this.getQueries();
             this.editModus = false;
