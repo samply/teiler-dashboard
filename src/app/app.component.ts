@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {RouteManagerService} from "./route/route-manager.service";
 import {TeilerAuthService} from "./security/teiler-auth.service";
 import {from, Observable} from "rxjs";
-import { ColorSchemeService } from './color-scheme.service';
+import {environment} from "../environments/environment";
+import {ColorPaletteService} from "./color-palette.service";
 
 
 @Component({
@@ -10,23 +11,41 @@ import { ColorSchemeService } from './color-scheme.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  selectedColor: string = 'lightgrey';
+export class AppComponent implements OnInit{
 
   title = 'teiler-dashboard';
   isLoggedIn: boolean = false;
   user: string = '';
 
 
-  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService,private colorSchemeService: ColorSchemeService) {
+  fontColor: string = '';
+
+  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService, private colorPaletteService: ColorPaletteService) {
     from(authService.isLoggedId()).subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
-      if (isLoggedIn){
-        from(authService.loadUserProfile()).subscribe(keycloakProfile => this.user = keycloakProfile.firstName + ' '+ keycloakProfile.lastName);
+      if (isLoggedIn) {
+        from(authService.loadUserProfile()).subscribe(keycloakProfile => this.user = keycloakProfile.firstName + ' ' + keycloakProfile.lastName);
       }
     });
   }
-  changeColor() {
-    this.colorSchemeService.setColor(this.selectedColor);
+
+  ngOnInit(): void {
+    this.colorPaletteService.getPalettesLoadedStatus().subscribe(loaded => {
+      if (loaded) {
+        const selectedPaletteName = this.colorPaletteService.getSelectedPaletteName();
+        if (selectedPaletteName) {
+          console.log('Verwendete Farbpalette:', selectedPaletteName);
+          this.fontColor = this.colorPaletteService.getFontColor();
+          console.log('Schriftfarbe:', this.fontColor);
+        } else {
+          console.error('Keine Farbpalette ausgewählt.');
+        }
+      } else {
+        console.error('Farbpaletten wurden nicht geladen.');
+      }
+    });
   }
+
+
+  protected readonly environment = environment;
 }

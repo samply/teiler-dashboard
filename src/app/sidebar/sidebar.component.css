@@ -5,6 +5,7 @@
   z-index:1;
   position: relative;
 }
+
 .main-content {
   display: flex;
   height: 100%;
@@ -34,17 +35,13 @@
   width: 300px;
 
 }
-.router-style, .b-img{
-  position: absolute;
-}
+
 .router-style{
   margin-top: 6%;
   z-index: 2;
   position: relative;
 }
-.b-img{
-  z-index: 1;
-}
+
 .sidebar {
   font-size: 18px;
   transition: all 3ms ease;
