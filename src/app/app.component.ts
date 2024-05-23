@@ -17,8 +17,7 @@ export class AppComponent implements OnInit{
   isLoggedIn: boolean = false;
   user: string = '';
 
-
-  fontColor: string = '';
+  backgroundImageUrl: string = '';
 
   constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService, private colorPaletteService: ColorPaletteService) {
     from(authService.isLoggedId()).subscribe(isLoggedIn => {
@@ -34,9 +33,7 @@ export class AppComponent implements OnInit{
       if (loaded) {
         const selectedPaletteName = this.colorPaletteService.getSelectedPaletteName();
         if (selectedPaletteName) {
-          console.log('Verwendete Farbpalette:', selectedPaletteName);
-          this.fontColor = this.colorPaletteService.getFontColor();
-          console.log('Schriftfarbe:', this.fontColor);
+          this.setCSSVariables();
         } else {
           console.error('Keine Farbpalette ausgewählt.');
         }
@@ -46,6 +43,26 @@ export class AppComponent implements OnInit{
     });
   }
 
+  private setCSSVariables() {
+    const backgroundColor = this.colorPaletteService.getBackgroundColor();
+    const encodedColor = encodeURIComponent(backgroundColor);
+    this.backgroundImageUrl = `${environment.config.BACKGROUND_IMAGE_URL}?color=${encodedColor}`;
+
+    const iconColor = this.colorPaletteService.getIconColor();
+    const textColor = this.colorPaletteService.getTextColor();
+    const lineColor = this.colorPaletteService.getLineColor();
+    const fontStyle = this.colorPaletteService.getFontStyle() + ', sans-serif';
+
+    this.setCSSVariable('--icon-color', iconColor);
+    this.setCSSVariable('--background-color', backgroundColor);
+    this.setCSSVariable('--text-color', textColor);
+    this.setCSSVariable('--line-color', lineColor);
+    this.setCSSVariable('--font-style', fontStyle);
+  }
+
+  private setCSSVariable(variableName: string, value: string) {
+    document.documentElement.style.setProperty(variableName, value);
+  }
 
   protected readonly environment = environment;
 }

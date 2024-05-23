@@ -3,19 +3,25 @@
     {
       "name": "Color-Palette-1",
       "colors": {
-        "background": "#ffffff",
-        "font": "#000000",
-        "text": "#ffffff",
-        "line": "#000000"
+        "background": "blue",
+        "text": "grey",
+        "line": "grey",
+        "icon": "grey"
+      },
+      "style": {
+        "font": "Bahnschrift"
       }
     },
     {
       "name": "Color-Palette-2",
       "colors": {
-        "background": "#000000",
-        "font": "#ffffff",
-        "text": "#000000",
-        "line": "#ffffff"
+        "background": "red",
+        "text": "black",
+        "line": "black",
+        "icon": "black"
+      },
+      "style": {
+        "font": "Calibri"
       }
     }
   ]
