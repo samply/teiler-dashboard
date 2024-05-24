@@ -15,7 +15,7 @@
     {
       "name": "Color-Palette-2",
       "colors": {
-        "background": "red",
+        "background": "#ABB5EE",
         "text": "black",
         "line": "black",
         "icon": "black"
