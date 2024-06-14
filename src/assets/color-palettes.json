@@ -3,7 +3,6 @@
     {
       "name": "Color-Palette-1",
       "colors": {
-        "background": "blue",
         "text": "grey",
         "line": "grey",
         "icon": "grey"
@@ -15,7 +14,6 @@
     {
       "name": "Color-Palette-2",
       "colors": {
-        "background": "#ABB5EE",
         "text": "black",
         "line": "black",
         "icon": "black"

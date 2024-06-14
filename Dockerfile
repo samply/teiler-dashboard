@@ -14,7 +14,7 @@ RUN apk update
 RUN apk upgrade
 RUN apk add bash
 
-### Configuration of NGINX
+### ConfigurationInterface of NGINX
 COPY docker/nginx.conf /etc/nginx/nginx.template.conf
 
 EXPOSE 80

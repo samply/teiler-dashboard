@@ -109,7 +109,6 @@ h6 {
   z-index: 0;
   background-size: cover;
   background-repeat: no-repeat;
-  fill: var(--background-color);
 }
 
 @media screen and (min-width: 768px) {

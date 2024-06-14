@@ -17,7 +17,6 @@ export class AppComponent implements OnInit{
   isLoggedIn: boolean = false;
   user: string = '';
 
-  backgroundImageUrl: string = '';
 
   constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService, private colorPaletteService: ColorPaletteService) {
     from(authService.isLoggedId()).subscribe(isLoggedIn => {
@@ -44,9 +43,6 @@ export class AppComponent implements OnInit{
   }
 
   private setCSSVariables() {
-    const backgroundColor = this.colorPaletteService.getBackgroundColor();
-    const encodedColor = encodeURIComponent(backgroundColor);
-    this.backgroundImageUrl = `${environment.config.BACKGROUND_IMAGE_URL}?color=${encodedColor}`;
 
     const iconColor = this.colorPaletteService.getIconColor();
     const textColor = this.colorPaletteService.getTextColor();
@@ -54,7 +50,6 @@ export class AppComponent implements OnInit{
     const fontStyle = this.colorPaletteService.getFontStyle() + ', sans-serif';
 
     this.setCSSVariable('--icon-color', iconColor);
-    this.setCSSVariable('--background-color', backgroundColor);
     this.setCSSVariable('--text-color', textColor);
     this.setCSSVariable('--line-color', lineColor);
     this.setCSSVariable('--font-style', fontStyle);
