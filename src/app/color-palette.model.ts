@@ -2,7 +2,6 @@ export interface ColorPalette {
   name: string;
   colors: {
     icon: string;
-    background: string;
     text: string;
     line: string;
   };

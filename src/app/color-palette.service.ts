@@ -86,14 +86,6 @@ export class ColorPaletteService {
     return this.selectedPalette.style.font;
   }
 
-  getBackgroundColor(): string {
-    if (!this.selectedPalette) {
-      console.error('No palette selected.');
-      return 'defaultColor';
-    }
-    return this.selectedPalette.colors.background;
-  }
-
   getTextColor(): string {
     if (!this.selectedPalette) {
       console.error('No palette selected.');
