@@ -21,7 +21,7 @@
     "EXPORTER_DEFAULT_TEMPLATE_ID": "ccp",
     "TEILER_USER": "bridgehead-test",
     "TEILER_ADMIN": "bridgehead-test-admin",
-    "BACKGROUND_IMAGE_URL": "http://localhost:8085/assets/Background_Box1.svg",
+    "BACKGROUND_IMAGE_URL": "http://localhost:8085/assets/Background_Box2.svg",
     "LOGO_URL": "http://localhost:8085/assets/DKTK_TEILER_LOGO.svg",
     "COLOR_PALETTE": "Color-Palette-1",
   };
