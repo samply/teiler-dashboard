@@ -69,7 +69,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   queryLabel: string = "";
   queryDescription: string = "";
   selectedTemplate: string = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-  selectedOutputFormat: string = "JSON";
+  selectedOutputFormat: string = "EXCEL";
   selectedQueryFormat: string = "FHIR_SEARCH";
   exportUrl = "";
   fileName: string | undefined;
@@ -236,7 +236,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
         this.queryDescription = query.description;
         this.selectedQueryFormat = query.format;
         this.contactID = query.contactId;
-        query.defaultOutputFormat !== null && query.defaultOutputFormat !== undefined ? this.selectedOutputFormat = query.defaultOutputFormat : this.selectedOutputFormat = "JSON";
+        query.defaultOutputFormat !== null && query.defaultOutputFormat !== undefined ? this.selectedOutputFormat = query.defaultOutputFormat : this.selectedOutputFormat = "EXCEL";
         query.defaultTemplateId !== null && query.defaultTemplateId !== undefined ? this.selectedTemplate = query.defaultTemplateId : this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
 
         query.expirationDate !== null ? this.expirationDate = new Date(query.expirationDate) : this.expirationDate = undefined;
