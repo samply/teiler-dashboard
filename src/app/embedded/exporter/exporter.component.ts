@@ -76,7 +76,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   outputFormats: DropdownFormat[] = [];
   queryFormats: DropdownFormat[] = [];
   selectedTemplate: string = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-  selectedOutputFormat: string = "JSON";
+  selectedOutputFormat: string = "EXCEL";
   selectedQueryFormat: string = "FHIR_SEARCH";
   exportUrl = "";
   fileName: string | undefined;
@@ -400,7 +400,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
       this.executeOnSaving = true;
       this.buttonDisabled = false;
       this.loadedQueryID = query[0].id.toString();
-      query[0].defaultOutputFormat !== null && query[0].defaultOutputFormat !== undefined ? this.selectedOutputFormat = query[0].defaultOutputFormat : this.selectedOutputFormat = "JSON";
+      query[0].defaultOutputFormat !== null && query[0].defaultOutputFormat !== undefined ? this.selectedOutputFormat = query[0].defaultOutputFormat : this.selectedOutputFormat = "EXCEL";
       query[0].defaultTemplateId !== null && query[0].defaultTemplateId !== undefined ? this.selectedTemplate = query[0].defaultTemplateId : this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
       this.panelOpenState = true;
       query[0].expirationDate !== "0" ? this.expirationDate = new Date(parseInt(query[0].expirationDate)) : this.expirationDate = undefined;
@@ -427,7 +427,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
       this.loadedQueryID = "";
       this.expirationDate = undefined;
       this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-      this.selectedOutputFormat = "JSON";
+      this.selectedOutputFormat = "EXCEL";
       this.contextArray = [{key: "", value: ""} as Context];
     }
   }
@@ -439,7 +439,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.query = "";
     from(this.authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
     this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-    this.selectedOutputFormat = "JSON";
+    this.selectedOutputFormat = "EXCEL";
     this.selectedQueryFormat = "FHIR_SEARCH";
     this.expirationDate = undefined;
     this.loadedQueryID = "";

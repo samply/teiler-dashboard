@@ -35,39 +35,39 @@
           <table class="summary-table">
             <tbody>
             <tr>
-              <td class="table-left">Titel:</td>
+              <td class="table-left" i18n>Titel:</td>
               <td class="table-right">{{queryLabel}}</td>
             </tr>
             <tr>
-              <td class="table-left">Beschreibung:</td>
+              <td class="table-left" i18n>Beschreibung:</td>
               <td class="table-right">{{queryDescription}}</td>
             </tr>
             <tr>
-              <td class="table-left">Anfrage:</td>
+              <td class="table-left" i18n>Anfrage:</td>
               <td class="table-right">{{query.substring(0, 30)}}</td>
             </tr>
             <tr>
-              <td class="table-left">Template:</td>
+              <td class="table-left" i18n>Template:</td>
               <td class="table-right">{{selectedTemplate}}</td>
             </tr>
             <tr>
-              <td class="table-left">Anfrageformat:</td>
+              <td class="table-left" i18n>Anfrageformat:</td>
               <td class="table-right">{{selectedQueryFormat}}</td>
             </tr>
             <tr>
-              <td class="table-left">Ausgabeformat:</td>
+              <td class="table-left" i18n>Ausgabeformat:</td>
               <td class="table-right">{{selectedOutputFormat}}</td>
             </tr>
             <tr>
-              <td class="table-left">Ablaufdatum:</td>
+              <td class="table-left" i18n>Ablaufdatum:</td>
               <td class="table-right">{{expirationDate | date: 'mediumDate'}}</td>
             </tr>
             <tr>
-              <td class="table-left">Anfragende:</td>
+              <td class="table-left" i18n>Anfragende:</td>
               <td class="table-right">{{contactID}}</td>
             </tr>
             <tr *ngFor="let context of contextArray; let i=index">
-              <td class="table-left table-env"><span *ngIf="i === 0">Umgebungsvariablen:</span></td>
+              <td class="table-left table-env"><span *ngIf="i === 0" i18n>Umgebungsvariablen:</span></td>
               <td class="table-right table-env">{{context.key}}<span *ngIf="(context.key.length > 0) && (context.value.length > 0)">=</span>{{context.value}}</td>
             </tr>
             </tbody>

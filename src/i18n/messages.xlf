@@ -223,6 +223,78 @@
         <source>Anfrage editieren</source>
       </segment>
     </unit>
+    <unit id="3178946553015334487">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:38</note>
+      </notes>
+      <segment>
+        <source>Titel:</source>
+      </segment>
+    </unit>
+    <unit id="4323370826886363911">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:42</note>
+      </notes>
+      <segment>
+        <source>Beschreibung:</source>
+      </segment>
+    </unit>
+    <unit id="8415561417457379828">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:46</note>
+      </notes>
+      <segment>
+        <source>Anfrage:</source>
+      </segment>
+    </unit>
+    <unit id="9216489346867324174">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:50</note>
+      </notes>
+      <segment>
+        <source>Template:</source>
+      </segment>
+    </unit>
+    <unit id="4305019779989632551">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:54</note>
+      </notes>
+      <segment>
+        <source>Anfrageformat:</source>
+      </segment>
+    </unit>
+    <unit id="3038783211443630455">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:58</note>
+      </notes>
+      <segment>
+        <source>Ausgabeformat:</source>
+      </segment>
+    </unit>
+    <unit id="5751662168562941694">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:62</note>
+      </notes>
+      <segment>
+        <source>Ablaufdatum:</source>
+      </segment>
+    </unit>
+    <unit id="6559654084488192213">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:66</note>
+      </notes>
+      <segment>
+        <source>Anfragende:</source>
+      </segment>
+    </unit>
+    <unit id="2787135929336983936">
+      <notes>
+        <note category="location">src/app/embedded/exporter/exporter.component.html:70</note>
+      </notes>
+      <segment>
+        <source>Umgebungsvariablen:</source>
+      </segment>
+    </unit>
     <unit id="5733508493886442121">
       <notes>
         <note category="location">src/app/embedded/exporter/exporter.component.html:112</note>
