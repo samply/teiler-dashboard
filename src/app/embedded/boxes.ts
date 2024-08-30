@@ -19,7 +19,7 @@ export const boxes =[
     inf2: 'Teilers',
     name:'Konfiguration',
     icon:"bi bi-gear-fill",
-    icon_source: "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css",
+    icon_source: "../node_modules/bootstrap-icons/font/bootstrap-icons.css",
   },
   {
     id: 2,
