@@ -7,7 +7,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {SelectionModel} from "@angular/cdk/collections";
 import {environment} from "../../../environments/environment";
 import {ExporterService} from "../../teiler/exporter.service";
-import {DropdownFormat, ExportResponse} from "../exporter/exporter.component";
+import {Context, DropdownFormat, ExportResponse} from "../exporter/exporter.component";
 import {Templates} from "../quality-report/quality-report.component";
 
 
@@ -18,6 +18,11 @@ export interface ExporterExecutions {
   outputFormat: string;
   status: string;
   executedAt: string;
+}
+export interface ExecutionError {
+  id: number;
+  queryExecutionId: number;
+  error: string;
 }
 export enum ExportStatus {
   OK = "OK",
@@ -64,7 +69,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   queryLabel: string = "";
   queryDescription: string = "";
   selectedTemplate: string = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-  selectedOutputFormat: string = "JSON";
+  selectedOutputFormat: string = "EXCEL";
   selectedQueryFormat: string = "FHIR_SEARCH";
   exportUrl = "";
   fileName: string | undefined;
@@ -73,6 +78,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   queryFormats: DropdownFormat[] = [];
   templateIDs: Templates[] = [];
   contactID: string | undefined;
+  contextArray: Context[] = [{key: "", value: ""}];
   templateGraph = {
     "containers" : [ {
       "linked-attribute" : [ {
@@ -188,22 +194,25 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.queryID = params['id'];
       console.log(params['id']);
-      this.query = window.history.state.query;
-      this.queryLabel = window.history.state.label;
-      this.queryDescription = window.history.state.description;
-      this.selectedQueryFormat = window.history.state.selectedQueryFormat?.toUpperCase();
+
+      this.getQuery();
+      //this.query = window.history.state.query;
+      //this.queryLabel = window.history.state.label;
+      //this.queryDescription = window.history.state.description;
+      //this.selectedQueryFormat = window.history.state.selectedQueryFormat?.toUpperCase();
       //this.selectedOutputFormat = window.history.state.selectedOutputFormat.toUpperCase() as string;
       //this.selectedTemplate = window.history.state.selectedTemplate.toUpperCase();
-      this.getQueryExecutions();
-      if (window.history.state.newExecID) {
+      const execID = window.history.state.newExecID;
+      if (execID) {
         this.panelOpenState = true;
         this.buttonDisabled = true;
-        this.pollingStatusAndLogs(this.queryID.toString(), false);
-      } else {
-        this.getQuery();
+        this.pollingStatusAndLogs(execID, false);
       }
+
+      this.getQueryExecutions();
     })
-    console.log(this.dataSourcePatients.data)
+    //this.getExecutionError(1)
+    //console.log(this.dataSourcePatients.data)
   }
   ngOnDestroy(): void {
     this.subscriptionGetExecutionList?.unsubscribe();
@@ -226,6 +235,22 @@ export class ExecutionComponent implements OnInit, OnDestroy {
         this.queryLabel = query.label;
         this.queryDescription = query.description;
         this.selectedQueryFormat = query.format;
+        this.contactID = query.contactId;
+        query.defaultOutputFormat !== null && query.defaultOutputFormat !== undefined ? this.selectedOutputFormat = query.defaultOutputFormat : this.selectedOutputFormat = "EXCEL";
+        query.defaultTemplateId !== null && query.defaultTemplateId !== undefined ? this.selectedTemplate = query.defaultTemplateId : this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
+
+        query.expirationDate !== null ? this.expirationDate = new Date(query.expirationDate) : this.expirationDate = undefined;
+
+        if (query.context !== null) {
+          this.contextArray = [];
+          atob(query.context).split(';').forEach((context) => {
+            const contextPair = context.split('=');
+            this.contextArray.push({key: contextPair[0], value: contextPair[1]} as Context);
+          })
+        } else {
+          this.contextArray = [{key: "", value: ""} as Context];
+        }
+
       },
       error: (error) => {
         console.log(error);
@@ -269,7 +294,6 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       next: (response: ExportResponse) => {
         const url = new URL(response.responseUrl)
         const id = url.searchParams.get("query-execution-id");
-        this.exportStatus = ExportStatus.RUNNING
         if (id) {
           this.pollingStatusAndLogs(id, false);
         }
@@ -284,6 +308,9 @@ export class ExecutionComponent implements OnInit, OnDestroy {
   pollingStatusAndLogs(id: string, init: boolean): void {
     this.subscriptionGetExportStatus?.unsubscribe();
     this.subscriptionFetchLogs?.unsubscribe();
+    setTimeout(() => {
+      this.getQueryExecutions();
+    }, 1000);
     this.exportStatus = ExportStatus.RUNNING
     const exportDiv = document.getElementById("exportDiv");
     this.intervall = window.setInterval(() => {
@@ -336,6 +363,20 @@ export class ExecutionComponent implements OnInit, OnDestroy {
       }, 200);
     }
   }
+
+  getExecutionError(execID: number): void {
+    this.executionService.getExecutionError(execID).subscribe({
+      next: (execError) => {
+        console.log(execError[0].error)
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
+  }
+
   getExecutionDataInBody(exec:ExporterExecutions): void {
     this.subscriptionGetExecution?.unsubscribe();
     this.subscriptionGetExecution = this.executionService.getExecutionDataInBody(exec.id).subscribe({

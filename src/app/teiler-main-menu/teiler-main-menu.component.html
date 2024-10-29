@@ -7,37 +7,47 @@
   <div class="tabs">
     <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
       <div class="tabs1">
-        <div class="index">
+        <!--<div class="index">
           <div tabindex="0" role="tab"
                (click)="tab=1" (keyup.enter)="tab=1"
                [ngClass]="{active: tab===1}" class="apps" i18n>Lokale Apps</div>
           <div tabindex="0" role="tab"
                (click)="tab=2" (keyup.enter)="tab=2"
                [ngClass]="{active: tab===2}" class="apps" i18n>Zentrale Apps</div>
-        </div>
-
+        </div>-->
+        <section class="app-selection">
+          <mat-checkbox class="local-apps" [(ngModel)]="showLocalApps" i18n>lokale Apps</mat-checkbox>
+          <mat-checkbox class="central-apps" [(ngModel)]="showCentralApps" i18n>zentrale Apps</mat-checkbox>
+        </section>
         <div class="contents">
-          <div *ngIf="tab === 1">
+          <!--<div *ngIf="tab === 1">-->
             <div class="slider-wrap">
               <div class="slider-main">
                 <div *ngFor="let teilerApp of teilerService.teilerApps">
-                  <div *ngIf="teilerApp.local && teilerApp.inMenu">
+                  <ng-container *ngIf="(teilerApp.local && showLocalApps) || (!teilerApp.local && showCentralApps)">
+                  <div *ngIf="teilerApp.inMenu">
                     <div *ngIf="!teilerApp.externLink">
-                      <a routerLink="{{'/'+teilerApp.routerLink}}">
+                      <a *ngIf="isClickable(teilerApp); else nonClickableApp" routerLink="{{'/'+teilerApp.routerLink}}"
+                      >
                         <teiler-box [teilerApp]="teilerApp"></teiler-box>
                       </a>
                     </div>
                     <div *ngIf="teilerApp.externLink">
-                      <a routerLink="{{'/'+teilerApp.routerLink}}" [externalLinkBlank]="teilerApp.sourceUrl??''">
+                      <a *ngIf="isClickable(teilerApp); else nonClickableApp" routerLink="{{'/'+teilerApp.routerLink}}" [externalLinkBlank]="teilerApp.sourceUrl??''"
+                      >
                         <teiler-box [teilerApp]="teilerApp"></teiler-box>
                       </a>
                     </div>
+                    <ng-template #nonClickableApp>
+                      <teiler-box [teilerApp]="teilerApp"></teiler-box>
+                    </ng-template>
                   </div>
+                  </ng-container>
                 </div>
               </div>
             </div>
-          </div>
-          <div *ngIf="tab === 2">
+          <!--</div>-->
+          <!--<div *ngIf="tab === 2">
             <div class="slider-wrap">
               <div class="slider-main">
                 <div class="card-wrapper" *ngFor="let teilerApp of teilerService.teilerApps">
@@ -56,12 +66,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
 
-    <div class="section-header" *ngIf="!existLocalAndCentralTeilerAppsAtTheSameTime()">
+    <!--<div class="section-header" *ngIf="!existLocalAndCentralTeilerAppsAtTheSameTime()">
         <div class="contents">
           <h3 i18n>Lokale Apps</h3>
           <hr>
@@ -84,6 +94,6 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>-->
     </div>
 </div>

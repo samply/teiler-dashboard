@@ -7,17 +7,18 @@
     <div class="button-status">
       <mat-form-field class="template_dropdown">
         <mat-label>Template</mat-label>
-        <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" (ngModelChange)="changeTemplateSelection()" [disabled]="buttonDisabled">
+        <select class="template-select" matNativeControl [(ngModel)]="selectedTemplate" (ngModelChange)="changeTemplateSelection()" [disabled]="buttonDisabled">
           <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
         </select>
       </mat-form-field>
-      <button class="cancel-button" mat-raised-button color="primary" (click)=cancelQB() [ngClass]="{ 'visible-button': buttonDisabled }" i18n>abbrechen</button>
-      <button class="generate-button" mat-raised-button color="primary" (click)=generateQB() [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && !buttonDisabled) }" i18n>neuen Report generieren</button>
+      <button class="cancel-button" mat-raised-button color="primary" (click)=cancelQB() [ngClass]="{ 'visible-button': !buttonVisible }" i18n>abbrechen</button>
+      <button class="generate-button" mat-raised-button color="primary" (click)=generateQB() [ngClass]="{ 'visible-button': buttonVisible }" [disabled]="importTemplate === '' && selectedTemplate === 'custom'" i18n>neuen Report generieren</button>
       <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
         <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
-        <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [disabled]="buttonDisabled">
-          <span i18n>Template auswählen und neuen Report generieren</span>
+        <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click()" [ngClass]="{ 'visible-button': selectedTemplate === 'custom' }" [disabled]="buttonDisabled">
+          <span i18n>Template auswählen</span>
         </button>
+        <div class="file-name">{{ fileName }}</div>
       </div>
       <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
 
@@ -29,29 +30,38 @@
         <ng-container *ngIf="qbStatus === QBStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span></ng-container>
       </div>
     </div>
-    <div class="log-div">
-      <div class="log-reporter" [ngClass]="{ 'visible': buttonDisabled }">
-        <div class="log-header">Reporter Log:</div>
-        <div id="reportDiv" class="log-reports"><div *ngFor="let log of reportLog[0]?.lastLines">{{log}}</div></div>
-      </div>
-      <div class="log-exporter" [ngClass]="{ 'visible': buttonDisabled }">
-        <div class="log-header">Exporter Log:</div>
-        <div id="exportDiv" class="log-reports"><div *ngFor="let log of reportLog[1]?.lastLines">{{log}}</div></div>
-      </div>
-    </div>
+    <mat-accordion class="log-accordion" [ngClass]="{ 'visible': panelVisible }">
+      <mat-expansion-panel [(expanded)]="panelOpenState">
+        <mat-expansion-panel-header>
+          Logs:
+        </mat-expansion-panel-header>
+        <div class="log-div">
+          <div class="log-reporter" >
+            <div class="log-header">Reporter Log:</div>
+            <div id="reportDiv" class="log-reports"><div *ngFor="let log of reportLog[0]?.lastLines">{{log}}</div></div>
+          </div>
+          <div class="log-exporter">
+            <div class="log-header">Exporter Log:</div>
+            <div id="exportDiv" class="log-reports"><div *ngFor="let log of reportLog[1]?.lastLines">{{log}}</div></div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
 
   </div>
 
   <div class="tablex">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort matSortDisableClear class="mat-elevation-z8">
 
       <ng-container matColumnDef="timestamp">
-        <th mat-header-cell *matHeaderCellDef><div i18n>Zeitstempel</div> </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><div i18n>Zeitstempel</div> </th>
         <td mat-cell *matCellDef="let element"> {{element.timestamp | date: 'medium'}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="templateid">
-        <th mat-header-cell *matHeaderCellDef><div i18n>Template-ID</div> </th>
+      <ng-container matColumnDef="template-id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header><div i18n>Template-ID</div> </th>
         <td mat-cell *matCellDef="let element"> {{element['template-id']}} </td>
       </ng-container>
 

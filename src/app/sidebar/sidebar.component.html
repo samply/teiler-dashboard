@@ -34,7 +34,7 @@
                 <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
                   <i class="{{teilerApp.iconClass}}"></i>
                 </div>
-                <a mat-list-item routerLink="{{'/'+teilerApp.routerLink}}" class="sidebar-text">{{teilerApp.title}}</a>
+                <a *ngIf="isClickable(teilerApp); else nonclickable" mat-list-item routerLink="{{'/'+teilerApp.routerLink}}" class="sidebar-text">{{teilerApp.title}}</a>
               </div>
             </div>
 
@@ -49,10 +49,13 @@
                     <i class="{{teilerApp.iconClass}}"></i>
                   </div>
                 </ng-template>
-                <a mat-list-item routerLink="{{'/'+teilerApp.routerLink}}"
+                <a *ngIf="isClickable(teilerApp); else nonclickable" mat-list-item routerLink="{{'/'+teilerApp.routerLink}}"
                    [externalLinkBlank]="teilerApp.sourceUrl??''" class="sidebar-text">{{teilerApp.title}}</a>
               </div>
             </div>
+            <ng-template #nonclickable>
+              <a href="javascript:void(0);" mat-list-item class="sidebar-text-span">{{teilerApp.title}}</a>
+            </ng-template>
           </div>
         </ng-container>
       </mat-nav-list>

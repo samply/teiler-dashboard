@@ -8,7 +8,7 @@ h3{
   margin:0;
 }
 .teiler-box-image {
-  min-height: 92px;
+  min-height: 88px;
   display: flex;
   margin-bottom: 5px;
 }
@@ -28,7 +28,7 @@ p{
   color: grey;
   margin: 0 auto 5px auto;
   width: fit-content;
-  min-height: 92px;
+  min-height: 88px;
   display: flex;
 }
 .teiler-box {
@@ -40,7 +40,7 @@ p{
   margin: 1.25%;
   position: relative;
   border-radius: 2%;
-  box-shadow: 6px 5px 15px 1px lightgrey;
+  box-shadow: 0px 0px 1px 1px lightgrey;
   transition: transform 150ms ease;
   vertical-align: middle;
   text-align: center;
@@ -48,19 +48,27 @@ p{
   background-color: white;
   overflow: clip;
 }
+.teiler-box.clickable {
+  box-shadow: 6px 5px 12px 4px lightgrey;
+}
 .teiler-box._mat-animation-noopable {
   transition: all 1ms ease-in-out !important;
 }
 
-.teiler-box:hover {
+.teiler-box.clickable:hover {
   box-shadow: 6px 5px 15px 1px lightgrey;
   transform: scale(1.05);
 }
-.teiler-box:hover .strich{
+.teiler-box.clickable:hover .strich{
   transform:scaleX(1);
 }
 .teiler-box-description {
-  font-size: 95%;
+  font-size: 90%;
+  max-height: 88px;
+  overflow: hidden;
+}
+.teiler-box-description:hover {
+  overflow: auto;
 }
 .text{
   position: absolute;
@@ -87,14 +95,22 @@ hr{
   right: 0px;
   background: white;
   height: 40px;
-  width: 40px;
+  width: 95%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   border-radius: 50% 0 0 0;
-  transition: all 0.3s ease-in-out !important;
+  margin-left: 5%;
+  /*transition: all 0.3s ease-in-out !important;*/
 }
-.teiler-box:hover .icon-footer{
+.icon-footer-box {
+  border-radius: 50% 0 0 0;
+  width: 40px;
+  height: 28px;
+  transition: all 0.3s ease-in-out !important;
+  padding-top: 12px;
+}
+.teiler-box.clickable:hover .icon-footer-box{
   transform: translate(5px);
   box-shadow: -4px -1px 13px rgba(0, 0, 0, 0.35)
 }

@@ -4,7 +4,7 @@
 teiler-welcome{
   position:sticky;
   display: block;
-  width:80%;
+  width:90%;
   margin-left: 4%;
 }
 .content {
@@ -17,7 +17,7 @@ teiler-welcome{
   height: 30px;
 }
 .tabs{
-  min-width: 50%;
+  min-width: 65%;
   margin-left:4%;
   margin-right:4%;
   text-align: center;
@@ -67,7 +67,25 @@ teiler-welcome{
   margin-bottom: 5px;
   font-weight: normal;
 }
-
+.app-selection {
+  text-align: left;
+}
+.central-apps {
+  margin-left: 2%;
+}
+.local-apps {
+  margin-left: 1%;
+}
+@media(min-width : 1930px) {
+  .tabs {
+    min-width: 65%;
+  }
+}
+@media(min-width : 1980px) {
+.tabs {
+  min-width: 62%;
+}
+}/*
 @media(max-width : 1740px) {
   .content {
     zoom: 67%;
@@ -92,13 +110,8 @@ teiler-welcome{
     align-content: center;
   }
 }
-
+/*
 @media(max-width : 1200px){
-  teiler-welcome{
-    /* width: 93%; */
-    /* margin-left: 5%; */
-    /* margin-right: 4%; */
-  }
   .welcome-text{
     flex: 1;
   }
@@ -165,4 +178,4 @@ teiler-welcome{
     text-align: center;
     align-content: center;
   }
-}
+}*/

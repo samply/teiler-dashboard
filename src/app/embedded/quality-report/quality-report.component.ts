@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 
 import {MatTableDataSource} from "@angular/material/table";
@@ -6,6 +6,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {QualityReportService, reportLog} from "../../teiler/quality-report.service";
 import {Subscription} from "rxjs";
 import {environment} from "../../../environments/environment";
+import {MatSort} from "@angular/material/sort";
 
 export interface QualityReports {
   id: string;
@@ -35,12 +36,11 @@ export enum QBStatus {
   styleUrls: ['./quality-report.component.css']
 })
 
+export class QualityReportComponent implements OnInit, OnDestroy, AfterViewInit {
 
-export class QualityReportComponent implements OnInit, OnDestroy {
   //table
-  displayedColumns: string[] = ['timestamp', 'templateid', 'link'];
+  displayedColumns: string[] = ['timestamp', 'template-id', 'link'];
   dataSource = new MatTableDataSource<QualityReports>();
-
   //generator
   title = 'appComponent';
 
@@ -57,16 +57,22 @@ export class QualityReportComponent implements OnInit, OnDestroy {
   qbStatus: QBStatus = QBStatus.EMPTY
   reportUrl = "";
   buttonDisabled: boolean = false;
+  buttonVisible: boolean = true;
   fileName: string | undefined;
   importTemplate: string = "";
   selectedTemplate: string = environment.config.REPORTER_DEFAULT_TEMPLATE_ID;
   templateIDs: Templates[] = [];
+  panelVisible: boolean = false;
+  panelOpenState: boolean = true;
 
   constructor(private route: ActivatedRoute, private qualityReportService: QualityReportService) {
   }
   // @ts-ignore
   @ViewChild('paginator') paginator: MatPaginator;
 
+  @ViewChild(MatSort) set matSort(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -97,11 +103,15 @@ export class QualityReportComponent implements OnInit, OnDestroy {
   }
   onReaderLoad(event: any): void {
     this.importTemplate = event.target.result;
-    this.generateQB();
+    //this.generateQB();
   }
 
   generateQB() {
     this.buttonDisabled = true;
+    this.buttonVisible = false;
+    this.panelVisible = true;
+    this.panelOpenState = true;
+    this.reportLog = [];
     this.subscriptionGenerateQB = this.qualityReportService.generateQB(this.selectedTemplate, this.importTemplate).subscribe({
       next: (response:QBResponse) => {
         const url = new URL(response.responseUrl);
@@ -114,6 +124,8 @@ export class QualityReportComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.log(error);
         this.buttonDisabled = false;
+        this.buttonVisible = true;
+        this.panelOpenState = false;
         this.qbStatus = QBStatus.ERROR;
       },
       complete: () => {}
@@ -156,8 +168,9 @@ export class QualityReportComponent implements OnInit, OnDestroy {
           if (status !== QBStatus.RUNNING) {
             window.clearInterval(this.intervall);
             this.buttonDisabled = false;
+            this.buttonVisible = true;
+            this.panelOpenState = false;
             if (status === QBStatus.OK && !init) {
-              this.reportLog = [];
               this.downloadReport(id);
               this.getReports();
             }
@@ -217,7 +230,11 @@ export class QualityReportComponent implements OnInit, OnDestroy {
         })
         tempQBs.sort((a,b) =>  Number(b.timestamp) - Number(a.timestamp))
         if (tempQBs.length > 0) {
+          this.panelVisible = true;
+          this.panelOpenState = true;
+          this.reportLog = [];
           this.buttonDisabled = true;
+          this.buttonVisible = false;
           this.pollingStatusAndLogs(tempQBs[0].id, true)
         }
       },
@@ -247,6 +264,8 @@ export class QualityReportComponent implements OnInit, OnDestroy {
   cancelQB(): void {
     window.clearInterval(this.intervall);
     this.buttonDisabled = false;
+    this.panelOpenState = false;
+    this.reportLog = [];
     this.qbStatus = QBStatus.EMPTY;
   }
 
