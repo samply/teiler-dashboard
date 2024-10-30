@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - feature/bbmri-look-and-feel
     # Build then a new version is tagged
     tags:
       - '*.*.*'
