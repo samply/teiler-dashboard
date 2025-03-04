@@ -2,7 +2,7 @@
   <div class="toolbar">
     <div class="logo">
       <a routerLink="{{'/' + routeManagerService.mainRouterLink}}">
-        <img width="40" alt="DKTK Teiler" src="https://dktk.dkfz.de/packages/dktk/img/logo-dktk-sign.svg" />
+        <img width="40" src="{{environment.config.LOGO_URL}}" alt="DKTK Teiler">
       </a>
       <span class="logo-text" i18n>Brückenkopf</span>
     </div>
@@ -26,16 +26,9 @@
       <div>
         <language-selector></language-selector>
       </div>
-      <!--<div>
-        <select [(ngModel)]="selectedColor" (change)="changeColor()" class="color-change">
-          <option value="lightgrey">Default</option>
-          <option value="lilac">Projektname</option>
-          <option value="blue">Blue</option>
-          <option value="brown">Brown</option>
-        </select>
-      </div>-->
     </div>
   </div>
+  <img  src="{{environment.config.BACKGROUND_IMAGE_URL}}" alt="DKTK Teiler" class="b-img">
   <app-sidebar></app-sidebar>
   <div class="footer">
     <a class="user-agreement" href="">Nutzervereinbarung</a>
@@ -48,3 +41,4 @@
     </div>
   </div>
 </div>
+

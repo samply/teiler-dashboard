@@ -4,6 +4,8 @@ import {createMainRouterLink} from "../route/route-utils";
 import {ColorSchemeService} from "../color-scheme.service";
 import {RouteManagerService} from "../route/route-manager.service";
 import {TeilerApp} from "../teiler/teiler-app";
+import {environment} from "../../environments/environment";
+
 
 @Component({
   selector: 'app-sidebar',
@@ -16,8 +18,14 @@ export class SidebarComponent implements OnInit {
   public innerWidth: any;
   public menuVisibleMobile: boolean = false;
 
+  selectedBackground: string = 'background1';
+
   constructor(public teilerService: TeilerService, private colorSchemeService: ColorSchemeService, public routeManagerService: RouteManagerService) {
   }
+
+
+
+
   isGreyTheme(): boolean {
     return this.colorSchemeService.getColor() === 'rgb(211,211,211)';
   }
@@ -60,4 +68,6 @@ export class SidebarComponent implements OnInit {
       (app.backendReachable === undefined && app.frontendReachable) ||
       (app.backendReachable === null && app.frontendReachable));
   }
+
+  protected readonly environment = environment;
 }

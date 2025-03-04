@@ -43,4 +43,5 @@ export class TeilerWelcomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  protected readonly environment = environment;
 }

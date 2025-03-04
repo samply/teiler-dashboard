@@ -1,0 +1,26 @@
+{
+  "color-palettes": [
+    {
+      "name": "Color-Palette-1",
+      "colors": {
+        "text": "grey",
+        "line": "grey",
+        "icon": "grey"
+      },
+      "style": {
+        "font": "Bahnschrift"
+      }
+    },
+    {
+      "name": "Color-Palette-2",
+      "colors": {
+        "text": "black",
+        "line": "black",
+        "icon": "black"
+      },
+      "style": {
+        "font": "Calibri"
+      }
+    }
+  ]
+}
