@@ -65,3 +65,23 @@ ng serve --configuration=development
 ## Internationalization
 `ng extract-i18n --output-path src/i18n --format=xlf2`  
 After that: Compare messages.en.xlf with the new messages.xlf: Update and add new entries
+
+## Configuration in IntelliJ
+### Single SPA DE
+Create npm config
+command: run
+scripts: start
+arguments: -- --port 4200 --configuration=development
+
+### Single SPA EN
+Create npm config
+command: run
+scripts: start
+arguments: -- --port 4200 --configuration=en
+
+### Standalone DE
+Create npm config
+command: run
+scripts: start
+arguments:
+
