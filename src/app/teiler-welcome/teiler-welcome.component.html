@@ -1,7 +1,10 @@
 <div class="wrapper">
-    <h2>{{welcomeTitle}}</h2>
+    <h2>{{environment.config['TEILER_DASHBOARD_WELCOME_TITLE_'+locale.toUpperCase()]}}</h2>
     <br>
-    <div [innerHTML]="welcomeMessage"></div>
+    <div [innerHTML]=welcomeText></div>
+    <br>
+    <br>
+    <div [innerHTML]=furtherInfo></div>
     <br>
     <b>{{teilerAdmin.name}}</b>
     <br>

@@ -21,6 +21,17 @@
       "style": {
         "font": "Calibri"
       }
+    },
+    {
+      "name": "Color-Palette-3",
+      "colors": {
+        "text": "#484848",
+        "line": "grey",
+        "icon": "grey"
+      },
+      "style": {
+        "font": "Roboto"
+      }
     }
   ]
 }

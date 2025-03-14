@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from "../../environments/environment";
+import {getLocale} from "../route/route-utils";
+
 
 class TeilerAdmin {
   name: string | undefined;
@@ -23,7 +25,10 @@ export class TeilerWelcomeComponent implements OnInit {
 
   teilerAdmin: TeilerAdmin = new TeilerAdmin();
 
-  welcomeTitle1: string = $localize`Willkommen auf Ihrem`
+  locale = ""
+  welcomeText = ""
+  furtherInfo = ""
+  /*welcomeTitle1: string = $localize`Willkommen auf Ihrem`
   welcomeTitle2: string = $localize`CCP-Brückenkopf`
   welcomeTitle: string = this.welcomeTitle1 + " " + environment.config.TEILER_PROJECT.toUpperCase() + "-" + this.welcomeTitle2;
 
@@ -36,11 +41,14 @@ export class TeilerWelcomeComponent implements OnInit {
     Weitere Informationen zum Konzept des Brückenkopfs finden Sie unter:
   `
   welcomeMessage: string = this.welcomeMessage1 + '<br><br>' + this.welcomeMessage2 + '<br><a href="https://dktk.dkfz.de/klinische-plattformen/ccp-it">https://dktk.dkfz.de/klinische-plattformen/ccp-it</a><br><a href="https://github.com/samply/bridgehead">https://github.com/samply/bridgehead</a> ';
-
+*/
   constructor() {
   }
 
   ngOnInit(): void {
+    this.locale = getLocale();
+    this.welcomeText = environment.config['TEILER_DASHBOARD_WELCOME_TEXT_'+this.locale.toUpperCase()];
+    this.furtherInfo = environment.config['TEILER_DASHBOARD_FURTHER_INFO_'+this.locale.toUpperCase()];
   }
 
   protected readonly environment = environment;
