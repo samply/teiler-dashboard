@@ -5,10 +5,8 @@
       "colors": {
         "text": "grey",
         "line": "grey",
-        "icon": "grey"
-      },
-      "style": {
-        "font": "Bahnschrift"
+        "icon": "grey",
+        "background": "grey"
       }
     },
     {
@@ -16,10 +14,8 @@
       "colors": {
         "text": "black",
         "line": "black",
-        "icon": "black"
-      },
-      "style": {
-        "font": "Calibri"
+        "icon": "black",
+        "background": "#F7ADAD"
       }
     },
     {
@@ -27,10 +23,8 @@
       "colors": {
         "text": "#484848",
         "line": "grey",
-        "icon": "grey"
-      },
-      "style": {
-        "font": "Roboto"
+        "icon": "grey",
+        "background": "#afe2fd"
       }
     }
   ]

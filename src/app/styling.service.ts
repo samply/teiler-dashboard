@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ColorPaletteService {
+export class StylingService {
 
   private colorPalettes: { [key: string]: ColorPalette } = {};
   private selectedPalette: ColorPalette | null = null;
@@ -79,11 +79,7 @@ export class ColorPaletteService {
   }
 
   getFontStyle(): string {
-    if (!this.selectedPalette) {
-      console.error('No palette selected.');
-      return 'defaultColor';
-    }
-    return this.selectedPalette.style.font;
+    return environment.config.FONT;
   }
 
   getTextColor(): string {
@@ -108,5 +104,12 @@ export class ColorPaletteService {
       return 'defaultColor';
     }
     return this.selectedPalette.colors.icon;
+  }
+  getBackgroundColor(): string {
+    if (!this.selectedPalette) {
+      console.error('No palette selected.');
+      return 'defaultColor';
+    }
+    return this.selectedPalette.colors.background;
   }
 }

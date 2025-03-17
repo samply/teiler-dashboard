@@ -3,7 +3,9 @@ import {RouteManagerService} from "./route/route-manager.service";
 import {TeilerAuthService} from "./security/teiler-auth.service";
 import {from, Observable} from "rxjs";
 import {environment} from "../environments/environment";
-import {ColorPaletteService} from "./color-palette.service";
+import {StylingService} from "./styling.service";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -16,9 +18,9 @@ export class AppComponent implements OnInit{
   title = 'teiler-dashboard';
   isLoggedIn: boolean = false;
   user: string = '';
+  svgimage: any = ""
 
-
-  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService, private colorPaletteService: ColorPaletteService) {
+  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService, private stylingService: StylingService, private httpClient: HttpClient, private sanitizer: DomSanitizer) {
     from(authService.isLoggedId()).subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       if (isLoggedIn) {
@@ -28,9 +30,9 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.colorPaletteService.getPalettesLoadedStatus().subscribe(loaded => {
+    this.stylingService.getPalettesLoadedStatus().subscribe(loaded => {
       if (loaded) {
-        const selectedPaletteName = this.colorPaletteService.getSelectedPaletteName();
+        const selectedPaletteName = this.stylingService.getSelectedPaletteName();
         if (selectedPaletteName) {
           this.setCSSVariables();
         } else {
@@ -40,14 +42,15 @@ export class AppComponent implements OnInit{
         console.error('Farbpaletten wurden nicht geladen.');
       }
     });
+    this.setBackgroundImage()
   }
 
   private setCSSVariables() {
 
-    const iconColor = this.colorPaletteService.getIconColor();
-    const textColor = this.colorPaletteService.getTextColor();
-    const lineColor = this.colorPaletteService.getLineColor();
-    const fontStyle = this.colorPaletteService.getFontStyle() + ', sans-serif';
+    const iconColor = this.stylingService.getIconColor();
+    const textColor = this.stylingService.getTextColor();
+    const lineColor = this.stylingService.getLineColor();
+    const fontStyle = this.stylingService.getFontStyle() + ', sans-serif';
 
     this.setCSSVariable('--icon-color', iconColor);
     this.setCSSVariable('--text-color', textColor);
@@ -59,5 +62,25 @@ export class AppComponent implements OnInit{
     document.documentElement.style.setProperty(variableName, value);
   }
 
+  public setBackgroundImage() {
+    const headers = new HttpHeaders();
+    headers.set('Accept', 'image/svg+xml');
+    this.httpClient.get(environment.config.BACKGROUND_IMAGE_URL, {headers, responseType: 'text'}).subscribe((svg) => {
+      this.svgimage = svg;
+      this.changeColor(this.stylingService.getBackgroundColor());
+    });
+  }
+  changeColor(color: string): void {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(this.svgimage, 'image/svg+xml');
+
+    const paths = xmlDoc.getElementsByTagName('path');
+    for (let i = 0; i < paths.length; i++) {
+      paths[i].setAttribute('fill', color);
+    }
+
+    const serializer = new XMLSerializer();
+    this.svgimage = this.sanitizer.bypassSecurityTrustHtml(serializer.serializeToString(xmlDoc));
+  }
   protected readonly environment = environment;
 }
