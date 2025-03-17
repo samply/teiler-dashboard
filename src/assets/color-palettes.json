@@ -1,7 +1,7 @@
 {
   "color-palettes": [
     {
-      "name": "Color-Palette-1",
+      "name": "Grey",
       "colors": {
         "text": "grey",
         "line": "grey",
@@ -10,7 +10,7 @@
       }
     },
     {
-      "name": "Color-Palette-2",
+      "name": "Black",
       "colors": {
         "text": "black",
         "line": "black",
@@ -19,7 +19,7 @@
       }
     },
     {
-      "name": "Color-Palette-3",
+      "name": "Grey 2",
       "colors": {
         "text": "#484848",
         "line": "grey",
