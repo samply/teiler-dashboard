@@ -6,6 +6,7 @@ import {environment} from "../environments/environment";
 import {StylingService} from "./styling.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
+import {DashboardConfigService} from "./teiler/dashboard-config.service";
 
 
 @Component({
@@ -19,14 +20,18 @@ export class AppComponent implements OnInit{
   isLoggedIn: boolean = false;
   user: string = '';
   svgimage: any = ""
+  logoUrl: string = ""
 
-  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService, private stylingService: StylingService, private httpClient: HttpClient, private sanitizer: DomSanitizer) {
+  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService, private stylingService: StylingService, private httpClient: HttpClient, private sanitizer: DomSanitizer, private configService: DashboardConfigService) {
     from(authService.isLoggedId()).subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       if (isLoggedIn) {
         from(authService.loadUserProfile()).subscribe(keycloakProfile => this.user = keycloakProfile.firstName + ' ' + keycloakProfile.lastName);
       }
     });
+    this.configService.getConfig().subscribe((config) => {
+      this.logoUrl = config.LOGO_URL ?? environment.config.LOGO_URL
+    })
   }
 
   ngOnInit(): void {
@@ -63,12 +68,16 @@ export class AppComponent implements OnInit{
   }
 
   public setBackgroundImage() {
-    const headers = new HttpHeaders();
-    headers.set('Accept', 'image/svg+xml');
-    this.httpClient.get(environment.config.BACKGROUND_IMAGE_URL, {headers, responseType: 'text'}).subscribe((svg) => {
-      this.svgimage = svg;
-      this.changeColor(this.stylingService.getBackgroundColor());
-    });
+    this.configService.getConfig().subscribe((config) => {
+      if (config.BACKGROUND_IMAGE_URL) {
+        const headers = new HttpHeaders();
+        headers.set('Accept', 'image/svg+xml');
+        this.httpClient.get(config.BACKGROUND_IMAGE_URL, {headers, responseType: 'text'}).subscribe((svg) => {
+          this.svgimage = svg;
+          this.changeColor(this.stylingService.getBackgroundColor());
+        });
+      }
+    })
   }
   changeColor(color: string): void {
     const parser = new DOMParser();
