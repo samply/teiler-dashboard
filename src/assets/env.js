@@ -30,7 +30,7 @@
     "BACKGROUND_IMAGE_URL": "http://localhost:4200/de/assets/images/Background_Box1.svg",
     "LOGO_URL": "http://localhost:4200/de/assets/images/DKTK_TEILER_LOGO.svg",
     "COLOR_PALETTE": "http://localhost:4200/de/assets/color-palettes.json",
-    "COLOR_PROFILE": "Grey 2",
+    "COLOR_PROFILE": "Blue",
     "FONT":"Arial"
   };
 

@@ -113,7 +113,7 @@ export class StylingService {
   getBackgroundColor(): string {
     if (!this.selectedPalette) {
       console.error('No palette selected.');
-      return 'defaultColor';
+      return '#ffffff';
     }
     return this.selectedPalette.colors.background;
   }

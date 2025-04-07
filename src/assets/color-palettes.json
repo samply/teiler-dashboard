@@ -26,6 +26,15 @@
         "icon": "grey",
         "background": "#afe2fd"
       }
+    },
+    {
+      "name": "Blue",
+      "colors": {
+        "text": "#484848",
+        "line": "grey",
+        "icon": "grey",
+        "background": "#0093FC"
+      }
     }
   ]
 }

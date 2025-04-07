@@ -1,4 +1,4 @@
-<div class="app">
+<div class="app" #myIdentifier>
   <div class="toolbar">
     <div class="logo">
       <a routerLink="{{'/' + routeManagerService.mainRouterLink}}">
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <svg [innerHtml]="svgimage" class="b-img"></svg>
+  <svg [innerHtml]="svgimage" class="b-img" [style.width.px]="svgWidth" [style.height.px]="svgHeight"></svg>
   <app-sidebar></app-sidebar>
   <div class="footer">
     <a class="user-agreement" href="">Nutzervereinbarung</a>
