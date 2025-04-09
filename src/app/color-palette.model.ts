@@ -4,6 +4,7 @@ export interface ColorPalette {
     icon: string;
     text: string;
     line: string;
+    background: string;
   };
   style: {
     font: string;

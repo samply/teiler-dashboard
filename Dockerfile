@@ -28,5 +28,9 @@ ADD docker/start.sh                 /samply/
 RUN chmod +x                        /samply/start.sh
 
 ENV EXAMPLE=[]
+ENV BACKGROUND_IMAGE_URL=""
+ENV LOGO_URL=""
+ENV COLOR_PALETTE="Grey"
+ENV FONT="Open Sans"
 
 CMD ["/samply/start.sh"]

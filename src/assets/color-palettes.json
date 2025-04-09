@@ -1,36 +1,39 @@
 {
   "color-palettes": [
     {
-      "name": "Color-Palette-1",
+      "name": "Grey",
       "colors": {
         "text": "grey",
         "line": "grey",
-        "icon": "grey"
-      },
-      "style": {
-        "font": "Bahnschrift"
+        "icon": "grey",
+        "background": "grey"
       }
     },
     {
-      "name": "Color-Palette-2",
+      "name": "Black",
       "colors": {
         "text": "black",
         "line": "black",
-        "icon": "black"
-      },
-      "style": {
-        "font": "Calibri"
+        "icon": "black",
+        "background": "#F7ADAD"
       }
     },
     {
-      "name": "Color-Palette-3",
+      "name": "Grey 2",
       "colors": {
         "text": "#484848",
         "line": "grey",
-        "icon": "grey"
-      },
-      "style": {
-        "font": "Roboto"
+        "icon": "grey",
+        "background": "#afe2fd"
+      }
+    },
+    {
+      "name": "Blue",
+      "colors": {
+        "text": "#484848",
+        "line": "grey",
+        "icon": "grey",
+        "background": "#0093FC"
       }
     }
   ]
