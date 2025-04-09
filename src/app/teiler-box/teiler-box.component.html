@@ -1,5 +1,5 @@
 
-<div class="teiler-box">
+<div class="teiler-box" [ngClass]="isAppClickable() ? 'clickable' : 'nonclickable'">
   <div class="text">
     <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
       <i class="{{teilerApp.iconClass}}" ></i>
@@ -14,7 +14,11 @@
     <p class="teiler-box-description">{{teilerApp.description}}</p>
   </div>
   <div class="icon-footer">
-  <i class="{{getCheckIconClass()}}" title="{{getCheckIconTitle()}}"></i>
+    <span *ngIf="teilerApp.local" i18n>lokal</span>
+    <span *ngIf="!teilerApp.local" i18n>zentral</span>
+    <div class="icon-footer-box">
+      <i class="{{getCheckIconClass()}}" title="{{getCheckIconTitle()}}"></i>
+    </div>
   </div>
 </div>
 

@@ -14,7 +14,7 @@ RUN apk update
 RUN apk upgrade
 RUN apk add bash
 
-### Configuration of NGINX
+### ConfigurationInterface of NGINX
 COPY docker/nginx.conf /etc/nginx/nginx.template.conf
 
 EXPOSE 80
@@ -28,5 +28,9 @@ ADD docker/start.sh                 /samply/
 RUN chmod +x                        /samply/start.sh
 
 ENV EXAMPLE=[]
+ENV BACKGROUND_IMAGE_URL=""
+ENV LOGO_URL=""
+ENV COLOR_PALETTE="Grey"
+ENV FONT="Open Sans"
 
 CMD ["/samply/start.sh"]

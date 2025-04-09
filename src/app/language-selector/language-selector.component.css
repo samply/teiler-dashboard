@@ -3,19 +3,24 @@
 .translate-wrapper {
   position: relative;
 }
+.translate-wrapper i {
+  font-size: 170%;
+}
 
 .menu-wrapper {
   position: absolute;
-  background-color: white; 
+  background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
   top: 100%;
   right: 0;
   padding: 8px;
   z-index: 1;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
+.invisible-menu {
+  display: none;
+}
 .menu-item {
   padding: 8px;
 }
@@ -23,4 +28,5 @@
 a {
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
+  font-size: 16px;
 }

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {getHref, getRouterLinkSwitchingLocale} from "../route/route-utils";
+import {Router} from "@angular/router";
 
 
 class LanguageHref {
@@ -14,10 +15,12 @@ class LanguageHref {
 })
 export class LanguageSelectorComponent implements OnInit {
 
-  constructor() {
+  availableLanguages: LanguageHref[] = []
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+    this.availableLanguages = this.getAvailableLanguageHrefs();
   }
 
   public menuVisible: boolean = false;
@@ -54,9 +57,4 @@ export class LanguageSelectorComponent implements OnInit {
     }
     return locales.sort();
   }
-
-  toggleLanguageMenu() {
-    this.menuVisible = !this.menuVisible;
-  }
-
 }

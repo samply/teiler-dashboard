@@ -44,6 +44,11 @@ button{
   text-align: left;
   font-size: 14px;
   width: 100%;
+  display: flex;
+}
+.output-and-log-div {
+  width: 60%;
+  margin-left: auto;
 }
 .log-div {
   margin-top: 20px;
@@ -56,24 +61,12 @@ button{
 .status {
   margin: 1.4% 0 0 3%;
 }
-.log-exporter {
-  border: 1px solid #333333;
-  width: 49%;
-  padding: 1% 2%;
-  background-color: white;
-  height: 300px;
-  display: none;
-  margin-top: 20px;
-}
 
-.log-header {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-.log-reports {
-  height: 250px;
-  max-height: 300px;
+.FormGroup-input-div {
+  width: 40%;
+  height: 315px;
   overflow: auto;
+  margin-bottom: 10px;
 }
 .matinput {
   margin-left: 2%;
@@ -158,6 +151,9 @@ button{
 ::ng-deep .query-label .mat-mdc-text-field-wrapper, ::ng-deep .query-expiration-date .mat-mdc-text-field-wrapper {
   flex: unset!important;
 }
+::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  height: 30px !important;
+}
 .query-label {
   width: 100%;
 }
@@ -217,17 +213,18 @@ button{
 .status {
   margin: 1.4% 0 0 3%;
 }
-.log-exporter, .log-reporter {
-  border: 1px solid #333333;
-  width: 49%;
+
+.log-exporter {
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  width: 100%;
   padding: 1% 2%;
   background-color: white;
-  height: 300px;
-  display: none;
-}
-.log-exporter {
+  height: 310px;
+  margin-top: 20px;
   margin-left: 2%;
+  max-width: 700px;
 }
+
 .log-header {
   font-weight: bold;
   margin-bottom: 10px;
@@ -236,6 +233,9 @@ button{
   height: 250px;
   max-height: 300px;
   overflow: auto;
+}
+.outputformat_dropdown  {
+  width: 50%;
 }
 .matinput {
   margin-left: 2%;
@@ -293,24 +293,6 @@ button{
 }
 .visible-button-group {
   display: inline-flex;
-}
-.file-upload {
-  text-transform: none !important;
-  width: 200px;
-  height: 45px;
-  font-size: 13px;
-  color: black!important;
-  display: flex;
-  padding: 5px;
-  background-color: #2BCDD563 !important;
-}
-.file-upload-text {
-  margin: 8px 5px;
-}
-.file-name {
-  color: black;
-  margin: 5px;
-  height: 20px;
 }
 .template_dropdown, .outputformat_dropdown {
   margin: 0 2%;
@@ -372,4 +354,34 @@ button{
 }
 mat-expansion-panel-header {
   padding: 15px 20px 25px 20px;
+}
+.summary-box {
+  width: 30%;
+  background-color: rgba(197, 197, 197, 0.2);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  margin-right: 5px;
+  height: 456px;
+  overflow: auto;
+}
+.summary-box-left {
+  width: 40%;
+}
+.summary-box-right {
+  width: 60%;
+}
+.summary-table {
+  text-align: left;
+}
+.summary-table td {
+  padding: 6px;
+  border-bottom: #e0e0e0 1px solid;
+}
+.table-left {
+  width: 35%;
+}
+.table-right {
+  width: 65%;
+}
+.table-left.table-env {
+  border-bottom: none!important;
 }

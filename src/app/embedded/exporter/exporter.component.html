@@ -2,10 +2,11 @@
   <div class="title">
     <h2 i18n>Exporter Anfragen</h2>
   </div>
+
+
   <mat-accordion class="button-accordion">
     <mat-expansion-panel [(expanded)]="panelOpenState">
       <mat-expansion-panel-header>
-
         <div class="create-buttons">
           <div class="buttons-left">
             <button class="create-button" mat-raised-button color="primary" [disabled]="editModus" (click)="createNewQuery();$event.stopPropagation();" i18n>neue Anfrage erstellen</button>
@@ -25,121 +26,316 @@
               <button mat-menu-item (click)="saveButtonMenu(false)">{{saveButtonText.get(false)}}</button>
               <button mat-menu-item (click)="saveButtonMenu(true)">{{saveButtonText.get(true)}}</button>
             </mat-menu>
-            <!--<button class="generate-button" mat-raised-button color="primary" (click)=generateExport() [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }" i18n>neue Anfrage ausführen</button>-->
-            <div class="upload-button" [ngClass]="{ 'visible': (selectedTemplate === 'custom' && panelOpenState) }">
-              <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
-              <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click();$event.stopPropagation();">
-                <span i18n>Template auswählen</span>
-              </button>
-              <div class="file-name">{{ fileName }}</div>
-            </div>
-            <button class="download-button" mat-raised-button color="primary" (click)="downloadTemplate();$event.stopPropagation();" [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom' && panelOpenState) }" i18n>Template herunterladen</button>
           </div>
         </div>
-
       </mat-expansion-panel-header>
 
-      <div class="generate-div">
-        <div class="query-input">
-          <div class="input-left">
-            <mat-form-field appearance="outline" class="query-label">
-              <mat-label>Titel</mat-label>
-              <input
-                matInput
-                type="text"
-                [(ngModel)]="queryLabel"
-                (ngModelChange)="generateButtonStatus()"
-                [disabled] = "!editModus"
-              />
-            </mat-form-field>
-            <!--<mat-form-field class="query-textfield">
-              <mat-label>Beschreibung</mat-label>
-              <textarea
-                matInput
-                [(ngModel)]="queryDescription"
-                (ngModelChange)="generateButtonStatus()"
-                [disabled] = "!editModus"
-                cdkTextareaAutosize
-                cdkAutosizeMinRows="2"
-                cdkAutosizeMaxRows="5"
-              ></textarea>
-            </mat-form-field>-->
-            <div>
-              <div>Beschreibung</div>
-              <textarea
-                class="query-textfield"
-                name="query-textfield"
-                rows="6"
-                cols="40"
-                [(ngModel)]="queryDescription"
-                (ngModelChange)="generateButtonStatus()"
-                [disabled] = "!editModus"
-              ></textarea>
-            </div>
-          </div>
-          <div>
-            <div>Anfrage</div>
-            <textarea
-              class="query-textfield"
-              name="query-textfield"
-              rows="13"
-              cols="50"
-              [(ngModel)]="query"
-              (ngModelChange)="generateButtonStatus()"
-              [disabled] = "!editModus"
-            ></textarea>
-          </div>
-          <div class="query-input-right">
-            <div class="dropdowns">
-              <div class="dropdowns-left">
-                <mat-form-field class="queryformat_dropdown">
-                  <mat-label>Anfrageformat</mat-label>
-                  <select class="queryformat-select" matNativeControl required [(ngModel)]="selectedQueryFormat" [disabled] = "!editModus">
-                    <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
-                  </select>
-                </mat-form-field>
-                <mat-form-field class="outputformat_dropdown">
-                  <mat-label>Ausgabeformat</mat-label>
-                  <select class="outputformat-select" matNativeControl required [(ngModel)]="selectedOutputFormat" >
-                    <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
-                  </select>
-                </mat-form-field>
-                <mat-form-field class="template_dropdown">
-                  <mat-label>Template</mat-label>
-                  <select class="template-select" matNativeControl required [(ngModel)]="selectedTemplate" >
-                    <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
-                  </select>
-                </mat-form-field>
-              </div>
-              <div class="dropdowns-right">
-                <mat-form-field appearance="outline" class="query-expiration-date">
-                  <mat-label>Ablaufdatum</mat-label>
-                  <input
-                    matInput
-                    [matDatepicker]="dateStartPicker"
-                    [(ngModel)]="expirationDate"
-                    [disabled] = "!editModus"
-                  />
-                  <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
-                  <mat-datepicker #dateStartPicker></mat-datepicker>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="query-contactid">
-                  <mat-label i18n>Anfragende</mat-label>
-                  <input
-                    matInput
-                    type="text"
-                    [(ngModel)]="contactID"
-                    [disabled] = "true"
-                  />
-                </mat-form-field>
-              </div>
-            </div>
-          </div>
+      <div class="input-box">
+        <div class="summary-box">
+          <table class="summary-table">
+            <tbody>
+            <tr>
+              <td class="table-left" i18n>Titel:</td>
+              <td class="table-right">{{queryLabel}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Beschreibung:</td>
+              <td class="table-right">{{queryDescription}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Anfrage:</td>
+              <td class="table-right">{{query.substring(0, 30)}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Template:</td>
+              <td class="table-right">{{selectedTemplate}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Anfrageformat:</td>
+              <td class="table-right">{{selectedQueryFormat}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Ausgabeformat:</td>
+              <td class="table-right">{{selectedOutputFormat}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Ablaufdatum:</td>
+              <td class="table-right">{{expirationDate | date: 'mediumDate'}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Anfragende:</td>
+              <td class="table-right">{{contactID}}</td>
+            </tr>
+            <tr *ngFor="let context of contextArray; let i=index">
+              <td class="table-left table-env"><span *ngIf="i === 0" i18n>Umgebungsvariablen:</span></td>
+              <td class="table-right table-env">{{context.key}}<span *ngIf="(context.key.length > 0) && (context.value.length > 0)">=</span>{{context.value}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="stepper">
+          <mat-stepper
+            class="query-stepper"
+            [orientation]="(stepperOrientation | async)!">
+            <mat-step [stepControl]="firstFormGroup" label="Beschreibung" completed="false">
+              <form [formGroup]="firstFormGroup" class="form-content">
+                <div class="firstFormGroup-div">
+                  <div class="FormGroup-input-div">
+                    <mat-form-field appearance="outline" class="query-label">
+                      <mat-label>Titel</mat-label>
+                      <input matInput type="text"
+                             [(ngModel)]="queryLabel"
+                             (ngModelChange)="generateButtonStatus()"
+                             [disabled] = "!editModus"
+                             [ngModelOptions]="{standalone: true}"
+                      >
+                    </mat-form-field>
+                    <div class="textarea-box">
+                      <mat-form-field class="query-textfield">
+                      <mat-label>Beschreibung</mat-label>
+                      <textarea
+                        class="textarea"
+                        matInput
+                        [(ngModel)]="queryDescription"
+                        (ngModelChange)="generateButtonStatus()"
+                        cdkTextareaAutosize
+                        cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="5"
+                        [disabled] = "!editModus"
+                        [ngModelOptions]="{standalone: true}"
+                      ></textarea>
+                    </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="FormGroup-description-div">
+
+                      <span class="stepper-help-header" i18n>Erstellen Sie Ihre Anfrage in 4 Schritten: </span>
+                        <ol>
+                          <li>
+                            <span class="stepper-help-text" i18n>Versehen Sie sie mit einer Überschrift und einer Beschreibung.</span>
+                            <br>
+                            <br>
+                          </li>
+                          <li>
+                            <span class="stepper-help-text" i18n>Bestimmen Sie die Anfragesprache und formulieren Sie Ihre Anfrage (Query) entsprechend dem gewählten Format.</span>
+                            <br>
+                            <br>
+                          </li>
+                          <li>
+                            <span class="stepper-help-text" i18n>Wählen Sie ein Ausgabeformat und das passende Template.</span>
+                            <br>
+                            <br>
+                          </li>
+                          <li>
+                            <span class="stepper-help-text" i18n>Setzen Sie ein Ablaufdatum und fügen Sie zusätzliche Parameter hinzu, falls Ihre Anfrage spezielle Anforderungen hat.</span>
+                            <br>
+                            <br>
+                          </li>
+                        </ol>
+
+                  </div>
+                </div>
+                <div class="stepper-buttons">
+                  <span></span>
+                  <button class="next-button" mat-raised-button color="primary" matStepperNext i18n>Weiter</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup" label="Anfrage" completed="false">
+              <form [formGroup]="secondFormGroup" class="form-content">
+                <div class="secondFormGroup-div">
+                  <div class="FormGroup-input-div">
+                    <div class="textarea-box query-textbox">
+                      <mat-form-field class="query-textfield">
+                        <mat-label>Anfrage</mat-label>
+                        <textarea
+                          class="textarea"
+                          matInput
+                          [(ngModel)]="query"
+                          (ngModelChange)="generateButtonStatus()"
+                          cdkTextareaAutosize
+                          cdkAutosizeMinRows="2"
+                          cdkAutosizeMaxRows="5"
+                          [disabled] = "!editModus"
+                          [ngModelOptions]="{standalone: true}"
+                        ></textarea>
+                      </mat-form-field>
+                    </div>
+                    <mat-form-field class="queryformat_dropdown">
+                      <mat-label>Anfrageformat</mat-label>
+                      <select class="queryformat-select"
+                              matNativeControl
+                              [(ngModel)]="selectedQueryFormat"
+                              [disabled] = "!editModus"
+                              [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let id of queryFormats" [value]="id.value">{{id.display}}</option>
+                      </select>
+                    </mat-form-field>
+                  </div>
+                  <div class="FormGroup-description-div">
+                    <ul>
+                      <li>
+                        <span class="stepper-help-header" i18n>Anfrage formulieren: </span>
+                        <span class="stepper-help-text" i18n>Legen Sie Ihre Anfrage und das Anfrageformat fest. Verwenden Sie die Syntax, wie sie in unserer Dokumentation beschrieben wird, um Ihre Anfrage korrekt zu strukturieren.</span>
+                        <ul>
+                          <li>
+                            <span class="stepper-help-hint-header" i18n>Hinweis: </span>
+                            <span class="stepper-help-hint-text" i18n>Es können nur gültige Anfragen aus den unterstützten Anfrageformaten ausgeführt werden.</span>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="stepper-buttons">
+                  <button class="back-button" mat-raised-button color="primary" matStepperPrevious i18n>Zurück</button>
+                  <button class="next-button" mat-raised-button color="primary" matStepperNext i18n>Weiter</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="thirdFormGroup" label="Ausgabe" completed="false">
+              <form [formGroup]="thirdFormGroup" class="form-content">
+                <div class="thirdFormGroup-div">
+                  <div class="FormGroup-input-div">
+                    <div class="template-box">
+                      <mat-form-field class="template_dropdown">
+                        <mat-label>Template</mat-label>
+                        <select class="template-select"
+                                matNativeControl
+                                [(ngModel)]="selectedTemplate"
+                                [disabled] = "!editModus"
+                                [ngModelOptions]="{standalone: true}">
+                          <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
+                        </select>
+                      </mat-form-field>
+                      <div class="upload-button" [ngClass]="{ 'visible': (selectedTemplate === 'custom') }">
+                        <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
+                        <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click();$event.stopPropagation();">
+                          <span i18n>Template auswählen</span>
+                        </button>
+                        <div class="file-name">{{ fileName }}</div>
+                      </div>
+                      <button class="download-button" mat-raised-button color="primary"
+                              (click)="downloadTemplate();$event.stopPropagation();"
+                              [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }"
+                              [disabled] = "!editModus"
+                              i18n>Template herunterladen
+                      </button>
+                    </div>
+                    <mat-form-field class="outputformat_dropdown">
+                      <mat-label>Ausgabeformat</mat-label>
+                      <select class="outputformat-select"
+                              matNativeControl
+                              [(ngModel)]="selectedOutputFormat"
+                              [disabled] = "!editModus"
+                              [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let id of outputFormats" [value]="id.value">{{id.display}}</option>
+                      </select>
+                    </mat-form-field>
+                  </div>
+                  <div class="FormGroup-description-div">
+                    <ul>
+                      <li>
+                        <span class="stepper-help-header" i18n>Ausgabeformat wählen: </span>
+                        <span class="stepper-help-text" i18n>Wählen Sie das Template und das Format für die Ausgabedaten.</span>
+                        <ul>
+                          <li>
+                            <span class="stepper-help-hint-header" i18n>Hinweis: </span>
+                            <span class="stepper-help-hint-text" i18n>das Template/Vorlage definiert die Datenstruktur im gewählten Format (json, csv...)</span>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="stepper-buttons">
+                  <button class="back-button" mat-raised-button color="primary" matStepperPrevious i18n>Zurück</button>
+                  <button class="next-button" mat-raised-button color="primary" matStepperNext i18n>Weiter</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="forthFormGroup" label="weitere Parameter" completed="false">
+              <form [formGroup]="forthFormGroup" class="form-content">
+                <div class="forthFormGroup-div">
+                  <div class="FormGroup-input-div">
+                    <mat-form-field appearance="outline" class="query-expiration-date">
+                      <mat-label>Ablaufdatum</mat-label>
+                      <input
+                        matInput
+                        [matDatepicker]="dateStartPicker"
+                        [(ngModel)]="expirationDate"
+                        [disabled] = "!editModus"
+                        [ngModelOptions]="{standalone: true}"
+                      />
+                      <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #dateStartPicker></mat-datepicker>
+                    </mat-form-field>
+                    <div *ngFor="let context of contextArray; let i=index">
+                      <mat-form-field appearance="outline" class="query-context">
+                        <mat-label i18n>Schlüssel</mat-label>
+                        <input
+                          id="context_key_{{i}}"
+                          matInput
+                          [ngModelOptions]="{standalone: true}"
+                          type="text"
+                          [(ngModel)]="context.key"
+                          [disabled] = "!editModus"
+                          (ngModelChange)="checkContext(i)"
+                        />
+                      </mat-form-field>
+                      <mat-form-field appearance="outline" class="query-context">
+                        <mat-label i18n>Wert</mat-label>
+                        <input
+                          id="context_value_{{i}}"
+                          matInput
+                          [ngModelOptions]="{standalone: true}"
+                          type="text"
+                          [(ngModel)]="context.value"
+                          [disabled] = "!editModus"
+                          (ngModelChange)="checkContext(i)"
+                        />
+                      </mat-form-field>
+                      <button *ngIf="contextArray.length > 1" mat-raised-button color="primary" class="minus-button"
+                              (click)="deleteContextInput(i)">-
+                      </button>
+                      <button *ngIf="(i === contextArray.length - 1) && showPlusButton" mat-raised-button color="primary" class="plus-button"
+                              (click)="addContextInput($event, i)">+
+                      </button>
+                    </div>
+                  </div>
+                  <div class="FormGroup-description-div">
+                    <ul>
+                      <li>
+                        <span class="stepper-help-header" i18n>Ablaufdatum angeben: </span>
+                        <span class="stepper-help-text" i18n>Bestimmen Sie ein Ablaufdatum für Ihre Anfrage, um festzulegen, wann die Anfrage abgeschlossen sein soll.</span>
+                        <br>
+                        <br>
+                      </li>
+                      <li>
+                        <span class="stepper-help-header" i18n>Zusätzliche Parameter: </span>
+                        <span class="stepper-help-text" i18n>Falls Ihre Anfrage spezielle Anforderungen hat, können Sie weitere Parameter definieren.</span>
+                        <ul>
+                          <li>
+                            <span class="stepper-help-hint-header" i18n>Hinweis: </span>
+                            <span class="stepper-help-hint-text" i18n>Detaillierte Informationen zu zusätzlichen Parametern finden Sie ebenfalls in unserer Dokumentation.</span>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="stepper-buttons">
+                  <button class="back-button" mat-raised-button color="primary" matStepperPrevious i18n>Zurück</button>
+                  <span></span>
+                </div>
+              </form>
+            </mat-step>
+          </mat-stepper>
         </div>
       </div>
-
     </mat-expansion-panel>
   </mat-accordion>
+
 
   <div class="tablex">
     <section class="query-selection">

@@ -17,7 +17,7 @@ export interface exportLog {
 })
 export class ExporterService extends EmbeddedTeilerApp {
 
-	description: string = $localize`Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.`;
+	description: string = $localize`Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.Verwenden Sie den Exporter, um Ihre Daten flexibel in unterschiedliche Formate zu exportieren, und passen Sie die Daten an Ihre spezifischen Anforderungen an.`;
 	iconClass: string | undefined = 'bi bi-download';
 	iconSourceUrl: string | undefined = undefined;
 	title: string = "Exporter";
@@ -41,30 +41,38 @@ export class ExporterService extends EmbeddedTeilerApp {
   getQueryFormats(): Observable<string[]> {
     return this.http.get<string[]>(this.getExporterURL() + "/input-formats");
   }
-  public createQuery(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, contactID: string | undefined, templateID: string, template?:string): Observable<QueryResponse> {
+  public createQuery(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, contactID: string | undefined, templateID: string, context: string, expDate: string, template?:string): Observable<QueryResponse> {
     let qLabel: string = "";
     let qDesc: string = "";
     let contactid = "";
+    let qContext: string = "";
+    let expiration: string = "";
     if (queryLabel && queryLabel !== "") {qLabel = "&query-label=" + queryLabel}
     if (queryDescription && queryDescription !== "") {qDesc = "&query-description=" + queryDescription}
     if (contactID && contactID !== "") {contactid = "&query-contact-id=" + contactID}
+    if (context && context.length !== 0) { qContext = "&query-context=" + context}
+    if (expDate.length > 0) {expiration = "&query-expiration-date=" + expDate}
     if (templateID === "custom") {
       const templateBody ="<request><query>" + query + "</query>" + template + "</request>"
-      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc + contactid, template, {headers: this.httpHeadersXML});
+      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query-format=" + queryFormat + "&query-default-output-format=" + outputFormat + qLabel + qDesc + contactid + qContext + expiration, templateBody, {headers: this.httpHeadersXML});
     } else {
-      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query=" + query + "&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc + contactid, null, {headers: this.httpHeaders});
+      const templateBody ="<request><query>" + query + "</query></request>"
+      return this.http.post<QueryResponse>(this.getExporterURL() + "/create-query?query-format=" + queryFormat + "&query-default-output-format=" + outputFormat + "&query-default-template-id=" + templateID + qLabel + qDesc + contactid + qContext + expiration, templateBody, {headers: this.httpHeadersXML});
     }
   }
-  public generateExport(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, templateID: string, template?:string): Observable<ExportResponse> {
+  public generateExport(query: string, queryLabel: string, queryDescription: string, queryFormat: string, outputFormat: string, templateID: string, context: string, template?:string): Observable<ExportResponse> {
     let qLabel: string = "";
     let qDesc: string = "";
+    let qContext: string = "";
     if (queryLabel && queryLabel !== "") { qLabel = "&query-label=" + queryLabel}
     if (queryDescription && queryDescription !== "") { qDesc = "&query-description=" + queryDescription}
+    if (context && context.length !== 0) { qContext = "&query-context=" + context}
     if (templateID === "custom") {
       const templateBody ="<request><query>" + query + "</query>" + template + "</request>"
-      return this.http.post<ExportResponse>(this.getExporterURL()+"/request?query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc, templateBody, {headers: this.httpHeadersXML});
+      return this.http.post<ExportResponse>(this.getExporterURL()+"/request?query-format=" + queryFormat + "&output-format=" + outputFormat + qLabel + qDesc + qContext, templateBody, {headers: this.httpHeadersXML});
     } else {
-      return this.http.post<ExportResponse>(this.getExporterURL() + "/request?query="+ query +"&query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc, null, {headers: this.httpHeaders});
+      const templateBody ="<request><query>" + query + "</query></request>"
+      return this.http.post<ExportResponse>(this.getExporterURL() + "/request?query-format=" + queryFormat + "&output-format=" + outputFormat + "&template-id=" + templateID + qLabel + qDesc + qContext, templateBody, {headers: this.httpHeadersXML});
     }
   }
 public executeQuery(queryID: string, outputFormat: string, templateID: string, template?:string ): Observable<ExportResponse> {
@@ -72,19 +80,26 @@ public executeQuery(queryID: string, outputFormat: string, templateID: string, t
     const templateBody ="<request>" + template + "</request>"
     return this.http.post<ExportResponse>(this.getExporterURL()+"/request?query-id="+ queryID + "&output-format=" + outputFormat, templateBody, {headers: this.httpHeadersXML});
   } else {
-    return this.http.post<ExportResponse>(this.getExporterURL() + "/request?query-id="+ queryID + "&output-format=" + outputFormat + "&template-id=" + templateID, null, {headers: this.httpHeaders});
+    return this.http.post<ExportResponse>(this.getExporterURL() + "/request?query-id="+ queryID + "&output-format=" + outputFormat + "&template-id=" + templateID, null, {headers: this.httpHeadersXML});
   }
 }
-  public updateQuery(queryID: string, queryLabel: string, queryDescription: string): Observable<any> {
+
+  public updateQuery(queryID: string, query: string, queryLabel: string, queryDescription: string, outputFormat: string, templateID: string, context: string, expDate: string, template?:string): Observable<any> {
     let qLabel: string = "";
     let qDesc: string = "";
-    if (queryLabel && queryLabel !== "") {
-      qLabel = "&query-label=" + queryLabel
+    let qContext: string = "";
+    let expiration: string = "";
+    if (queryLabel && queryLabel !== "") { qLabel = "&query-label=" + queryLabel }
+    if (queryDescription && queryDescription !== "") { qDesc = "&query-description=" + queryDescription }
+    if (context && context.length !== 0) { qContext = "&query-context=" + context}
+    if (expDate.length > 0) { expiration = "&query-expiration-date=" + expDate }
+    if (templateID === "custom") {
+      const templateBody ="<request><query>" + query + "</query>" + template + "</request>"
+      return this.http.post<QueryResponse>(this.getExporterURL() + "/update-query?query-id=" + queryID + "&query-default-output-format=" + outputFormat + qLabel + qDesc + qContext + expiration, templateBody, {headers: this.httpHeadersXML});
+    } else {
+      const templateBody ="<request><query>" + query + "</query></request>"
+      return this.http.post<QueryResponse>(this.getExporterURL() + "/update-query?query-id=" + queryID + "&query-default-output-format=" + outputFormat + "&query-default-template-id=" + templateID + qLabel + qDesc + qContext + expiration, templateBody, {headers: this.httpHeadersXML});
     }
-    if (queryDescription && queryDescription !== "") {
-      qDesc = "&query-description=" + queryDescription
-    }
-    return this.http.post<any>(this.getExporterURL() + "/update-query?query-id=" + queryID + qLabel + qDesc , null, {headers: this.httpHeaders});
   }
 
   getExportStatus(exexID: string): Observable<ExportStatus> {
