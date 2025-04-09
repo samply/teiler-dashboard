@@ -1109,44 +1109,6 @@
         <source>zentrale Apps</source>
       </segment>
     </unit>
-    <unit id="2068445951425750817">
-      <notes>
-        <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:26</note>
-      </notes>
-      <segment>
-        <source>Willkommen auf Ihrem</source>
-      </segment>
-    </unit>
-    <unit id="2778250193858918005">
-      <notes>
-        <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:27</note>
-      </notes>
-      <segment>
-        <source>CCP-Brückenkopf</source>
-      </segment>
-    </unit>
-    <unit id="8977662470240286356">
-      <notes>
-        <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:30,34</note>
-      </notes>
-      <segment>
-        <source>
-    Ihr Tool für die effiziente und sichere Integration onkologischer Daten im DKTK.
-    Als Schlüsselelement der &lt;b&gt;Clinical Communication Plattform (CCP)&lt;/b&gt; ermöglicht der Brückenkopf die Transformation von Standortdaten in ein DKTK-kompatibles Format und ermöglicht deren Nutzung im Konsortium. Betrieben unter lokaler Hoheit, unterstützt der Brückenkopf die standortübergreifende Forschung durch effiziente Datenhandhabung. &lt;br&gt;Diese Übersicht präsentiert die lokalen und zentralen Komponenten Ihres Brückenkopfs sowie deren Status und ermöglicht den Zugriff auf weitere Elemente der CCP-Plattform.
-
-  </source>
-      </segment>
-    </unit>
-    <unit id="1731659883926178761">
-      <notes>
-        <note category="location">src/app/teiler-welcome/teiler-welcome.component.ts:35,37</note>
-      </notes>
-      <segment>
-        <source>
-    Weitere Informationen zum Konzept des Brückenkopfs finden Sie unter:
-  </source>
-      </segment>
-    </unit>
     <unit id="8309375931756676569">
       <notes>
         <note category="location">src/app/teiler/active-inquiries.service.ts:13</note>
