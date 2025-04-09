@@ -20,7 +20,18 @@
     "REPORTER_DEFAULT_TEMPLATE_ID": "ccp-qb",
     "EXPORTER_DEFAULT_TEMPLATE_ID": "ccp",
     "TEILER_USER": "bridgehead-test",
-    "TEILER_ADMIN": "bridgehead-test-admin"
+    "TEILER_ADMIN": "bridgehead-test-admin",
+    "WELCOME_TITLE_DE":"Willkommen auf Ihrem DKTK-CCP-Brückenkopf",
+    "WELCOME_TITLE_EN":"Welcome to your DKTK-CCP-Bridgehead",
+    "WELCOME_TEXT_DE":"Ihr Tool für die effiziente und sichere Integration onkologischer Daten im DKTK. Als Schlüsselelement der <b>Clinical Communication Plattform (CCP)</b> ermöglicht der Brückenkopf die Transformation von Standortdaten in ein DKTK-kompatibles Format und ermöglicht deren Nutzung im Konsortium. Betrieben unter lokaler Hoheit, unterstützt der Brückenkopf die standortübergreifende Forschung durch effiziente Datenhandhabung. <br>Diese Übersicht präsentiert die lokalen und zentralen Komponenten Ihres Brückenkopfs sowie deren Status und ermöglicht den Zugriff auf weitere Elemente der CCP-Plattform.",
+    "WELCOME_TEXT_EN":"Your tool for the efficient and secure integration of oncological data in the DKTK. As a key element of the <b>Clinical Communication Platform (CCP)</b> the bridgehead enables the transformation of site data into a DKTK-compatible format and enables its use in the consortium. Operated under local sovereignty, the bridgehead supports cross-site research through efficient data handling. <br>This overview presents the local and central components of your bridgehead as well as their status and provides access to further elements of the CCP platform.",
+    "FURTHER_INFO_DE":"Weitere Informationen zum Konzept des Brückenkopfs finden Sie unter:<br><a href=\"https://dktk.dkfz.de/klinische-plattformen/ccp-it\">https://dktk.dkfz.de/klinische-plattformen/ccp-it</a><br><a href=\"https://github.com/samply/bridgehead\">https://github.com/samply/bridgehead</a>",
+    "FURTHER_INFO_EN":"Further information on the bridgehead concept can be found at:<br><a href=\"https://dktk.dkfz.de/klinische-plattformen/ccp-it\">https://dktk.dkfz.de/klinische-plattformen/ccp-it</a><br><a href=\"https://github.com/samply/bridgehead\">https://github.com/samply/bridgehead</a>",
+    "BACKGROUND_IMAGE_URL": "http://localhost:4200/de/assets/images/Background_Box1.svg",
+    "LOGO_URL": "http://localhost:4200/de/assets/images/DKTK_TEILER_LOGO.svg",
+    "COLOR_PALETTE": "http://localhost:4200/de/assets/color-palettes.json",
+    "COLOR_PROFILE": "Blue",
+    "FONT":"Arial"
   };
 
 })(this);

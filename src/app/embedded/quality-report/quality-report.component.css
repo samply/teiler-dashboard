@@ -59,7 +59,6 @@ button{
   padding: 1% 2%;
   background-color: white;
   height: 300px;
-  display: none;
 }
 .log-exporter {
   margin-left: 2%;
@@ -106,7 +105,7 @@ table{
   font-size: 115%;
   text-align: center;
 }
-.upload-button, .download-button, .generate-button, .cancel-button, .download-button {
+.upload-button, .download-button, .generate-button, .cancel-button, .download-button, .log-accordion {
   display: none;
 }
 .download-button-div {
@@ -114,7 +113,7 @@ table{
   margin-top: 15px;
 }
 .visible {
-  display: block;
+  display: inline;
 }
 .visible-button {
   display: flex;
@@ -122,35 +121,26 @@ table{
 .file-input {
   display: none;
 }
-.generate-button, .cancel-button, .download-button {
+.generate-button, .cancel-button, .download-button, .file-upload {
   width: 200px;
   height: 45px;
   padding: 5px;
   font-size: 14px;
   color: black!important;
 }
-.generate-button, .cancel-button, .download-button {
+.generate-button, .cancel-button, .download-button, .file-upload {
   background-color: #2BCDD563 !important;
 }
-.generate-button:disabled, .cancel-button:disabled, .download-button:disabled {
+.generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .file-upload:disabled {
   color: darkgrey!important;
 }
 .generate-button, .cancel-button {
   width: 220px;
 }
-.download-button {
+.download-button, .upload-button {
   margin-left: 2%;
 }
-.file-upload {
-  text-transform: none !important;
-  width: 200px;
-  height: 55px;
-  font-size: 13px;
-  color: black;
-  display: flex;
-  padding: 5px;
-  background-color: #2BCDD563 !important;
-}
+
 .file-upload-text {
   margin: 8px 5px;
 }

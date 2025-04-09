@@ -1,0 +1,40 @@
+{
+  "color-palettes": [
+    {
+      "name": "Grey",
+      "colors": {
+        "text": "grey",
+        "line": "grey",
+        "icon": "grey",
+        "background": "grey"
+      }
+    },
+    {
+      "name": "Black",
+      "colors": {
+        "text": "black",
+        "line": "black",
+        "icon": "black",
+        "background": "#F7ADAD"
+      }
+    },
+    {
+      "name": "Grey 2",
+      "colors": {
+        "text": "#484848",
+        "line": "grey",
+        "icon": "grey",
+        "background": "#afe2fd"
+      }
+    },
+    {
+      "name": "Blue",
+      "colors": {
+        "text": "#484848",
+        "line": "grey",
+        "icon": "grey",
+        "background": "#0093FC"
+      }
+    }
+  ]
+}
