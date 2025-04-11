@@ -1,30 +1,29 @@
-import {Injectable} from '@angular/core';
-import {KeycloakAuthGuard, KeycloakService} from "keycloak-angular";
-import {ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
-import {getHref, createMainRouterLink} from "../../route/route-utils";
+import { Injectable } from '@angular/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { getHref, createMainRouterLink } from '../../route/route-utils';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthGuard extends KeycloakAuthGuard {
+export class AuthGuard {
 
   constructor(
-    router: Router,
-    protected readonly keycloak: KeycloakService) {
-    super(router, keycloak);
-  }
-
+    private router: Router,
+    private oidcSecurityService: OidcSecurityService
+  ) {}
 
   async isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
-    if (!this.authenticated) {
-      await this.keycloak.login({redirectUri: this.getRedirectUri()});
+    const isAuthenticated = this.oidcSecurityService.isAuthenticated$;
+
+    if (!isAuthenticated) {
+      this.oidcSecurityService.authorize();
+      return false;
     }
-    return this.authenticated;
+    return true;
   }
 
   getRedirectUri(): string {
-    return getHref(createMainRouterLink())
+    return getHref(createMainRouterLink());
   }
-
-
 }
