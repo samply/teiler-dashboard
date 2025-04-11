@@ -98,7 +98,7 @@ import { environment } from '../environments/environment';
         redirectUrl: window.location.origin,
         postLogoutRedirectUri: window.location.origin,
         responseType: 'code',
-        scope: 'openid profile email groups', // OIDC_TOKEN_GROUP
+        scope: 'openid profile email', // OIDC_TOKEN_GROUP
         useRefreshToken: true,
         secureRoutes: [environment.config.TEILER_BACKEND_URL],
       },

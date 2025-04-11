@@ -1,29 +1,18 @@
-import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
+import { CanActivateFn } from '@angular/router';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { getHref, createMainRouterLink } from '../../route/route-utils';
+import { map } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard {
+export const authGuard: CanActivateFn = (route, state) => {
+  const oidcSecurityService = inject(OidcSecurityService);
 
-  constructor(
-    private router: Router,
-    private oidcSecurityService: OidcSecurityService
-  ) {}
-
-  async isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean | UrlTree> {
-    const isAuthenticated = this.oidcSecurityService.isAuthenticated$;
-
-    if (!isAuthenticated) {
-      this.oidcSecurityService.authorize();
-      return false;
-    }
-    return true;
-  }
-
-  getRedirectUri(): string {
-    return getHref(createMainRouterLink());
-  }
-}
+  return oidcSecurityService.isAuthenticated$.pipe(
+    map(({ isAuthenticated }) => {
+      if (!isAuthenticated) {
+        oidcSecurityService.authorize();
+        return false;
+      }
+      return true;
+    })
+  );
+};
