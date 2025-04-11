@@ -213,6 +213,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     })
     //this.getExecutionError(1)
     //console.log(this.dataSourcePatients.data)
+    window.dispatchEvent(new Event('resize'));
   }
   ngOnDestroy(): void {
     this.subscriptionGetExecutionList?.unsubscribe();
