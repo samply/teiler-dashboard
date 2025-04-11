@@ -92,27 +92,32 @@ export class TeilerService {
     this.allTeilerApps.filter(teilerApp => teilerApp.activated && this.isAuthorized(teilerApp)).forEach(teilerApp => this.teilerApps.push(teilerApp))
   }
 
-  isAuthorized(teilerApp: TeilerApp) {
-
+  isAuthorized(teilerApp: TeilerApp): boolean {
     let isAuthorized = false;
-
     let teilerAppRoles = new Set(teilerApp.roles);
+
     if (teilerAppRoles.size == 0) {
       isAuthorized = true;
     } else if (teilerAppRoles.has(TeilerRole.TEILER_PUBLIC)) {
       isAuthorized = true;
     } else {
-      let roles: string[] = (environment.config.OIDC_TOKEN_GROUP) ? this.authService.getGroups() : this.authService.getRoles();
-      for (let role of roles) {
-        let mappedRole = this.fetchRoleFromEnvironment(role);
-        if (mappedRole != undefined && teilerAppRoles.has(mappedRole)) {
-          return true;
+      const roles$ = (environment.config.OIDC_TOKEN_GROUP) ? this.authService.getGroups() : this.authService.getRoles();
+
+      roles$.subscribe(roles => {
+        for (let role of roles) {
+          let mappedRole = this.fetchRoleFromEnvironment(role);
+          if (mappedRole !== undefined && teilerAppRoles.has(mappedRole)) {
+            isAuthorized = true;
+            break;
+          }
         }
-      }
+      });
+
     }
 
     return isAuthorized;
   }
+
 
   fetchRoleFromEnvironment(role: string): TeilerRole | undefined {
     if (role === environment.config.TEILER_USER) {
