@@ -36,13 +36,13 @@ export class TeilerService {
     router.events.subscribe(myEvent => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
   }
 
-  fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps: TeilerApp[]) {
-    this.httpClient.get<TeilerApp[]>(this.getTeilerDashboardAppsUrl()).subscribe(teilerApps => {
+  async fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps: TeilerApp[]) {
+    this.httpClient.get<TeilerApp[]>(this.getTeilerDashboardAppsUrl()).subscribe(async teilerApps => {
       this.allTeilerApps = [];
       embeddedTeilerApps.forEach(teilerApp => this.allTeilerApps.push(teilerApp));
       this.addTeilerDashboardApps(teilerApps);
       this.sortTeilerApps();
-      this.filterTeilerApps()
+      await this.filterTeilerApps();
       this.teilerAppBehaviorSubject.next(this.teilerApps);
     });
   }
@@ -51,32 +51,37 @@ export class TeilerService {
     return environment.config.TEILER_BACKEND_URL + '/apps/' + getLocale();
   }
 
-  filterTeilerApps() {
+  async filterTeilerApps(): Promise<void> {
     this.teilerApps = [];
-    this.allTeilerApps.filter(teilerApp => teilerApp.activated && this.isAuthorized(teilerApp)).forEach(teilerApp => this.teilerApps.push(teilerApp))
+
+    for (const teilerApp of this.allTeilerApps) {
+      if (teilerApp.activated && await this.isAuthorized(teilerApp)) {
+        this.teilerApps.push(teilerApp);
+      }
+    }
   }
 
-  isAuthorized(teilerApp: TeilerApp) {
+  async isAuthorized(teilerApp: TeilerApp): Promise<boolean> {
+    const teilerAppRoles = new Set(teilerApp.roles);
 
-    let isAuthorized = false;
+    if (teilerAppRoles.size === 0 || teilerAppRoles.has(TeilerRole.TEILER_PUBLIC)) {
+      return true;
+    }
 
-    let teilerAppRoles = new Set(teilerApp.roles);
-    if (teilerAppRoles.size == 0) {
-      isAuthorized = true;
-    } else if (teilerAppRoles.has(TeilerRole.TEILER_PUBLIC)) {
-      isAuthorized = true;
-    } else {
-      let roles: string[] = (environment.config.OIDC_TOKEN_GROUP) ? this.authService.getGroups() : this.authService.getRoles();
-      for (let role of roles) {
-        let mappedRole = this.fetchRoleFromEnvironment(role);
-        if (mappedRole != undefined && teilerAppRoles.has(mappedRole)) {
-          return true;
-        }
+    const roles = environment.config.OIDC_TOKEN_GROUP
+      ? await this.authService.getGroups()
+      : await this.authService.getRoles();
+
+    for (let role of roles) {
+      const mappedRole = this.fetchRoleFromEnvironment(role);
+      if (mappedRole && teilerAppRoles.has(mappedRole)) {
+        return true;
       }
     }
 
-    return isAuthorized;
+    return false;
   }
+
 
   fetchRoleFromEnvironment(role: string): TeilerRole | undefined {
     if (role === environment.config.TEILER_USER) {

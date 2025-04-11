@@ -1,17 +1,15 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-
 import {AppRoutingModule, routingComponents} from './route/app-routing.module';
 import {AppComponent} from './app.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from "@angular/material/list";
 import {SidebarComponent} from './sidebar/sidebar.component';
-
 import {MatSelectModule} from "@angular/material/select";
 import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {
@@ -19,8 +17,6 @@ import {
 } from './teiler-app-plugin-orchestrator/teiler-app-plugin-orchestrator.component';
 import {ParcelModule} from "single-spa-angular/parcel";
 import {ExternalLinkDirective} from './external-link.directive';
-import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
-import {initializeKeycloak} from "./security/keycloak/keycloak-init.factory";
 import {TeilerModule} from "./teiler/teiler.module";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -47,6 +43,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSortModule} from "@angular/material/sort";
 import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
+import { AuthModule } from 'angular-auth-oidc-client';
+import { environment } from '../environments/environment';
+
 
 @NgModule({ declarations: [
         AppComponent,
@@ -58,12 +57,13 @@ import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
         TeilerBoxComponent,
         TeilerWelcomeComponent
     ],
-    bootstrap: [AppComponent], imports: [AppRoutingModule,
+    bootstrap: [AppComponent],
+    imports: [
+        AppRoutingModule,
         BarChartModule,
         BrowserModule,
         FlexLayoutModule,
         FormsModule,
-        KeycloakAngularModule,
         MatButtonModule,
         MatCardModule,
         MatDialogModule,
@@ -92,14 +92,20 @@ import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
         MatDatepickerModule,
         MatNativeDateModule,
         MatButtonToggleModule,
-        MatSortModule], providers: [
+        MatSortModule,
+        AuthModule.forRoot({
+          config: {
+            authority: environment.config.OIDC_URL,
+            clientId: environment.config.OIDC_CLIENT_ID,
+            redirectUrl: window.location.origin,
+            postLogoutRedirectUri: window.location.origin,
+            responseType: 'code',
+            useRefreshToken: true,
+            secureRoutes: [environment.config.TEILER_BACKEND_URL],
+          },
+        })],
+    providers: [
         ColorSchemeService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initializeKeycloak,
-            multi: true,
-            deps: [KeycloakService]
-        },
         provideHttpClient(withInterceptorsFromDi())
     ] })
 export class AppModule {
