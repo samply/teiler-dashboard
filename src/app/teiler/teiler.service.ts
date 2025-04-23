@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 import {QualityReportService} from "./quality-report.service";
 import {ConfigurationService} from "./configuration.service";
 import {TeilerApp, TeilerRole} from "./teiler-app";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, filter, Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {TeilerAuthService} from "../security/teiler-auth.service";
 import {environment} from "../../environments/environment";
 import {FunctionTestsService} from "./function-tests.service";
 import {EventLogService} from "./event-log.service";
-import {Router} from "@angular/router";
+import {Event, NavigationStart, Router, RouterEvent} from "@angular/router";
 import {getLocale} from "../route/route-utils";
 import {UploadsService} from "./uploads.service";
 import {ActiveInquiriesService} from "./active-inquiries.service";
@@ -68,8 +68,18 @@ export class TeilerService {
       dialogTestsService,
 			exporterService,
 			executionService];
-    this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
-    router.events.subscribe(myEvent => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
+
+
+    //this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
+    //router.events.subscribe(myEvent => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
+
+    this.router.events
+      .pipe(
+        filter((event: Event | RouterEvent) => event instanceof NavigationStart),
+        tap(() => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)),
+      )
+      .subscribe();
+
   }
 
   fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps: TeilerApp[]) {
