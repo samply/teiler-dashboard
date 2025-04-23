@@ -7,6 +7,7 @@ import {StylingService} from "./styling.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
 import {DashboardConfigService} from "./teiler/dashboard-config.service";
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 
 @Component({
@@ -26,11 +27,22 @@ export class AppComponent implements OnInit{
   svgWidth: number = 2560;
   svgHeight: number = 1440;
 
-  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService, private stylingService: StylingService, private httpClient: HttpClient, private sanitizer: DomSanitizer, private configService: DashboardConfigService) {
-    from(authService.isLoggedId()).subscribe(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-      if (isLoggedIn) {
-        from(authService.loadUserProfile()).subscribe(keycloakProfile => this.user = keycloakProfile.firstName + ' ' + keycloakProfile.lastName);
+  constructor(
+    public routeManagerService: RouteManagerService,
+    public authService: TeilerAuthService,
+    private oidcSecurityService: OidcSecurityService,
+    private stylingService: StylingService,
+    private httpClient: HttpClient,
+    private sanitizer: DomSanitizer,
+    private configService: DashboardConfigService
+  ) {
+    // @ts-ignore
+    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated }) => {
+      this.isLoggedIn = isAuthenticated;
+      if (isAuthenticated) {
+        from(this.authService.loadUserProfile()).subscribe(profile => {
+          this.user = `${profile.firstName} ${profile.lastName}`;
+        });
       }
     });
     this.configService.getConfig().subscribe((config) => {
