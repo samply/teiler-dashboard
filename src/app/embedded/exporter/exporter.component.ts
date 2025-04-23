@@ -493,4 +493,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     return btoa(context);
   }
 
+  checkOutputFormat(): boolean {
+    return this.selectedOutputFormat === 'OPAL' || this.selectedTemplate === 'opal-ccp' || this.selectedTemplate === 'opal-c4'
+  }
 }
