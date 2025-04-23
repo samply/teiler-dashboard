@@ -139,7 +139,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.getQueries();
     this.getTemplateIDs();
     this.getOutputFormats();
-    this.getQueryFormats();
+    this.getQueryFormats()
+    window.dispatchEvent(new Event('resize'));
   }
 
   ngOnDestroy(): void {
