@@ -1,6 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* The fonts are copied in the /dist/assets/fonts folder, not in /src/assets/fonts. Therefore we ignore the error with
+   the following comment:
+*/
+/*noinspection CssUnknownTarget */
+@font-face {
+  font-family: "bootstrap-icons";
+  src: url("assets/fonts/bootstrap-icons.woff2") format("woff2"),
+  url("assets/fonts/bootstrap-icons.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
 :root {
     --color-blue: #1B9AAA;
     --color-yellow: #FFC43D;
@@ -12,4 +25,7 @@
     --font-style: Arial, sans-serif;
 }
 
+.bi {
+  font-family: "bootstrap-icons" !important;
+}
 
