@@ -37,6 +37,7 @@ export class TeilerService {
     //this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
     //router.events.subscribe(myEvent => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
 
+    /*** TODO: find better method to fetch and update the Teiler APPs. For now its called on 'NavigationStart'-Event from Router-Service   ***/
     this.router.events
       .pipe(
         filter((event: Event | RouterEvent) => event instanceof NavigationStart),
