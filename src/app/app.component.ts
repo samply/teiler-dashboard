@@ -60,7 +60,7 @@ export class AppComponent implements OnInit{
           console.error('Keine Farbpalette ausgewählt.');
         }
       } else {
-        console.error('Farbpaletten wurden nicht geladen.');
+        //console.error('Farbpaletten wurden nicht geladen.');
       }
     });
     this.setBackgroundImage()

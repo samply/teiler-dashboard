@@ -65,7 +65,7 @@ export class StylingService {
     palettes['color-palettes'].forEach(palette => {
       this.colorPalettes[palette.name] = palette;
     });
-    console.log('Color palettes loaded successfully:', this.colorPalettes); // Nach dem Laden der Farbpaletten
+    //console.log('Color palettes loaded successfully:', this.colorPalettes); // Nach dem Laden der Farbpaletten
   }
 
   selectPalette(paletteName: string | undefined) {

@@ -5,6 +5,7 @@
   window["env"]["teiler"]["config"] = {
     "DEFAULT_LANGUAGE": "DE",
     "TEILER_BACKEND_URL": "http://localhost:8085",
+    "TEILER_DASHBOARD_URL": "http://localhost:4200",
     "OIDC_URL": "https://login.verbis.dkfz.de",
     "OIDC_REALM": "test-realm-01",
     "OIDC_CLIENT_ID": "bridgehead-test",
@@ -15,7 +16,6 @@
     "TEILER_PROJECT": "DKTK",
     "EXPORTER_API_KEY": "ttsHGwSITs0Eq8L63YWtLVyHymBmULvZIihL6w4t42FBmzp6Eb9SGNd7fZmeUtAI",
     "TEILER_ORCHESTRATOR_URL": "http://localhost:9000",
-    "TEILER_DASHBOARD_HTTP_RELATIVE_PATH": "",
     "TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH": "",
     "REPORTER_DEFAULT_TEMPLATE_ID": "ccp-qb",
     "EXPORTER_DEFAULT_TEMPLATE_ID": "ccp",

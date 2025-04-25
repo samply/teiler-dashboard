@@ -48,3 +48,5 @@ Thumbs.db
 *.iml
 out
 gen
+
+src/assets/fonts
