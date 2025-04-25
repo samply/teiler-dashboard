@@ -218,7 +218,7 @@
                       <button class="download-button" mat-raised-button color="primary"
                               (click)="downloadTemplate();$event.stopPropagation();"
                               [ngClass]="{ 'visible-button': (selectedTemplate !== 'custom') }"
-                              [disabled] = "!editModus || checkOutputFormat()"
+                              [disabled] = "!editModus"
                               i18n>Template herunterladen
                       </button>
                     </div>

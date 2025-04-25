@@ -492,8 +492,4 @@ export class ExporterComponent implements OnInit, OnDestroy {
     //return Buffer.from(context).toString("base64");
     return btoa(context);
   }
-
-  checkOutputFormat(): boolean {
-    return this.selectedOutputFormat === 'OPAL' || this.selectedTemplate === 'opal-ccp' || this.selectedTemplate === 'opal-c4'
-  }
 }
