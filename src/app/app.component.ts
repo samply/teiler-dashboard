@@ -40,14 +40,15 @@ export class AppComponent implements OnInit{
     fromEvent(window, "resize")
       .pipe(throttleTime(500), debounceTime(500))
       .subscribe(() => {
-       this.updateSVGSize()
+       this.updateSVG()
       });
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.updateSVGSize()
-    },500)
+      this.updateSVG()
+      window.dispatchEvent(new Event('resize'));
+    },800)
   }
 
   ngOnInit(): void {
@@ -90,31 +91,37 @@ export class AppComponent implements OnInit{
         headers.set('Accept', 'image/svg+xml');
         this.httpClient.get(config.BACKGROUND_IMAGE_URL, {headers, responseType: 'text'}).subscribe((svg) => {
           this.svgOrig = svg;
-          this.changeColor(this.stylingService.getBackgroundColor());
+          this.updateSVG()
         });
       }
     })
   }
-  updateSVGSize(): void {
+  updateSVG(): void {
     this.svgWidth = this.myIdentifier.nativeElement.offsetWidth;
     this.svgHeight = this.myIdentifier.nativeElement.offsetHeight;
-  }
 
-  changeColor(color: string): void {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(this.svgOrig, 'image/svg+xml');
 
-    /*const paths = xmlDoc.getElementsByTagName('path');
-    for (let i = 0; i < paths.length; i++) {
-      paths[i].setAttribute('fill', color);
-    }*/
+    const svg = xmlDoc.getElementsByTagName('svg');
+    svg[0].setAttribute('width', this.svgWidth.toString())
+    svg[0].setAttribute('height', this.svgHeight.toString())
+    svg[0].setAttribute('viewBox', "0 0 "+this.svgWidth.toString()+" "+this.svgHeight.toString())
+
+    const rect = xmlDoc.getElementsByTagName('rect');
+    for (let i = 0; i < rect.length; i++) {
+      rect[i].setAttribute('width', this.svgWidth.toString())
+      rect[i].setAttribute('height', this.svgHeight.toString())
+    }
+
     const stop = xmlDoc.getElementsByTagName('stop');
     if (stop.length > 1) {
-    stop[1].setAttribute('stop-color', this.hexToRGB(color, 0.18));}
+      stop[1].setAttribute('stop-color', this.hexToRGB(this.stylingService.getBackgroundColor(), 0.18));}
 
     const serializer = new XMLSerializer();
     this.svgimage = this.sanitizer.bypassSecurityTrustHtml(serializer.serializeToString(xmlDoc));
   }
+
   hexToRGB(hex: string, alpha?: number) {
     var r = parseInt(hex.slice(1, 3), 16),
       g = parseInt(hex.slice(3, 5), 16),
