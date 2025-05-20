@@ -1,16 +1,13 @@
 import {Injectable} from '@angular/core';
 import {TeilerService} from "../teiler/teiler.service";
 import {EmbeddedTeilerApps, TeilerApp, TeilerAppRoute, TeilerRole} from "../teiler/teiler-app";
-import {ConfigurationComponent} from "../embedded/configuration/configuration.component";
 import {QualityReportComponent} from "../embedded/quality-report/quality-report.component";
-import {Route, Router, Routes} from "@angular/router";
+import {Route, Router} from "@angular/router";
 import {TeilerMainMenuComponent} from "../teiler-main-menu/teiler-main-menu.component";
 import {
   TeilerAppPluginOrchestratorComponent
 } from "../teiler-app-plugin-orchestrator/teiler-app-plugin-orchestrator.component";
 import {AuthGuard} from "../security/guard/auth.guard";
-import {FunctionTestsComponent} from "../embedded/function-tests/function-tests.component";
-import {EventLogComponent} from "../embedded/event-log/event-log.component";
 import {
   BASE_LOGIN_ROUTER_LINK,
   BASE_LOGOUT_ROUTER_LINK,
@@ -19,15 +16,6 @@ import {
   createLogoutRouterLink,
   createMainRouterLink
 } from "./route-utils";
-import {UploadsComponent} from "../embedded/uploads/uploads.component";
-import {ActiveInquiriesComponent} from "../embedded/inquiries/active-inquiries.component";
-import {ArchivedInquiriesComponent} from "../embedded/inquiries/archived-inquiries.component";
-import {FailedInquiriesComponent} from "../embedded/inquiries/failed-inquiries.component";
-import {InquiryComponent} from "../embedded/inquiries/inquiry/inquiry.component";
-import {InquiryDialogComponent} from "../embedded/pop-ups/inquiry-dialog/inquiry-dialog.component";
-import {DialogUploadsComponent} from "../embedded/pop-ups/dialog-uploads/dialog-uploads.component";
-import {DialogQualiComponent} from "../embedded/pop-ups/dialog-quali/dialog-quali.component";
-import {DialogTestsComponent} from "../embedded/pop-ups/dialog-tests/dialog-tests.component";
 import {ExporterComponent} from "../embedded/exporter/exporter.component";
 import {ExecutionComponent} from "../embedded/execution/execution.component";
 
@@ -41,19 +29,7 @@ export class RouteManagerService {
   public logoutRouterLink: string = BASE_LOGOUT_ROUTER_LINK;
 
   embeddedTeilerAppNameComponentMap = new Map<string, any>([
-    {name: EmbeddedTeilerApps.CONFIGURATION, component: ConfigurationComponent},
     {name: EmbeddedTeilerApps.QUALITY_REPORT, component: QualityReportComponent},
-    {name: EmbeddedTeilerApps.FUNCTION_TESTS, component: FunctionTestsComponent},
-    {name: EmbeddedTeilerApps.EVENT_LOG, component: EventLogComponent},
-    {name: EmbeddedTeilerApps.UPLOADS, component: UploadsComponent},
-    {name: EmbeddedTeilerApps.ACTIVE_INQUIRIES, component: ActiveInquiriesComponent},
-    {name: EmbeddedTeilerApps.ARCHIVED_INQUIRIES, component: ArchivedInquiriesComponent},
-    {name: EmbeddedTeilerApps.FAILED_INQUIRIES, component: FailedInquiriesComponent},
-    {name: EmbeddedTeilerApps.INQUIRY, component: InquiryComponent},
-    {name: EmbeddedTeilerApps.INQUIRY_DIALOG, component: InquiryDialogComponent},
-    {name: EmbeddedTeilerApps.DIALOG_UPLOADS, component: DialogUploadsComponent},
-    {name: EmbeddedTeilerApps.DIALOG_QUALI, component: DialogQualiComponent},
-    {name: EmbeddedTeilerApps.DIALOG_TESTS, component: DialogTestsComponent},
 		{name: EmbeddedTeilerApps.EXPORTER, component: ExporterComponent},
 		{name: EmbeddedTeilerApps.EXECUTION, component: ExecutionComponent}
   ].map(teilerAppComponent => [teilerAppComponent.name, teilerAppComponent.component]));

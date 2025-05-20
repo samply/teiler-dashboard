@@ -8,19 +8,7 @@ export enum TeilerRole {
 }
 
 export enum EmbeddedTeilerApps {
-  CONFIGURATION = 'config',
   QUALITY_REPORT = 'quality-report',
-  FUNCTION_TESTS = 'function-tests',
-  EVENT_LOG = 'event-log',
-  UPLOADS = 'uploads',
-  ACTIVE_INQUIRIES = 'active-inquiries',
-  ARCHIVED_INQUIRIES = 'archived-inquiries',
-  FAILED_INQUIRIES = 'failed-inquiries',
-  INQUIRY = 'inquiry',
-  DIALOG_QUALI = 'dialog-quali',
-  DIALOG_UPLOADS ='dialog-uploads',
-  INQUIRY_DIALOG = 'inquiry-dialog',
-  DIALOG_TESTS = 'dialog-tests',
 	EXPORTER = 'exporter',
 	EXECUTION = 'execution'
 }
