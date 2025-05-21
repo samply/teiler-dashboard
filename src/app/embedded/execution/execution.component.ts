@@ -324,7 +324,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
             this.buttonDisabled = false;
             if (status === ExportStatus.OK && !init) {
               this.exportLog = [];
-              this.downloadExport(id);
+              if (this.selectedOutputFormat !== 'OPAL') {this.downloadExport(id)}
               setTimeout(() => {
                 this.getQueryExecutions();
               }, 2000);

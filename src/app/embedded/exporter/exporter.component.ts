@@ -492,5 +492,4 @@ export class ExporterComponent implements OnInit, OnDestroy {
     //return Buffer.from(context).toString("base64");
     return btoa(context);
   }
-
 }
