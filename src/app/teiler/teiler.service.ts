@@ -1,24 +1,12 @@
 import {Injectable} from '@angular/core';
 import {QualityReportService} from "./quality-report.service";
-import {ConfigurationService} from "./configuration.service";
 import {TeilerApp, TeilerRole} from "./teiler-app";
 import {BehaviorSubject, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {TeilerAuthService} from "../security/teiler-auth.service";
 import {environment} from "../../environments/environment";
-import {FunctionTestsService} from "./function-tests.service";
-import {EventLogService} from "./event-log.service";
 import {Router} from "@angular/router";
 import {getLocale} from "../route/route-utils";
-import {UploadsService} from "./uploads.service";
-import {ActiveInquiriesService} from "./active-inquiries.service";
-import {ArchivedInquiriesService} from "./archived-inquiries.service";
-import {FailedInquiriesService} from "./failed-inquiries.service";
-import {InquiryService} from "./inquiry.service";
-import {InquiryDialogService} from "./inquiry-dialog.service";
-import {DialogQualiService} from "./dialog-quali.service";
-import {DialogUploadsService} from "./dialog-uploads.service";
-import {DialogTestsService} from "./dialog-tests.service";
 import {ExporterService} from "./exporter.service";
 import {ExecutionService} from "./execution.service";
 
@@ -37,35 +25,11 @@ export class TeilerService {
     private router: Router,
     private httpClient: HttpClient,
     qualityReportService: QualityReportService,
-    configurationService: ConfigurationService,
-    functionTestsService: FunctionTestsService,
-    eventLogService: EventLogService,
-    uploadsService: UploadsService,
-    newInquiriesService: ActiveInquiriesService,
-    archivedInquiriesService: ArchivedInquiriesService,
-    failedInquiriesService: FailedInquiriesService,
-    inquiryService: InquiryService,
-    inquiryDialogService:InquiryDialogService,
-    dialogQualiService:DialogQualiService,
-    dialogUploadsService: DialogUploadsService,
-    dialogTestsService: DialogTestsService,
 		exporterService: ExporterService,
 		executionService: ExecutionService
   ) {
     let embeddedTeilerApps = [
       qualityReportService,
-      configurationService,
-      functionTestsService,
-      eventLogService,
-      uploadsService,
-      newInquiriesService,
-      archivedInquiriesService,
-      failedInquiriesService,
-      inquiryService,
-      inquiryDialogService,
-      dialogQualiService,
-      dialogUploadsService,
-      dialogTestsService,
 			exporterService,
 			executionService];
     this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
