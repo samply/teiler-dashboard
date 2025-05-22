@@ -2,9 +2,9 @@
   <div class="toolbar">
     <div class="logo">
       <a routerLink="{{'/' + routeManagerService.mainRouterLink}}">
-        <img width="40" src="{{logoUrl}}" alt="DKTK Teiler">
+        <img height="{{logoHeight}}" src="{{logoUrl}}" [alt]="environment.config.TEILER_PROJECT+' Teiler'">
       </a>
-      <span class="logo-text" i18n>Brückenkopf</span>
+      <span class="logo-text">{{logoText}}</span>
     </div>
     <div class="spacer"></div>
     <div class="user">

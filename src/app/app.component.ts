@@ -23,6 +23,8 @@ export class AppComponent implements OnInit{
   svgOrig: any = ""
   svgimage: any = ""
   logoUrl: string = ""
+  logoHeight: number = 40;
+  logoText: string = ""
   svgWidth: number = 2560;
   svgHeight: number = 1440;
 
@@ -35,6 +37,8 @@ export class AppComponent implements OnInit{
     });
     this.configService.getConfig().subscribe((config) => {
       this.logoUrl = config.LOGO_URL ?? environment.config.LOGO_URL
+      this.logoText = config.LOGO_TEXT ?? "Bridgehead"
+      this.logoHeight = config.LOGO_HEIGHT ?? 40
     })
 
     fromEvent(window, "resize")
