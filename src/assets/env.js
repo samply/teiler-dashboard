@@ -7,7 +7,6 @@
     "TEILER_BACKEND_URL": "http://localhost:8085",
     "TEILER_DASHBOARD_URL": "http://localhost:4200",
     "OIDC_URL": "https://login.verbis.dkfz.de/realms/test-realm-01",
-    "OIDC_REALM": "test-realm-01",
     "OIDC_CLIENT_ID": "bridgehead-test",
     "OIDC_TOKEN_GROUP": "groups",
     "TEILER_ADMIN_NAME": "Max Mustermann",
