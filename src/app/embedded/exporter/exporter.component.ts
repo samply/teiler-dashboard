@@ -52,9 +52,10 @@ export interface Context {
   value: string;
 }
 @Component({
-  selector: 'exporter',
-  templateUrl: './exporter.component.html',
-  styleUrls: ['./exporter.component.css']
+    selector: 'exporter',
+    templateUrl: './exporter.component.html',
+    styleUrls: ['./exporter.component.css'],
+    standalone: false
 })
 export class ExporterComponent implements OnInit, OnDestroy {
 

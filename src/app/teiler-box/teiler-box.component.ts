@@ -8,9 +8,10 @@ enum TeilerAppStatus {
 }
 
 @Component({
-  selector: 'teiler-box',
-  templateUrl: './teiler-box.component.html',
-  styleUrls: ['./teiler-box.component.css']
+    selector: 'teiler-box',
+    templateUrl: './teiler-box.component.html',
+    styleUrls: ['./teiler-box.component.css'],
+    standalone: false
 })
 export class TeilerBoxComponent implements OnInit {
 

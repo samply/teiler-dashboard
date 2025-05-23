@@ -22,9 +22,10 @@ class PluginConfigurator {
 
 
 @Component({
-  selector: 'samply-teiler-app-plugin-orchestrator',
-  template: '<parcel [config]="config" [mountParcel]="mountRootParcel"></parcel>',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'samply-teiler-app-plugin-orchestrator',
+    template: '<parcel [config]="config" [mountParcel]="mountRootParcel"></parcel>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class TeilerAppPluginOrchestratorComponent {
 

@@ -2,7 +2,8 @@ import {Directive, Input} from '@angular/core';
 import {RouterLink} from "@angular/router";
 
 @Directive({
-  selector: '[externalLinkBlank]'
+    selector: '[externalLinkBlank]',
+    standalone: false
 })
 export class ExternalLinkBlankDirective {
 

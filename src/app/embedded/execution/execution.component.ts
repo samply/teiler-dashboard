@@ -33,9 +33,10 @@ export enum ExportStatus {
 }
 
 @Component({
-  selector: 'execution',
-  templateUrl: './execution.component.html',
-  styleUrls: ['./execution.component.css']
+    selector: 'execution',
+    templateUrl: './execution.component.html',
+    styleUrls: ['./execution.component.css'],
+    standalone: false
 })
 export class ExecutionComponent implements OnInit, OnDestroy {
   displayedColumnsExecutions: string[] = ['executedAt', 'status', 'templateId', 'outputFormat', 'link'];

@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Embed external libraries
 - Angular 18
+- Angular 19
+
 ### Added
 - Teiler Backend config for Logo Text and Logo Height
 
