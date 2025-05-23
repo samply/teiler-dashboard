@@ -7,7 +7,7 @@ import {TeilerMainMenuComponent} from "../teiler-main-menu/teiler-main-menu.comp
 import {
   TeilerAppPluginOrchestratorComponent
 } from "../teiler-app-plugin-orchestrator/teiler-app-plugin-orchestrator.component";
-import {AuthGuard} from "../security/guard/auth.guard";
+import {authGuard} from "../security/guard/auth.guard";
 import {
   BASE_LOGIN_ROUTER_LINK,
   BASE_LOGOUT_ROUTER_LINK,
@@ -67,7 +67,7 @@ export class RouteManagerService {
 
   private completeRoute(route: Route, teilerApp: TeilerApp, routeName: string, subroutes: Route[]) {
     if (teilerApp.roles && !teilerApp.roles.includes(TeilerRole.TEILER_PUBLIC)) {
-      route.canActivate = [AuthGuard];
+      route.canActivate = [authGuard];
     }
 
     route.component = this.getComponent(routeName);
@@ -91,7 +91,7 @@ export class RouteManagerService {
     routes.push({
       path: createLoginRouterLink(),
       component: TeilerMainMenuComponent,
-      canActivate: [AuthGuard]
+      canActivate: [authGuard]
     });
     routes.push({path: createLogoutRouterLink(), component: TeilerMainMenuComponent});
   }
