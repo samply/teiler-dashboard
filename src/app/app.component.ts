@@ -4,7 +4,7 @@ import {TeilerAuthService} from "./security/teiler-auth.service";
 import {debounceTime, from, fromEvent, throttleTime} from "rxjs";
 import {environment} from "../environments/environment";
 import {StylingService} from "./styling.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
 import {DashboardConfigService} from "./teiler/dashboard-config.service";
 

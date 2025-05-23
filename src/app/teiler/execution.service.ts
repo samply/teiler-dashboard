@@ -3,7 +3,7 @@ import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {ExecutionError, ExporterExecutions} from "../embedded/execution/execution.component";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {ExporterQueries} from "../embedded/exporter/exporter.component";
 

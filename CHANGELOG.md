@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Innecessary Embedded Apps
 ### Changed
 - Embed external libraries
+- Angular 18
 ### Added
 - Teiler Backend config for Logo Text and Logo Height
 

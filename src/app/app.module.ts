@@ -13,7 +13,7 @@ import {MatListModule} from "@angular/material/list";
 import {SidebarComponent} from './sidebar/sidebar.component';
 
 import {MatSelectModule} from "@angular/material/select";
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {
   TeilerAppPluginOrchestratorComponent
 } from './teiler-app-plugin-orchestrator/teiler-app-plugin-orchestrator.component';
@@ -48,24 +48,21 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSortModule} from "@angular/material/sort";
 import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    routingComponents,
-    SidebarComponent,
-    TeilerAppPluginOrchestratorComponent,
-    ExternalLinkDirective,
-    ExternalLinkBlankDirective,
-    TeilerBoxComponent,
-    TeilerWelcomeComponent
-  ],
-    imports: [
-        AppRoutingModule,
+@NgModule({ declarations: [
+        AppComponent,
+        routingComponents,
+        SidebarComponent,
+        TeilerAppPluginOrchestratorComponent,
+        ExternalLinkDirective,
+        ExternalLinkBlankDirective,
+        TeilerBoxComponent,
+        TeilerWelcomeComponent
+    ],
+    bootstrap: [AppComponent], imports: [AppRoutingModule,
         BarChartModule,
         BrowserModule,
         FlexLayoutModule,
         FormsModule,
-        HttpClientModule,
         KeycloakAngularModule,
         MatButtonModule,
         MatCardModule,
@@ -95,19 +92,15 @@ import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
         MatDatepickerModule,
         MatNativeDateModule,
         MatButtonToggleModule,
-        MatSortModule
-
-    ],
-  providers: [
-    ColorSchemeService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeKeycloak,
-      multi: true,
-      deps: [KeycloakService]
-    }
-  ],
-  bootstrap: [AppComponent]
-})
+        MatSortModule], providers: [
+        ColorSchemeService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initializeKeycloak,
+            multi: true,
+            deps: [KeycloakService]
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
 }

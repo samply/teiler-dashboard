@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {QualityReportService} from "./quality-report.service";
 import {TeilerApp, TeilerRole} from "./teiler-app";
 import {BehaviorSubject, Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {TeilerAuthService} from "../security/teiler-auth.service";
 import {environment} from "../../environments/environment";
 import {Router} from "@angular/router";
