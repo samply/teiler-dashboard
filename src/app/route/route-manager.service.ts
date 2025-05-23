@@ -8,8 +8,6 @@ import {
   TeilerAppPluginOrchestratorComponent
 } from "../teiler-app-plugin-orchestrator/teiler-app-plugin-orchestrator.component";
 import {authGuard} from "../security/guard/auth.guard";
-import {FunctionTestsComponent} from "../embedded/function-tests/function-tests.component";
-import {EventLogComponent} from "../embedded/event-log/event-log.component";
 import {
   BASE_LOGIN_ROUTER_LINK,
   BASE_LOGOUT_ROUTER_LINK,
