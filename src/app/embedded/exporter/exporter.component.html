@@ -10,11 +10,11 @@
         <div class="create-buttons">
           <div class="buttons-left">
             <button class="create-button" mat-raised-button color="primary" [disabled]="editModus" (click)="createNewQuery();$event.stopPropagation();" i18n>neue Anfrage erstellen</button>
-            <button class="edit-button" mat-raised-button color="primary" [disabled]="editButtonDisabled" [ngClass]="{ 'visible-button': ((!editButtonDisabled || panelOpenState ) && !editModus) }" (click)="editQuery();$event.stopPropagation();" i18n>Anfrage editieren</button>
+            <button class="edit-button" mat-raised-button color="primary" [disabled]="editButtonDisabled" [ngClass]="{ 'visible-button': ((!editButtonDisabled || panelOpenState ) && !editModus) }" (click)="editQuery();$event.stopPropagation();" ><span i18n>Anfrage editieren</span></button>
             <button class="cancel-edit-button" mat-raised-button color="primary" [ngClass]="{ 'visible-button': (editModus) }" (click)="cancelEdit();$event.stopPropagation();" i18n>abbrechen</button>
           </div>
           <div class="buttons-right">
-            <button class="execute-button" mat-raised-button color="primary" [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': ((!buttonDisabled || panelOpenState) && !editModus) }" (click)="executeQuery();$event.stopPropagation();" i18n>Anfrage ausführen</button>
+            <button class="execute-button" mat-raised-button color="primary" [disabled]="buttonDisabled" [ngClass]="{ 'visible-button': ((!buttonDisabled || panelOpenState) && !editModus) }" (click)="executeQuery();$event.stopPropagation();" ><span i18n>Anfrage ausführen</span></button>
             <mat-button-toggle-group class="generate-button-group" [ngClass]="{ 'visible-button-group': (editModus) }" >
               <mat-button-toggle class="generate-button" (click)="saveQuery();$event.stopPropagation();" [disabled]="buttonDisabled">{{saveButtonText.get(executeOnSaving)}}</mat-button-toggle>
               <mat-button-toggle class="generate-button-dropdown drop-down-button" (click) = "$event.stopPropagation();" [disabled]="buttonDisabled" [matMenuTriggerFor]="dropdownMenuOne">
@@ -77,12 +77,12 @@
           <mat-stepper
             class="query-stepper"
             [orientation]="(stepperOrientation | async)!">
-            <mat-step [stepControl]="firstFormGroup" label="Beschreibung" completed="false">
+            <mat-step [stepControl]="firstFormGroup" [label]="descriptionLoc" completed="false">
               <form [formGroup]="firstFormGroup" class="form-content">
                 <div class="firstFormGroup-div">
                   <div class="FormGroup-input-div">
                     <mat-form-field appearance="outline" class="query-label">
-                      <mat-label>Titel</mat-label>
+                      <mat-label i18n>Titel</mat-label>
                       <input matInput type="text"
                              [(ngModel)]="queryLabel"
                              (ngModelChange)="generateButtonStatus()"
@@ -92,7 +92,7 @@
                     </mat-form-field>
                     <div class="textarea-box">
                       <mat-form-field class="query-textfield">
-                      <mat-label>Beschreibung</mat-label>
+                      <mat-label i18n>Beschreibung</mat-label>
                       <textarea
                         class="textarea"
                         matInput
@@ -137,17 +137,17 @@
                 </div>
                 <div class="stepper-buttons">
                   <span></span>
-                  <button class="next-button" mat-raised-button color="primary" matStepperNext i18n>Weiter</button>
+                  <button class="next-button" mat-raised-button color="primary" matStepperNext ><span i18n>Weiter</span></button>
                 </div>
               </form>
             </mat-step>
-            <mat-step [stepControl]="secondFormGroup" label="Anfrage" completed="false">
+            <mat-step [stepControl]="secondFormGroup" [label]="queryLoc" completed="false">
               <form [formGroup]="secondFormGroup" class="form-content">
                 <div class="secondFormGroup-div">
                   <div class="FormGroup-input-div">
                     <div class="textarea-box query-textbox">
                       <mat-form-field class="query-textfield">
-                        <mat-label>Anfrage</mat-label>
+                        <mat-label i18n>Anfrage</mat-label>
                         <textarea
                           class="textarea"
                           matInput
@@ -162,7 +162,7 @@
                       </mat-form-field>
                     </div>
                     <mat-form-field class="queryformat_dropdown">
-                      <mat-label>Anfrageformat</mat-label>
+                      <mat-label i18n>Anfrageformat</mat-label>
                       <select class="queryformat-select"
                               matNativeControl
                               [(ngModel)]="selectedQueryFormat"
@@ -188,18 +188,18 @@
                   </div>
                 </div>
                 <div class="stepper-buttons">
-                  <button class="back-button" mat-raised-button color="primary" matStepperPrevious i18n>Zurück</button>
-                  <button class="next-button" mat-raised-button color="primary" matStepperNext i18n>Weiter</button>
+                  <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
+                  <button class="next-button" mat-raised-button color="primary" matStepperNext ><span i18n>Weiter</span></button>
                 </div>
               </form>
             </mat-step>
-            <mat-step [stepControl]="thirdFormGroup" label="Ausgabe" completed="false">
+            <mat-step [stepControl]="thirdFormGroup" [label]="outputLoc" completed="false">
               <form [formGroup]="thirdFormGroup" class="form-content">
                 <div class="thirdFormGroup-div">
                   <div class="FormGroup-input-div">
                     <div class="template-box">
                       <mat-form-field class="template_dropdown">
-                        <mat-label>Template</mat-label>
+                        <mat-label i18n>Template</mat-label>
                         <select class="template-select"
                                 matNativeControl
                                 [(ngModel)]="selectedTemplate"
@@ -223,7 +223,7 @@
                       </button>
                     </div>
                     <mat-form-field class="outputformat_dropdown">
-                      <mat-label>Ausgabeformat</mat-label>
+                      <mat-label i18n>Ausgabeformat</mat-label>
                       <select class="outputformat-select"
                               matNativeControl
                               [(ngModel)]="selectedOutputFormat"
@@ -249,17 +249,17 @@
                   </div>
                 </div>
                 <div class="stepper-buttons">
-                  <button class="back-button" mat-raised-button color="primary" matStepperPrevious i18n>Zurück</button>
-                  <button class="next-button" mat-raised-button color="primary" matStepperNext i18n>Weiter</button>
+                  <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
+                  <button class="next-button" mat-raised-button color="primary" matStepperNext ><span i18n>Weiter</span></button>
                 </div>
               </form>
             </mat-step>
-            <mat-step [stepControl]="forthFormGroup" label="weitere Parameter" completed="false">
+            <mat-step [stepControl]="forthFormGroup" [label]="otherParametersLoc" completed="false">
               <form [formGroup]="forthFormGroup" class="form-content">
                 <div class="forthFormGroup-div">
                   <div class="FormGroup-input-div">
                     <mat-form-field appearance="outline" class="query-expiration-date">
-                      <mat-label>Ablaufdatum</mat-label>
+                      <mat-label i18n>Ablaufdatum</mat-label>
                       <input
                         matInput
                         [matDatepicker]="dateStartPicker"
@@ -325,7 +325,7 @@
                   </div>
                 </div>
                 <div class="stepper-buttons">
-                  <button class="back-button" mat-raised-button color="primary" matStepperPrevious i18n>Zurück</button>
+                  <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
                   <span></span>
                 </div>
               </form>

@@ -4,15 +4,16 @@ import {TeilerAuthService} from "./security/teiler-auth.service";
 import {debounceTime, from, fromEvent, throttleTime} from "rxjs";
 import {environment} from "../environments/environment";
 import {StylingService} from "./styling.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
 import {DashboardConfigService} from "./teiler/dashboard-config.service";
 
 
 @Component({
-  selector: 'teiler-dashboard',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'teiler-dashboard',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit{
   @ViewChild('myIdentifier') myIdentifier!: ElementRef;
@@ -23,6 +24,8 @@ export class AppComponent implements OnInit{
   svgOrig: any = ""
   svgimage: any = ""
   logoUrl: string = ""
+  logoHeight: number = 40;
+  logoText: string = ""
   svgWidth: number = 2560;
   svgHeight: number = 1440;
 
@@ -35,6 +38,8 @@ export class AppComponent implements OnInit{
     });
     this.configService.getConfig().subscribe((config) => {
       this.logoUrl = config.LOGO_URL ?? environment.config.LOGO_URL
+      this.logoText = config.LOGO_TEXT ?? "Bridgehead"
+      this.logoHeight = config.LOGO_HEIGHT ?? 40
     })
 
     fromEvent(window, "resize")

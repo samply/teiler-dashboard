@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
 import {Router} from "@angular/router";
 import {Observable, of} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {QBResponse, QBStatus, QualityReports} from "../embedded/quality-report/quality-report.component";
 

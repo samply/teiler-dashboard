@@ -9,9 +9,10 @@ class LanguageHref {
 }
 
 @Component({
-  selector: 'language-selector',
-  templateUrl: './language-selector.component.html',
-  styleUrls: ['./language-selector.component.css']
+    selector: 'language-selector',
+    templateUrl: './language-selector.component.html',
+    styleUrls: ['./language-selector.component.css'],
+    standalone: false
 })
 export class LanguageSelectorComponent implements OnInit {
 

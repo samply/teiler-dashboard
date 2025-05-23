@@ -110,13 +110,13 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "teiler-dashboard:build:production"
+              "buildTarget": "teiler-dashboard:build:production"
             },
             "development": {
-              "browserTarget": "teiler-dashboard:build:development"
+              "buildTarget": "teiler-dashboard:build:development"
             },
             "en": {
-              "browserTarget": "teiler-dashboard:build:en"
+              "buildTarget": "teiler-dashboard:build:en"
             }
 
           },
@@ -125,14 +125,17 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "teiler-dashboard:build"
+            "buildTarget": "teiler-dashboard:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts",
+              "@angular/localize/init"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [

@@ -67,7 +67,7 @@ p{
 }
 .text{
   position: absolute;
-  top: 10%;
+  top: 8%;
   left: 6%;
   right: 5%;
   text-align: left;
@@ -81,10 +81,11 @@ p{
   color: var(--line-color);
 }
 hr{
-  height: 1px;
+  height: 2px;
   border: none;
   background-color:var(--line-color);
   color: var(--line-color);
+  margin: 6px 0;
 }
 .icon-footer {
   position: absolute;
@@ -96,16 +97,17 @@ hr{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 50% 0 0 0;
+  /*border-radius: 50% 0 0 0;*/
   margin-left: 5%;
   /*transition: all 0.3s ease-in-out !important;*/
 }
 .icon-footer-box {
   border-radius: 50% 0 0 0;
   width: 40px;
-  height: 28px;
+  height: 35px;
   transition: all 0.3s ease-in-out !important;
-  padding-top: 12px;
+  padding-top: 8px;
+  margin-top:2px;
 }
 .teiler-box.clickable:hover .icon-footer-box{
   transform: translate(5px);

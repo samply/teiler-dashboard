@@ -3,7 +3,7 @@
   window["env"]["teiler"] = {};
   // Environment variables
   window["env"]["teiler"]["config"] = {
-    "DEFAULT_LANGUAGE": "DE",
+    "DEFAULT_LANGUAGE": "EN",
     "TEILER_BACKEND_URL": "http://localhost:8085",
     "TEILER_DASHBOARD_URL": "http://localhost:4200",
     "OIDC_URL": "https://login.verbis.dkfz.de",

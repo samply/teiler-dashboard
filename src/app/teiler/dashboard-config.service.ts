@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {getLocale} from "../route/route-utils";
 import {Observable, of} from "rxjs";
@@ -11,6 +11,8 @@ export interface ConfigVariables {
   FONT?: string;
   FURTHER_INFO?: string;
   LOGO_URL?: string;
+  LOGO_HEIGHT?: number;
+  LOGO_TEXT?: string;
   URL?: string;
   WELCOME_TEXT?: string;
   WELCOME_TITLE?: string;
