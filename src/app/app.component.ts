@@ -39,15 +39,16 @@ export class AppComponent implements OnInit{
     private sanitizer: DomSanitizer,
     private configService: DashboardConfigService
   ) {
-    // @ts-ignore
-    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated }) => {
-      this.isLoggedIn = isAuthenticated;
-      if (isAuthenticated) {
-        from(this.authService.loadUserProfile()).subscribe(profile => {
-          this.user = `${profile.firstName || ''} ${profile.lastName || ''}`;
-        });
-      }
-    });
+    if (environment.config.OIDC_URL){
+      this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated }) => {
+        this.isLoggedIn = isAuthenticated;
+        if (isAuthenticated) {
+          from(this.authService.loadUserProfile()).subscribe(profile => {
+            this.user = `${profile.firstName || ''} ${profile.lastName || ''}`;
+          });
+        }
+      });
+    }
     this.configService.getConfig().subscribe((config) => {
       this.logoUrl = config.LOGO_URL ?? environment.config.LOGO_URL
       this.logoText = config.LOGO_TEXT ?? "Bridgehead"

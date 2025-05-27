@@ -88,7 +88,6 @@ export class ExporterComponent implements OnInit, OnDestroy {
   exportUrl = "";
   fileName: string | undefined;
   importTemplate: string = "";
-  ExportStatus: typeof ExportStatus = ExportStatus;
   exportStatus: ExportStatus = ExportStatus.EMPTY;
   private intervall: number | undefined;
   expirationDate: Date | undefined;
@@ -129,7 +128,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   stepperOrientation: Observable<StepperOrientation>;
 
   constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private viewport: ViewportScroller) {
-    from(authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
+    from(authService.loadUserProfile()).subscribe(authUserProfile => this.contactID = authUserProfile.email);
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
