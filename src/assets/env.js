@@ -6,7 +6,7 @@
     "DEFAULT_LANGUAGE": "DE",
     "TEILER_BACKEND_URL": "http://localhost:8085",
     "TEILER_DASHBOARD_URL": "http://localhost:4200",
-    "OIDC_URL": "https://sso.verbis.dkfz.de/application/o/bridgehead-test-public/",
+    "OIDC_URL": "https://sso.verbis.dkfz.de/application/o/bridgehead-test-public",
     "OIDC_CLIENT_ID": "bridgehead-test-public",
     "OIDC_TOKEN_GROUP": "groups",
     "OIDC_REALM": "test-realm-01",
