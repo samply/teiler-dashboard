@@ -89,7 +89,7 @@ export class StylingService {
 
   getTextColor(): string {
     if (!this.selectedPalette) {
-      console.error('No palette selected.');
+      //console.error('No palette selected.');
       return 'defaultColor';
     }
     return this.selectedPalette.colors.text;
@@ -97,7 +97,7 @@ export class StylingService {
 
   getLineColor(): string {
     if (!this.selectedPalette) {
-      console.error('No palette selected.');
+      //console.error('No palette selected.');
       return 'defaultColor';
     }
     return this.selectedPalette.colors.line;
@@ -105,14 +105,14 @@ export class StylingService {
 
   getIconColor(): string {
     if (!this.selectedPalette) {
-      console.error('No palette selected.');
+      //console.error('No palette selected.');
       return 'defaultColor';
     }
     return this.selectedPalette.colors.icon;
   }
   getBackgroundColor(): string {
     if (!this.selectedPalette) {
-      console.error('No palette selected.');
+      //console.error('No palette selected.');
       return '#ffffff';
     }
     return this.selectedPalette.colors.background;

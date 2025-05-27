@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.5] - 2025-05-23
 ### Removed
 - Innecessary Embedded Apps
+
 ### Changed
 - Embed external libraries
 - Angular 18
@@ -15,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Teiler Backend config for Logo Text and Logo Height
+- Deactivate OIDC if OIDC-URL not set
 
 
 ## [1.0.4] - 2025-03-04
