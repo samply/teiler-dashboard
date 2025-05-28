@@ -46,6 +46,7 @@ import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
 import { AuthModule } from 'angular-auth-oidc-client';
 import { environment } from '../environments/environment';
 
+const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
 
 @NgModule({ declarations: [
         AppComponent,
@@ -95,7 +96,7 @@ import { environment } from '../environments/environment';
         MatSortModule,
         AuthModule.forRoot({
           config: {
-            authority: environment.config.OIDC_URL,
+            authority: oidcUrl,
             clientId: environment.config.OIDC_CLIENT_ID,
             redirectUrl: window.location.origin,
             postLogoutRedirectUri: window.location.origin,
