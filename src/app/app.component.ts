@@ -44,7 +44,7 @@ export class AppComponent implements OnInit{
         this.isLoggedIn = isAuthenticated;
         if (isAuthenticated) {
           from(this.authService.loadUserProfile()).subscribe(profile => {
-            this.user = `${profile.firstName || ''} ${profile.lastName || ''}`;
+            this.user = `${profile.userData.name || ''}`;
           });
         }
       });

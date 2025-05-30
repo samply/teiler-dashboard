@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Innecessary Embedded Apps
 
+### Fixed
+- User name
+
 ### Changed
 - Embed external libraries
 - Angular 18
