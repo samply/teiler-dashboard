@@ -20,6 +20,7 @@ export class StylingService {
   style: StyleVariables = {}
   constructor(private http: HttpClient, private configService: DashboardConfigService) {
     this.getStyles()
+    this.getPalettes()
   }
 
   private getStyles():void {
@@ -28,7 +29,6 @@ export class StylingService {
         if (styles) {
           this.styleLoaded$.next(true)
           this.style = styles
-          this.getPalettes()
         }
       },
       error: (error) => {
@@ -40,7 +40,7 @@ export class StylingService {
   private getPalettes(): void {
     this.configService.getColorPalettes().subscribe({
       next: (palettes) => {
-        if (palettes) {
+        if (palettes["color-palettes"]) {
           this.processColorPalettes(palettes);
           this.selectPalette(this.config.COLOR_PROFILE);
         }
