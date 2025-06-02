@@ -22,7 +22,9 @@ export interface ConfigVariables {
 export interface StyleVariables {
   backgroundImage?: string
   logo?: string
-  logoMargin?: string
+  logoText?: string
+  logoMargin?: number
+  logoHeight?: number
   colorPalette?: string
   useColorProfile?: string
   font?: string
