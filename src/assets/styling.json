@@ -1,8 +1,8 @@
 {
   "backgroundImage": "http://localhost:4200/de/assets/images/CurveLine.svg",
-  "logo": "http://localhost:8085/assets/DKTK_TEILER_LOGO.svg",
+  "logo": "http://localhost:4200/assets/de/images/DKTK_TEILER_LOGO.svg",
   "logoMargin": "5px",
-  "colorPalette": "http://localhost:8085/assets/color-palettes.json",
+  "colorPalette": "http://localhost:4200/de/assets/color-palettes.json",
   "useColorProfile": "Blue",
   "font": "Open Sans"
 }
