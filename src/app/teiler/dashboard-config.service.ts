@@ -6,14 +6,7 @@ import {BehaviorSubject, map, Observable, of, switchMap} from "rxjs";
 import {ColorPalettes} from "../color-palette.model";
 
 export interface ConfigVariables {
-  BACKGROUND_IMAGE_URL?: string;
-  COLOR_PALETTE?: string;
-  COLOR_PROFILE?: string;
-  FONT?: string;
   FURTHER_INFO?: string;
-  LOGO_URL?: string;
-  LOGO_HEIGHT?: number;
-  LOGO_TEXT?: string;
   URL?: string;
   WELCOME_TEXT?: string;
   WELCOME_TITLE?: string;
@@ -34,11 +27,8 @@ export interface StyleVariables {
 })
 export class DashboardConfigService {
   private configSubject = new BehaviorSubject<ConfigVariables>({} as ConfigVariables);
-  public $config: Observable<ConfigVariables> = this.configSubject.asObservable();
   private styleSubject = new BehaviorSubject<StyleVariables>({} as StyleVariables);
-  public $style: Observable<StyleVariables> = this.styleSubject.asObservable();
   private paletteSubject = new BehaviorSubject<ColorPalettes>({} as ColorPalettes);
-  public $palette: Observable<ColorPalettes> = this.paletteSubject.asObservable();
   locale = "";
   constructor(private httpClient: HttpClient) {
     this.locale = getLocale();
@@ -68,13 +58,13 @@ export class DashboardConfigService {
   }
 
   public getConfig(): Observable<ConfigVariables> {
-    return this.$config
+    return this.configSubject.asObservable()
   }
   public getStyle(): Observable<StyleVariables> {
-    return this.$style
+    return this.styleSubject.asObservable()
   }
   public getColorPalettes(): Observable<ColorPalettes> {
-   return this.$palette
+   return this.paletteSubject.asObservable()
   }
   private isUrl(paletteConfig: string): boolean {
     try {
