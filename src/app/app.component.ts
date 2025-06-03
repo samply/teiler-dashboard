@@ -105,11 +105,11 @@ export class AppComponent implements OnInit{
   }
 
   public setBackgroundImage() {
-    this.configService.getConfig().subscribe((config) => {
-      if (config.BACKGROUND_IMAGE_URL) {
+    this.configService.getStyle().subscribe((style) => {
+      if (style.backgroundImage) {
         const headers = new HttpHeaders();
         headers.set('Accept', 'image/svg+xml');
-        this.httpClient.get(config.BACKGROUND_IMAGE_URL, {headers, responseType: 'text'}).subscribe((svg) => {
+        this.httpClient.get(style.backgroundImage, {headers, responseType: 'text'}).subscribe((svg) => {
           this.svgOrig = svg;
           this.updateSVG()
         });
