@@ -42,7 +42,7 @@ export class StylingService {
       next: (palettes) => {
         if (palettes["color-palettes"]) {
           this.processColorPalettes(palettes);
-          this.selectPalette(this.config.COLOR_PROFILE);
+          this.selectPalette(this.style.useColorProfile);
         }
       },
       error: (error) => {
