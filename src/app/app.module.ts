@@ -98,8 +98,8 @@ const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
           config: {
             authority: oidcUrl,
             clientId: environment.config.OIDC_CLIENT_ID,
-            redirectUrl: environment.config.TEILER_ORCHESTRATOR_URL,
-            postLogoutRedirectUri: environment.config.TEILER_ORCHESTRATOR_URL,
+            redirectUrl: window.location.origin + window.location.pathname,
+            postLogoutRedirectUri: window.location.origin + window.location.pathname,
             responseType: 'code',
             useRefreshToken: true,
             secureRoutes: [environment.config.TEILER_BACKEND_URL],
