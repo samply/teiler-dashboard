@@ -22,7 +22,7 @@ export class TeilerAuthService {
 
   public logout() {
     this.oidcSecurityService.logoff().subscribe(() => {
-      window.location.href = getHref('/' + getLocale());
+      window.location.href = getHref(getLocale());
     });
   }
 
