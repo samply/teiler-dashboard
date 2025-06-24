@@ -1,0 +1,10 @@
+{
+  "backgroundImage": "http://localhost:4200/de/assets/images/CurveLine.svg",
+  "logo": "http://localhost:4200/de/assets/images/DKTK_TEILER_LOGO.svg",
+  "logoText": "Bridgehead",
+  "logoMargin": 5,
+  "logoHeight": 40,
+  "colorPalette": "http://localhost:4200/de/assets/color-palettes.json",
+  "useColorProfile": "Blue",
+  "font": "Open Sans"
+}

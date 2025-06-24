@@ -26,6 +26,7 @@ export class AppComponent implements OnInit{
   svgimage: any = ""
   logoUrl: string = ""
   logoHeight: number = 40;
+  logoMargin: number = 0;
   logoText: string = ""
   svgWidth: number = 2560;
   svgHeight: number = 1440;
@@ -50,9 +51,12 @@ export class AppComponent implements OnInit{
       });
     }
     this.configService.getConfig().subscribe((config) => {
-      this.logoUrl = config.LOGO_URL ?? environment.config.LOGO_URL
       this.logoText = config.LOGO_TEXT ?? "Bridgehead"
-      this.logoHeight = config.LOGO_HEIGHT ?? 40
+    })
+    this.configService.getStyle().subscribe((style) => {
+      this.logoUrl = style.logo ?? environment.config.LOGO_URL
+      this.logoHeight = style.logoHeight ?? 40
+      this.logoMargin = style.logoMargin ?? 0
     })
 
     fromEvent(window, "resize")
@@ -103,11 +107,11 @@ export class AppComponent implements OnInit{
   }
 
   public setBackgroundImage() {
-    this.configService.getConfig().subscribe((config) => {
-      if (config.BACKGROUND_IMAGE_URL) {
+    this.configService.getStyle().subscribe((style) => {
+      if (style.backgroundImage) {
         const headers = new HttpHeaders();
         headers.set('Accept', 'image/svg+xml');
-        this.httpClient.get(config.BACKGROUND_IMAGE_URL, {headers, responseType: 'text'}).subscribe((svg) => {
+        this.httpClient.get(style.backgroundImage, {headers, responseType: 'text'}).subscribe((svg) => {
           this.svgOrig = svg;
           this.updateSVG()
         });
