@@ -40,15 +40,19 @@ export class DashboardConfigService {
         return config.STYLING
       }),
       switchMap((styleUrl) => {
-        if (styleUrl && this.isUrl(styleUrl)) return this.httpClient.get<StyleVariables>(styleUrl, {headers, responseType: 'json'})
-        else return of(null)
+        if (styleUrl) return this.httpClient.get<StyleVariables>(styleUrl, {headers, responseType: 'json'})
+        else {
+          console.error("styling url not provided by teiler backend")
+          return of(null)
+        }
       }),
       switchMap((style) => {
         if (style) this.styleSubject.next(style)
-        if (style && style.colorPalette && this.isUrl(style.colorPalette)) {
+        if (style && style.colorPalette) {
           return this.httpClient.get<ColorPalettes>(style.colorPalette, {headers, responseType: 'json'})
         }
         else {
+          console.error("color palette url not provided by teiler backend")
           return of(null)
         }
       })
