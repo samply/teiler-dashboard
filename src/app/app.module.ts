@@ -45,6 +45,8 @@ import {MatSortModule} from "@angular/material/sort";
 import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
 import { AuthModule } from 'angular-auth-oidc-client';
 import { environment } from '../environments/environment';
+import {ExporterComponent} from "./embedded/exporter/exporter.component";
+import {EditQueryDialogComponent} from "./embedded/exporter/edit-query-dialog/edit-query-dialog.component";
 
 const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
 
@@ -56,7 +58,9 @@ const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
         ExternalLinkDirective,
         ExternalLinkBlankDirective,
         TeilerBoxComponent,
-        TeilerWelcomeComponent
+        TeilerWelcomeComponent,
+        ExporterComponent,
+        EditQueryDialogComponent,
     ],
     bootstrap: [AppComponent],
     imports: [

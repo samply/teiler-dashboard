@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {ExporterService, exportLog} from "../../teiler/exporter.service";
@@ -14,6 +14,8 @@ import {FormBuilder} from "@angular/forms";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {StepperOrientation} from "@angular/cdk/stepper";
 import {ViewportScroller} from "@angular/common";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {EditQueryDialogComponent} from "./edit-query-dialog/edit-query-dialog.component";
 
 export interface ExporterQueries {
   id: number;
@@ -28,7 +30,13 @@ export interface ExporterQueries {
   context: string;
   defaultTemplateId: string;
   defaultOutputFormat: string;
-
+}
+export interface ExporterQueriesBox extends ExporterQueries {
+  selectedQueryFormat: string;
+  selectedOutputFormat: string;
+  selectedTemplate: string
+  boxExpanded: boolean;
+  contextArray: Context[];
 }
 export interface ExportResponse {
   responseUrl: URL;
@@ -106,7 +114,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   panelOpenState: boolean = false;
   contextArray: Context[] = [{key: "", value: ""}];
   showPlusButton: boolean = false;
-
+  tempEQs: ExporterQueriesBox[] = [];
 
   firstFormGroup = this._formBuilder.group({
     queryTitle: [''],
@@ -126,6 +134,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     contextValue: ['']
   });
   stepperOrientation: Observable<StepperOrientation>;
+  readonly dialog = inject(MatDialog);
 
   constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private viewport: ViewportScroller) {
     from(authService.loadUserProfile()).subscribe(authUserProfile => this.contactID = authUserProfile.email);
@@ -179,10 +188,26 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
 
   filterQueries(): void {
-    const tempEQs: ExporterQueries[] = [];
+    //const tempEQs: ExporterQueries[] = [];
     this.queryList.forEach((query) => {
       if ((this.activeQueries && query.archivedAt === null) || (this.archivedQueries && query.archivedAt !== null)) {
-        tempEQs.push({
+        let selectedOutputFormat: string
+        let selectedTemplate: string
+        //let expirationDate: Date | undefined
+        let contextArray: Context[] = []
+        query.defaultOutputFormat !== null && query.defaultOutputFormat !== undefined ? selectedOutputFormat = query.defaultOutputFormat : selectedOutputFormat = "EXCEL";
+        query.defaultTemplateId !== null && query.defaultTemplateId !== undefined ? selectedTemplate = query.defaultTemplateId : selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
+        //query.expirationDate !== "0" ? expirationDate = new Date(parseInt(query.expirationDate)) : expirationDate = undefined;
+        if (query.context !== null) {
+          atob(query.context).split(';').forEach((context) => {
+            const contextPair = context.split('=');
+            contextArray.push({key: contextPair[0], value: contextPair[1]} as Context);
+          })
+        } else {
+          contextArray = [{key: "", value: ""} as Context];
+        }
+
+        this.tempEQs.push({
           id: query.id,
           query: query.query,
           format: query.format,
@@ -194,12 +219,17 @@ export class ExporterComponent implements OnInit, OnDestroy {
           archivedAt: this.transformDate(query.archivedAt),
           defaultTemplateId: query.defaultTemplateId,
           defaultOutputFormat: query.defaultOutputFormat,
-          context: query.context
+          context: query.context,
+          boxExpanded: false,
+          selectedOutputFormat: selectedOutputFormat,
+          selectedTemplate: selectedTemplate,
+          selectedQueryFormat: query.format,
+          contextArray: contextArray
         });
       }
     })
-    tempEQs.sort((a,b) =>  Number(b.createdAt) - Number(a.createdAt))
-    this.dataSource.data = tempEQs;
+    this.tempEQs.sort((a,b) =>  Number(b.createdAt) - Number(a.createdAt))
+    this.dataSource.data = this.tempEQs;
     this.dataSource._updateChangeSubscription();
   }
 
@@ -441,19 +471,31 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   createNewQuery(): void {
     this.editModus = true;
-    this.queryLabel = "";
-    this.queryDescription = "";
-    this.query = "";
-    from(this.authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
-    this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-    this.selectedOutputFormat = "EXCEL";
-    this.selectedQueryFormat = "FHIR_SEARCH";
-    this.expirationDate = undefined;
-    this.loadedQueryID = "";
-    this.panelOpenState = true;
-    this.contextArray = [{key: "", value: ""} as Context];
+    let contactId: string = ""
+    from(this.authService.loadUserProfile()).subscribe(keycloakProfile => contactId = keycloakProfile.email);
+
+    const newQuery: ExporterQueriesBox = {
+      id: this.tempEQs.length,
+      label: "",
+      description: "",
+      query: "",
+      contactId: contactId,
+      selectedTemplate: environment.config.EXPORTER_DEFAULT_TEMPLATE_ID,
+      selectedOutputFormat: "EXCEL",
+      selectedQueryFormat: "FHIR_SEARCH",
+      expirationDate: "",
+      contextArray: [{key: "", value: ""} as Context],
+      format: "",
+      createdAt: "",
+      archivedAt: "",
+      context: "",
+      defaultTemplateId: "",
+      defaultOutputFormat: "",
+      boxExpanded: false
+  }
     this.selection.clear();
     this.generateButtonStatus();
+    this.editDialog(newQuery)
   }
 
   editQuery(): void {
@@ -499,4 +541,11 @@ export class ExporterComponent implements OnInit, OnDestroy {
     return btoa(context);
   }
 
+  editDialog(element: ExporterQueriesBox): void {
+    const dialogConfig = new MatDialogConfig();
+    //dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = element
+    this.dialog.open(EditQueryDialogComponent, dialogConfig);
+  }
 }

@@ -2,9 +2,10 @@
   <div class="title">
     <h2 i18n>Exporter Anfragen</h2>
   </div>
-
-
-  <mat-accordion class="button-accordion">
+  <div class="create">
+    <button class="create-button" mat-raised-button color="primary" (click)="createNewQuery()" i18n>neue Anfrage erstellen</button>
+  </div>
+  <mat-accordion class="button-accordion" style="display:none">
     <mat-expansion-panel [(expanded)]="panelOpenState">
       <mat-expansion-panel-header>
         <div class="create-buttons">
@@ -337,7 +338,7 @@
   </mat-accordion>
 
 
-  <div class="tablex">
+  <div class="tablex" style="display:none">
     <section class="query-selection">
       <mat-checkbox class="active-queries" [(ngModel)]="activeQueries" (change)="filterQueries()" i18n>aktive Anfragen</mat-checkbox>
       <mat-checkbox class="archived-queries" [(ngModel)]="archivedQueries" (change)="filterQueries()" i18n>archivierte Anfragen</mat-checkbox>
@@ -383,6 +384,68 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleCheckbox($event, row)"></tr>
     </table>
+  </div>
+
+  <div class="box-container">
+    <div *ngFor="let element of tempEQs;" class="query-box" [ngClass]="{ 'box-expanded': element.boxExpanded }" (click)="element.boxExpanded = !element.boxExpanded">
+      <ng-container *ngIf="!element.boxExpanded">
+        <div style="width:30%">
+          <div class="box-title">{{element.label}}</div>
+          <div class="box-createdAt"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
+        </div>
+        <div style="width:30%">
+          <div class="box-query"><span class="fw-bold">Anfrage: </span>{{element.query}}</div>
+        </div>
+        <div style="width:30%">
+          <div class="box-format"><span class="fw-bold">Format: </span>{{element.format}}</div>
+        </div>
+        <div style="width:10%" class="box-link">
+          <a routerLink="{{getRouterLink(element.id.toString())}}"><i class="link-icon bi bi-box-arrow-in-right"></i></a>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="element.boxExpanded">
+        <div style="width:30%">
+          <div class="box-title">{{element.label}}</div>
+          <div class="box-createdAt"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
+          <table class="box-table">
+            <tbody>
+            <tr>
+              <td class="table-left" i18n>Template:</td>
+              <td class="table-right">{{element.selectedTemplate}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Anfrageformat:</td>
+              <td class="table-right">{{element.selectedQueryFormat}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Ausgabeformat:</td>
+              <td class="table-right">{{element.selectedOutputFormat}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Ablaufdatum:</td>
+              <td class="table-right">{{element.expirationDate | date: 'mediumDate'}}</td>
+            </tr>
+            <tr *ngFor="let context of element.contextArray; let i=index">
+              <td class="table-left table-env"><span *ngIf="i === 0" i18n>Umgebungsvariablen:</span></td>
+              <td class="table-right table-env">{{context.key}}<span *ngIf="(context.key.length > 0) && (context.value.length > 0)">=</span>{{context.value}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="width:50%">
+          <div class="box-description"><span class="fw-bold">Beschreibung: </span>{{element.description}}</div>
+          <div class="box-contactId"><span class="fw-bold">Anfragende: </span>{{element.contactId}}</div>
+          <div class="box-query"><span class="fw-bold">Anfrage: </span>{{element.query}}</div>
+        </div>
+        <div style="width:20%">
+          <div class="box-actions">
+            <span class="fw-bold link" (click)="editDialog(element);$event.stopPropagation();">Edit</span>
+            <span class="fw-bold">|</span>
+            <span class="fw-bold link">Ausführungen</span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
   <div class="paginator">
     <mat-paginator

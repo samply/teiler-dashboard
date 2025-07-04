@@ -41,11 +41,8 @@ table {
 .table-link-column {
   text-align: center;
 }
-mat-paginator {
-  opacity: 0.8;
-  width: fit-content;
-  float: right;
-  border-radius: 10px;
+mat-paginator{
+  opacity: 0.75;
 }
 
 button{
@@ -306,8 +303,7 @@ mat-expansion-panel-header {
   border-bottom: none!important;
 }
 .stepper {
-  width: 68%;
-  margin-left: auto;
+  padding: 2rem;
 }
 .textarea {
   font-size: 11pt!important;
@@ -397,71 +393,4 @@ mat-expansion-panel-header {
 }
 .description-textfield, .query-textfield {
   height: 114px;
-}
-
-@media(max-width : 1400px){
-  .main{
-    width: 80%;
-    margin-left:auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-  }
-}
-.box-container {
-  font-size: 16px;
-}
-.query-box {
-  padding: 15px 25px;
-  margin: 15px 0;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 10px;
-  display: flex;
-  background: white;
-  align-items: center;
-  cursor: pointer;
-}
-.box-expanded {
-  align-items: normal;
-}
-.query-box:hover {
-  background: #F5F7FD;
-}
-.box-title {
-  font-weight: bold;
-}
-.box-createdAt, .box-contactId {
-  font-size: 12px;
-}
-.box-contactId {
-  margin-bottom: 20px;
-}
-.box-table {
-  margin-top: 20px;
-  text-align: left;
-  font-size: 14px;
-}
-.box-table td {
-  padding: 3px 10px 3px 0;
-}
-.box-table .table-left {
-  font-weight: bold;
-}
-.box-actions {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  justify-content: center;
-}
-.link {
-  padding: 0 5px;
-  text-decoration: underline;
-  color: #0d6efd;
-}
-.link:hover {
-  color: black;
-}
-.create {
-  display: flex;
-  justify-content: flex-end;
 }
