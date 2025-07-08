@@ -251,9 +251,53 @@
         </div>
         <div class="stepper-buttons">
           <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
-          <span></span>
+          <button class="next-button" mat-raised-button color="primary" matStepperNext ><span i18n>Weiter</span></button>
         </div>
       </form>
+    </mat-step>
+    <mat-step [stepControl]="fifthFormGroup" [label]="summaryLoc" completed="false">
+      <div class="fifthFormGroup">
+        <div style="width:40%">
+          <div class="box-title"><span class="fw-bold">Titel: </span>{{element.label}}</div>
+          <div class="box-createdAt"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
+          <table class="box-table">
+            <tbody>
+            <tr>
+              <td class="table-left" i18n>Template:</td>
+              <td class="table-right">{{element.selectedTemplate}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Anfrageformat:</td>
+              <td class="table-right">{{element.selectedQueryFormat}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Ausgabeformat:</td>
+              <td class="table-right">{{element.selectedOutputFormat}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Ablaufdatum:</td>
+              <td class="table-right">{{element.expirationDate | date: 'mediumDate'}}</td>
+            </tr>
+            <tr *ngFor="let context of element.contextArray; let i=index">
+              <td class="table-left table-env"><span *ngIf="i === 0" i18n>Umgebungsvariablen:</span></td>
+              <td class="table-right table-env">{{context.key}}<span *ngIf="(context.key.length > 0) && (context.value.length > 0)">=</span>{{context.value}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="width:50%">
+          <div class="box-description"><span class="fw-bold">Beschreibung: </span>{{element.description}}</div>
+          <div class="box-contactId"><span class="fw-bold">Anfragende/r: </span>{{element.contactId}}</div>
+          <div class="box-query"><span class="fw-bold">Anfrage: </span>{{element.query}}</div>
+        </div>
+      </div>
+      <div class="stepper-buttons" style="margin:5px 20px">
+        <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
+        <div style="display:flex">
+          <button class="save-button" mat-raised-button color="primary" (click)="saveQuery" ><span i18n>Speichern</span></button>
+          <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery" ><span i18n>Ausführen</span></button>
+        </div>
+      </div>
     </mat-step>
   </mat-stepper>
 </div>

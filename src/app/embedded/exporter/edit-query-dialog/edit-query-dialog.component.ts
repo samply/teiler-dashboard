@@ -23,6 +23,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   queryLoc = $localize`Anfrage`
   outputLoc = $localize`Ausgabe`
   otherParametersLoc = $localize`weitere Parameter`
+  summaryLoc = $localize`Zusammenfassung`
   firstFormGroup = this._formBuilder.group({
     queryTitle: [''],
     queryDescription: ['']
@@ -39,6 +40,9 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     expirationDate: [''],
     contextKey: [''],
     contextValue: ['']
+  });
+  fifthFormGroup = this._formBuilder.group({
+
   });
   buttonDisabled: boolean = true;
   editModus: boolean = true;
@@ -141,5 +145,11 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   }
   downloadTemplate(): void {
     window.location.href = this.exportUrl + 'template?template-id=' + this.element.selectedTemplate;
+  }
+  saveQuery(): void {
+
+  }
+  executeQuery(): void {
+
   }
 }

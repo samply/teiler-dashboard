@@ -394,7 +394,7 @@
           <div class="box-createdAt"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
         </div>
         <div style="width:30%">
-          <div class="box-query"><span class="fw-bold">Anfrage: </span>{{element.query}}</div>
+          <div class="box-query maxwidth"><span class="fw-bold">Anfrage: </span><span class="font">{{element.query}}</span></div>
         </div>
         <div style="width:30%">
           <div class="box-format"><span class="fw-bold">Format: </span>{{element.format}}</div>
@@ -434,7 +434,7 @@
         </div>
         <div style="width:50%">
           <div class="box-description"><span class="fw-bold">Beschreibung: </span>{{element.description}}</div>
-          <div class="box-contactId"><span class="fw-bold">Anfragende: </span>{{element.contactId}}</div>
+          <div class="box-contactId"><span class="fw-bold">Anfragende/r: </span>{{element.contactId}}</div>
           <div class="box-query"><span class="fw-bold">Anfrage: </span>{{element.query}}</div>
         </div>
         <div style="width:20%">

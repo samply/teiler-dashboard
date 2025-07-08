@@ -465,3 +465,12 @@ mat-expansion-panel-header {
   display: flex;
   justify-content: flex-end;
 }
+.maxwidth {
+  display: inline-block;
+  max-width: calc(35 * 1ch);
+  max-height: 44px;
+  overflow: hidden;
+}
+.font {
+  font-size: 14px;
+}
