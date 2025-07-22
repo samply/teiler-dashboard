@@ -8,6 +8,13 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 import {ExporterService} from "../../../teiler/exporter.service";
 import {Templates} from "../../quality-report/quality-report.component";
 
+export enum ExportStatus {
+  OK = "OK",
+  RUNNING = "RUNNING",
+  NOT_FOUND = "NOT_FOUND",
+  EMPTY = "EMPTY",
+  ERROR = "ERROR"
+}
 @Component({
   selector: 'samply-edit-query-dialog',
   templateUrl: './edit-query-dialog.component.html',
@@ -19,6 +26,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   private subscriptionGetQueryFormats: Subscription | undefined
   private subscriptionGetTemplateIDs: Subscription | undefined
   element: ExporterQueriesBox
+  showStepper: boolean = true
   descriptionLoc = $localize`Beschreibung`
   queryLoc = $localize`Anfrage`
   outputLoc = $localize`Ausgabe`
@@ -54,6 +62,10 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   templateIDs: Templates[] = [];
   showPlusButton: boolean = false;
   exportUrl = "";
+  ExportStatus: typeof ExportStatus = ExportStatus;
+  exportStatus: ExportStatus = ExportStatus.EMPTY;
+  exportLog: string[] = [];
+  selectedOutputFormat: string = "EXCEL";
   constructor(@Inject(MAT_DIALOG_DATA) public data: ExporterQueriesBox, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, void>, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver) {
     this.element = data
     this.stepperOrientation = breakpointObserver
@@ -66,6 +78,8 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     this.getTemplateIDs();
     this.getOutputFormats();
     this.getQueryFormats()
+
+    this.element.defaultOutputFormat !== null && this.element.defaultOutputFormat !== undefined ? this.selectedOutputFormat = this.element.defaultOutputFormat : this.selectedOutputFormat = "EXCEL";
   }
   ngOnDestroy(): void {
     this.subscriptionGetOutputFormats?.unsubscribe();
@@ -150,6 +164,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
 
   }
   executeQuery(): void {
-
+    console.log(this.showStepper)
+    this.showStepper = false
   }
 }

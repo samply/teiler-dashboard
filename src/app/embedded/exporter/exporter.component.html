@@ -387,7 +387,7 @@
   </div>
 
   <div class="box-container">
-    <div *ngFor="let element of tempEQs;" class="query-box" [ngClass]="{ 'box-expanded': element.boxExpanded }" (click)="element.boxExpanded = !element.boxExpanded">
+    <div *ngFor="let element of dataSource.data;" class="query-box" [ngClass]="{ 'box-expanded': element.boxExpanded }" (click)="element.boxExpanded = !element.boxExpanded">
       <ng-container *ngIf="!element.boxExpanded">
         <div style="width:30%">
           <div class="box-title">{{element.label}}</div>

@@ -1,13 +1,5 @@
-.main{
-  width: 80%;
-  margin-left:auto;
-  margin-right:auto;
-  display: flex;
-  flex-direction: column;
-}
-.title {
-  border-bottom: 3px solid black;
-  margin-bottom: 20px;
+:host {
+  min-width: 80%;
 }
 h2{
   text-align: left;
@@ -58,37 +50,6 @@ button{
   text-align: left;
   font-size: 14px;
   width: 100%;
-}
-.log-div {
-  margin-top: 20px;
-  display:flex;
-}
-.button-status {
-  display: flex;
-  margin-top: 10px;
-}
-.status {
-  margin: 1.4% 0 0 3%;
-}
-.log-exporter, .log-reporter {
-  border: 1px solid #333333;
-  width: 49%;
-  padding: 1% 2%;
-  background-color: white;
-  height: 300px;
-  display: none;
-}
-.log-exporter {
-  margin-left: 2%;
-}
-.log-header {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-.log-reports {
-  height: 250px;
-  max-height: 300px;
-  overflow: auto;
 }
 .matinput {
   margin-left: 2%;
@@ -425,4 +386,44 @@ mat-expansion-panel-header {
   display: flex;
   margin: 30px 20px 0px 20px;
   height: 320px;
+}
+.short-info {
+  display: flex;
+  margin: 30px 30px 0px 30px;
+  height: 120px;
+}
+
+.log-div {
+  margin: 20px 0;
+  display:flex;
+}
+.button-status {
+  display: flex;
+  margin-top: 10px;
+}
+.status {
+  margin: 1.4% 0 0 3%;
+}
+.log-exporter {
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  padding: 1% 2%;
+  background-color: white;
+  height: 230px;
+  margin-top: 20px;
+  margin-left: 2%;
+  max-width: 700px;
+}
+
+.log-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.log-reports {
+  height: 170px;
+  max-height: 200px;
+  overflow: auto;
+}
+.executions {
+  min-height: 120px;
 }

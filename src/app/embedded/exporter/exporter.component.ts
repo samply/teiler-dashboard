@@ -83,7 +83,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   otherParametersLoc = $localize`weitere Parameter`
 
   displayedColumns: string[] = ['#', 'timestamp', 'querytitle', 'querysource', 'format', 'executions'];
-  dataSource = new MatTableDataSource<ExporterQueries>();
+  dataSource = new MatTableDataSource<ExporterQueriesBox>();
   buttonDisabled: boolean = true;
   editButtonDisabled: boolean = true;
   editModus: boolean = false;
@@ -545,7 +545,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
     const dialogConfig = new MatDialogConfig();
     //dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = element
+    dialogConfig.data = element;
+    dialogConfig.width = "1500px";
     this.dialog.open(EditQueryDialogComponent, dialogConfig);
   }
 }

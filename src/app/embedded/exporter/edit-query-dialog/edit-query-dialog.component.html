@@ -1,4 +1,5 @@
-<div class="stepper">
+<ng-container *ngIf="showStepper">
+  <div class="stepper">
   <mat-stepper
     class="query-stepper"
     [orientation]="(stepperOrientation | async)!">
@@ -294,10 +295,69 @@
       <div class="stepper-buttons" style="margin:5px 20px">
         <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
         <div style="display:flex">
-          <button class="save-button" mat-raised-button color="primary" (click)="saveQuery" ><span i18n>Speichern</span></button>
-          <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery" ><span i18n>Ausführen</span></button>
+          <button class="save-button" mat-raised-button color="primary" (click)="saveQuery()" ><span i18n>Speichern</span></button>
+          <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" ><span i18n>Ausführen</span></button>
         </div>
       </div>
     </mat-step>
   </mat-stepper>
 </div>
+</ng-container>
+<ng-container *ngIf="!showStepper">
+  <div class="short-info">
+    <div style="width:30%">
+      <div class="box-title">{{element.label}}</div>
+      <div class="box-createdAt"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
+    </div>
+    <div style="width:40%;margin-right:10%">
+      <div class="box-query maxwidth"><span class="fw-bold">Anfrage: </span><span class="font">{{element.query}}</span></div>
+    </div>
+    <div style="width:20%">
+      <div class="box-format"><span class="fw-bold">Format: </span>{{element.format}}</div>
+    </div>
+  </div>
+  <div class="stepper-buttons" style="margin:5px 30px">
+    <button class="back-button" mat-raised-button color="primary" (click)="showStepper=true"><span i18n>Anfrage editieren</span></button>
+    <div style="display:flex">
+      <mat-form-field class="outputformat_dropdown">
+        <mat-label i18n>Ausgabeformat</mat-label>
+        <select class="outputformat-select"
+                matNativeControl
+                [(ngModel)]="selectedOutputFormat"
+                [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let id of outputFormats" [value]="id.value">{{ id.display }}</option>
+        </select>
+      </mat-form-field>
+      <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" ><span i18n>Ausführen</span></button>
+    </div>
+  </div>
+
+
+  <div class="status-log-div">
+    <div class="status">
+      <ng-container *ngIf="exportStatus === ExportStatus.EMPTY"><span class="status-empty"></span>
+      </ng-container>
+      <ng-container *ngIf="exportStatus === ExportStatus.RUNNING"><span class="status-running" i18n>Report wird erstellt ...</span>
+      </ng-container>
+      <ng-container *ngIf="exportStatus === ExportStatus.OK"><span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span>
+      </ng-container>
+      <ng-container *ngIf="exportStatus === ExportStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span>
+      </ng-container>
+      <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span>
+      </ng-container>
+    </div>
+
+    <div class="log-div">
+      <div class="log-exporter" [ngClass]="{ 'visible': buttonDisabled }">
+        <div class="log-header" i18n>Exporter Log:</div>
+        <div id="exportDiv" class="log-reports">
+          <div *ngFor="let log of exportLog">{{ log }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="executions">
+
+  </div>
+</ng-container>
