@@ -14,6 +14,7 @@ interface Contact {
   emailText: string
   aboutLink: string
   aboutText: string
+  aboutYear: string
   userAgreementLink: string
 }
 
@@ -37,7 +38,8 @@ export class AppComponent implements OnInit{
   logoText: string = ""
   svgWidth: number = 2560;
   svgHeight: number = 1440;
-  contact: Contact = {aboutLink: "", aboutText: "", emailLink: "", emailText: "", userAgreementLink: ""}
+  contact: Contact = {aboutLink: "", aboutText: "", aboutYear: "", emailLink: "", emailText: "", userAgreementLink: ""}
+  showFooter: boolean = true
 
   constructor(
     public routeManagerService: RouteManagerService,
@@ -65,8 +67,10 @@ export class AppComponent implements OnInit{
         emailText: config.CONTACT_EMAIL_TEXT ?? "",
         aboutLink: config.CONTACT_ABOUT_LINK ?? "",
         aboutText: config.CONTACT_ABOUT_TEXT ?? "",
+        aboutYear: config.CONTACT_ABOUT_YEAR ?? "",
         userAgreementLink: config.CONTACT_USERAGREEMENT_LINK ?? ""
       }
+      this.showFooter = !(this.contact.emailLink === "" && this.contact.aboutLink === "" && this.contact.userAgreementLink === "");
     })
     this.configService.getStyle().subscribe((style) => {
       this.logoUrl = style.logo ?? environment.config.LOGO_URL

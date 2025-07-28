@@ -16,6 +16,7 @@ export interface ConfigVariables {
   CONTACT_EMAIL_TEXT?: string;
   CONTACT_ABOUT_LINK?: string;
   CONTACT_ABOUT_TEXT?: string;
+  CONTACT_ABOUT_YEAR?: string;
   CONTACT_USERAGREEMENT_LINK?: string;
 }
 export interface StyleVariables {
