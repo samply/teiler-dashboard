@@ -31,13 +31,13 @@
 
   <svg [innerHtml]="svgimage" class="b-img" [style.width.px]="svgWidth" [style.height.px]="svgHeight"></svg>
   <app-sidebar></app-sidebar>
-  <div class="footer">
-    <a class="user-agreement" href="">Nutzervereinbarung</a>
-    <a class="email" href="mailto:CCP@dkfz.de">CCP&#64;dkfz.de</a>
+  <div *ngIf="showFooter" class="footer">
+    <a class="user-agreement" href="{{contact.userAgreementLink}}" target="_blank">Nutzervereinbarung</a>
+    <a class="email" href="mailto:{{contact.emailLink}}">{{contact.emailText}}</a>
     <div class="copyright">
-      <span>&#169; 2025 </span>
-      <a href="https://dktk.dkfz.de/en/clinical-platform/about-ccp"
-      >Clinical Communication Platform (CCP)</a
+      <span *ngIf="contact.aboutYear !== ''">&#169; {{contact.aboutYear}} </span>
+      <a href="{{contact.aboutLink}}" target="_blank"
+      >{{contact.aboutText}}</a
       >
     </div>
   </div>
