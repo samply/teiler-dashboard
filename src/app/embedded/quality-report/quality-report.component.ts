@@ -31,9 +31,10 @@ export enum QBStatus {
 }
 
 @Component({
-  selector: 'quality-report-app',
-  templateUrl: './quality-report.component.html',
-  styleUrls: ['./quality-report.component.css']
+    selector: 'quality-report-app',
+    templateUrl: './quality-report.component.html',
+    styleUrls: ['./quality-report.component.css'],
+    standalone: false
 })
 
 export class QualityReportComponent implements OnInit, OnDestroy, AfterViewInit {

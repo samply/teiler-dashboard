@@ -4,15 +4,25 @@ import {TeilerAuthService} from "./security/teiler-auth.service";
 import {debounceTime, from, fromEvent, throttleTime} from "rxjs";
 import {environment} from "../environments/environment";
 import {StylingService} from "./styling.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
 import {DashboardConfigService} from "./teiler/dashboard-config.service";
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
+interface Contact {
+  emailLink: string
+  emailText: string
+  aboutLink: string
+  aboutText: string
+  aboutYear: string
+  userAgreementLink: string
+}
 
 @Component({
-  selector: 'teiler-dashboard',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'teiler-dashboard',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent implements OnInit{
   @ViewChild('myIdentifier') myIdentifier!: ElementRef;
@@ -23,31 +33,63 @@ export class AppComponent implements OnInit{
   svgOrig: any = ""
   svgimage: any = ""
   logoUrl: string = ""
+  logoHeight: number = 40;
+  logoMargin: number = 0;
+  logoText: string = ""
   svgWidth: number = 2560;
   svgHeight: number = 1440;
+  contact: Contact = {aboutLink: "", aboutText: "", aboutYear: "", emailLink: "", emailText: "", userAgreementLink: ""}
+  showFooter: boolean = true
 
-  constructor(public routeManagerService: RouteManagerService, public authService: TeilerAuthService, private stylingService: StylingService, private httpClient: HttpClient, private sanitizer: DomSanitizer, private configService: DashboardConfigService) {
-    from(authService.isLoggedId()).subscribe(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-      if (isLoggedIn) {
-        from(authService.loadUserProfile()).subscribe(keycloakProfile => this.user = keycloakProfile.firstName + ' ' + keycloakProfile.lastName);
-      }
-    });
+  constructor(
+    public routeManagerService: RouteManagerService,
+    public authService: TeilerAuthService,
+    private oidcSecurityService: OidcSecurityService,
+    private stylingService: StylingService,
+    private httpClient: HttpClient,
+    private sanitizer: DomSanitizer,
+    private configService: DashboardConfigService
+  ) {
+    if (environment.config.OIDC_URL){
+      this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated }) => {
+        this.isLoggedIn = isAuthenticated;
+        if (isAuthenticated) {
+          from(this.authService.loadUserProfile()).subscribe(profile => {
+            this.user = `${profile.userData.name || ''}`;
+          });
+        }
+      });
+    }
     this.configService.getConfig().subscribe((config) => {
-      this.logoUrl = config.LOGO_URL ?? environment.config.LOGO_URL
+      this.logoText = config.LOGO_TEXT ?? "Bridgehead"
+      this.contact = {
+        emailLink: config.CONTACT_EMAIL_LINK ?? "",
+        emailText: config.CONTACT_EMAIL_TEXT ?? "",
+        aboutLink: config.CONTACT_ABOUT_LINK ?? "",
+        aboutText: config.CONTACT_ABOUT_TEXT ?? "",
+        aboutYear: config.CONTACT_ABOUT_YEAR ?? "",
+        userAgreementLink: config.CONTACT_USERAGREEMENT_LINK ?? ""
+      }
+      this.showFooter = !(this.contact.emailLink === "" && this.contact.aboutLink === "" && this.contact.userAgreementLink === "");
+    })
+    this.configService.getStyle().subscribe((style) => {
+      this.logoUrl = style.logo ?? environment.config.LOGO_URL
+      this.logoHeight = style.logoHeight ?? 40
+      this.logoMargin = style.logoMargin ?? 0
     })
 
     fromEvent(window, "resize")
       .pipe(throttleTime(500), debounceTime(500))
       .subscribe(() => {
-       this.updateSVGSize()
+       this.updateSVG()
       });
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.updateSVGSize()
-    },500)
+      this.updateSVG()
+      window.dispatchEvent(new Event('resize'));
+    },800)
   }
 
   ngOnInit(): void {
@@ -60,7 +102,7 @@ export class AppComponent implements OnInit{
           console.error('Keine Farbpalette ausgewählt.');
         }
       } else {
-        console.error('Farbpaletten wurden nicht geladen.');
+        //console.error('Farbpaletten wurden nicht geladen.');
       }
     });
     this.setBackgroundImage()
@@ -84,37 +126,43 @@ export class AppComponent implements OnInit{
   }
 
   public setBackgroundImage() {
-    this.configService.getConfig().subscribe((config) => {
-      if (config.BACKGROUND_IMAGE_URL) {
+    this.configService.getStyle().subscribe((style) => {
+      if (style.backgroundImage) {
         const headers = new HttpHeaders();
         headers.set('Accept', 'image/svg+xml');
-        this.httpClient.get(config.BACKGROUND_IMAGE_URL, {headers, responseType: 'text'}).subscribe((svg) => {
+        this.httpClient.get(style.backgroundImage, {headers, responseType: 'text'}).subscribe((svg) => {
           this.svgOrig = svg;
-          this.changeColor(this.stylingService.getBackgroundColor());
+          this.updateSVG()
         });
       }
     })
   }
-  updateSVGSize(): void {
+  updateSVG(): void {
     this.svgWidth = this.myIdentifier.nativeElement.offsetWidth;
     this.svgHeight = this.myIdentifier.nativeElement.offsetHeight;
-  }
 
-  changeColor(color: string): void {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(this.svgOrig, 'image/svg+xml');
 
-    /*const paths = xmlDoc.getElementsByTagName('path');
-    for (let i = 0; i < paths.length; i++) {
-      paths[i].setAttribute('fill', color);
-    }*/
+    const svg = xmlDoc.getElementsByTagName('svg');
+    svg[0].setAttribute('width', this.svgWidth.toString())
+    svg[0].setAttribute('height', this.svgHeight.toString())
+    svg[0].setAttribute('viewBox', "0 0 "+this.svgWidth.toString()+" "+this.svgHeight.toString())
+
+    const rect = xmlDoc.getElementsByTagName('rect');
+    for (let i = 0; i < rect.length; i++) {
+      rect[i].setAttribute('width', this.svgWidth.toString())
+      rect[i].setAttribute('height', this.svgHeight.toString())
+    }
+
     const stop = xmlDoc.getElementsByTagName('stop');
     if (stop.length > 1) {
-    stop[1].setAttribute('stop-color', this.hexToRGB(color, 0.18));}
+      stop[1].setAttribute('stop-color', this.hexToRGB(this.stylingService.getBackgroundColor(), 0.18));}
 
     const serializer = new XMLSerializer();
     this.svgimage = this.sanitizer.bypassSecurityTrustHtml(serializer.serializeToString(xmlDoc));
   }
+
   hexToRGB(hex: string, alpha?: number) {
     var r = parseInt(hex.slice(1, 3), 16),
       g = parseInt(hex.slice(3, 5), 16),

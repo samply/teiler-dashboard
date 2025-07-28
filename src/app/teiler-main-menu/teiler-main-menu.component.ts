@@ -6,10 +6,10 @@ import {TeilerApp} from "../teiler/teiler-app";
 
 
 @Component({
-  selector: 'teiler-main-menu',
-  templateUrl: './teiler-main-menu.component.html',
-  styleUrls: ['./teiler-main-menu.component.css'],
-
+    selector: 'teiler-main-menu',
+    templateUrl: './teiler-main-menu.component.html',
+    styleUrls: ['./teiler-main-menu.component.css'],
+    standalone: false
 })
 export class TeilerMainMenuComponent implements OnInit {
   tab = 1;

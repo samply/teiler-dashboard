@@ -17,9 +17,10 @@ class TeilerAdmin {
 }
 
 @Component({
-  selector: 'teiler-welcome',
-  templateUrl: './teiler-welcome.component.html',
-  styleUrls: ['./teiler-welcome.component.css']
+    selector: 'teiler-welcome',
+    templateUrl: './teiler-welcome.component.html',
+    styleUrls: ['./teiler-welcome.component.css'],
+    standalone: false
 })
 export class TeilerWelcomeComponent implements OnInit {
 

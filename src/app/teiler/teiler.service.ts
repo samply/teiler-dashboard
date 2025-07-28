@@ -1,24 +1,12 @@
 import {Injectable} from '@angular/core';
 import {QualityReportService} from "./quality-report.service";
-import {ConfigurationService} from "./configuration.service";
 import {TeilerApp, TeilerRole} from "./teiler-app";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, filter, Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {TeilerAuthService} from "../security/teiler-auth.service";
 import {environment} from "../../environments/environment";
-import {FunctionTestsService} from "./function-tests.service";
-import {EventLogService} from "./event-log.service";
-import {Router} from "@angular/router";
+import {Event, NavigationStart, Router, RouterEvent} from "@angular/router";
 import {getLocale} from "../route/route-utils";
-import {UploadsService} from "./uploads.service";
-import {ActiveInquiriesService} from "./active-inquiries.service";
-import {ArchivedInquiriesService} from "./archived-inquiries.service";
-import {FailedInquiriesService} from "./failed-inquiries.service";
-import {InquiryService} from "./inquiry.service";
-import {InquiryDialogService} from "./inquiry-dialog.service";
-import {DialogQualiService} from "./dialog-quali.service";
-import {DialogUploadsService} from "./dialog-uploads.service";
-import {DialogTestsService} from "./dialog-tests.service";
 import {ExporterService} from "./exporter.service";
 import {ExecutionService} from "./execution.service";
 
@@ -37,48 +25,35 @@ export class TeilerService {
     private router: Router,
     private httpClient: HttpClient,
     qualityReportService: QualityReportService,
-    configurationService: ConfigurationService,
-    functionTestsService: FunctionTestsService,
-    eventLogService: EventLogService,
-    uploadsService: UploadsService,
-    newInquiriesService: ActiveInquiriesService,
-    archivedInquiriesService: ArchivedInquiriesService,
-    failedInquiriesService: FailedInquiriesService,
-    inquiryService: InquiryService,
-    inquiryDialogService:InquiryDialogService,
-    dialogQualiService:DialogQualiService,
-    dialogUploadsService: DialogUploadsService,
-    dialogTestsService: DialogTestsService,
 		exporterService: ExporterService,
 		executionService: ExecutionService
   ) {
     let embeddedTeilerApps = [
       qualityReportService,
-      configurationService,
-      functionTestsService,
-      eventLogService,
-      uploadsService,
-      newInquiriesService,
-      archivedInquiriesService,
-      failedInquiriesService,
-      inquiryService,
-      inquiryDialogService,
-      dialogQualiService,
-      dialogUploadsService,
-      dialogTestsService,
 			exporterService,
 			executionService];
-    this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
-    router.events.subscribe(myEvent => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
+
+
+    //this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)
+    //router.events.subscribe(myEvent => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps));
+
+    /*** TODO: find better method to fetch and update the Teiler APPs. For now its called on 'NavigationStart'-Event from Router-Service   ***/
+    this.router.events
+      .pipe(
+        filter((event: Event | RouterEvent) => event instanceof NavigationStart),
+        tap(() => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)),
+      )
+      .subscribe();
+
   }
 
-  fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps: TeilerApp[]) {
-    this.httpClient.get<TeilerApp[]>(this.getTeilerDashboardAppsUrl()).subscribe(teilerApps => {
+  async fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps: TeilerApp[]) {
+    this.httpClient.get<TeilerApp[]>(this.getTeilerDashboardAppsUrl()).subscribe(async teilerApps => {
       this.allTeilerApps = [];
       embeddedTeilerApps.forEach(teilerApp => this.allTeilerApps.push(teilerApp));
       this.addTeilerDashboardApps(teilerApps);
       this.sortTeilerApps();
-      this.filterTeilerApps()
+      await this.filterTeilerApps();
       this.teilerAppBehaviorSubject.next(this.teilerApps);
     });
   }
@@ -87,32 +62,37 @@ export class TeilerService {
     return environment.config.TEILER_BACKEND_URL + '/apps/' + getLocale();
   }
 
-  filterTeilerApps() {
+  async filterTeilerApps(): Promise<void> {
     this.teilerApps = [];
-    this.allTeilerApps.filter(teilerApp => teilerApp.activated && this.isAuthorized(teilerApp)).forEach(teilerApp => this.teilerApps.push(teilerApp))
+
+    for (const teilerApp of this.allTeilerApps) {
+      if (teilerApp.activated && await this.isAuthorized(teilerApp)) {
+        this.teilerApps.push(teilerApp);
+      }
+    }
   }
 
-  isAuthorized(teilerApp: TeilerApp) {
+  async isAuthorized(teilerApp: TeilerApp): Promise<boolean> {
+    const teilerAppRoles = new Set(teilerApp.roles);
 
-    let isAuthorized = false;
+    if (teilerAppRoles.size === 0 || teilerAppRoles.has(TeilerRole.TEILER_PUBLIC)) {
+      return true;
+    }
 
-    let teilerAppRoles = new Set(teilerApp.roles);
-    if (teilerAppRoles.size == 0) {
-      isAuthorized = true;
-    } else if (teilerAppRoles.has(TeilerRole.TEILER_PUBLIC)) {
-      isAuthorized = true;
-    } else {
-      let roles: string[] = (environment.config.OIDC_TOKEN_GROUP) ? this.authService.getGroups() : this.authService.getRoles();
-      for (let role of roles) {
-        let mappedRole = this.fetchRoleFromEnvironment(role);
-        if (mappedRole != undefined && teilerAppRoles.has(mappedRole)) {
-          return true;
-        }
+    const roles = environment.config.OIDC_TOKEN_GROUP
+      ? await this.authService.getGroups()
+      : await this.authService.getRoles();
+
+    for (let role of roles) {
+      const mappedRole = this.fetchRoleFromEnvironment(role);
+      if (mappedRole && teilerAppRoles.has(mappedRole)) {
+        return true;
       }
     }
 
-    return isAuthorized;
+    return false;
   }
+
 
   fetchRoleFromEnvironment(role: string): TeilerRole | undefined {
     if (role === environment.config.TEILER_USER) {

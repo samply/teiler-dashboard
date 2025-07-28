@@ -1,3 +1,5 @@
+import './polyfills';
+
 import { enableProdMode, NgZone } from '@angular/core';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -9,10 +11,14 @@ import { singleSpaAngular, getSingleSpaExtraProviders } from 'single-spa-angular
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import { singleSpaPropsSubject } from './single-spa/single-spa-props';
+import {loadBootstrapIconsCss} from "./load-bootstrap-icons";
+
 
 if (environment.production) {
   enableProdMode();
 }
+
+loadBootstrapIconsCss(environment.config.TEILER_DASHBOARD_URL + '/' + environment.config.DEFAULT_LANGUAGE.toLowerCase());
 
 const lifecycles = singleSpaAngular({
   bootstrapFunction: singleSpaProps => {
