@@ -9,6 +9,13 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {DashboardConfigService} from "./teiler/dashboard-config.service";
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 
+interface Contact {
+  emailLink: string
+  emailText: string
+  aboutLink: string
+  aboutText: string
+  userAgreementLink: string
+}
 
 @Component({
     selector: 'teiler-dashboard',
@@ -30,6 +37,7 @@ export class AppComponent implements OnInit{
   logoText: string = ""
   svgWidth: number = 2560;
   svgHeight: number = 1440;
+  contact: Contact = {aboutLink: "", aboutText: "", emailLink: "", emailText: "", userAgreementLink: ""}
 
   constructor(
     public routeManagerService: RouteManagerService,
@@ -52,6 +60,13 @@ export class AppComponent implements OnInit{
     }
     this.configService.getConfig().subscribe((config) => {
       this.logoText = config.LOGO_TEXT ?? "Bridgehead"
+      this.contact = {
+        emailLink: config.CONTACT_EMAIL_LINK ?? "",
+        emailText: config.CONTACT_EMAIL_TEXT ?? "",
+        aboutLink: config.CONTACT_ABOUT_LINK ?? "",
+        aboutText: config.CONTACT_ABOUT_TEXT ?? "",
+        userAgreementLink: config.CONTACT_USERAGREEMENT_LINK ?? ""
+      }
     })
     this.configService.getStyle().subscribe((style) => {
       this.logoUrl = style.logo ?? environment.config.LOGO_URL

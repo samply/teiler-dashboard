@@ -12,6 +12,11 @@ export interface ConfigVariables {
   WELCOME_TEXT?: string;
   WELCOME_TITLE?: string;
   STYLING?: string;
+  CONTACT_EMAIL_LINK?: string;
+  CONTACT_EMAIL_TEXT?: string;
+  CONTACT_ABOUT_LINK?: string;
+  CONTACT_ABOUT_TEXT?: string;
+  CONTACT_USERAGREEMENT_LINK?: string;
 }
 export interface StyleVariables {
   backgroundImage?: string
