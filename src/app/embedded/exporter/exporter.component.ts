@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {ExporterService, exportLog} from "../../teiler/exporter.service";
@@ -10,7 +10,7 @@ import {environment} from "../../../environments/environment";
 import {SelectionModel} from "@angular/cdk/collections";
 import {TeilerAuthService} from "../../security/teiler-auth.service";
 import {createRouterLinkForBase} from "../../route/route-utils";
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {StepperOrientation} from "@angular/cdk/stepper";
 import {ViewportScroller} from "@angular/common";
@@ -52,9 +52,10 @@ export interface Context {
   value: string;
 }
 @Component({
-  selector: 'exporter',
-  templateUrl: './exporter.component.html',
-  styleUrls: ['./exporter.component.css']
+    selector: 'exporter',
+    templateUrl: './exporter.component.html',
+    styleUrls: ['./exporter.component.css'],
+    standalone: false
 })
 export class ExporterComponent implements OnInit, OnDestroy {
 
@@ -67,6 +68,12 @@ export class ExporterComponent implements OnInit, OnDestroy {
   private subscriptionFetchLogs: Subscription | undefined
   private subscriptionUpdateQuery: Subscription | undefined
   private subscriptionCreateQuery: Subscription | undefined;
+
+  descriptionLoc = $localize`Beschreibung`
+  queryLoc = $localize`Anfrage`
+  outputLoc = $localize`Ausgabe`
+  otherParametersLoc = $localize`weitere Parameter`
+
   displayedColumns: string[] = ['#', 'timestamp', 'querytitle', 'querysource', 'format', 'executions'];
   dataSource = new MatTableDataSource<ExporterQueries>();
   buttonDisabled: boolean = true;
@@ -81,7 +88,6 @@ export class ExporterComponent implements OnInit, OnDestroy {
   exportUrl = "";
   fileName: string | undefined;
   importTemplate: string = "";
-  ExportStatus: typeof ExportStatus = ExportStatus;
   exportStatus: ExportStatus = ExportStatus.EMPTY;
   private intervall: number | undefined;
   expirationDate: Date | undefined;
@@ -91,7 +97,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   contactID: string | undefined;
   selection = new SelectionModel<any>(false, []);
   executeOnSaving: boolean = true;
-  saveButtonText: Map<boolean, string> = new Map([[false, "Anfrage speichern"], [true, "Anfrage speichern und ausführen"]]);
+  saveButtonText: Map<boolean, string> = new Map([[false, $localize`Anfrage speichern`], [true, $localize`Anfrage speichern und ausführen`]]);
   loadedQueryID: string = "";
   activeQueries: boolean = true;
   archivedQueries: boolean = true;
@@ -122,7 +128,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   stepperOrientation: Observable<StepperOrientation>;
 
   constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private viewport: ViewportScroller) {
-    from(authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
+    from(authService.loadUserProfile()).subscribe(authUserProfile => this.contactID = authUserProfile.email);
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -139,7 +145,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.getQueries();
     this.getTemplateIDs();
     this.getOutputFormats();
-    this.getQueryFormats();
+    this.getQueryFormats()
+    window.dispatchEvent(new Event('resize'));
   }
 
   ngOnDestroy(): void {

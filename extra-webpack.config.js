@@ -3,6 +3,12 @@ const singleSpaAngularWebpack = require('single-spa-angular/lib/webpack').defaul
 module.exports = (config, options) => {
   const singleSpaWebpackConfig = singleSpaAngularWebpack(config, options);
 
-  // Feel free to modify this webpack config however you'd like to
+  // Add rule for raw-loader on CSS with ?raw query (optional but safer)
+  singleSpaWebpackConfig.module.rules.push({
+    test: /\.css$/,
+    resourceQuery: /raw/, // only applies when importing like: import '...css?raw'
+    use: ['raw-loader'],
+  });
+
   return singleSpaWebpackConfig;
 };

@@ -11,7 +11,7 @@
           <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
         </select>
       </mat-form-field>
-      <button class="cancel-button" mat-raised-button color="primary" (click)=cancelQB() [ngClass]="{ 'visible-button': !buttonVisible }" i18n>abbrechen</button>
+      <button class="cancel-button" mat-raised-button color="primary" (click)=cancelQB() [ngClass]="{ 'visible-button': !buttonVisible }" ><span i18n>abbrechen</span></button>
       <button class="generate-button" mat-raised-button color="primary" (click)=generateQB() [ngClass]="{ 'visible-button': buttonVisible }" [disabled]="importTemplate === '' && selectedTemplate === 'custom'" i18n>neuen Report generieren</button>
       <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
         <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
@@ -20,7 +20,7 @@
         </button>
         <div class="file-name">{{ fileName }}</div>
       </div>
-      <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" i18n>Template herunterladen</button>
+      <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" ><span i18n>Template herunterladen</span></button>
 
       <div class="status">
         <ng-container *ngIf="qbStatus === QBStatus.EMPTY"><span class="status-empty"></span></ng-container>

@@ -2,9 +2,9 @@
   <div class="toolbar">
     <div class="logo">
       <a routerLink="{{'/' + routeManagerService.mainRouterLink}}">
-        <img width="40" src="{{logoUrl}}" alt="DKTK Teiler">
+        <img style="margin:{{logoMargin}}px" height="{{logoHeight}}" src="{{logoUrl}}" [alt]="environment.config.TEILER_PROJECT+' Teiler'">
       </a>
-      <span class="logo-text" i18n>Brückenkopf</span>
+      <span class="logo-text">{{logoText}}</span>
     </div>
     <div class="spacer"></div>
     <div class="user">
@@ -12,7 +12,7 @@
         <i class="bi bi-person"></i>&nbsp;
         <span>{{user}}</span>
       </div>
-      <div>
+      <div *ngIf="environment.config.OIDC_URL">
         <div *ngIf="!isLoggedIn">
           <span class="login-hint1" i18n>für weitere Apps loggen Sie sich Bitte > </span>
           <a class="login-link" routerLink="{{'/' + routeManagerService.loginRouterLink}}"><span i18n>hier</span></a>
@@ -31,13 +31,13 @@
 
   <svg [innerHtml]="svgimage" class="b-img" [style.width.px]="svgWidth" [style.height.px]="svgHeight"></svg>
   <app-sidebar></app-sidebar>
-  <div class="footer">
-    <a class="user-agreement" href="">Nutzervereinbarung</a>
-    <a class="email" href="mailto:CCP@dkfz.de">CCP&#64;dkfz.de</a>
+  <div *ngIf="showFooter" class="footer">
+    <a class="user-agreement" href="{{contact.userAgreementLink}}" target="_blank">Nutzervereinbarung</a>
+    <a class="email" href="mailto:{{contact.emailLink}}">{{contact.emailText}}</a>
     <div class="copyright">
-      <span>&#169; 2025 </span>
-      <a href="https://dktk.dkfz.de/en/clinical-platform/about-ccp"
-      >Clinical Communication Platform (CCP)</a
+      <span *ngIf="contact.aboutYear !== ''">&#169; {{contact.aboutYear}} </span>
+      <a href="{{contact.aboutLink}}" target="_blank"
+      >{{contact.aboutText}}</a
       >
     </div>
   </div>

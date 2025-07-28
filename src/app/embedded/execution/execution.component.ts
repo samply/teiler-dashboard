@@ -33,9 +33,10 @@ export enum ExportStatus {
 }
 
 @Component({
-  selector: 'execution',
-  templateUrl: './execution.component.html',
-  styleUrls: ['./execution.component.css']
+    selector: 'execution',
+    templateUrl: './execution.component.html',
+    styleUrls: ['./execution.component.css'],
+    standalone: false
 })
 export class ExecutionComponent implements OnInit, OnDestroy {
   displayedColumnsExecutions: string[] = ['executedAt', 'status', 'templateId', 'outputFormat', 'link'];
@@ -213,6 +214,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     })
     //this.getExecutionError(1)
     //console.log(this.dataSourcePatients.data)
+    window.dispatchEvent(new Event('resize'));
   }
   ngOnDestroy(): void {
     this.subscriptionGetExecutionList?.unsubscribe();
@@ -323,7 +325,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
             this.buttonDisabled = false;
             if (status === ExportStatus.OK && !init) {
               this.exportLog = [];
-              this.downloadExport(id);
+              if (this.selectedOutputFormat !== 'OPAL') {this.downloadExport(id)}
               setTimeout(() => {
                 this.getQueryExecutions();
               }, 2000);
