@@ -330,14 +330,14 @@ template = \
 \ticonClass: string | undefined = {args.ICON_CLASS};
 \ticonSourceUrl: string | undefined = {args.ICON_SOURCE_URL};
 \ttitle: string = "{args.TITLE}";
-\troles: TeilerRole[] = [{",".join(["TeilerRole.TEILER_" + role for role in args.ROLES])}];
+\troles: string[] = [{",".join([role for role in args.ROLES])}];
 
 \tconstructor(router: Router) {{
     super(EmbeddedTeilerApps.{NAME_ENUM}, router);
 \t}}\n'''
 
 import_string = \
-    '''import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
+    '''import {EmbeddedTeilerApp, EmbeddedTeilerApps} from "./teiler-app";
     import {Router} from "@angular/router";\n'''
 
 with open(SERVICE_FILE, "r") as file:

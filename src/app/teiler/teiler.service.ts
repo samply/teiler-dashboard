@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {QualityReportService} from "./quality-report.service";
-import {TeilerApp, TeilerRole} from "./teiler-app";
+import {TEILER_ROLE_PUBLIC, TeilerApp} from "./teiler-app";
 import {BehaviorSubject, filter, Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {TeilerAuthService} from "../security/teiler-auth.service";
@@ -18,6 +18,7 @@ export class TeilerService {
   allTeilerApps: TeilerApp[] = [];
   teilerApps: TeilerApp[] = [];
   teilerAppBehaviorSubject = new BehaviorSubject(this.teilerApps);
+  teilerGroupRoleMap: Map<string, string> = new Map<string, string>();
 
 
   constructor(
@@ -41,7 +42,9 @@ export class TeilerService {
     this.router.events
       .pipe(
         filter((event: Event | RouterEvent) => event instanceof NavigationStart),
-        tap(() => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps)),
+        tap(() => this.fetchTeilerDashboardRolesAndUpdateTeilerRoleGroupMap().then(
+          () => this.fetchTeilerDashboardAppsUrlAndUpdateTeilerApps(embeddedTeilerApps))
+        )
       )
       .subscribe();
 
@@ -58,8 +61,18 @@ export class TeilerService {
     });
   }
 
+  async fetchTeilerDashboardRolesAndUpdateTeilerRoleGroupMap() {
+    this.httpClient.get<{[key:string]:string}>(this.getTeilerDashboardRolesUrl()).subscribe(async roleGroupMap => {
+        this.teilerGroupRoleMap = new Map(Object.entries(roleGroupMap));
+    });
+  }
+
   getTeilerDashboardAppsUrl() {
     return environment.config.TEILER_BACKEND_URL + '/apps/' + getLocale();
+  }
+
+  getTeilerDashboardRolesUrl() {
+    return environment.config.TEILER_BACKEND_URL + '/roles';
   }
 
   async filterTeilerApps(): Promise<void> {
@@ -75,7 +88,7 @@ export class TeilerService {
   async isAuthorized(teilerApp: TeilerApp): Promise<boolean> {
     const teilerAppRoles = new Set(teilerApp.roles);
 
-    if (teilerAppRoles.size === 0 || teilerAppRoles.has(TeilerRole.TEILER_PUBLIC)) {
+    if (teilerAppRoles.size === 0 || teilerAppRoles.has(TEILER_ROLE_PUBLIC)) {
       return true;
     }
 
@@ -84,24 +97,13 @@ export class TeilerService {
       : await this.authService.getRoles();
 
     for (let role of roles) {
-      const mappedRole = this.fetchRoleFromEnvironment(role);
+      const mappedRole = this.teilerGroupRoleMap.get(role);
       if (mappedRole && teilerAppRoles.has(mappedRole)) {
         return true;
       }
     }
 
     return false;
-  }
-
-
-  fetchRoleFromEnvironment(role: string): TeilerRole | undefined {
-    if (role === environment.config.TEILER_USER) {
-      return TeilerRole.TEILER_USER;
-    } else if (role === environment.config.TEILER_ADMIN) {
-      return TeilerRole.TEILER_ADMIN;
-    } else {
-      return undefined; // Role doesn't match any enum values
-    }
   }
 
   addTeilerDashboardApps(teilerDashboardApps: TeilerApp[]) {

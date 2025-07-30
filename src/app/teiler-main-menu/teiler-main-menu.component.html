@@ -5,9 +5,9 @@
   </div>
 
   <div class="tabs">
-    <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
+    <div class="section-header">
       <div class="tabs1">
-        <section class="app-selection">
+        <section class="app-selection" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
           <mat-checkbox class="local-apps" [(ngModel)]="showLocalApps" i18n>lokale Apps</mat-checkbox>
           <mat-checkbox class="central-apps" [(ngModel)]="showCentralApps" i18n>zentrale Apps</mat-checkbox>
         </section>

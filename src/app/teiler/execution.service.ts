@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
+import {EmbeddedTeilerApp, EmbeddedTeilerApps, TEILER_ROLE_ADMIN} from "./teiler-app";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {ExecutionError, ExporterExecutions} from "../embedded/execution/execution.component";
@@ -16,7 +16,7 @@ export class ExecutionService extends EmbeddedTeilerApp {
   iconClass: string | undefined = 'bi bi-person-rolodex';
   iconSourceUrl: string | undefined = undefined;
   title: string = "Query Execution";
-  roles: TeilerRole[] = [TeilerRole.TEILER_USER];
+  roles: string[] = [TEILER_ROLE_ADMIN];
   httpHeaders: HttpHeaders = new HttpHeaders().append("x-api-key", environment.config.EXPORTER_API_KEY);
 
   routerLinkExtension: string = "/:id";

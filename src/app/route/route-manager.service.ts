@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {TeilerService} from "../teiler/teiler.service";
-import {EmbeddedTeilerApps, TeilerApp, TeilerAppRoute, TeilerRole} from "../teiler/teiler-app";
+import {EmbeddedTeilerApps, TEILER_ROLE_PUBLIC, TeilerApp} from "../teiler/teiler-app";
 import {QualityReportComponent} from "../embedded/quality-report/quality-report.component";
 import {Route, Router} from "@angular/router";
 import {TeilerMainMenuComponent} from "../teiler-main-menu/teiler-main-menu.component";
@@ -66,7 +66,7 @@ export class RouteManagerService {
   }
 
   private completeRoute(route: Route, teilerApp: TeilerApp, routeName: string, subroutes: Route[]) {
-    if (teilerApp.roles && !teilerApp.roles.includes(TeilerRole.TEILER_PUBLIC)) {
+    if (teilerApp.roles && !teilerApp.roles.includes(TEILER_ROLE_PUBLIC)) {
       route.canActivate = [authGuard];
     }
 

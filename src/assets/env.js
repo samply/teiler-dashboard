@@ -19,8 +19,6 @@
     "TEILER_ORCHESTRATOR_HTTP_RELATIVE_PATH": "",
     "REPORTER_DEFAULT_TEMPLATE_ID": "ccp-qb",
     "EXPORTER_DEFAULT_TEMPLATE_ID": "ccp",
-    "TEILER_USER": "bridgehead-test",
-    "TEILER_ADMIN": "bridgehead-test-admin",
   };
 
 })(this);

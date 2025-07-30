@@ -1,11 +1,9 @@
 import {Route, Router, Routes} from "@angular/router";
 import {createRouterLinkForBase} from "../route/route-utils";
 
-export enum TeilerRole {
-  TEILER_PUBLIC = 'TEILER_PUBLIC',
-  TEILER_USER = 'TEILER_USER',
-  TEILER_ADMIN = 'TEILER_ADMIN'
-}
+export const TEILER_ROLE_ADMIN = 'ADMIN';
+export const TEILER_ROLE_USER = 'USER';
+export const TEILER_ROLE_PUBLIC = 'PUBLIC';
 
 export enum EmbeddedTeilerApps {
   QUALITY_REPORT = 'quality-report',
@@ -37,7 +35,7 @@ export interface TeilerApp {
   externLink: boolean;
   activated: boolean;
   local: boolean;
-  roles: TeilerRole[];
+  roles: string[];
   iconClass?: string;
   iconSourceUrl?: string;
   backendUrl?: string;
@@ -55,7 +53,7 @@ export abstract class EmbeddedTeilerApp implements TeilerApp {
   abstract iconClass: string | undefined;
   abstract iconSourceUrl: string | undefined;
   abstract title: string;
-  abstract roles: TeilerRole[];
+  abstract roles: string[];
 
   activated: boolean = false;
   backendUrl: string | undefined = undefined;
@@ -90,7 +88,7 @@ export class EmptyTeilerApp implements TeilerApp {
   local: boolean = true;
   name: string = "empty";
   order: undefined = undefined;
-  roles: TeilerRole[] = [];
+  roles: string[] = [];
   routerLink: string = "/empty";
   singleSpaLink: undefined = undefined;
   singleSpaMainJs: undefined = undefined;

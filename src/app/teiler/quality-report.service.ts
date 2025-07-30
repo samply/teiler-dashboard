@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
+import {EmbeddedTeilerApp, EmbeddedTeilerApps, TEILER_ROLE_ADMIN} from "./teiler-app";
 import {Router} from "@angular/router";
 import {Observable, of} from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -20,7 +20,7 @@ export class QualityReportService extends EmbeddedTeilerApp {
   iconClass: string = "bi bi-file-earmark-excel-fill";
   iconSourceUrl: string | undefined = undefined;
   title: string = $localize`Reporter`;
-  roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
+  roles: string[] = [TEILER_ROLE_ADMIN];
   httpHeaders: HttpHeaders = new HttpHeaders();
   httpHeadersXML: HttpHeaders = new HttpHeaders().append("Content-Type",  "application/xml");
   constructor(router: Router, private http: HttpClient) {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {EmbeddedTeilerApp, EmbeddedTeilerApps, TeilerRole} from "./teiler-app";
+import {EmbeddedTeilerApp, EmbeddedTeilerApps, TEILER_ROLE_ADMIN} from "./teiler-app";
     import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {ExporterQueries, ExportResponse, ExportStatus, QueryResponse} from "../embedded/exporter/exporter.component";
@@ -21,7 +21,7 @@ export class ExporterService extends EmbeddedTeilerApp {
 	iconClass: string | undefined = 'bi bi-download';
 	iconSourceUrl: string | undefined = undefined;
 	title: string = "Exporter";
-	roles: TeilerRole[] = [TeilerRole.TEILER_ADMIN];
+	roles: string[] = [TEILER_ROLE_ADMIN];
   httpHeaders: HttpHeaders = new HttpHeaders().append("x-api-key", environment.config.EXPORTER_API_KEY);
   httpHeadersXML: HttpHeaders = new HttpHeaders().append("x-api-key", environment.config.EXPORTER_API_KEY).append("Content-Type",  "application/xml");
 
