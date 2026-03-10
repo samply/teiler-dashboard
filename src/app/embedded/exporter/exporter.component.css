@@ -43,7 +43,7 @@ table {
 }
 mat-paginator {
   opacity: 0.8;
-  width: fit-content;
+  width: 47%;
   float: right;
   border-radius: 10px;
 }
@@ -144,10 +144,17 @@ button{
   display: none;
   border-radius: 10px;
 }
-.generate-button, .cancel-button, .download-button, .create-button, .edit-button, .execute-button, .cancel-edit-button {
+.generate-button, .cancel-button, .download-button, .edit-button, .execute-button, .cancel-edit-button {
   width: 200px;
   height: 45px;
   padding: 5px;
+  font-size: 14px;
+  color: black!important;
+}
+.create-button{
+  width: 47%;
+  height: 25%;
+  padding: 10px 25px;
   font-size: 14px;
   color: black!important;
 }
@@ -412,6 +419,7 @@ mat-expansion-panel-header {
   font-size: 16px;
 }
 .query-box {
+  width: 50%;
   padding: 15px 25px;
   margin: 15px 0;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
@@ -462,6 +470,8 @@ mat-expansion-panel-header {
   color: black;
 }
 .create {
+  position: relative;
+  top: 10px;
   display: flex;
   justify-content: flex-end;
 }

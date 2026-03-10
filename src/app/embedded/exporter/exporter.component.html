@@ -2,8 +2,8 @@
   <div class="title">
     <h2 i18n>Exporter Anfragen</h2>
   </div>
-  <div class="create">
-    <button class="create-button" mat-raised-button color="primary" (click)="createNewQuery()" i18n>neue Anfrage erstellen</button>
+  <div style="top: 55px;" class="create">
+    <button  class="create-button" mat-raised-button color="primary" (click)="createNewQuery()" i18n>neue Anfrage erstellen</button>
   </div>
   <mat-accordion class="button-accordion" style="display:none">
     <mat-expansion-panel [(expanded)]="panelOpenState">
@@ -387,6 +387,7 @@
   </div>
 
   <div class="box-container">
+
     <div *ngFor="let element of dataSource.data;" class="query-box" [ngClass]="{ 'box-expanded': element.boxExpanded }" (click)="element.boxExpanded = !element.boxExpanded">
       <ng-container *ngIf="!element.boxExpanded">
         <div style="width:30%">
@@ -403,6 +404,7 @@
           <a routerLink="{{getRouterLink(element.id.toString())}}"><i class="link-icon bi bi-box-arrow-in-right"></i></a>
         </div>
       </ng-container>
+
       <ng-container *ngIf="element.boxExpanded">
         <div style="width:30%">
           <div class="box-title">{{element.label}}</div>
