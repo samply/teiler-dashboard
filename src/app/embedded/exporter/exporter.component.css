@@ -152,12 +152,25 @@ button{
   color: black!important;
 }
 .create-button{
+  display: flex;
+
   width: 47%;
   height: 25%;
   padding: 10px 25px;
   font-size: 14px;
   color: black!important;
 }
+
+.info-box {
+  width: 47%;
+  margin-top: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+}
+
 .generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled {
   color: darkgrey!important;
 }
@@ -417,6 +430,8 @@ mat-expansion-panel-header {
 }
 .box-container {
   font-size: 16px;
+  position: relative;
+  top: -140px;
 }
 .query-box {
   width: 50%;
@@ -470,10 +485,11 @@ mat-expansion-panel-header {
   color: black;
 }
 .create {
-  position: relative;
   top: 10px;
   display: flex;
-  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  position: relative;
 }
 .maxwidth {
   display: inline-block;
@@ -484,3 +500,4 @@ mat-expansion-panel-header {
 .font {
   font-size: 14px;
 }
+
