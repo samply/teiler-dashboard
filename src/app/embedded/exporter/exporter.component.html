@@ -6,11 +6,15 @@
     <button  class="create-button" mat-raised-button color="primary" (click)="createNewQuery()" i18n>neue Anfrage erstellen</button>
 
     <div class="info-box">
-      <h3>Mein Inhalt</h3>
-      <p>Text hier...</p>
+        <h3 class="uebersicht-titel">Übersicht Ausführung</h3>
+      <div *ngFor="let element of dataSource.data; let index = index">
+        <div (click)="setActiveDataSource()">
+          <span>Titel: </span><span>{{element.label}}</span>
+        </div>
+        <span>Datum: </span><span>{{element.createdAt | date: 'mediumDate'}}</span>
+      </div>
     </div>
   </div>
-
 
   <mat-accordion class="button-accordion" style="display:none">
     <mat-expansion-panel [(expanded)]="panelOpenState">
@@ -396,25 +400,11 @@
 
   <div class="box-container">
 
-    <div *ngFor="let element of dataSource.data;" class="query-box" [ngClass]="{ 'box-expanded': element.boxExpanded }" (click)="element.boxExpanded = !element.boxExpanded">
-      <ng-container *ngIf="!element.boxExpanded">
-        <div style="width:30%">
-          <div class="box-title">{{element.label}}</div>
-          <div class="box-createdAt"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
-        </div>
-        <div style="width:30%">
-          <div class="box-query maxwidth"><span class="fw-bold">Anfrage: </span><span class="font">{{element.query}}</span></div>
-        </div>
-        <div style="width:30%">
-          <div class="box-format"><span class="fw-bold">Format: </span>{{element.format}}</div>
-        </div>
-        <div style="width:10%" class="box-link">
-          <a routerLink="{{getRouterLink(element.id.toString())}}"><i class="link-icon bi bi-box-arrow-in-right"></i></a>
-        </div>
-      </ng-container>
+    <div class="query-box">
+        <span>Titel:</span><span>{{dataSource.data[activeDataSource]}}</span>
+        <span>Abfrage:</span>
+        <span>Beschreibung:</span>
 
-      <ng-container *ngIf="element.boxExpanded">
-      </ng-container>
     </div>
   </div>
 

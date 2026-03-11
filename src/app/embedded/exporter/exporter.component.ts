@@ -77,6 +77,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
   private subscriptionUpdateQuery: Subscription | undefined
   private subscriptionCreateQuery: Subscription | undefined;
 
+  activeDataSource: number = 0;
+
   descriptionLoc = $localize`Beschreibung`
   queryLoc = $localize`Anfrage`
   outputLoc = $localize`Ausgabe`
@@ -548,5 +550,10 @@ export class ExporterComponent implements OnInit, OnDestroy {
     dialogConfig.data = element;
     dialogConfig.width = "1500px";
     this.dialog.open(EditQueryDialogComponent, dialogConfig);
+  }
+
+  setActiveDataSource(): void {
+    //this.activeDataSource = index
+    console.log("sdsfsdjf")
   }
 }
