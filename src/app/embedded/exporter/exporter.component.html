@@ -2,18 +2,41 @@
   <div class="title">
     <h2 i18n>Exporter Anfragen</h2>
   </div>
-  <div style="top: 55px;" class="create">
-    <button  class="create-button" mat-raised-button color="primary" (click)="createNewQuery()" i18n>neue Anfrage erstellen</button>
+
+  <div class="main-box">
+    <div class="query-box">
+      <span class="query-box-titel">Titel </span><span class="query-box-titel">{{dataSource.data[activeDataSource]?.label}}</span>
+      <span class="query-box-abfrage">Abfrage: </span><span>{{dataSource.data[activeDataSource]?.query}}</span>
+      <span class="query-box-beschreibung">Beschreibung: </span><span>{{dataSource.data[activeDataSource]?.description}}</span>
+      <span class="query-box-template">Template: </span><span>{{dataSource.data[activeDataSource]?.defaultTemplateId}}</span>
+      <span class="query-box-ausgabeformat">Ausgabeformat: </span><span>{{dataSource.data[activeDataSource]?.defaultOutputFormat}}</span>
+      <span class="query-box-ablaufsdatum">Ablaufdatum: </span><span>{{dataSource.data[activeDataSource]?.expirationDate | date: 'mediumDate'}}</span>
+      <span class="query-box-umgebungsvariablen">Umgebungsvariablen: </span><span>{{dataSource.data[activeDataSource]?.expirationDate}}</span>
+      <span class="query-box-anfrage">Anfrage: </span><span>{{dataSource.data[activeDataSource]?.query}}</span>
+      <span class="query-box-erstelltam">Erstellt am: </span><span>{{dataSource.data[activeDataSource]?.createdAt | date: 'mediumDate'}}</span>
+      <span class="query-box-anfragender">Anfragender: </span><span>{{dataSource.data[activeDataSource]?.contactId}}</span>
+      <span class="query-box-format">Format: </span><span>{{dataSource.data[activeDataSource]?.format}}</span>
+    </div>
+
+  <div class="create">
+    <button  class="create-button" mat-raised-button (click)="createNewQuery()" i18n>neue Anfrage erstellen</button>
 
     <div class="info-box">
         <h3 class="uebersicht-titel">Übersicht Ausführung</h3>
-      <div *ngFor="let element of dataSource.data; let index = index">
-        <div (click)="setActiveDataSource()">
-          <span>Titel: </span><span>{{element.label}}</span>
+
+      <div *ngFor="let element of dataSource.data; let index = index" class="info-box-entry">
+        <div (click)="setActiveDataSource(index)">
+          <span class="infoBoxTitel">Titel: </span>
+          <span>{{element.label}}</span>
         </div>
-        <span>Datum: </span><span>{{element.createdAt | date: 'mediumDate'}}</span>
-      </div>
+        <div>
+          <span class="infoBoxDatum">Datum: </span>
+          <span>{{element.createdAt | date: 'mediumDate'}}</span>
+        </div>
+        </div>
+
     </div>
+  </div>
   </div>
 
   <mat-accordion class="button-accordion" style="display:none">
@@ -395,17 +418,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleCheckbox($event, row)"></tr>
     </table>
-  </div>
-
-
-  <div class="box-container">
-
-    <div class="query-box">
-        <span>Titel:</span><span>{{dataSource.data[activeDataSource]}}</span>
-        <span>Abfrage:</span>
-        <span>Beschreibung:</span>
-
-    </div>
   </div>
 
   <div class="paginator">

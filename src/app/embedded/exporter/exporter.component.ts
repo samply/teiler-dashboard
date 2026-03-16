@@ -552,8 +552,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.dialog.open(EditQueryDialogComponent, dialogConfig);
   }
 
-  setActiveDataSource(): void {
-    //this.activeDataSource = index
-    console.log("sdsfsdjf")
+  setActiveDataSource(index:number): void {
+    this.activeDataSource = index
   }
 }
