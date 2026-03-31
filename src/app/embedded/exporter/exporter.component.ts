@@ -16,6 +16,8 @@ import {StepperOrientation} from "@angular/cdk/stepper";
 import {ViewportScroller} from "@angular/common";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {EditQueryDialogComponent} from "./edit-query-dialog/edit-query-dialog.component";
+import {ExporterExecutions} from "../execution/execution.component";
+import {ExecutionService} from "../../teiler/execution.service";
 
 export interface ExporterQueries {
   id: number;
@@ -35,8 +37,8 @@ export interface ExporterQueriesBox extends ExporterQueries {
   selectedQueryFormat: string;
   selectedOutputFormat: string;
   selectedTemplate: string
-  boxExpanded: boolean;
   contextArray: Context[];
+  loadedQueryID?: string;
 }
 export interface ExportResponse {
   responseUrl: URL;
@@ -66,7 +68,7 @@ export interface Context {
     standalone: false
 })
 export class ExporterComponent implements OnInit, OnDestroy {
-
+  private subscriptionGetExecutionList: Subscription | undefined
   private subscriptionGetQueries: Subscription | undefined
   private subscriptionGetTemplateIDs: Subscription | undefined
   private subscriptionGetOutputFormats: Subscription | undefined
@@ -76,6 +78,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   private subscriptionFetchLogs: Subscription | undefined
   private subscriptionUpdateQuery: Subscription | undefined
   private subscriptionCreateQuery: Subscription | undefined;
+  dataSourceExecutions = new MatTableDataSource<ExporterExecutions>();
 
   activeDataSource: number = 0;
 
@@ -111,7 +114,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   loadedQueryID: string = "";
   activeQueries: boolean = true;
   archivedQueries: boolean = true;
-  queryList:ExporterQueries[] = [];
+  queryList: ExporterQueries[] = [];
   executionLink: string = EmbeddedTeilerApps.EXECUTION;
   panelOpenState: boolean = false;
   contextArray: Context[] = [{key: "", value: ""}];
@@ -138,19 +141,21 @@ export class ExporterComponent implements OnInit, OnDestroy {
   stepperOrientation: Observable<StepperOrientation>;
   readonly dialog = inject(MatDialog);
 
-  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private viewport: ViewportScroller) {
+  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private viewport: ViewportScroller, private executionService: ExecutionService) {
     from(authService.loadUserProfile()).subscribe(authUserProfile => this.contactID = authUserProfile.email);
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
   }
+
   // @ts-ignore
   @ViewChild('paginator') paginator: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.viewport.scrollToPosition([0,0]);
+    this.viewport.scrollToPosition([0, 0]);
   }
+
   ngOnInit(): void {
     this.exportUrl = this.exporterService.getExporterURL() + "/";
     this.getQueries();
@@ -171,21 +176,25 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.subscriptionUpdateQuery?.unsubscribe();
     this.subscriptionCreateQuery?.unsubscribe();
     window.clearInterval(this.intervall);
+    this.subscriptionGetExecutionList?.unsubscribe();
   }
+
   ngAfterContentChecked() {
     //this.ref.detectChanges();
   }
+
   getQueries(): void {
     this.subscriptionGetQueries?.unsubscribe();
     this.subscriptionGetQueries = this.exporterService.getReports().subscribe({
-      next: (queryList:ExporterQueries[]) => {
+      next: (queryList: ExporterQueries[]) => {
         this.queryList = queryList;
         this.filterQueries();
       },
       error: (error) => {
         console.log(error);
       },
-      complete: () => {}
+      complete: () => {
+      }
     })
   }
 
@@ -222,7 +231,6 @@ export class ExporterComponent implements OnInit, OnDestroy {
           defaultTemplateId: query.defaultTemplateId,
           defaultOutputFormat: query.defaultOutputFormat,
           context: query.context,
-          boxExpanded: false,
           selectedOutputFormat: selectedOutputFormat,
           selectedTemplate: selectedTemplate,
           selectedQueryFormat: query.format,
@@ -230,15 +238,16 @@ export class ExporterComponent implements OnInit, OnDestroy {
         });
       }
     })
-    this.tempEQs.sort((a,b) =>  Number(b.createdAt) - Number(a.createdAt))
+    this.tempEQs.sort((a, b) => Number(b.createdAt) - Number(a.createdAt))
     this.dataSource.data = this.tempEQs;
     this.dataSource._updateChangeSubscription();
   }
 
-  openQuery(query:ExporterQueries): void {
+  openQuery(query: ExporterQueries): void {
     console.log(query)
 //    this.router.navigate([EmbeddedTeilerApps.EXECUTION, query.id], {state: { query: query.query, label: query.label, description: query.description, selectedQueryFormat: query.format, selectedOutputFormat: "", selectedTemplate: ""}})
   }
+
   transformDate(date: string): string {
     return new Date(date).getTime().toString();
   }
@@ -246,7 +255,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   transformDateForQuery(date: Date | undefined): string {
     if (date) {
       const offset = date.getTimezoneOffset();
-      date = new Date(date.getTime() - (offset*60*1000));
+      date = new Date(date.getTime() - (offset * 60 * 1000));
       return date.toISOString().split('T')[0];
     } else {
       return "";
@@ -278,9 +287,11 @@ export class ExporterComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.log(error);
       },
-      complete: () => {}
+      complete: () => {
+      }
     });
   }
+
   executeQuery() {
     this.subscriptionGenerateExport?.unsubscribe();
     this.subscriptionGenerateExport = this.exporterService.executeQuery(this.loadedQueryID, this.selectedOutputFormat, this.selectedTemplate, this.importTemplate).subscribe({
@@ -305,74 +316,79 @@ export class ExporterComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.log(error);
       },
-      complete: () => {}
+      complete: () => {
+      }
     });
   }
+
   saveQuery() {
     this.subscriptionUpdateQuery?.unsubscribe();
     this.subscriptionCreateQuery?.unsubscribe();
 
     this.buttonDisabled = true;
-    const expDate= this.transformDateForQuery(this.expirationDate);
+    const expDate = this.transformDateForQuery(this.expirationDate);
 
-      if (this.loadedQueryID !== "") {
-        this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.loadedQueryID, this.query, this.queryLabel, this.queryDescription, this.selectedOutputFormat, this.selectedTemplate, this.getContext(), expDate, this.importTemplate).subscribe({
-          next: (response: any) => {
-            this.getQueries();
-            this.editModus = false;
-            this.buttonDisabled = false;
-            if (this.executeOnSaving) {
-              this.executeQuery();
-            }
-          },
-          error: (error) => {
-            console.log(error);
-            this.editModus = false;
-            this.buttonDisabled = false;
-          },
-          complete: () => {}
-        });
-      } else {
-        this.subscriptionCreateQuery = this.exporterService.createQuery(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.contactID, this.selectedTemplate, this.getContext(), expDate, this.importTemplate).subscribe({
-          next: (response: QueryResponse) => {
-            this.getQueries();
-            this.editModus = false;
-            this.buttonDisabled = false;
-            if (this.executeOnSaving) {
-              this.loadedQueryID = response.queryId;
-              this.executeQuery();
-            }
+    if (this.loadedQueryID !== "") {
+      this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.loadedQueryID, this.query, this.queryLabel, this.queryDescription, this.selectedOutputFormat, this.selectedTemplate, this.getContext(), expDate, this.importTemplate).subscribe({
+        next: (response: any) => {
+          this.getQueries();
+          this.editModus = false;
+          this.buttonDisabled = false;
+          if (this.executeOnSaving) {
+            this.executeQuery();
+          }
+        },
+        error: (error) => {
+          console.log(error);
+          this.editModus = false;
+          this.buttonDisabled = false;
+        },
+        complete: () => {
+        }
+      });
+    } else {
+      this.subscriptionCreateQuery = this.exporterService.createQuery(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.contactID, this.selectedTemplate, this.getContext(), expDate, this.importTemplate).subscribe({
+        next: (response: QueryResponse) => {
+          this.getQueries();
+          this.editModus = false;
+          this.buttonDisabled = false;
+          if (this.executeOnSaving) {
+            this.loadedQueryID = response.queryId;
+            this.executeQuery();
+          }
 
-          },
-          error: (error) => {
-            console.log(error);
-            this.editModus = false;
-            this.buttonDisabled = false;
-          },
-          complete: () => {}
-        });
-      }
+        },
+        error: (error) => {
+          console.log(error);
+          this.editModus = false;
+          this.buttonDisabled = false;
+        },
+        complete: () => {
+        }
+      });
+    }
 
   }
 
   getTemplateIDs(): void {
     this.subscriptionGetTemplateIDs?.unsubscribe();
     this.subscriptionGetTemplateIDs = this.exporterService.getExporterTemplates().subscribe({
-      next: (templateList:string[]) => {
+      next: (templateList: string[]) => {
         templateList.forEach((template) => {
           this.templateIDs.push({value: template, display: template})
         })
-        this.templateIDs.push({value: "custom", display:"Eigenes Template"})
+        this.templateIDs.push({value: "custom", display: "Eigenes Template"})
       },
       error: (error) => {
         console.log(error);
       }
     })
   }
+
   getOutputFormats(): void {
     this.subscriptionGetOutputFormats?.unsubscribe();
     this.subscriptionGetOutputFormats = this.exporterService.getOutputFormats().subscribe({
-      next: (formatList:string[]) => {
+      next: (formatList: string[]) => {
         formatList.forEach((format) => {
           this.outputFormats.push({value: format, display: format.toLowerCase()})
         })
@@ -382,10 +398,11 @@ export class ExporterComponent implements OnInit, OnDestroy {
       }
     })
   }
+
   getQueryFormats(): void {
     this.subscriptionGetQueryFormats?.unsubscribe();
     this.subscriptionGetQueryFormats = this.exporterService.getQueryFormats().subscribe({
-      next: (formatList:string[]) => {
+      next: (formatList: string[]) => {
         formatList.forEach((format) => {
           this.queryFormats.push({value: format, display: format.toLowerCase()})
         })
@@ -395,6 +412,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
       }
     })
   }
+
   doImportFromFile(event: Event): void {
     // @ts-ignore
     const file: File = (event.target as HTMLInputElement).files[0];
@@ -403,6 +421,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     reader.readAsText(file);
     this.fileName = file.name;
   }
+
   onReaderLoad(event: any): void {
     this.importTemplate = event.target.result;
     //this.generateExport();
@@ -413,9 +432,11 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.buttonDisabled = false;
     this.exportStatus = ExportStatus.EMPTY;
   }
+
   generateButtonStatus(): void {
-    this.buttonDisabled = (this.queryLabel === "")  || (this.query === "") || (this.queryDescription === "");
+    this.buttonDisabled = (this.queryLabel === "") || (this.query === "") || (this.queryDescription === "");
   }
+
   downloadTemplate(): void {
     window.location.href = this.exportUrl + 'template?template-id=' + this.selectedTemplate;
   }
@@ -426,10 +447,11 @@ export class ExporterComponent implements OnInit, OnDestroy {
       this.loadQuery();
     }
   }
+
   loadQuery(): void {
     const query: ExporterQueries[] = this.selection.selected
 
-    if(query.length > 0) {
+    if (query.length > 0) {
       this.query = query[0].query;
       this.queryDescription = query[0].description;
       this.queryLabel = query[0].label;
@@ -454,8 +476,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
         this.contextArray = [{key: "", value: ""} as Context];
       }
 
-    }
-    else {
+    } else {
       this.query = "";
       this.queryDescription = "";
       this.queryLabel = "";
@@ -471,30 +492,34 @@ export class ExporterComponent implements OnInit, OnDestroy {
     }
   }
 
-  createNewQuery(): void {
+  createNewQuery(modus:string): void {
+    var isCreate:boolean = true
+    if(modus === "edit"){
+      isCreate = false
+    }
     this.editModus = true;
     let contactId: string = ""
     from(this.authService.loadUserProfile()).subscribe(keycloakProfile => contactId = keycloakProfile.email);
 
     const newQuery: ExporterQueriesBox = {
+      loadedQueryID: isCreate ? undefined : this.dataSource.data[this.activeDataSource].id.toString(),
       id: this.tempEQs.length,
-      label: "",
-      description: "",
-      query: "",
-      contactId: contactId,
-      selectedTemplate: environment.config.EXPORTER_DEFAULT_TEMPLATE_ID,
-      selectedOutputFormat: "EXCEL",
-      selectedQueryFormat: "FHIR_SEARCH",
-      expirationDate: "",
+      label: isCreate ? "" : this.dataSource.data[this.activeDataSource].label,
+      description: isCreate ? "" : this.dataSource.data[this.activeDataSource].description,
+      query: isCreate ? "" : this.dataSource.data[this.activeDataSource].query,
+      contactId: isCreate ? contactId : this.dataSource.data[this.activeDataSource].contactId,
+      selectedTemplate: isCreate ? environment.config.EXPORTER_DEFAULT_TEMPLATE_ID : this.dataSource.data[this.activeDataSource].selectedTemplate,
+      selectedOutputFormat: isCreate ? "EXCEL" : this.dataSource.data[this.activeDataSource].selectedOutputFormat,
+      selectedQueryFormat: isCreate ? "FHIR_SEARCH" : this.dataSource.data[this.activeDataSource].selectedQueryFormat,
+      expirationDate: isCreate ? "" : this.dataSource.data[this.activeDataSource].expirationDate,
       contextArray: [{key: "", value: ""} as Context],
-      format: "",
-      createdAt: "",
-      archivedAt: "",
-      context: "",
-      defaultTemplateId: "",
-      defaultOutputFormat: "",
-      boxExpanded: false
-  }
+      format: isCreate ? "" : this.dataSource.data[this.activeDataSource].format,
+      createdAt: isCreate ? "" : this.dataSource.data[this.activeDataSource].createdAt,
+      archivedAt: isCreate ? "" :this.dataSource.data[this.activeDataSource].archivedAt,
+      context: isCreate ? "" : this.dataSource.data[this.activeDataSource].context,
+      defaultTemplateId: isCreate ? "" : this.dataSource.data[this.activeDataSource].defaultTemplateId,
+      defaultOutputFormat: isCreate ? "" : this.dataSource.data[this.activeDataSource].defaultOutputFormat,
+    }
     this.selection.clear();
     this.generateButtonStatus();
     this.editDialog(newQuery)
@@ -505,15 +530,19 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.panelOpenState = true;
     this.generateButtonStatus();
   }
+
   saveButtonMenu(modus: boolean) {
     this.executeOnSaving = modus;
   }
+
   cancelEdit(): void {
     this.editModus = false;
   }
+
   getRouterLink(id: string): string {
     return '/' + createRouterLinkForBase(this.executionLink + '/' + id);
   }
+
   addContextInput(element: any, index2: number): void {
     const scrollElement = element.target.parentNode.parentNode.parentNode;
     this.contextArray.push({key: "", value: ""} as Context);
@@ -522,13 +551,16 @@ export class ExporterComponent implements OnInit, OnDestroy {
     }, 50);
     this.showPlusButton = false;
   }
+
   deleteContextInput(index: number): void {
     this.contextArray.splice(index, 1);
-    this.checkContext(this.contextArray.length-1);
+    this.checkContext(this.contextArray.length - 1);
   }
+
   checkContext(index: number) {
     this.showPlusButton = this.contextArray[index].key.length > 0 && this.contextArray[index].value.length > 0;
   }
+
   getContext(): string {
     let context: string = "";
     this.contextArray.forEach(contextPair => {
@@ -549,10 +581,45 @@ export class ExporterComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = true;
     dialogConfig.data = element;
     dialogConfig.width = "1500px";
-    this.dialog.open(EditQueryDialogComponent, dialogConfig);
+    this.dialog.open(EditQueryDialogComponent, dialogConfig).afterClosed().subscribe((isSaved:boolean)=>{
+      if(isSaved){
+        this.getQueries()
+      }
+    });
   }
 
-  setActiveDataSource(index:number): void {
+  setActiveDataSource(index: number): void {
     this.activeDataSource = index
+    const id = this.dataSource.data[index].id
+    this.getQueryExecutions(id)
+  }
+
+  getQueryExecutions(queryID: number): void {
+    this.subscriptionGetExecutionList?.unsubscribe();
+    this.subscriptionGetExecutionList = this.executionService.getExecutionList(queryID).subscribe({
+      next: (execs) => {
+        const tempExecs: ExporterExecutions[] = [];
+        execs.forEach((execution) => {
+          if (execution.queryId == queryID) {
+            tempExecs.push({
+              id: execution.id,
+              queryId: execution.queryId,
+              templateId: execution.templateId,
+              outputFormat: execution.outputFormat,
+              status: execution.status,
+              executedAt: this.transformDate(execution.executedAt)
+            })
+            tempExecs.sort((a, b) => Number(b.executedAt) - Number(a.executedAt))
+            this.dataSourceExecutions.data = tempExecs;
+            this.dataSourceExecutions._updateChangeSubscription();
+          }
+        })
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
   }
 }

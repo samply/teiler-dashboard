@@ -5,24 +5,34 @@
 
   <div class="main-box">
     <div class="query-box">
-      <span class="query-box-titel">Titel </span><span class="query-box-titel">{{dataSource.data[activeDataSource]?.label}}</span>
+      <span class="query-box-titel">Titel: </span><span class="query-box-titel">{{dataSource.data[activeDataSource]?.label}}</span>
       <span class="query-box-abfrage">Abfrage: </span><span>{{dataSource.data[activeDataSource]?.query}}</span>
       <span class="query-box-beschreibung">Beschreibung: </span><span>{{dataSource.data[activeDataSource]?.description}}</span>
       <span class="query-box-template">Template: </span><span>{{dataSource.data[activeDataSource]?.defaultTemplateId}}</span>
       <span class="query-box-ausgabeformat">Ausgabeformat: </span><span>{{dataSource.data[activeDataSource]?.defaultOutputFormat}}</span>
-      <span class="query-box-ablaufsdatum">Ablaufdatum: </span><span>{{dataSource.data[activeDataSource]?.expirationDate | date: 'mediumDate'}}</span>
-      <span class="query-box-umgebungsvariablen">Umgebungsvariablen: </span><span>{{dataSource.data[activeDataSource]?.expirationDate}}</span>
+      <span class="query-box-ablaufsdatum">Ablaufdatum: </span><span>{{dataSource.data[activeDataSource]?.expirationDate!== "0" ? (dataSource.data[activeDataSource]?.expirationDate | date: 'mediumDate') : "keine Angabe"}}</span>
+      <span class="query-box-umgebungsvariablen">Umgebungsvariablen: </span><span>{{dataSource.data[activeDataSource]?.context}}</span>
       <span class="query-box-anfrage">Anfrage: </span><span>{{dataSource.data[activeDataSource]?.query}}</span>
       <span class="query-box-erstelltam">Erstellt am: </span><span>{{dataSource.data[activeDataSource]?.createdAt | date: 'mediumDate'}}</span>
       <span class="query-box-anfragender">Anfragender: </span><span>{{dataSource.data[activeDataSource]?.contactId}}</span>
       <span class="query-box-format">Format: </span><span>{{dataSource.data[activeDataSource]?.format}}</span>
+      <div class="edit-ausfuehren">
+        <button class="query-box-edit" (click)="createNewQuery('edit')">Edit</button>
+        <button class="query-box-ausfuehren">Ausführen</button>
+      </div>
+      <div class="execution-row" *ngFor="let element of dataSourceExecutions.data; let index = index" >
+        <span><span class="execution-row-date">Ausgeführt am: </span>{{element.executedAt | date: 'mediumDate'}}</span>
+        <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
+        <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
+        <span><span class="execution-row-format">Ausgabeformat: </span>  {{element.outputFormat}}</span>
+      </div>
     </div>
 
   <div class="create">
-    <button  class="create-button" mat-raised-button (click)="createNewQuery()" i18n>neue Anfrage erstellen</button>
+    <button  class="create-button" mat-raised-button (click)="createNewQuery('create')" i18n>neue Anfrage erstellen</button>
 
     <div class="info-box">
-        <h3 class="uebersicht-titel">Übersicht Ausführung</h3>
+        <h3 class="uebersicht-titel">Übersicht Anfragen</h3>
 
       <div *ngFor="let element of dataSource.data; let index = index" class="info-box-entry">
         <div (click)="setActiveDataSource(index)">
@@ -44,7 +54,7 @@
       <mat-expansion-panel-header>
         <div class="create-buttons">
           <div class="buttons-left">
-            <button class="create-button" mat-raised-button color="primary" [disabled]="editModus" (click)="createNewQuery();$event.stopPropagation();" i18n>neue Anfrage erstellen</button>
+            <button class="create-button" mat-raised-button color="primary" [disabled]="editModus" (click)="createNewQuery('create');$event.stopPropagation();" i18n>neue Anfrage erstellen</button>
             <button class="edit-button" mat-raised-button color="primary" [disabled]="editButtonDisabled" [ngClass]="{ 'visible-button': ((!editButtonDisabled || panelOpenState ) && !editModus) }" (click)="editQuery();$event.stopPropagation();" ><span i18n>Anfrage editieren</span></button>
             <button class="cancel-edit-button" mat-raised-button color="primary" [ngClass]="{ 'visible-button': (editModus) }" (click)="cancelEdit();$event.stopPropagation();" i18n>abbrechen</button>
           </div>
@@ -121,7 +131,7 @@
                       <input matInput type="text"
                              [(ngModel)]="queryLabel"
                              (ngModelChange)="generateButtonStatus()"
-                             [disabled] = "!editModus"
+                              [disabled] = "!editModus"
                              [ngModelOptions]="{standalone: true}"
                       >
                     </mat-form-field>
@@ -143,7 +153,6 @@
                     </div>
                   </div>
                   <div class="FormGroup-description-div">
-
                       <span class="stepper-help-header" i18n>Erstellen Sie Ihre Anfrage in 4 Schritten: </span>
                         <ol>
                           <li>
