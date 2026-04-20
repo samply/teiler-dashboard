@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
-import {Context, DropdownFormat, ExporterQueriesBox} from "../exporter.component";
+import {Context, DropdownFormat, ExporterQueriesBox, QueryResponse} from "../exporter.component";
 import {map, Observable, Subscription} from "rxjs";
 import {StepperOrientation} from "@angular/cdk/stepper";
 import {FormBuilder} from "@angular/forms";
@@ -25,6 +25,9 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   private subscriptionGetOutputFormats: Subscription | undefined
   private subscriptionGetQueryFormats: Subscription | undefined
   private subscriptionGetTemplateIDs: Subscription | undefined
+  private subscriptionUpdateQuery: Subscription | undefined
+  private subscriptionCreateQuery: Subscription | undefined;
+
   element: ExporterQueriesBox
   showStepper: boolean = true
   descriptionLoc = $localize`Beschreibung`
@@ -52,6 +55,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   fifthFormGroup = this._formBuilder.group({
 
   });
+  executeOnSaving: boolean = false;
   buttonDisabled: boolean = true;
   editModus: boolean = true;
   stepperOrientation: Observable<StepperOrientation>;
@@ -66,7 +70,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   exportStatus: ExportStatus = ExportStatus.EMPTY;
   exportLog: string[] = [];
   selectedOutputFormat: string = "EXCEL";
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ExporterQueriesBox, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, void>, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ExporterQueriesBox, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, boolean>, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver) {
     this.element = data
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -85,6 +89,8 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     this.subscriptionGetOutputFormats?.unsubscribe();
     this.subscriptionGetQueryFormats?.unsubscribe();
     this.subscriptionGetTemplateIDs?.unsubscribe();
+    this.subscriptionUpdateQuery?.unsubscribe();
+    this.subscriptionCreateQuery?.unsubscribe();
   }
 
   generateButtonStatus(): void {
@@ -160,11 +166,85 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   downloadTemplate(): void {
     window.location.href = this.exportUrl + 'template?template-id=' + this.element.selectedTemplate;
   }
-  saveQuery(): void {
+
+  saveQuery() {
+    this.subscriptionUpdateQuery?.unsubscribe();
+    this.subscriptionCreateQuery?.unsubscribe();
+
+    this.buttonDisabled = true;
+    //const expDate= this.transformDateForQuery(this.element.expirationDate);
+
+    if (this.element.loadedQueryId) {
+      this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.element.loadedQueryId, this.element.query, this.element.label, this.element.description, this.element.selectedOutputFormat, this.element.selectedTemplate, this.getContext(), this.element.expirationDate, this.importTemplate).subscribe({
+        next: (response: any) => {
+          //this.getQueries();
+          this.editModus = false;
+          this.buttonDisabled = false;
+          if (this.executeOnSaving) {
+            this.executeQuery();
+          }
+        },
+        error: (error) => {
+          console.log(error);
+          this.editModus = false;
+          this.buttonDisabled = false;
+        },
+        complete: () => {
+          this.dialogRef.close(true)
+        }
+      });
+    } else {
+      this.subscriptionCreateQuery = this.exporterService.createQuery(this.element.query, this.element.label, this.element.description, this.element.selectedQueryFormat, this.element.selectedOutputFormat, this.element.contactId, this.element.selectedTemplate, this.getContext(), this.element.expirationDate, this.importTemplate).subscribe({
+        next: (response: QueryResponse) => {
+          //this.getQueries();
+          this.editModus = false;
+          this.buttonDisabled = false;
+          if (this.executeOnSaving) {
+            this.element.loadedQueryId = response.queryId;
+            this.executeQuery();
+          }
+
+        },
+        error: (error) => {
+          console.log(error);
+          this.editModus = false;
+          this.buttonDisabled = false;
+        },
+        complete: () => {
+          this.dialogRef.close(true)
+        }
+      });
+    }
 
   }
+
+
   executeQuery(): void {
     console.log(this.showStepper)
     this.showStepper = false
+  }
+
+  transformDateForQuery(date: Date | undefined): string {
+    if (date) {
+      const offset = date.getTimezoneOffset();
+      date = new Date(date.getTime() - (offset*60*1000));
+      return date.toISOString().split('T')[0];
+    } else {
+      return "";
+    }
+  }
+
+  getContext(): string {
+    let context: string = "";
+    this.element.contextArray.forEach(contextPair => {
+      if (contextPair.key.length !== 0 && contextPair.value.length !== 0) {
+        if (context.length !== 0) {
+          context += ";"
+        }
+        context += contextPair.key + "=" + contextPair.value;
+      }
+    })
+    //return Buffer.from(context).toString("base64");
+    return btoa(context);
   }
 }

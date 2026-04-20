@@ -16,6 +16,8 @@ import {StepperOrientation} from "@angular/cdk/stepper";
 import {ViewportScroller} from "@angular/common";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {EditQueryDialogComponent} from "./edit-query-dialog/edit-query-dialog.component";
+import {ExporterExecutions} from "../execution/execution.component";
+import {ExecutionService} from "../../teiler/execution.service";
 
 export interface ExporterQueries {
   id: number;
@@ -37,6 +39,7 @@ export interface ExporterQueriesBox extends ExporterQueries {
   selectedTemplate: string
   boxExpanded: boolean;
   contextArray: Context[];
+  loadedQueryId?: string;
 }
 export interface ExportResponse {
   responseUrl: URL;
@@ -76,6 +79,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   private subscriptionFetchLogs: Subscription | undefined
   private subscriptionUpdateQuery: Subscription | undefined
   private subscriptionCreateQuery: Subscription | undefined;
+  private subscriptionGetExecutionList: Subscription | undefined
 
   activeDataSource: number = 0;
 
@@ -86,6 +90,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = ['#', 'timestamp', 'querytitle', 'querysource', 'format', 'executions'];
   dataSource = new MatTableDataSource<ExporterQueriesBox>();
+  dataSourceExecutions = new MatTableDataSource<ExporterExecutions>();
   buttonDisabled: boolean = true;
   editButtonDisabled: boolean = true;
   editModus: boolean = false;
@@ -138,7 +143,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   stepperOrientation: Observable<StepperOrientation>;
   readonly dialog = inject(MatDialog);
 
-  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private viewport: ViewportScroller) {
+  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private viewport: ViewportScroller,private executionService: ExecutionService) {
     from(authService.loadUserProfile()).subscribe(authUserProfile => this.contactID = authUserProfile.email);
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -170,6 +175,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.subscriptionFetchLogs?.unsubscribe();
     this.subscriptionUpdateQuery?.unsubscribe();
     this.subscriptionCreateQuery?.unsubscribe();
+    this.subscriptionGetExecutionList?.unsubscribe();
     window.clearInterval(this.intervall);
   }
   ngAfterContentChecked() {
@@ -549,10 +555,44 @@ export class ExporterComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = true;
     dialogConfig.data = element;
     dialogConfig.width = "1500px";
-    this.dialog.open(EditQueryDialogComponent, dialogConfig);
+    this.dialog.open(EditQueryDialogComponent, dialogConfig).afterClosed().subscribe((isSaved:boolean) => {
+      if(isSaved){
+        this.getQueries()
+      }
+    });
   }
 
   setActiveDataSource(index:number): void {
     this.activeDataSource = index
+    const id = this.dataSource.data[index].id
+    this.getQueryExecutions(id)
+  }
+
+  getQueryExecutions(queryID: number): void {
+    this.subscriptionGetExecutionList?.unsubscribe();
+    this.subscriptionGetExecutionList = this.executionService.getExecutionList(queryID).subscribe({
+      next: (execs) => {
+        const tempExecs: ExporterExecutions[] = [];
+        execs.forEach((execution) => {
+          if (execution.queryId == queryID) {
+            tempExecs.push({
+              id: execution.id,
+              queryId: execution.queryId,
+              templateId: execution.templateId,
+              outputFormat: execution.outputFormat,
+              status: execution.status,
+              executedAt: this.transformDate(execution.executedAt)
+            })
+            tempExecs.sort((a,b) =>  Number(b.executedAt) - Number(a.executedAt))
+            this.dataSourceExecutions.data = tempExecs;
+            this.dataSourceExecutions._updateChangeSubscription();
+          }
+        })
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {}
+    })
   }
 }
