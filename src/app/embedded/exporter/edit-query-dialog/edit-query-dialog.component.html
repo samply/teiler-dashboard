@@ -35,7 +35,7 @@
           </div>
           <div class="FormGroup-description-div">
 
-            <span class="stepper-help-header" i18n>Erstellen Sie Ihre Anfrage in 4 Schritten: </span>
+              <span class="stepper-help-header" i18n>Erstellen Sie Ihre Anfrage in 4 Schritten: </span>
             <ol>
               <li>
                 <span class="stepper-help-text" i18n>Versehen Sie sie mit einer Überschrift und einer Beschreibung.</span>
@@ -258,9 +258,8 @@
     </mat-step>
     <mat-step [stepControl]="fifthFormGroup" [label]="summaryLoc" completed="false">
       <div class="fifthFormGroup">
-        <div style="width:40%">
+        <div style="width:50%">
           <div class="box-title"><span class="fw-bold">Titel: </span>{{element.label}}</div>
-          <div class="box-createdAt"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
           <table class="box-table">
             <tbody>
             <tr>
@@ -268,16 +267,12 @@
               <td class="table-right">{{element.selectedTemplate}}</td>
             </tr>
             <tr>
+              <td class="table-left">Erstellt am: </td>
+              <td class="table-right">{{element.createdAt | date: 'medium'}}</td>
+            </tr>
+            <tr>
               <td class="table-left" i18n>Anfrageformat:</td>
               <td class="table-right">{{element.selectedQueryFormat}}</td>
-            </tr>
-            <tr>
-              <td class="table-left" i18n>Ausgabeformat:</td>
-              <td class="table-right">{{element.selectedOutputFormat}}</td>
-            </tr>
-            <tr>
-              <td class="table-left" i18n>Ablaufdatum:</td>
-              <td class="table-right">{{element.expirationDate | date: 'mediumDate'}}</td>
             </tr>
             <tr *ngFor="let context of element.contextArray; let i=index">
               <td class="table-left table-env"><span *ngIf="i === 0" i18n>Umgebungsvariablen:</span></td>
@@ -288,11 +283,30 @@
         </div>
         <div style="width:50%">
           <div class="box-description"><span class="fw-bold">Beschreibung: </span>{{element.description}}</div>
-          <div class="box-contactId"><span class="fw-bold">Anfragende/r: </span>{{element.contactId}}</div>
-          <div class="box-query"><span class="fw-bold">Anfrage: </span>{{element.query}}</div>
+          <table class="box-table">
+            <tbody>
+            <tr>
+              <td class="table-left" i18n>Anfrage:</td>
+              <td class="table-right">{{element.query}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Anfragende/r:</td>
+              <td class="table-right">{{element.contactId}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Ablaufdatum:</td>
+              <td class="table-right">{{element.expirationDate | date: 'mediumDate'}}</td>
+            </tr>
+            <tr>
+              <td class="table-left" i18n>Ausgabeformat:</td>
+              <td class="table-right">{{element.selectedOutputFormat}}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="stepper-buttons" style="margin:5px 20px">
+
+      <div class="stepper-buttons" style="margin: 20px 20px 0px 20px">
         <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
         <div style="display:flex">
           <button class="save-button" mat-raised-button color="primary" (click)="saveQuery()" ><span i18n>Speichern</span></button>
@@ -304,10 +318,11 @@
 </div>
 </ng-container>
 <ng-container *ngIf="!showStepper">
+  <div class="overview-info" style="display: flex"><span class="fw-bold">Ausführung</span></div>
   <div class="short-info">
     <div style="width:30%">
       <div class="box-title">{{element.label}}</div>
-      <div class="box-createdAt"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
+      <div class="box-createdAt" style="font-weight: 700"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
     </div>
     <div style="width:40%;margin-right:10%">
       <div class="box-query maxwidth"><span class="fw-bold">Anfrage: </span><span class="font">{{element.query}}</span></div>
@@ -316,22 +331,6 @@
       <div class="box-format"><span class="fw-bold">Format: </span>{{element.format}}</div>
     </div>
   </div>
-  <div class="stepper-buttons" style="margin:5px 30px">
-    <button class="back-button" mat-raised-button color="primary" (click)="showStepper=true"><span i18n>Anfrage editieren</span></button>
-    <div style="display:flex">
-      <mat-form-field class="outputformat_dropdown">
-        <mat-label i18n>Ausgabeformat</mat-label>
-        <select class="outputformat-select"
-                matNativeControl
-                [(ngModel)]="selectedOutputFormat"
-                [ngModelOptions]="{standalone: true}">
-          <option *ngFor="let id of outputFormats" [value]="id.value">{{ id.display }}</option>
-        </select>
-      </mat-form-field>
-      <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" ><span i18n>Ausführen</span></button>
-    </div>
-  </div>
-
 
   <div class="status-log-div">
     <div class="status">
@@ -354,9 +353,24 @@
           <div *ngFor="let log of exportLog">{{ log }}</div>
         </div>
       </div>
+
+    <div class="stepper-buttons-log" style="margin:20px 30px">
+      <button class="back-button" mat-raised-button color="primary" (click)="showStepper=true"><span i18n>Anfrage editieren</span></button>
+      <div style="display:flex">
+        <mat-form-field class="outputformat_dropdown">
+          <mat-label i18n>Ausgabeformat</mat-label>
+          <select class="outputformat-select"
+                  matNativeControl
+                  [(ngModel)]="selectedOutputFormat"
+                  [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let id of outputFormats" [value]="id.value">{{ id.display }}</option>
+          </select>
+        </mat-form-field>
+        <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" ><span i18n>Ausführen</span></button>
+      </div>
     </div>
   </div>
-
+  </div>
   <div class="executions">
 
   </div>

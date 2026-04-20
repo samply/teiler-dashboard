@@ -163,7 +163,7 @@ button{
 }
 .info-box {
   width: 100%;
-  height: 20rem;
+  height: 25.8rem;
   padding: 15px 25px;
   margin: 15px 0;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
@@ -176,6 +176,10 @@ button{
 }
 .info-box-entry{
   border-bottom: 1px solid darkgrey;
+  display: flex;
+  padding: 0rem 15rem 0rem 0rem;
+  justify-content: space-between;
+  margin: 3px 0px 3px 0px;
 }
 .query-box-ausfuehren:hover, .query-box-edit:hover{
   transform: scale(1.01);
@@ -203,6 +207,10 @@ button{
   font-weight: bold;
   font-size: larger;
 }
+.infoBoxTitel, .infoBoxDatum {
+  margin-right: 10px;
+  margin-left: 10px;
+}
 .execution-row-date,
 .execution-row-status,
 .execution-row-templateId,
@@ -229,7 +237,7 @@ button{
   color: darkgrey!important;
 }
 .generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .plus-button, .minus-button, .next-button, .back-button, .query-box-edit, .query-box-ausfuehren {
-  background-color: rgba(73, 83, 83, 0.39) !important;
+  background-color: #D3D3D3 !important;
   border-style: none;
 }
 .download-button, .edit-button, .cancel-edit-button, .upload-button {
@@ -360,7 +368,7 @@ mat-expansion-panel-header {
 }
 .summary-box {
   width: 30%;
-  background-color: rgba(197, 197, 197, 0.2);
+  background-color: #D3D3D3;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   margin-right: 5px;
   height: 480px;
@@ -503,7 +511,6 @@ mat-expansion-panel-header {
 }
 .query-box {
   width: 50%;
-  height: auto;
   padding: 15px 25px;
   margin: 0px 0px 15px 0px;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);

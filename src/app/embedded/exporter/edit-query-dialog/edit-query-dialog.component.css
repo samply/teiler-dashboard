@@ -120,7 +120,7 @@ button{
   color: darkgrey!important;
 }
 .generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .plus-button, .minus-button, .next-button, .back-button, .save-button, .exec-button {
-  background-color: #2BCDD563 !important;
+  background-color: #D3D3D3 !important;
 }
 .download-button, .edit-button, .cancel-edit-button, .upload-button, .exec-button {
   margin-left: 2%;
@@ -291,7 +291,13 @@ mat-expansion-panel-header {
 .stepper-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: auto;
+  margin: 20px 0px 0px 0px;
+}
+.stepper-buttons-log{
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  width: 50%;
 }
 .form-content {
   height: 350px;
@@ -310,6 +316,15 @@ mat-expansion-panel-header {
   font-size: 11pt;
   max-height: 315px;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.7rem;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #696969;
+  color: white;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .FormGroup-description-div ul {
   margin-top: 0;
@@ -362,8 +377,9 @@ mat-expansion-panel-header {
 .description-textfield, .query-textfield {
   height: 114px;
 }
-.box-title {
+.box-title, .box-description {
   font-weight: bold;
+  font-size: x-large;
 }
 .box-createdAt, .box-contactId {
   font-size: 12px;
@@ -371,12 +387,15 @@ mat-expansion-panel-header {
 .box-contactId {
   margin-bottom: 20px;
 }
-.box-table {
+.box-table, .table-side-right {
   margin-top: 20px;
   text-align: left;
-  font-size: 14px;
+  font-size: large;
 }
-.box-table td {
+.table-side-right {
+  padding: 3px 10px 3px 0;
+}
+.box-table td{
   padding: 3px 10px 3px 0;
 }
 .box-table .table-left {
@@ -386,15 +405,32 @@ mat-expansion-panel-header {
   display: flex;
   margin: 30px 20px 0px 20px;
   height: 320px;
+  border: solid 1px black;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #696969;
+  color: white;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .short-info {
   display: flex;
   margin: 30px 30px 0px 30px;
-  height: 120px;
+  height: 100px;
+  border: solid 1px;
+  border-radius: 8px;
+  padding: 10px;
+  align-items: center;
+  color: white;
+  background-color: #696969;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+.overview-info {
+  justify-content: center;
+  margin-top: 20px;
+  font-size: x-large;
 }
 
 .log-div {
-  margin: 20px 0;
   display:flex;
 }
 .button-status {
@@ -406,7 +442,7 @@ mat-expansion-panel-header {
 }
 .log-exporter {
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  width: 100%;
+  width: 50%;
   padding: 1% 2%;
   background-color: white;
   height: 230px;
