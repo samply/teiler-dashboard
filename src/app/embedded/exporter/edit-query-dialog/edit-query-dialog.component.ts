@@ -77,6 +77,9 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
 
   }
   ngOnInit(): void {
+    console.log(this.element)
+    this.element.expirationDate = new Date(+this.element.expirationDate).toISOString()
+    console.log(this.element.expirationDate)
     this.exportUrl = this.exporterService.getExporterURL() + "/";
     this.getTemplateIDs();
     this.getOutputFormats();
@@ -185,8 +188,9 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     this.buttonDisabled = true;
     // const expDate = this.transformDateForQuery(this.expirationDate);
 
+    const date = this.transformDateForQuery(this.element.expirationDate as unknown as Date)
     if (this.element.loadedQueryID) {
-      this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.element.loadedQueryID, this.element.query, this.element.label, this.element.description, this.element.selectedOutputFormat, this.element.selectedTemplate, this.getContext(), this.element.expirationDate, this.importTemplate).subscribe({
+      this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.element.loadedQueryID, this.element.query, this.element.label, this.element.description, this.element.selectedOutputFormat, this.element.selectedTemplate, this.getContext(), date, this.importTemplate).subscribe({
         next: (response: any) => {
          // this.getQueries();
           this.editModus = false;
@@ -205,7 +209,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
         }
       });
     } else {
-      this.subscriptionCreateQuery = this.exporterService.createQuery(this.element.query, this.element.label, this.element.description, this.element.selectedQueryFormat, this.element.selectedOutputFormat, this.element.contactId, this.element.selectedTemplate, this.getContext(), this.element.expirationDate, this.importTemplate).subscribe({
+      this.subscriptionCreateQuery = this.exporterService.createQuery(this.element.query, this.element.label, this.element.description, this.element.selectedQueryFormat, this.element.selectedOutputFormat, this.element.contactId, this.element.selectedTemplate, this.getContext(), date, this.importTemplate).subscribe({
         next: (response: QueryResponse) => {
           // this.getQueries();
           this.editModus = false;
@@ -231,5 +235,15 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     console.log(this.showStepper)
     this.showStepper = false
   }
+
+transformDateForQuery(date: Date | undefined): string {
+  if (date) {
+    const offset = date.getTimezoneOffset();
+    date = new Date(date.getTime() - (offset * 60 * 1000));
+    return date.toISOString().split('T')[0];
+  } else {
+    return "";
+  }
 }
 
+}

@@ -187,6 +187,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.subscriptionGetQueries?.unsubscribe();
     this.subscriptionGetQueries = this.exporterService.getReports().subscribe({
       next: (queryList: ExporterQueries[]) => {
+        this.queryList = []
         this.queryList = queryList;
         this.filterQueries();
       },
@@ -199,7 +200,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
 
   filterQueries(): void {
-    //const tempEQs: ExporterQueries[] = [];
+    this.tempEQs = [];
     this.queryList.forEach((query) => {
       if ((this.activeQueries && query.archivedAt === null) || (this.archivedQueries && query.archivedAt !== null)) {
         let selectedOutputFormat: string
