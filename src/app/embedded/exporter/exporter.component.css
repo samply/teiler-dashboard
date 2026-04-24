@@ -150,7 +150,6 @@ button{
 }
 .create-button{
   display: flex;
-  font-weight: bolder;
   width: 100%;
   height: 10%;
   padding: 10px 25px;
@@ -194,16 +193,15 @@ button{
 }
 .execution-row {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   gap: 20px;
   align-items: center;
   padding: 15px 20px;
   margin-bottom: 8px;
   border-bottom: 1px solid darkgrey;
+  justify-content: space-between;
 }
-.infoBoxDatum, .infoBoxTitel, .execution-row-date, .execution-row-status, .execution-row-format, .execution-row-templateId,
-.query-box-edit, .query-box-ausfuehren{
+.infoBoxDatum, .infoBoxTitel, .execution-row-date, .execution-row-status, .execution-row-format, .execution-row-templateId{
   font-weight: bold;
   font-size: larger;
 }
@@ -580,4 +578,6 @@ mat-expansion-panel-header {
 .font {
   font-size: 14px;
 }
-
+.query-box-ausfuehren, .query-box-edit {
+  width: 20%;
+}

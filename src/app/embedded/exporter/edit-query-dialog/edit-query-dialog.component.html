@@ -1,4 +1,5 @@
 <ng-container *ngIf="showStepper">
+  <button class="delete-button" (click)="deleteQuery()">X</button>
   <div class="stepper">
   <mat-stepper
     class="query-stepper"
@@ -355,7 +356,8 @@
       </div>
 
     <div class="stepper-buttons-log" style="margin:20px 30px">
-      <button class="back-button" mat-raised-button color="primary" (click)="showStepper=true"><span i18n>Anfrage editieren</span></button>
+      <button class="back-button" mat-raised-button color="primary" (click)="showStepper=true" style="width: 60%; margin-top: 10px"><span i18n>Anfrage editieren</span></button>
+      <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" style="width: 60%"><span i18n>Ausführen</span></button>
       <div style="display:flex">
         <mat-form-field class="outputformat_dropdown">
           <mat-label i18n>Ausgabeformat</mat-label>
@@ -366,12 +368,14 @@
             <option *ngFor="let id of outputFormats" [value]="id.value">{{ id.display }}</option>
           </select>
         </mat-form-field>
-        <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" ><span i18n>Ausführen</span></button>
       </div>
     </div>
   </div>
   </div>
-  <div class="executions">
-
+  <div class="executions" *ngFor="let element of dataSourceExecutions.data; let index = index" >
+    <span><span class="execution-row-date">Ausgeführt am: </span>{{element.executedAt | date: 'mediumDate'}}</span>
+    <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
+    <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
+    <span><span class="execution-row-format">Ausgabeformat: </span>  {{element.outputFormat}}</span>
   </div>
 </ng-container>

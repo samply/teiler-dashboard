@@ -109,7 +109,7 @@ button{
   font-size: 14px;
   color: black!important;
 }
-.save-button, .exec-button {
+.save-button, .exec-button, .delete-button, .back-button {
   width: 180px;
   height: 40px;
   padding: 5px;
@@ -122,7 +122,7 @@ button{
 .generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .plus-button, .minus-button, .next-button, .back-button, .save-button, .exec-button {
   background-color: #D3D3D3 !important;
 }
-.download-button, .edit-button, .cancel-edit-button, .upload-button, .exec-button {
+.download-button, .edit-button, .cancel-edit-button, .upload-button, .exec-button, .back-button, .outputformat_dropdown {
   margin-left: 2%;
 }
 .generate-button {
@@ -173,7 +173,7 @@ button{
 .queryformat_dropdown{
   width: 80%;
 }
-.template_dropdown, .outputformat_dropdown  {
+.template_dropdown {
   width: 50%;
 }
 .template_dropdown {
@@ -462,4 +462,8 @@ mat-expansion-panel-header {
 }
 .executions {
   min-height: 120px;
+}
+
+.outputformat_dropdown {
+  width: 60%;
 }

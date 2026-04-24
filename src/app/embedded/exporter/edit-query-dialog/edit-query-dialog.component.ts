@@ -7,6 +7,9 @@ import {FormBuilder} from "@angular/forms";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {ExporterService} from "../../../teiler/exporter.service";
 import {Templates} from "../../quality-report/quality-report.component";
+import {ExporterExecutions} from "../../execution/execution.component";
+import {MatTableDataSource} from "@angular/material/table";
+import {ExecutionService} from "../../../teiler/execution.service";
 
 export enum ExportStatus {
   OK = "OK",
@@ -22,11 +25,14 @@ export enum ExportStatus {
   standalone: false
 })
 export class EditQueryDialogComponent implements OnInit, OnDestroy {
+  private subscriptionGetExecutionList: Subscription | undefined
   private subscriptionGetOutputFormats: Subscription | undefined
   private subscriptionGetQueryFormats: Subscription | undefined
   private subscriptionGetTemplateIDs: Subscription | undefined
   private subscriptionUpdateQuery: Subscription | undefined
   private subscriptionCreateQuery: Subscription | undefined;
+  dataSourceExecutions = new MatTableDataSource<ExporterExecutions>();
+
   executeOnSaving: boolean = false
   element: ExporterQueriesBox
   showStepper: boolean = true
@@ -69,7 +75,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   exportStatus: ExportStatus = ExportStatus.EMPTY;
   exportLog: string[] = [];
   selectedOutputFormat: string = "EXCEL";
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ExporterQueriesBox, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, boolean>, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ExporterQueriesBox, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, boolean>, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private executionService: ExecutionService) {
     this.element = data
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -86,6 +92,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     this.getQueryFormats()
 
     this.element.defaultOutputFormat !== null && this.element.defaultOutputFormat !== undefined ? this.selectedOutputFormat = this.element.defaultOutputFormat : this.selectedOutputFormat = "EXCEL";
+    if (this.element.loadedQueryID) this.getQueryExecutions(parseInt(this.element.loadedQueryID))
   }
   ngOnDestroy(): void {
     this.subscriptionGetOutputFormats?.unsubscribe();
@@ -135,6 +142,9 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
         console.log(error);
       }
     })
+  }
+  transformDate(date: string): string {
+    return new Date(date).getTime().toString();
   }
   getTemplateIDs(): void {
     this.subscriptionGetTemplateIDs?.unsubscribe();
@@ -246,4 +256,35 @@ transformDateForQuery(date: Date | undefined): string {
   }
 }
 
-}
+  deleteQuery() {
+    this.dialogRef.close(false)
+  }
+
+  getQueryExecutions(queryID: number): void {
+    this.subscriptionGetExecutionList?.unsubscribe();
+    this.subscriptionGetExecutionList = this.executionService.getExecutionList(queryID).subscribe({
+      next: (execs) => {
+        const tempExecs: ExporterExecutions[] = [];
+        execs.forEach((execution) => {
+          if (execution.queryId == queryID) {
+            tempExecs.push({
+              id: execution.id,
+              queryId: execution.queryId,
+              templateId: execution.templateId,
+              outputFormat: execution.outputFormat,
+              status: execution.status,
+              executedAt: this.transformDate(execution.executedAt)
+            })
+            tempExecs.sort((a, b) => Number(b.executedAt) - Number(a.executedAt))
+            this.dataSourceExecutions.data = tempExecs;
+            this.dataSourceExecutions._updateChangeSubscription();
+          }
+        })
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
+  }}
