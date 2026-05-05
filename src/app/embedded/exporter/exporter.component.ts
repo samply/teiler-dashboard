@@ -120,7 +120,6 @@ export class ExporterComponent implements OnInit, OnDestroy {
   contextArray: Context[] = [{key: "", value: ""}];
   showPlusButton: boolean = false;
   tempEQs: ExporterQueriesBox[] = [];
-  // showStepper: boolean = true
 
   firstFormGroup = this._formBuilder.group({
     queryTitle: [''],
@@ -295,37 +294,9 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
 
   executeQuery() {
-    this.subscriptionGenerateExport?.unsubscribe();
-    this.subscriptionGenerateExport = this.exporterService.executeQuery(this.loadedQueryID, this.selectedOutputFormat, this.selectedTemplate, this.importTemplate).subscribe({
-      next: (response: QBResponse) => {
-        const url = new URL(response.responseUrl)
-        const id = url.searchParams.get("query-execution-id");
-        //this.exportStatus = ExportStatus.RUNNING
-        if (id) {
-          this.router.navigate([this.executionLink, this.loadedQueryID], {
-            state: {
-              newExecID: id,
-              //query: this.query,
-              //label: this.queryLabel,
-              //description: this.queryDescription,
-              //selectedQueryFormat: this.selectedQueryFormat,
-              //selectedOutputFormat: this.selectedOutputFormat,
-              //selectedTemplate: this.selectedTemplate
-            }
-          })
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-      }
-    });
+    const element = this.dataSource.data[this.activeDataSource]
+    this.editDialog(element, "execution")
   }
-  // executeQuery(): void {
-  //   this.showStepper = false
-  //   console.log("test")
-  // }
 
   saveQuery() {
     this.subscriptionUpdateQuery?.unsubscribe();
@@ -528,7 +499,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     }
     this.selection.clear();
     this.generateButtonStatus();
-    this.editDialog(newQuery)
+    this.editDialog(newQuery, "formular")
   }
 
   editQuery(): void {
@@ -581,11 +552,11 @@ export class ExporterComponent implements OnInit, OnDestroy {
     return btoa(context);
   }
 
-  editDialog(element: ExporterQueriesBox): void {
+  editDialog(element: ExporterQueriesBox, target:string): void {
     const dialogConfig = new MatDialogConfig();
     //dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = element;
+    dialogConfig.data = {element: element,target: target};
     dialogConfig.width = "1500px";
     this.dialog.open(EditQueryDialogComponent, dialogConfig).afterClosed().subscribe((isSaved:boolean)=>{
       if(isSaved){

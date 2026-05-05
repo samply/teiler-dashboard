@@ -75,8 +75,9 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   exportStatus: ExportStatus = ExportStatus.EMPTY;
   exportLog: string[] = [];
   selectedOutputFormat: string = "EXCEL";
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ExporterQueriesBox, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, boolean>, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private executionService: ExecutionService) {
-    this.element = data
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {element: ExporterQueriesBox, target: string}, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, boolean>, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private executionService: ExecutionService) {
+    this.element = data.element
+    data.target === 'formular' ? this.showStepper = true : this.showStepper = false
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
