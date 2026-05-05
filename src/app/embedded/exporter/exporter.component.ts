@@ -120,6 +120,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   contextArray: Context[] = [{key: "", value: ""}];
   showPlusButton: boolean = false;
   tempEQs: ExporterQueriesBox[] = [];
+  // showStepper: boolean = true
 
   firstFormGroup = this._formBuilder.group({
     queryTitle: [''],
@@ -321,6 +322,10 @@ export class ExporterComponent implements OnInit, OnDestroy {
       }
     });
   }
+  // executeQuery(): void {
+  //   this.showStepper = false
+  //   console.log("test")
+  // }
 
   saveQuery() {
     this.subscriptionUpdateQuery?.unsubscribe();
@@ -596,6 +601,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
   }
 
   getQueryExecutions(queryID: number): void {
+    this.dataSourceExecutions.data = []
     this.subscriptionGetExecutionList?.unsubscribe();
     this.subscriptionGetExecutionList = this.executionService.getExecutionList(queryID).subscribe({
       next: (execs) => {
@@ -610,6 +616,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
               status: execution.status,
               executedAt: this.transformDate(execution.executedAt)
             })
+            console.log("test")
             tempExecs.sort((a, b) => Number(b.executedAt) - Number(a.executedAt))
             this.dataSourceExecutions.data = tempExecs;
             this.dataSourceExecutions._updateChangeSubscription();

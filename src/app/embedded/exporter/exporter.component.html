@@ -17,15 +17,15 @@
       <span class="query-box-anfragender">Anfragender: </span><span>{{dataSource.data[activeDataSource]?.contactId}}</span>
       <span class="query-box-format">Format: </span><span>{{dataSource.data[activeDataSource]?.format}}</span>
       <div class="edit-ausfuehren">
-        <button class="query-box-edit" (click)="createNewQuery('edit')">Edit</button>
-        <button class="query-box-ausfuehren">Ausführen</button>
+        <button class="query-box-edit" mat-raised-button (click)="createNewQuery('edit')">Edit</button>
+        <button class="query-box-ausfuehren" mat-raised-button (click)="executeQuery()" >Ausführen</button>
       </div>
       <div class="execution-row" *ngFor="let element of dataSourceExecutions.data; let index = index" >
         <span><span class="execution-row-date">Ausgeführt am: </span>{{element.executedAt | date: 'mediumDate'}}</span>
         <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
         <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
         <span><span class="execution-row-format">Ausgabeformat: </span>  {{element.outputFormat}}</span>
-        <span><span class="execution-row-format"></span> <mat-icon svgIcon="download" aria-hidden="false" aria-label="Download SVG icon"></mat-icon> </span>
+<!--        <span><span class="execution-row-format"></span> <mat-icon svgIcon="download" aria-hidden="false" aria-label="Download SVG icon"></mat-icon> </span>-->
       </div>
     </div>
 

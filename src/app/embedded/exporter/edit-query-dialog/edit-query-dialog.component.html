@@ -1,5 +1,8 @@
-<ng-container *ngIf="showStepper">
+<div class="close-button-container">
   <button class="delete-button" (click)="deleteQuery()">X</button>
+</div>
+
+<ng-container *ngIf="showStepper">
   <div class="stepper">
   <mat-stepper
     class="query-stepper"
@@ -311,7 +314,7 @@
         <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
         <div style="display:flex">
           <button class="save-button" mat-raised-button color="primary" (click)="saveQuery()" ><span i18n>Speichern</span></button>
-          <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" ><span i18n>Ausführen</span></button>
+          <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" style="margin-left: 2%" ><span i18n>Ausführen</span></button>
         </div>
       </div>
     </mat-step>
@@ -319,6 +322,7 @@
 </div>
 </ng-container>
 <ng-container *ngIf="!showStepper">
+  <button class="delete-button" (click)="deleteQuery()">X</button>
   <div class="overview-info" style="display: flex"><span class="fw-bold">Ausführung</span></div>
   <div class="short-info">
     <div style="width:30%">
@@ -354,7 +358,6 @@
           <div *ngFor="let log of exportLog">{{ log }}</div>
         </div>
       </div>
-
     <div class="stepper-buttons-log" style="margin:20px 30px">
       <button class="back-button" mat-raised-button color="primary" (click)="showStepper=true" style="width: 60%; margin-top: 10px"><span i18n>Anfrage editieren</span></button>
       <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" style="width: 60%"><span i18n>Ausführen</span></button>
@@ -371,11 +374,11 @@
       </div>
     </div>
   </div>
-  </div>
-  <div class="executions" *ngFor="let element of dataSourceExecutions.data; let index = index" >
-    <span><span class="execution-row-date">Ausgeführt am: </span>{{element.executedAt | date: 'mediumDate'}}</span>
-    <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
-    <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
-    <span><span class="execution-row-format">Ausgabeformat: </span>  {{element.outputFormat}}</span>
+    <div class="executions" *ngFor="let element of dataSourceExecutions.data; let index = index" >
+      <span><span class="execution-row-date">Ausgeführt am: </span>{{element.executedAt | date: 'mediumDate'}}</span>
+      <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
+      <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
+      <span><span class="execution-row-format">Ausgabeformat: </span>  {{element.outputFormat}}</span>
+    </div>
   </div>
 </ng-container>

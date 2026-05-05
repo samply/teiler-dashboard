@@ -109,12 +109,30 @@ button{
   font-size: 14px;
   color: black!important;
 }
-.save-button, .exec-button, .delete-button, .back-button {
+.save-button, .exec-button, .back-button {
   width: 180px;
   height: 40px;
   padding: 5px;
   font-size: 14px;
   color: black!important;
+}
+.close-button-container{
+  position: relative;
+  overflow: visible;
+}
+.delete-button {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bolder;
+  color: black!important;
+  position: absolute;
+  z-index: 1000;
+  right: -10px;
+  top: -15px;
+  border-radius: 100%;
+  border-style: none;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
 }
 .generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled, .save-button:disabled, .exec-button:disabled {
   color: darkgrey!important;
@@ -122,7 +140,7 @@ button{
 .generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .plus-button, .minus-button, .next-button, .back-button, .save-button, .exec-button {
   background-color: #D3D3D3 !important;
 }
-.download-button, .edit-button, .cancel-edit-button, .upload-button, .exec-button, .back-button, .outputformat_dropdown {
+.download-button, .edit-button, .cancel-edit-button, .upload-button{
   margin-left: 2%;
 }
 .generate-button {
@@ -271,7 +289,7 @@ mat-expansion-panel-header {
   border-bottom: none!important;
 }
 .stepper {
-  padding: 2rem;
+  padding: 1rem 2rem 2rem 2rem;
 }
 .textarea {
   font-size: 11pt!important;
@@ -291,7 +309,7 @@ mat-expansion-panel-header {
 .stepper-buttons {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0px 0px 0px;
+  margin: 20px 20px 0px 20px;
 }
 .stepper-buttons-log{
   display: flex;
@@ -416,7 +434,7 @@ mat-expansion-panel-header {
   display: flex;
   margin: 30px 30px 0px 30px;
   height: 100px;
-  border: solid 1px;
+  border: none;
   border-radius: 8px;
   padding: 10px;
   align-items: center;
@@ -432,6 +450,7 @@ mat-expansion-panel-header {
 
 .log-div {
   display:flex;
+  margin-bottom: 21px;
 }
 .button-status {
   display: flex;
@@ -466,4 +485,22 @@ mat-expansion-panel-header {
 
 .outputformat_dropdown {
   width: 60%;
+}
+.overview-query {
+  border: 1px solid black;
+}
+.executions {
+  margin: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 15px 20px;
+  /*border: 1px solid darkgrey;*/
+  justify-content: space-between;
+  border-radius: 10px;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+.execution-row-date, .execution-row-status, .execution-row-templateId, .execution-row-format{
+  font-weight: bold;
+
 }
