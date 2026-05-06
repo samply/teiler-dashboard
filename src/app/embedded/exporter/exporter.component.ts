@@ -601,4 +601,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+  get currentItem(): any {
+    return this.dataSource.data[this.activeDataSource]
+  }
 }

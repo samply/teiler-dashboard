@@ -5,17 +5,17 @@
 
   <div class="main-box">
     <div class="query-box">
-      <span class="query-box-titel">Titel: </span><span class="query-box-titel">{{dataSource.data[activeDataSource]?.label}}</span>
-      <span class="query-box-abfrage">Abfrage: </span><span>{{dataSource.data[activeDataSource]?.query}}</span>
-      <span class="query-box-beschreibung">Beschreibung: </span><span>{{dataSource.data[activeDataSource]?.description}}</span>
-      <span class="query-box-template">Template: </span><span>{{dataSource.data[activeDataSource]?.defaultTemplateId}}</span>
-      <span class="query-box-ausgabeformat">Ausgabeformat: </span><span>{{dataSource.data[activeDataSource]?.defaultOutputFormat}}</span>
-      <span class="query-box-ablaufsdatum">Ablaufdatum: </span><span>{{dataSource.data[activeDataSource]?.expirationDate!== "0" ? (dataSource.data[activeDataSource]?.expirationDate | date: 'mediumDate') : "keine Angabe"}}</span>
-      <span class="query-box-umgebungsvariablen">Umgebungsvariablen: </span><span>{{dataSource.data[activeDataSource]?.context}}</span>
-      <span class="query-box-anfrage">Anfrage: </span><span>{{dataSource.data[activeDataSource]?.query}}</span>
-      <span class="query-box-erstelltam">Erstellt am: </span><span>{{dataSource.data[activeDataSource]?.createdAt | date: 'mediumDate'}}</span>
-      <span class="query-box-anfragender">Anfragender: </span><span>{{dataSource.data[activeDataSource]?.contactId}}</span>
-      <span class="query-box-format">Format: </span><span>{{dataSource.data[activeDataSource]?.format}}</span>
+      <span class="query-box-titel">Titel: </span><span class="query-box-titel">{{currentItem?.label}}</span>
+      <span class="query-box-abfrage">Abfrage: </span><span>{{currentItem?.query}}</span>
+      <span class="query-box-beschreibung">Beschreibung: </span><span>{{currentItem?.description}}</span>
+      <span class="query-box-template">Template: </span><span>{{currentItem?.defaultTemplateId}}</span>
+      <span class="query-box-ausgabeformat">Ausgabeformat: </span><span>{{currentItem?.defaultOutputFormat}}</span>
+      <span class="query-box-ablaufsdatum">Ablaufdatum: </span><span>{{currentItem?.expirationDate !== "0" ? (currentItem?.expirationDate | date: 'mediumDate') : "keine Angabe"}}</span>
+      <span class="query-box-umgebungsvariablen">Umgebungsvariablen: </span><span>{{currentItem?.context}}</span>
+      <span class="query-box-anfrage">Anfrage: </span><span>{{currentItem?.query}}</span>
+      <span class="query-box-erstelltam">Erstellt am: </span><span>{{currentItem?.createdAt | date: 'mediumDate'}}</span>
+      <span class="query-box-anfragender">Anfragender: </span><span>{{currentItem?.contactId}}</span>
+      <span class="query-box-format">Format: </span><span>{{currentItem?.format}}</span>
       <div class="edit-ausfuehren">
         <button class="query-box-edit" mat-raised-button (click)="createNewQuery('edit')">Edit</button>
         <button class="query-box-ausfuehren" mat-raised-button (click)="executeQuery()" >Ausführen</button>

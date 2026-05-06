@@ -84,7 +84,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
 
   }
   ngOnInit(): void {
-    console.log(this.element)
+    console.log(this.element.expirationDate)
     this.element.expirationDate = new Date(+this.element.expirationDate).toISOString()
     console.log(this.element.expirationDate)
     this.exportUrl = this.exporterService.getExporterURL() + "/";
