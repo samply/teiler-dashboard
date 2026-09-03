@@ -102,6 +102,7 @@ const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
             postLogoutRedirectUri: window.location.origin + window.location.pathname,
             responseType: 'code',
             useRefreshToken: true,
+            maxIdTokenIatOffsetAllowedInSeconds: 300,
             secureRoutes: [environment.config.TEILER_BACKEND_URL],
           },
         })],
