@@ -19,6 +19,21 @@ import {EditQueryDialogComponent} from "./edit-query-dialog/edit-query-dialog.co
 import {ExporterExecutions} from "../execution/execution.component";
 import {ExecutionService} from "../../teiler/execution.service";
 
+const KNOWN_FORMAT_ACRONYMS = ['FHIR', 'CQL', 'CSV', 'JSON', 'XML', 'SQL', 'ID', 'URL'];
+
+export function formatEnumDisplayLabel(value: string): string {
+  return value
+    .split('_')
+    .map((word) => {
+      const upper = word.toUpperCase();
+      if (KNOWN_FORMAT_ACRONYMS.includes(upper)) {
+        return upper;
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(' ');
+}
+
 export interface ExporterQueries {
   id: number;
   query: string;
@@ -61,6 +76,12 @@ export interface Context {
   key: string;
   value: string;
 }
+export interface QueryBoxRow {
+  key: string;
+  feld: string;
+  wert: string;
+  isDate?: boolean;
+}
 @Component({
     selector: 'exporter',
     templateUrl: './exporter.component.html',
@@ -88,6 +109,8 @@ export class ExporterComponent implements OnInit, OnDestroy {
   otherParametersLoc = $localize`weitere Parameter`
 
   displayedColumns: string[] = ['#', 'timestamp', 'querytitle', 'querysource', 'format', 'executions'];
+  queryBoxColumns: string[] = ['feld', 'wert'];
+  infoBoxColumns: string[] = ['label', 'createdAt'];
   dataSource = new MatTableDataSource<ExporterQueriesBox>();
   buttonDisabled: boolean = true;
   editButtonDisabled: boolean = true;
@@ -347,6 +370,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   }
 
+
   getTemplateIDs(): void {
     this.subscriptionGetTemplateIDs?.unsubscribe();
     this.subscriptionGetTemplateIDs = this.exporterService.getExporterTemplates().subscribe({
@@ -367,7 +391,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.subscriptionGetOutputFormats = this.exporterService.getOutputFormats().subscribe({
       next: (formatList: string[]) => {
         formatList.forEach((format) => {
-          this.outputFormats.push({value: format, display: format.toLowerCase()})
+          this.outputFormats.push({value: format, display: formatEnumDisplayLabel(format)})
         })
       },
       error: (error) => {
@@ -381,7 +405,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.subscriptionGetQueryFormats = this.exporterService.getQueryFormats().subscribe({
       next: (formatList: string[]) => {
         formatList.forEach((format) => {
-          this.queryFormats.push({value: format, display: format.toLowerCase()})
+          this.queryFormats.push({value: format, display: formatEnumDisplayLabel(format)})
         })
       },
       error: (error) => {
@@ -475,31 +499,32 @@ export class ExporterComponent implements OnInit, OnDestroy {
       isCreate = false
     }
     this.editModus = true;
-    let contactId: string = ""
-    from(this.authService.loadUserProfile()).subscribe(keycloakProfile => contactId = keycloakProfile.email);
+    from(this.authService.loadUserProfile()).subscribe(keycloakProfile => {
+      const contactId = keycloakProfile.email;
 
-    const newQuery: ExporterQueriesBox = {
-      loadedQueryID: isCreate ? undefined : this.dataSource.data[this.activeDataSource].id.toString(),
-      id: this.tempEQs.length,
-      label: isCreate ? "" : this.dataSource.data[this.activeDataSource].label,
-      description: isCreate ? "" : this.dataSource.data[this.activeDataSource].description,
-      query: isCreate ? "" : this.dataSource.data[this.activeDataSource].query,
-      contactId: isCreate ? contactId : this.dataSource.data[this.activeDataSource].contactId,
-      selectedTemplate: isCreate ? environment.config.EXPORTER_DEFAULT_TEMPLATE_ID : this.dataSource.data[this.activeDataSource].selectedTemplate,
-      selectedOutputFormat: isCreate ? "EXCEL" : this.dataSource.data[this.activeDataSource].selectedOutputFormat,
-      selectedQueryFormat: isCreate ? "FHIR_SEARCH" : this.dataSource.data[this.activeDataSource].selectedQueryFormat,
-      expirationDate: isCreate ? "" : this.dataSource.data[this.activeDataSource].expirationDate,
-      contextArray: [{key: "", value: ""} as Context],
-      format: isCreate ? "" : this.dataSource.data[this.activeDataSource].format,
-      createdAt: isCreate ? "" : this.dataSource.data[this.activeDataSource].createdAt,
-      archivedAt: isCreate ? "" :this.dataSource.data[this.activeDataSource].archivedAt,
-      context: isCreate ? "" : this.dataSource.data[this.activeDataSource].context,
-      defaultTemplateId: isCreate ? "" : this.dataSource.data[this.activeDataSource].defaultTemplateId,
-      defaultOutputFormat: isCreate ? "" : this.dataSource.data[this.activeDataSource].defaultOutputFormat,
-    }
-    this.selection.clear();
-    this.generateButtonStatus();
-    this.editDialog(newQuery, "formular")
+      const newQuery: ExporterQueriesBox = {
+        loadedQueryID: isCreate ? undefined : this.dataSource.data[this.activeDataSource].id.toString(),
+        id: this.tempEQs.length,
+        label: isCreate ? "" : this.dataSource.data[this.activeDataSource].label,
+        description: isCreate ? "" : this.dataSource.data[this.activeDataSource].description,
+        query: isCreate ? "" : this.dataSource.data[this.activeDataSource].query,
+        contactId: isCreate ? contactId : this.dataSource.data[this.activeDataSource].contactId,
+        selectedTemplate: isCreate ? environment.config.EXPORTER_DEFAULT_TEMPLATE_ID : this.dataSource.data[this.activeDataSource].selectedTemplate,
+        selectedOutputFormat: isCreate ? "EXCEL" : this.dataSource.data[this.activeDataSource].selectedOutputFormat,
+        selectedQueryFormat: isCreate ? "FHIR_SEARCH" : this.dataSource.data[this.activeDataSource].selectedQueryFormat,
+        expirationDate: isCreate ? "" : this.dataSource.data[this.activeDataSource].expirationDate,
+        contextArray: [{key: "", value: ""} as Context],
+        format: isCreate ? "" : this.dataSource.data[this.activeDataSource].format,
+        createdAt: isCreate ? "" : this.dataSource.data[this.activeDataSource].createdAt,
+        archivedAt: isCreate ? "" :this.dataSource.data[this.activeDataSource].archivedAt,
+        context: isCreate ? "" : this.dataSource.data[this.activeDataSource].context,
+        defaultTemplateId: isCreate ? "" : this.dataSource.data[this.activeDataSource].defaultTemplateId,
+        defaultOutputFormat: isCreate ? "" : this.dataSource.data[this.activeDataSource].defaultOutputFormat,
+      }
+      this.selection.clear();
+      this.generateButtonStatus();
+      this.editDialog(newQuery, "formular")
+    });
   }
 
   editQuery(): void {
@@ -565,6 +590,10 @@ export class ExporterComponent implements OnInit, OnDestroy {
     });
   }
 
+  selectQuery(row: ExporterQueriesBox): void {
+    this.setActiveDataSource(this.dataSource.data.indexOf(row));
+  }
+
   setActiveDataSource(index: number): void {
     this.activeDataSource = index
     const id = this.dataSource.data[index].id
@@ -604,5 +633,24 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   get currentItem(): any {
     return this.dataSource.data[this.activeDataSource]
+  }
+
+  get queryBoxRows(): QueryBoxRow[] {
+    const item = this.currentItem;
+    if (!item) {
+      return [];
+    }
+    return [
+      {key: 'label', feld: $localize`Titel`, wert: item.label},
+      {key: 'query', feld: $localize`Abfrage`, wert: item.query},
+      {key: 'description', feld: $localize`Beschreibung`, wert: item.description},
+      {key: 'defaultTemplateId', feld: $localize`Template`, wert: item.defaultTemplateId},
+      {key: 'defaultOutputFormat', feld: $localize`Ausgabeformat`, wert: item.defaultOutputFormat},
+      {key: 'expirationDate', feld: $localize`Ablaufdatum`, wert: item.expirationDate, isDate: true},
+      {key: 'context', feld: $localize`Umgebungsvariablen`, wert: item.context},
+      {key: 'createdAt', feld: $localize`Erstellt am`, wert: item.createdAt, isDate: true},
+      {key: 'contactId', feld: $localize`Anfragende/r`, wert: item.contactId},
+      {key: 'format', feld: $localize`Format`, wert: item.format},
+    ];
   }
 }

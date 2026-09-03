@@ -36,6 +36,15 @@
 
 }
 
+:host-context(body.dark-theme) .side-nav {
+  background-color: var(--surface-raised, var(--surface-color));
+  border-right: 1px solid var(--border-color);
+}
+
+:host-context(body.dark-theme) .sidebar {
+  border-bottom: 1px solid var(--border-color);
+}
+
 .router-style{
   margin-top: 6%;
   z-index: 2;
@@ -135,6 +144,9 @@
     background-color: white;
     z-index: 3;
     width: 10%;
+  }
+  :host-context(body.dark-theme) .burger-menu-button-close{
+    background-color: var(--surface-color);
   }
   .bi bi-x{
     font-size: 200%;

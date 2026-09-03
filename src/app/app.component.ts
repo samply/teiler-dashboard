@@ -30,6 +30,7 @@ export class AppComponent implements OnInit{
   logoText: string = ""
   svgWidth: number = 2560;
   svgHeight: number = 1440;
+  darkMode: boolean = false;
 
   constructor(
     public routeManagerService: RouteManagerService,
@@ -87,6 +88,14 @@ export class AppComponent implements OnInit{
       }
     });
     this.setBackgroundImage()
+    this.darkMode = localStorage.getItem('darkMode') === 'true';
+    document.body.classList.toggle('dark-theme', this.darkMode);
+  }
+
+  toggleDarkMode(): void {
+    this.darkMode = !this.darkMode;
+    document.body.classList.toggle('dark-theme', this.darkMode);
+    localStorage.setItem('darkMode', String(this.darkMode));
   }
 
   private setCSSVariables() {

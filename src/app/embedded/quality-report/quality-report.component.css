@@ -57,6 +57,21 @@ button{
   background-color: white;
   height: 300px;
 }
+:host-context(body.dark-theme) .log-exporter,
+:host-context(body.dark-theme) .log-reporter {
+  background-color: var(--surface-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+:host-context(body.dark-theme) .title {
+  border-bottom-color: var(--border-color);
+}
+:host-context(body.dark-theme) .mat-mdc-table,
+:host-context(body.dark-theme) .mat-mdc-row,
+:host-context(body.dark-theme) .mat-mdc-cell {
+  background-color: transparent;
+  color: var(--text-color);
+}
 .log-exporter {
   margin-left: 2%;
 }
@@ -145,6 +160,9 @@ table{
   color: black;
   margin: 5px;
   height: 20px;
+}
+:host-context(body.dark-theme) .file-name {
+  color: var(--text-color);
 }
 .template_dropdown {
   margin: 0 2%;

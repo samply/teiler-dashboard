@@ -1,8 +1,8 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
-import {Context, DropdownFormat, ExporterQueriesBox, QueryResponse} from "../exporter.component";
+import {Context, DropdownFormat, ExporterQueriesBox, QueryResponse, formatEnumDisplayLabel} from "../exporter.component";
 import {map, Observable, Subscription} from "rxjs";
-import {StepperOrientation} from "@angular/cdk/stepper";
+import {StepperOrientation, StepperSelectionEvent} from "@angular/cdk/stepper";
 import {FormBuilder} from "@angular/forms";
 import {BreakpointObserver} from "@angular/cdk/layout";
 import {ExporterService} from "../../../teiler/exporter.service";
@@ -39,8 +39,11 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   descriptionLoc = $localize`Beschreibung`
   queryLoc = $localize`Anfrage`
   outputLoc = $localize`Ausgabe`
-  otherParametersLoc = $localize`weitere Parameter`
+  otherParametersLoc = $localize`Weitere Parameter`
   summaryLoc = $localize`Zusammenfassung`
+  step1TooltipText = $localize`Bitte füllen Sie die Pflichtfelder "Titel" und "Beschreibung" aus.`
+  step2TooltipText = $localize`Bitte füllen Sie das Pflichtfeld "Anfrage" aus.`
+  visitedSteps: boolean[] = [true, false, false, false, false];
   firstFormGroup = this._formBuilder.group({
     queryTitle: [''],
     queryDescription: ['']
@@ -84,9 +87,8 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
 
   }
   ngOnInit(): void {
-    console.log(this.element.expirationDate)
-    this.element.expirationDate = new Date(+this.element.expirationDate).toISOString()
-    console.log(this.element.expirationDate)
+    const expirationMs = +this.element.expirationDate;
+    this.element.expirationDate = expirationMs ? new Date(expirationMs).toISOString() : '';
     this.exportUrl = this.exporterService.getExporterURL() + "/";
     this.getTemplateIDs();
     this.getOutputFormats();
@@ -106,6 +108,32 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   generateButtonStatus(): void {
     this.buttonDisabled = (this.element.label === "")  || (this.element.query === "") || (this.element.description === "");
   }
+  onStepperSelectionChange(event: StepperSelectionEvent): void {
+    this.visitedSteps[event.selectedIndex] = true;
+  }
+
+  get groupedTemplateIDs(): { label: string, items: Templates[] }[] {
+    const groups: Record<string, Templates[]> = {};
+    const order: string[] = [];
+    this.templateIDs.forEach((template) => {
+      if (template.value === 'custom') {
+        return;
+      }
+      let groupLabel = $localize`Sonstige`;
+      if (template.value.includes('ccp')) {
+        groupLabel = 'CCP';
+      } else if (template.value.includes('bbmri')) {
+        groupLabel = 'BBMRI';
+      }
+      if (!groups[groupLabel]) {
+        groups[groupLabel] = [];
+        order.push(groupLabel);
+      }
+      groups[groupLabel].push(template);
+    });
+    order.sort((a, b) => (a === $localize`Sonstige` ? 1 : b === $localize`Sonstige` ? -1 : a.localeCompare(b)));
+    return order.map((groupLabel) => ({label: groupLabel, items: groups[groupLabel]}));
+  }
   doImportFromFile(event: Event): void {
     // @ts-ignore
     const file: File = (event.target as HTMLInputElement).files[0];
@@ -123,7 +151,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     this.subscriptionGetOutputFormats = this.exporterService.getOutputFormats().subscribe({
       next: (formatList:string[]) => {
         formatList.forEach((format) => {
-          this.outputFormats.push({value: format, display: format.toLowerCase()})
+          this.outputFormats.push({value: format, display: formatEnumDisplayLabel(format)})
         })
       },
       error: (error) => {
@@ -136,7 +164,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     this.subscriptionGetQueryFormats = this.exporterService.getQueryFormats().subscribe({
       next: (formatList:string[]) => {
         formatList.forEach((format) => {
-          this.queryFormats.push({value: format, display: format.toLowerCase()})
+          this.queryFormats.push({value: format, display: formatEnumDisplayLabel(format)})
         })
       },
       error: (error) => {

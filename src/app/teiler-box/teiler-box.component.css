@@ -122,3 +122,11 @@ hr{
 .bi-clock {
   color: orange;
 }
+
+:host-context(body.dark-theme) .teiler-box {
+  background-color: var(--surface-color);
+  box-shadow: 0px 0px 1px 1px var(--border-color);
+}
+:host-context(body.dark-theme) .icon-footer {
+  background: var(--surface-color);
+}

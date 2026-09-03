@@ -127,6 +127,9 @@ button{
   margin: 5px;
   height: 20px;
 }
+:host-context(body.dark-theme) .file-name {
+  color: var(--text-color);
+}
 .template_dropdown, .outputformat_dropdown {
   margin: 0 2%;
   /*width: 20%;*/
@@ -224,6 +227,24 @@ button{
   margin-left: 2%;
   max-width: 700px;
 }
+:host-context(body.dark-theme) .log-exporter,
+:host-context(body.dark-theme) .summary-box {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+}
+:host-context(body.dark-theme) .title {
+  border-bottom-color: var(--border-color);
+}
+:host-context(body.dark-theme) .mat-mdc-header-cell {
+  background-color: var(--surface-header, var(--border-color)) !important;
+  color: var(--text-color);
+}
+:host-context(body.dark-theme) .mat-mdc-table,
+:host-context(body.dark-theme) .mat-mdc-row,
+:host-context(body.dark-theme) .mat-mdc-cell {
+  background-color: transparent;
+  color: var(--text-color);
+}
 
 .log-header {
   font-weight: bold;
@@ -304,6 +325,12 @@ button{
 ::ng-deep .query-input .mat-mdc-text-field-wrapper {
   background-color: #f5f5f5;
   min-width: 300px;
+}
+:host-context(body.dark-theme) .mat-mdc-menu-item {
+  color: var(--text-color);
+}
+::ng-deep :host-context(body.dark-theme) .query-input .mat-mdc-text-field-wrapper {
+  background-color: var(--border-color);
 }
 
 .download-link {

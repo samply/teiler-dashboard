@@ -4,9 +4,14 @@
   margin-right:auto;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 .title {
-  border-bottom: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: flex-end;
   margin-bottom: 20px;
 }
 h2{
@@ -15,6 +20,7 @@ h2{
   font-family: Roboto, Helvetica Neue, sans-serif;
   font-size: 30px;
   margin-top: 1.5%;
+  margin-bottom: 0;
 }
 table {
   text-align: center;
@@ -42,11 +48,17 @@ table {
 .table-link-column {
   text-align: center;
 }
+.info-box .paginator {
+  margin-top: auto;
+}
 mat-paginator {
   opacity: 0.8;
-  width: 50%;
-  float: right;
+  width: 100%;
   border-radius: 10px;
+}
+::ng-deep .paginator .mat-mdc-paginator-container {
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 button{
@@ -149,22 +161,24 @@ button{
   color: black!important;
 }
 .create-button{
-  display: flex;
-  width: 100%;
-  height: 10%;
-  padding: 10px 25px;
-  font-size: 14px;
+  width: auto;
+  padding: 5px 15px;
+  font-size: 13px;
   color: black!important;
+  margin-bottom: 4px;
 }
 .main-box {
   display: flex;
   flex-direction: row;
+  align-items: stretch;
+  gap: 15px;
 }
 .info-box {
   width: 100%;
-  height: 25.8rem;
+  flex: 1;
+  min-height: 0;
   padding: 15px 25px;
-  margin: 15px 0;
+  margin: 0 0 15px 0;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
   display: flex;
@@ -173,23 +187,13 @@ button{
   background: white;
   overflow-y: auto;
 }
-.info-box-entry{
-  border-bottom: 1px solid darkgrey;
-  display: flex;
-  padding: 0rem 15rem 0rem 0rem;
-  justify-content: space-between;
-  margin: 3px 0px 3px 0px;
+.info-box-table {
+  width: 100%;
 }
 .query-box-ausfuehren:hover, .query-box-edit:hover{
   transform: scale(1.01);
   transition: transform 0.4s ease;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-}
-.info-box-entry:hover {
-  transform: scale(1.01);
-  transition: transform 0.4s ease;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-  border-radius: 6px;
 }
 .execution-row {
   grid-column: 1 / -1;
@@ -203,13 +207,9 @@ button{
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   border-radius: 10px;
 }
-.infoBoxDatum, .infoBoxTitel, .execution-row-date, .execution-row-status, .execution-row-format, .execution-row-templateId{
+.execution-row-date, .execution-row-status, .execution-row-format, .execution-row-templateId{
   font-weight: bold;
   font-size: larger;
-}
-.infoBoxTitel, .infoBoxDatum {
-  margin-right: 10px;
-  margin-left: 10px;
 }
 .execution-row-date,
 .execution-row-status,
@@ -219,19 +219,18 @@ button{
   color: black;
   margin-bottom: 4px;
 }
-.infoBoxTitel {
-  cursor: pointer;
-}
-.info-box div > div{
-  display: flex;
-}
-.info-box div > div span:last-child{
-  flex: 1;
-  text-align: center;
+:host-context(body.dark-theme) .execution-row-date,
+:host-context(body.dark-theme) .execution-row-status,
+:host-context(body.dark-theme) .execution-row-templateId,
+:host-context(body.dark-theme) .execution-row-format {
+  color: var(--text-color);
 }
 .uebersicht-titel {
   text-align: left;
   font-weight: bold;
+}
+.query-box-heading {
+  grid-column: 1 / -1;
 }
 .generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled {
   color: darkgrey!important;
@@ -246,7 +245,7 @@ button{
 .edit-ausfuehren {
   grid-column: 1 / -1;
   display: flex;
-  justify-content: space-evenly;
+  gap: 10px;
   padding: 10px;
   border-bottom: 1px solid darkgrey;
   border-top: 1px solid darkgrey;
@@ -290,6 +289,9 @@ button{
   color: black;
   margin: 5px;
   height: 20px;
+}
+:host-context(body.dark-theme) .file-name {
+  color: var(--text-color);
 }/*
 .queryformat_dropdown {
   margin-bottom: 20px;
@@ -317,6 +319,9 @@ mat-expansion-panel-header {
 .mat-mdc-menu-item {
   color: black;
 }
+:host-context(body.dark-theme) .mat-mdc-menu-item {
+  color: var(--text-color);
+}
 .query-expiration-date {
   width: 74%;
   margin-bottom: 5%;
@@ -324,6 +329,9 @@ mat-expansion-panel-header {
 ::ng-deep .query-input .mat-mdc-text-field-wrapper {
   background-color: #f5f5f5;
   min-width: 220px;
+}
+::ng-deep :host-context(body.dark-theme) .query-input .mat-mdc-text-field-wrapper {
+  background-color: var(--border-color);
 }
 .query-contactid, .query-context {
   margin-right: 20px;
@@ -510,7 +518,7 @@ mat-expansion-panel-header {
   top: -140px;
 }
 .query-box {
-  width: 50%;
+  width: 65%;
   padding: 15px 25px;
   margin: 0px 0px 15px 0px;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
@@ -521,13 +529,14 @@ mat-expansion-panel-header {
   align-items: start;
   background: white;
 }
-.query-box-titel {
-  font-size: x-large;
-  font-weight: bold;
+.query-box-table {
+  grid-column: 1 / -1;
+  width: 100%;
 }
-.query-box-beschreibung,  .query-box-abfrage, .query-box-template, .query-box-ausgabeformat, .query-box-ablaufsdatum, .query-box-umgebungsvariablen, .query-box-anfrage, .query-box-erstelltam, .query-box-anfragender, .query-box-format {
+.query-box-table .mat-column-feld {
   font-weight: bold;
-  font-size: larger;
+  width: 220px;
+  border-right: 1px solid darkgrey;
 }
 .box-expanded {
   align-items: normal;
@@ -567,8 +576,9 @@ mat-expansion-panel-header {
   color: black;
 }
 .create {
-  width: 50%;
-  margin-left: 15px;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
 }
 
 .maxwidth {
@@ -581,5 +591,63 @@ mat-expansion-panel-header {
   font-size: 14px;
 }
 .query-box-ausfuehren, .query-box-edit {
-  width: 20%;
+  flex: 1;
+}
+
+:host-context(body.dark-theme) .query-box,
+:host-context(body.dark-theme) .info-box,
+:host-context(body.dark-theme) .execution-row {
+  background: var(--surface-color);
+  color: var(--text-color);
+}
+:host-context(body.dark-theme) .edit-ausfuehren {
+  border-color: var(--border-color);
+}
+:host-context(body.dark-theme) .query-box-table .mat-column-feld {
+  border-right-color: var(--border-color);
+}
+:host-context(body.dark-theme) .mat-mdc-header-cell {
+  background-color: var(--surface-header, var(--border-color)) !important;
+  color: var(--text-color);
+}
+:host-context(body.dark-theme) .mat-mdc-table,
+:host-context(body.dark-theme) .mat-mdc-row,
+:host-context(body.dark-theme) .mat-mdc-cell {
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+/* button hierarchy: "Ausführen" is the primary action, "Edit" stays secondary */
+:host-context(body.dark-theme) .query-box-ausfuehren {
+  background-color: var(--accent-primary, #3b82f6) !important;
+  color: #ffffff !important;
+}
+:host-context(body.dark-theme) .query-box-ausfuehren:hover {
+  background-color: var(--accent-hover, #2563eb) !important;
+}
+:host-context(body.dark-theme) .query-box-edit {
+  background-color: transparent !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color);
+}
+:host-context(body.dark-theme) .query-box-edit:hover {
+  background-color: var(--border-color) !important;
+}
+
+/* label vs. value contrast in the Feld/Wert table */
+:host-context(body.dark-theme) .query-box-table .mat-column-feld {
+  color: var(--text-secondary, var(--text-color));
+}
+:host-context(body.dark-theme) .query-box-table .mat-column-wert {
+  color: var(--text-primary, var(--text-color));
+}
+
+/* row separation: zebra striping + hover for the multi-row tables */
+:host-context(body.dark-theme) .query-box-table .mat-mdc-row:nth-child(even),
+:host-context(body.dark-theme) .info-box-table .mat-mdc-row:nth-child(even) {
+  background-color: var(--surface-raised, var(--surface-color));
+}
+:host-context(body.dark-theme) .query-box-table .mat-mdc-row:hover,
+:host-context(body.dark-theme) .info-box-table .mat-mdc-row:hover {
+  background-color: var(--border-subtle, var(--border-color)) !important;
 }

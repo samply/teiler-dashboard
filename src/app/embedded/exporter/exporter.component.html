@@ -1,21 +1,61 @@
 <div class="main">
   <div class="title">
     <h2 i18n>Exporter Anfragen</h2>
+    <button class="create-button" mat-raised-button (click)="createNewQuery('create')" i18n>neue Anfrage erstellen</button>
   </div>
 
   <div class="main-box">
+  <div class="create">
+    <div class="info-box">
+        <h3 class="uebersicht-titel">Übersicht Anfragen</h3>
+
+      <table mat-table [dataSource]="dataSource" class="info-box-table">
+
+        <ng-container matColumnDef="label">
+          <th mat-header-cell *matHeaderCellDef i18n>Titel</th>
+          <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef i18n>Datum</th>
+          <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd.MM.yyyy'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="infoBoxColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: infoBoxColumns;" (click)="selectQuery(row)"></tr>
+      </table>
+
+      <div class="paginator">
+        <mat-paginator
+          #paginator
+          [pageSize]="10"
+          [pageSizeOptions]="[5,10,25,100]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
+
     <div class="query-box">
-      <span class="query-box-titel">Titel: </span><span class="query-box-titel">{{currentItem?.label}}</span>
-      <span class="query-box-abfrage">Abfrage: </span><span>{{currentItem?.query}}</span>
-      <span class="query-box-beschreibung">Beschreibung: </span><span>{{currentItem?.description}}</span>
-      <span class="query-box-template">Template: </span><span>{{currentItem?.defaultTemplateId}}</span>
-      <span class="query-box-ausgabeformat">Ausgabeformat: </span><span>{{currentItem?.defaultOutputFormat}}</span>
-      <span class="query-box-ablaufsdatum">Ablaufdatum: </span><span>{{currentItem?.expirationDate !== "0" ? (currentItem?.expirationDate | date: 'mediumDate') : "keine Angabe"}}</span>
-      <span class="query-box-umgebungsvariablen">Umgebungsvariablen: </span><span>{{currentItem?.context}}</span>
-      <span class="query-box-anfrage">Anfrage: </span><span>{{currentItem?.query}}</span>
-      <span class="query-box-erstelltam">Erstellt am: </span><span>{{currentItem?.createdAt | date: 'mediumDate'}}</span>
-      <span class="query-box-anfragender">Anfragender: </span><span>{{currentItem?.contactId}}</span>
-      <span class="query-box-format">Format: </span><span>{{currentItem?.format}}</span>
+      <h3 class="uebersicht-titel query-box-heading" i18n>Details</h3>
+      <table mat-table [dataSource]="queryBoxRows" class="query-box-table">
+
+        <ng-container matColumnDef="feld">
+          <th mat-header-cell *matHeaderCellDef i18n>Feld</th>
+          <td mat-cell *matCellDef="let row"> {{row.feld}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="wert">
+          <th mat-header-cell *matHeaderCellDef i18n>Wert</th>
+          <td mat-cell *matCellDef="let row">
+            <ng-container *ngIf="row.isDate; else plainValue">{{row.wert !== "0" ? (row.wert | date: 'dd.MM.yyyy') : "keine Angabe"}}</ng-container>
+            <ng-template #plainValue>{{row.wert}}</ng-template>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="queryBoxColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: queryBoxColumns;"></tr>
+      </table>
       <div class="edit-ausfuehren">
         <button class="query-box-edit" mat-raised-button (click)="createNewQuery('edit')">Edit</button>
         <button class="query-box-ausfuehren" mat-raised-button (click)="executeQuery()" >Ausführen</button>
@@ -28,26 +68,6 @@
         <span class="execution-row-format"><i class="bi bi-download"></i></span>
       </div>
     </div>
-
-  <div class="create">
-    <button  class="create-button" mat-raised-button (click)="createNewQuery('create')" i18n>neue Anfrage erstellen</button>
-
-    <div class="info-box">
-        <h3 class="uebersicht-titel">Übersicht Anfragen</h3>
-
-      <div *ngFor="let element of dataSource.data; let index = index" class="info-box-entry">
-        <div (click)="setActiveDataSource(index)">
-          <span class="infoBoxTitel">Titel: </span>
-          <span class="created-label">{{element.label}}</span>
-        </div>
-        <div>
-          <span class="infoBoxDatum">Datum: </span>
-          <span class="created-date">{{element.createdAt | date: 'mediumDate'}}</span>
-        </div>
-        </div>
-
-    </div>
-  </div>
   </div>
 
   <div class="tablex" style="display:none">
@@ -96,15 +116,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleCheckbox($event, row)"></tr>
     </table>
-  </div>
-
-  <div class="paginator">
-    <mat-paginator
-      #paginator
-      [pageSize]="10"
-      [pageSizeOptions]="[5,10,25,100]"
-      showFirstLastButtons
-    ></mat-paginator>
   </div>
 </div>
 

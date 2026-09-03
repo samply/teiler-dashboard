@@ -1,6 +1,9 @@
 :host {
   min-width: 80%;
 }
+.field-required-hint {
+  color: #f44336 !important;
+}
 h2{
   text-align: left;
   font-family: Roboto, Helvetica Neue, sans-serif;
@@ -121,7 +124,11 @@ button{
   overflow: visible;
 }
 .delete-button {
-  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
   font-weight: bolder;
   color: black!important;
@@ -131,10 +138,11 @@ button{
   top: -15px;
   border-radius: 100%;
   border-style: none;
+  cursor: pointer;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 
 }
-.generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled, .save-button:disabled, .exec-button:disabled {
+.generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled, .save-button:disabled, .exec-button:disabled, .next-button:disabled, .back-button:disabled {
   color: darkgrey!important;
 }
 .generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .plus-button, .minus-button, .next-button, .back-button, .save-button, .exec-button {
@@ -182,6 +190,9 @@ button{
   color: black;
   margin: 5px;
   height: 20px;
+}
+:host-context(body.dark-theme) .file-name {
+  color: var(--text-color);
 }/*
 .queryformat_dropdown {
   margin-bottom: 20px;
@@ -318,14 +329,14 @@ mat-expansion-panel-header {
   width: 50%;
 }
 .form-content {
-  height: 350px;
+  min-height: 200px;
   margin: 30px 20px 20px 20px;
   display: flex;
   flex-direction: column;
 }
 .FormGroup-input-div {
   width: 55%;
-  height: 315px;
+  max-height: 315px;
   overflow: auto;
   margin-bottom: 10px;
 }
@@ -349,6 +360,7 @@ mat-expansion-panel-header {
 }
 .firstFormGroup-div, .secondFormGroup-div, .thirdFormGroup-div, .forthFormGroup-div {
   display: flex;
+  align-items: flex-start;
 }
 .template-box {
   display: flex;
@@ -368,6 +380,18 @@ mat-expansion-panel-header {
   width: 35%;
 }
 
+.stepper-help-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 13pt;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
 .stepper-help-header, .stepper-help-hint-header {
   font-weight: bold;
 }
@@ -503,4 +527,86 @@ mat-expansion-panel-header {
 .execution-row-date, .execution-row-status, .execution-row-templateId, .execution-row-format{
   font-weight: bold;
 
+}
+
+:host-context(body.dark-theme) .log-exporter,
+:host-context(body.dark-theme) .summary-box,
+:host-context(body.dark-theme) .executions {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+}
+::ng-deep :host-context(body.dark-theme) .query-input .mat-mdc-text-field-wrapper {
+  background-color: var(--border-color);
+}
+:host-context(body.dark-theme) .mat-mdc-menu-item {
+  color: var(--text-color);
+}
+:host-context(body.dark-theme) .mat-mdc-header-cell {
+  background-color: var(--surface-header, var(--border-color)) !important;
+  color: var(--text-color);
+}
+:host-context(body.dark-theme) .mat-mdc-table,
+:host-context(body.dark-theme) .mat-mdc-row,
+:host-context(body.dark-theme) .mat-mdc-cell {
+  background-color: transparent;
+  color: var(--text-color);
+}
+:host-context(body.dark-theme) .delete-button {
+  background-color: var(--surface-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* button hierarchy: primary (raised, filled) / secondary (stroked) / tertiary (text-only) */
+:host-context(body.dark-theme) .next-button:not(:disabled),
+:host-context(body.dark-theme) .exec-button:not(:disabled) {
+  background-color: var(--accent-primary, #3b82f6) !important;
+  color: #ffffff !important;
+}
+:host-context(body.dark-theme) .next-button:not(:disabled):hover,
+:host-context(body.dark-theme) .exec-button:not(:disabled):hover {
+  background-color: var(--accent-hover, #2563eb) !important;
+}
+:host-context(body.dark-theme) .back-button:not(:disabled),
+:host-context(body.dark-theme) .save-button:not(:disabled) {
+  background-color: transparent !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color);
+}
+:host-context(body.dark-theme) .back-button:not(:disabled):hover,
+:host-context(body.dark-theme) .save-button:not(:disabled):hover {
+  background-color: var(--border-color) !important;
+}
+:host-context(body.dark-theme) .file-upload,
+:host-context(body.dark-theme) .download-button {
+  background-color: transparent !important;
+  color: var(--accent-primary, #3b82f6) !important;
+  box-shadow: none !important;
+}
+:host-context(body.dark-theme) .file-upload:hover,
+:host-context(body.dark-theme) .download-button:hover {
+  background-color: var(--border-color) !important;
+}
+
+/* stepper icon contrast (selected / visited-editable / others) */
+:host-context(body.dark-theme) .mat-step-icon-selected {
+  background-color: var(--accent-primary, #3b82f6) !important;
+  color: #ffffff !important;
+}
+:host-context(body.dark-theme) .mat-step-icon-state-edit {
+  background-color: var(--color-success, #22c55e) !important;
+  color: #ffffff !important;
+}
+:host-context(body.dark-theme) .mat-step-icon:not(.mat-step-icon-selected):not(.mat-step-icon-state-edit) {
+  background-color: var(--border-color) !important;
+  color: var(--text-secondary, var(--text-color)) !important;
+}
+:host-context(body.dark-theme) .mat-stepper-horizontal-line {
+  border-top-color: var(--border-color) !important;
+}
+
+/* disabled "Weiter" button: clearly muted, not near-identical to the active state */
+:host-context(body.dark-theme) .next-button:disabled {
+  background-color: var(--border-subtle, var(--border-color)) !important;
+  color: var(--text-disabled, darkgrey) !important;
+  opacity: 1 !important;
 }

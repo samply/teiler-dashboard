@@ -6,26 +6,35 @@
   <div class="stepper">
   <mat-stepper
     class="query-stepper"
-    [orientation]="(stepperOrientation | async)!">
-    <mat-step [stepControl]="firstFormGroup" [label]="descriptionLoc" completed="false">
+    [orientation]="(stepperOrientation | async)!"
+    (selectionChange)="onStepperSelectionChange($event)">
+    <ng-template matStepperIcon="edit" let-index="index">
+      <span>{{ index + 1 }}</span>
+    </ng-template>
+    <mat-step [stepControl]="firstFormGroup" [label]="descriptionLoc" [completed]="visitedSteps[0] && !!element.label && !!element.description">
       <form [formGroup]="firstFormGroup" class="form-content">
         <div class="firstFormGroup-div">
           <div class="FormGroup-input-div">
             <mat-form-field appearance="outline" class="query-label">
               <mat-label i18n>Titel</mat-label>
               <input matInput type="text"
+                     required
+                     #titleModel="ngModel"
                      [(ngModel)]="element.label"
                      (ngModelChange)="generateButtonStatus()"
                      [disabled] = "!editModus"
                      [ngModelOptions]="{standalone: true}"
               >
+              <mat-hint class="field-required-hint" *ngIf="!element.label && titleModel.touched" i18n>Titel ist erforderlich</mat-hint>
             </mat-form-field>
             <div class="textarea-box">
-              <mat-form-field class="query-textfield">
+              <mat-form-field appearance="outline" class="query-textfield">
                 <mat-label i18n>Beschreibung</mat-label>
                 <textarea
                   class="textarea"
                   matInput
+                  required
+                  #descriptionModel="ngModel"
                   [(ngModel)]="element.description"
                   (ngModelChange)="generateButtonStatus()"
                   cdkTextareaAutosize
@@ -34,11 +43,12 @@
                   [disabled] = "!editModus"
                   [ngModelOptions]="{standalone: true}"
                 ></textarea>
+                <mat-hint class="field-required-hint" *ngIf="!element.description && descriptionModel.touched" i18n>Beschreibung ist erforderlich</mat-hint>
               </mat-form-field>
             </div>
           </div>
           <div class="FormGroup-description-div">
-
+            <div class="stepper-help-title"><i class="bi bi-info-circle"></i><span i18n>Hilfe</span></div>
               <span class="stepper-help-header" i18n>Erstellen Sie Ihre Anfrage in 4 Schritten: </span>
             <ol>
               <li>
@@ -67,20 +77,24 @@
         </div>
         <div class="stepper-buttons">
           <span></span>
-          <button class="next-button" mat-raised-button color="primary" matStepperNext ><span i18n>Weiter</span></button>
+          <span [matTooltip]="step1TooltipText" [matTooltipDisabled]="!!element.label && !!element.description">
+            <button class="next-button" mat-raised-button color="primary" matStepperNext [disabled]="!element.label || !element.description"><span i18n>Weiter</span></button>
+          </span>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" [label]="queryLoc" completed="false">
+    <mat-step [stepControl]="secondFormGroup" [label]="queryLoc" [completed]="visitedSteps[1] && !!element.query">
       <form [formGroup]="secondFormGroup" class="form-content">
         <div class="secondFormGroup-div">
           <div class="FormGroup-input-div">
             <div class="textarea-box query-textbox">
-              <mat-form-field class="query-textfield">
+              <mat-form-field appearance="outline" class="query-textfield">
                 <mat-label i18n>Anfrage</mat-label>
                 <textarea
                   class="textarea"
                   matInput
+                  required
+                  #queryModel="ngModel"
                   [(ngModel)]="element.query"
                   (ngModelChange)="generateButtonStatus()"
                   cdkTextareaAutosize
@@ -89,9 +103,10 @@
                   [disabled] = "!editModus"
                   [ngModelOptions]="{standalone: true}"
                 ></textarea>
+                <mat-hint class="field-required-hint" *ngIf="!element.query && queryModel.touched" i18n>Anfrage ist erforderlich</mat-hint>
               </mat-form-field>
             </div>
-            <mat-form-field class="queryformat_dropdown">
+            <mat-form-field appearance="outline" class="queryformat_dropdown">
               <mat-label i18n>Anfrageformat</mat-label>
               <select class="queryformat-select"
                       matNativeControl
@@ -103,6 +118,7 @@
             </mat-form-field>
           </div>
           <div class="FormGroup-description-div">
+            <div class="stepper-help-title"><i class="bi bi-info-circle"></i><span i18n>Hilfe</span></div>
             <ul>
               <li>
                 <span class="stepper-help-header" i18n>Anfrage formulieren: </span>
@@ -119,40 +135,45 @@
         </div>
         <div class="stepper-buttons">
           <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
-          <button class="next-button" mat-raised-button color="primary" matStepperNext ><span i18n>Weiter</span></button>
+          <span [matTooltip]="step2TooltipText" [matTooltipDisabled]="!!element.query">
+            <button class="next-button" mat-raised-button color="primary" matStepperNext [disabled]="!element.query"><span i18n>Weiter</span></button>
+          </span>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="thirdFormGroup" [label]="outputLoc" completed="false">
+    <mat-step [stepControl]="thirdFormGroup" [label]="outputLoc" [completed]="visitedSteps[2] && !!element.selectedTemplate && !!element.selectedOutputFormat">
       <form [formGroup]="thirdFormGroup" class="form-content">
         <div class="thirdFormGroup-div">
           <div class="FormGroup-input-div">
             <div class="template-box">
-              <mat-form-field class="template_dropdown">
+              <mat-form-field appearance="outline" class="template_dropdown">
                 <mat-label i18n>Template</mat-label>
                 <select class="template-select"
                         matNativeControl
                         [(ngModel)]="element.selectedTemplate"
                         [disabled] = "!editModus"
                         [ngModelOptions]="{standalone: true}">
-                  <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
+                  <optgroup *ngFor="let group of groupedTemplateIDs" [label]="group.label">
+                    <option *ngFor="let id of group.items" [value]="id.value">{{id.display}}</option>
+                  </optgroup>
+                  <option value="custom" i18n>Eigenes Template</option>
                 </select>
               </mat-form-field>
               <div class="upload-button" [ngClass]="{ 'visible': (element.selectedTemplate === 'custom') }">
-                <input type="file" class="file-input" (change)="doImportFromFile($event)" #fileUpload />
-                <button class="file-upload" mat-raised-button color="primary" (click)="fileUpload.click();$event.stopPropagation();">
+                <input type="file" class="file-input" aria-hidden="true" tabindex="-1" (change)="doImportFromFile($event)" #fileUpload />
+                <button type="button" class="file-upload" mat-button color="primary" (click)="fileUpload.click();$event.stopPropagation();">
                   <span i18n>Template auswählen</span>
                 </button>
                 <div class="file-name">{{ fileName }}</div>
               </div>
-              <button class="download-button" mat-raised-button color="primary"
+              <button type="button" class="download-button" mat-button color="primary"
                       (click)="downloadTemplate();$event.stopPropagation();"
                       [ngClass]="{ 'visible-button': (element.selectedTemplate !== 'custom') }"
                       [disabled] = "!editModus"
                       i18n>Template herunterladen
               </button>
             </div>
-            <mat-form-field class="outputformat_dropdown">
+            <mat-form-field appearance="outline" class="outputformat_dropdown">
               <mat-label i18n>Ausgabeformat</mat-label>
               <select class="outputformat-select"
                       matNativeControl
@@ -164,6 +185,7 @@
             </mat-form-field>
           </div>
           <div class="FormGroup-description-div">
+            <div class="stepper-help-title"><i class="bi bi-info-circle"></i><span i18n>Hilfe</span></div>
             <ul>
               <li>
                 <span class="stepper-help-header" i18n>Ausgabeformat wählen: </span>
@@ -171,7 +193,7 @@
                 <ul>
                   <li>
                     <span class="stepper-help-hint-header" i18n>Hinweis: </span>
-                    <span class="stepper-help-hint-text" i18n>das Template/Vorlage definiert die Datenstruktur im gewählten Format (json, csv...)</span>
+                    <span class="stepper-help-hint-text" i18n>Das Template bzw. die Vorlage definiert die Datenstruktur im gewählten Format (json, csv...)</span>
                   </li>
                 </ul>
               </li>
@@ -184,7 +206,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="forthFormGroup" [label]="otherParametersLoc" completed="false">
+    <mat-step [stepControl]="forthFormGroup" [label]="otherParametersLoc" [optional]="true" [completed]="visitedSteps[3]">
       <form [formGroup]="forthFormGroup" class="form-content">
         <div class="forthFormGroup-div">
           <div class="FormGroup-input-div">
@@ -234,6 +256,7 @@
             </div>
           </div>
           <div class="FormGroup-description-div">
+            <div class="stepper-help-title"><i class="bi bi-info-circle"></i><span i18n>Hilfe</span></div>
             <ul>
               <li>
                 <span class="stepper-help-header" i18n>Ablaufdatum angeben: </span>
@@ -260,10 +283,10 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="fifthFormGroup" [label]="summaryLoc" completed="false">
+    <mat-step [stepControl]="fifthFormGroup" [label]="summaryLoc" [completed]="visitedSteps[4] && !!element.label && !!element.description && !!element.query">
       <div class="fifthFormGroup">
         <div style="width:50%">
-          <div class="box-title"><span class="fw-bold">Titel: </span>{{element.label}}</div>
+          <div class="box-title"><span class="fw-bold">Titel: </span>{{element.label || '—'}}</div>
           <table class="box-table">
             <tbody>
             <tr>
@@ -272,7 +295,7 @@
             </tr>
             <tr>
               <td class="table-left">Erstellt am: </td>
-              <td class="table-right">{{element.createdAt | date: 'medium'}}</td>
+              <td class="table-right">{{element.createdAt ? (element.createdAt | date: 'medium') : '—'}}</td>
             </tr>
             <tr>
               <td class="table-left" i18n>Anfrageformat:</td>
@@ -286,20 +309,20 @@
           </table>
         </div>
         <div style="width:50%">
-          <div class="box-description"><span class="fw-bold">Beschreibung: </span>{{element.description}}</div>
+          <div class="box-description"><span class="fw-bold">Beschreibung: </span>{{element.description || '—'}}</div>
           <table class="box-table">
             <tbody>
             <tr>
               <td class="table-left" i18n>Anfrage:</td>
-              <td class="table-right">{{element.query}}</td>
+              <td class="table-right">{{element.query || '—'}}</td>
             </tr>
             <tr>
               <td class="table-left" i18n>Anfragende/r:</td>
-              <td class="table-right">{{element.contactId}}</td>
+              <td class="table-right">{{element.contactId || '—'}}</td>
             </tr>
             <tr>
               <td class="table-left" i18n>Ablaufdatum:</td>
-              <td class="table-right">{{element.expirationDate | date: 'mediumDate'}}</td>
+              <td class="table-right">{{element.expirationDate ? (element.expirationDate | date: 'mediumDate') : '—'}}</td>
             </tr>
             <tr>
               <td class="table-left" i18n>Ausgabeformat:</td>
@@ -327,7 +350,7 @@
   <div class="short-info">
     <div style="width:30%">
       <div class="box-title">{{element.label}}</div>
-      <div class="box-createdAt" style="font-weight: 700"><span class="fw-bold">erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
+      <div class="box-createdAt" style="font-weight: 700"><span class="fw-bold">Erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
     </div>
     <div style="width:40%;margin-right:10%">
       <div class="box-query maxwidth"><span class="fw-bold">Anfrage: </span><span class="font">{{element.query}}</span></div>
@@ -347,7 +370,7 @@
       </ng-container>
       <ng-container *ngIf="exportStatus === ExportStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span>
       </ng-container>
-      <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span>
+      <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-error" i18n>Ein Fehler ist aufgetreten.</span>
       </ng-container>
     </div>
 

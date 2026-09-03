@@ -14,7 +14,7 @@
           </button>
           <button class="cancel-button" mat-raised-button color="primary"
                   (click)="cancelExecution();$event.stopPropagation();" [ngClass]="{ 'visible-button': buttonDisabled }"
-                  ><span i18n>abbrechen </span>
+                  ><span i18n>Abbrechen</span>
           </button>
 
           <div class="upload-button" [ngClass]="{ 'visible': selectedTemplate === 'custom' }">
@@ -62,7 +62,7 @@
               <td class="table-right">{{ expirationDate | date: 'mediumDate' }}</td>
             </tr>
             <tr>
-              <td class="table-left" i18n>Anfragende:</td>
+              <td class="table-left" i18n>Anfragende/r:</td>
               <td class="table-right">{{ contactID }}</td>
             </tr>
             <tr *ngFor="let context of contextArray; let i=index">
@@ -95,7 +95,7 @@
               </ng-container>
               <ng-container *ngIf="exportStatus === ExportStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span>
               </ng-container>
-              <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span>
+              <ng-container *ngIf="exportStatus === ExportStatus.ERROR"><span class="status-error" i18n>Ein Fehler ist aufgetreten.</span>
               </ng-container>
             </div>
 
@@ -121,7 +121,7 @@
 
         <ng-container matColumnDef="executedAt">
           <th mat-header-cell *matHeaderCellDef>
-            <div i18n>ausgeführt am</div>
+            <div i18n>Ausgeführt am</div>
           </th>
           <td mat-cell *matCellDef="let element"> {{ element.executedAt | date: 'medium' }}</td>
         </ng-container>

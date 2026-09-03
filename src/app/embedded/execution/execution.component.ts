@@ -7,7 +7,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {SelectionModel} from "@angular/cdk/collections";
 import {environment} from "../../../environments/environment";
 import {ExporterService} from "../../teiler/exporter.service";
-import {Context, DropdownFormat, ExportResponse} from "../exporter/exporter.component";
+import {Context, DropdownFormat, ExportResponse, formatEnumDisplayLabel} from "../exporter/exporter.component";
 import {Templates} from "../quality-report/quality-report.component";
 
 
@@ -491,7 +491,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.subscriptionGetOutputFormats = this.exporterService.getOutputFormats().subscribe({
       next: (formatList:string[]) => {
         formatList.forEach((format) => {
-          this.outputFormats.push({value: format, display: format.toLowerCase()})
+          this.outputFormats.push({value: format, display: formatEnumDisplayLabel(format)})
         })
       },
       error: (error) => {
@@ -504,7 +504,7 @@ export class ExecutionComponent implements OnInit, OnDestroy {
     this.subscriptionGetQueryFormats = this.exporterService.getQueryFormats().subscribe({
       next: (formatList:string[]) => {
         formatList.forEach((format) => {
-          this.queryFormats.push({value: format, display: format.toLowerCase()})
+          this.queryFormats.push({value: format, display: formatEnumDisplayLabel(format)})
         })
       },
       error: (error) => {

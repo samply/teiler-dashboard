@@ -19,13 +19,16 @@
           <span class="login-hint2" i18n> < ein</span>
         </div>
         <div *ngIf="isLoggedIn">
-          <a routerLink="{{'/' + routeManagerService.logoutRouterLink}}" (click)="authService.logout()"><span
+          <a class="logout-link" routerLink="{{'/' + routeManagerService.logoutRouterLink}}" (click)="authService.logout()"><span
               i18n>ausloggen</span></a>
         </div>
       </div>
       <div>
         <language-selector></language-selector>
       </div>
+      <button class="dark-mode-toggle" (click)="toggleDarkMode()" [attr.aria-label]="darkMode ? 'Light Mode' : 'Dark Mode'" [title]="darkMode ? 'Light Mode' : 'Dark Mode'">
+        <i class="bi" [ngClass]="darkMode ? 'bi-sun' : 'bi-moon'"></i>
+      </button>
     </div>
   </div>
 

@@ -16,6 +16,12 @@
   z-index: 1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+:host-context(body.dark-theme) .menu-wrapper {
+  background-color: var(--surface-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
 .invisible-menu {
   display: none;
 }

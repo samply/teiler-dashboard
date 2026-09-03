@@ -42,6 +42,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSortModule} from "@angular/material/sort";
+import {MatTooltipModule} from "@angular/material/tooltip";
 import {ExternalLinkBlankDirective} from "./external-link-blank.directive";
 import { AuthModule } from 'angular-auth-oidc-client';
 import { environment } from '../environments/environment';
@@ -98,6 +99,7 @@ const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
         MatNativeDateModule,
         MatButtonToggleModule,
         MatSortModule,
+        MatTooltipModule,
         AuthModule.forRoot({
           config: {
             authority: oidcUrl,

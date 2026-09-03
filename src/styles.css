@@ -9,9 +9,171 @@
     --text-color: black;
     --line-color: black;
     --font-style: Arial, sans-serif;
+    --app-bg-color: #f5f5f5;
+    --surface-color: #ffffff;
+    --border-color: #e0e0e0;
+
+    /* semantic status colors, used across both themes */
+    --color-success: #16a34a;
+    --color-warning: #b45309;
+    --color-error: #dc2626;
+    --color-info: #2563eb;
+}
+
+body.dark-theme {
+    color-scheme: dark;
+    --icon-color: #e2e8f0;
+    --text-color: #e2e8f0;
+    --line-color: #e2e8f0;
+    --app-bg-color: #0d1b2e;
+    --surface-color: #1a2d47;
+    --border-color: #2d4a6e;
+
+    /* extended design tokens (surfaces, text, accent, borders) */
+    --surface-base: var(--app-bg-color);
+    --surface-raised: #132035;
+    --surface-overlay: var(--surface-color);
+    --surface-header: #243552;
+    --text-primary: var(--text-color);
+    --text-secondary: #94a3b8;
+    --text-disabled: #475569;
+    --accent-primary: #3b82f6;
+    --accent-hover: #2563eb;
+    --border-subtle: #1e3a5f;
+    --border-default: var(--border-color);
+
+    /* semantic status colors, tuned for the dark surface */
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    --color-info: #3b82f6;
+
+    background-color: var(--app-bg-color);
+    position: relative;
+
+    /* Angular Material surfaces (dialogs, menus, panels, tables, ...) */
+    --mdc-dialog-container-color: var(--surface-color);
+    --mdc-dialog-supporting-text-color: var(--text-color);
+    --mdc-dialog-subhead-color: var(--text-color);
+    --mat-menu-container-color: var(--surface-color);
+    --mat-menu-item-label-text-color: var(--text-color);
+    --mat-select-panel-background-color: var(--surface-color);
+    --mat-select-enabled-trigger-text-color: var(--text-color);
+    --mat-select-enabled-arrow-color: var(--text-color);
+    --mat-select-placeholder-text-color: var(--text-color);
+    --mat-autocomplete-background-color: var(--surface-color);
+    --mat-datepicker-calendar-container-background-color: var(--surface-color);
+    --mat-datepicker-calendar-body-label-text-color: var(--text-color);
+    --mat-expansion-container-background-color: var(--surface-color);
+    --mat-expansion-container-text-color: var(--text-color);
+    --mat-expansion-header-text-color: var(--text-color);
+    --mat-paginator-container-background-color: var(--surface-color);
+    --mat-paginator-container-text-color: var(--text-color);
+    --mat-stepper-container-color: var(--surface-color);
+    --mat-stepper-header-label-text-color: var(--text-color);
+    --mat-table-background-color: var(--surface-color);
+    --mat-table-row-item-label-text-color: var(--text-color);
+    --mdc-elevated-card-container-color: var(--surface-color);
+    --mdc-outlined-card-container-color: var(--surface-color);
+    --mat-bottom-sheet-container-background-color: var(--surface-color);
+
+    /* form fields (outlined inputs used throughout the query forms) */
+    --mdc-outlined-text-field-input-text-color: var(--text-color);
+    --mdc-outlined-text-field-label-text-color: var(--text-color);
+    --mdc-outlined-text-field-input-text-placeholder-color: var(--text-color);
+    --mdc-outlined-text-field-outline-color: var(--border-color);
+    --mdc-outlined-text-field-hover-outline-color: var(--text-color);
+    --mdc-outlined-text-field-hover-label-text-color: var(--text-color);
+
+    /* form fields (filled inputs, e.g. Beschreibung/Anfrage textareas and dropdowns) */
+    --mdc-filled-text-field-container-color: var(--border-color);
+    --mdc-filled-text-field-input-text-color: var(--text-color);
+    --mdc-filled-text-field-label-text-color: var(--text-color);
+    --mdc-filled-text-field-hover-label-text-color: var(--text-color);
+    --mdc-filled-text-field-input-text-placeholder-color: var(--text-color);
+    --mdc-filled-text-field-active-indicator-color: var(--text-color);
+    --mdc-filled-text-field-hover-active-indicator-color: var(--text-color);
+    --mat-form-field-enabled-select-arrow-color: var(--text-color);
+
+    /* checkbox (e.g. "lokale/zentrale Apps" filters) */
+    --mat-checkbox-label-text-color: var(--text-color);
+    --mdc-checkbox-unselected-icon-color: var(--text-color);
+    --mdc-checkbox-disabled-selected-icon-color: var(--border-color);
+    --mdc-checkbox-disabled-unselected-icon-color: var(--border-color);
+
+    /* nav list (sidebar menu) */
+    --mdc-list-list-item-label-text-color: var(--text-color);
+    --mdc-list-list-item-supporting-text-color: var(--text-color);
+    --mdc-list-list-item-leading-icon-color: var(--text-color);
+    --mdc-list-list-item-hover-label-text-color: var(--text-color);
+    --mdc-list-list-item-focus-label-text-color: var(--text-color);
+
+    /* datepicker calendar overlay */
+    --mat-datepicker-toggle-icon-color: var(--text-color);
+    --mat-datepicker-calendar-period-button-icon-color: var(--text-color);
+    --mat-datepicker-calendar-navigation-button-icon-color: var(--text-color);
+    --mat-datepicker-calendar-header-divider-color: var(--border-color);
+    --mat-datepicker-calendar-header-text-color: var(--text-color);
+    --mat-datepicker-calendar-date-today-outline-color: var(--text-color);
+    --mat-datepicker-calendar-date-text-color: var(--text-color);
+    --mat-datepicker-calendar-container-text-color: var(--text-color);
+
+    /* expansion panel / accordion */
+    --mat-expansion-header-description-color: var(--text-color);
+    --mat-expansion-header-indicator-color: var(--text-color);
+
+    /* menu */
+    --mat-menu-item-icon-color: var(--text-color);
+
+    /* paginator */
+    --mat-paginator-enabled-icon-color: var(--text-color);
+    --mat-paginator-disabled-icon-color: rgba(232, 232, 232, 0.35);
+
+    /* stepper */
+    --mat-stepper-header-optional-label-text-color: var(--text-color);
+    --mat-stepper-header-selected-state-label-text-color: var(--text-color);
+    --mat-stepper-header-icon-background-color: var(--border-color);
+
+    /* table header text */
+    --mat-table-header-headline-color: var(--text-color);
+
+    /* plain (unthemed) mat-button, e.g. the language-selector translate icon */
+    --mdc-text-button-label-text-color: var(--icon-color);
+}
+
+/* decorative background texture, kept very subtle so it doesn't compete with content */
+body.dark-theme::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url('assets/images/CurveLine.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.05;
 }
 
 .bi {
   font-family: "bootstrap-icons" !important;
+}
+
+/* semantic status text (report status, form errors, ...) */
+.status-ok {
+  color: var(--color-success);
+  font-weight: 600;
+}
+.status-running {
+  color: var(--color-info);
+  font-weight: 600;
+}
+.status-not-found {
+  color: var(--color-warning);
+  font-weight: 600;
+}
+.status-error {
+  color: var(--color-error);
+  font-weight: 600;
 }
 
