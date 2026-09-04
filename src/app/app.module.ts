@@ -48,6 +48,7 @@ import { AuthModule } from 'angular-auth-oidc-client';
 import { environment } from '../environments/environment';
 import {ExporterComponent} from "./embedded/exporter/exporter.component";
 import {EditQueryDialogComponent} from "./embedded/exporter/edit-query-dialog/edit-query-dialog.component";
+import {QueryFormComponent} from "./embedded/exporter/edit-query-dialog/query-form/query-form.component";
 
 const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
 
@@ -62,6 +63,7 @@ const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
         TeilerWelcomeComponent,
         ExporterComponent,
         EditQueryDialogComponent,
+        QueryFormComponent,
     ],
     bootstrap: [AppComponent],
     imports: [

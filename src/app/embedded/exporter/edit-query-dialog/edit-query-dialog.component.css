@@ -4,40 +4,13 @@
 .field-required-hint {
   color: #f44336 !important;
 }
-h2{
-  text-align: left;
-  font-family: Roboto, Helvetica Neue, sans-serif;
-  font-size: 30px;
-  margin-top: 1.5%;
-}
 table {
   text-align: center;
   width: 100%;
   margin-top: 1%;
 }
-.mat-mdc-row .mat-mdc-cell {
-  cursor: pointer;
-  max-width: 200px;
-  white-space: nowrap;
-}
-.mat-mdc-row:hover .mat-mdc-cell {
-  background-color: #2BCDD563;
-}
-.mat-mdc-header-cell {
-  background-color: #2BCDD563!important;
-}
 ::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
   height: 30px !important;
-}
-/*mat-form-field {
-  font-size: small;
-}*/
-
-.table-link-column {
-  text-align: center;
-}
-mat-paginator{
-  opacity: 0.75;
 }
 
 button{
@@ -47,70 +20,17 @@ button{
   padding: 1.5%;
   background-color: white!important;
 }
-.generate-div {
-  margin-top: 1.5%;
-  margin-bottom: 2%;
-  text-align: left;
-  font-size: 14px;
-  width: 100%;
-}
-.matinput {
-  margin-left: 2%;
-}
-.matinput input {
-  border:1px solid dimgrey;
-  min-width: 45%;
-  border-radius:4px;
-  padding: 2px;
-}
-.mat-column-version {
-  font-size: 115%;
-  text-align: center;
-}
-.upload-button, .download-button, .cancel-button {
+.upload-button, .download-button {
   display: none;
-}
-.download-button-div {
-  width: 10%;
-  margin-top: 15px;
 }
 .visible {
   display: block;
 }
-.file-input, .execute-button, .cancel-edit-button, .edit-button {
+.file-input {
   display: none;
 }
 .visible-button {
   display: inline-flex;
-}
-.create-buttons {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  display: flex;
-}
-.buttons-left {
-  display: flex;
-}
-.buttons-right {
-  display: flex;
-  position: absolute;
-  right: 50px;
-  /*margin-left: auto;
-  right: 60px;
-  position: absolute;*/
-}
-.generate-button-group {
-  margin-right: 10px;
-  height: 45px;
-  display: none;
-  border-radius: 10px;
-}
-.generate-button, .cancel-button, .download-button, .create-button, .edit-button, .execute-button, .cancel-edit-button {
-  width: 200px;
-  height: 45px;
-  padding: 5px;
-  font-size: 14px;
-  color: black!important;
 }
 .save-button, .exec-button, .back-button {
   width: 180px;
@@ -136,27 +56,19 @@ button{
   z-index: 1000;
   right: -10px;
   top: -15px;
-  border-radius: 100%;
   border-style: none;
   cursor: pointer;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-
+  background-color: transparent !important;
+  box-shadow: none;
 }
-.generate-button:disabled, .cancel-button:disabled, .download-button:disabled, .create-button:disabled, .edit-button:disabled, .execute-button:disabled, .save-button:disabled, .exec-button:disabled, .next-button:disabled, .back-button:disabled {
+.download-button:disabled, .save-button:disabled, .exec-button:disabled, .next-button:disabled, .back-button:disabled {
   color: darkgrey!important;
 }
-.generate-button, .create-button, .edit-button, .download-button, .execute-button, .cancel-edit-button, .plus-button, .minus-button, .next-button, .back-button, .save-button, .exec-button {
+.download-button, .plus-button, .minus-button, .next-button, .back-button, .save-button, .exec-button {
   background-color: #D3D3D3 !important;
 }
-.download-button, .edit-button, .cancel-edit-button, .upload-button{
+.download-button, .upload-button {
   margin-left: 2%;
-}
-.generate-button {
-  width: 250px;
-  padding-top: 0;
-}
-.visible-button-group {
-  display: inline-flex;
 }
 .plus-button, .minus-button {
   width: 35px;
@@ -183,9 +95,6 @@ button{
   padding: 5px;
   background-color: #2BCDD563 !important;
 }
-.file-upload-text {
-  margin: 8px 5px;
-}
 .file-name {
   color: black;
   margin: 5px;
@@ -193,103 +102,32 @@ button{
 }
 :host-context(body.dark-theme) .file-name {
   color: var(--text-color);
-}/*
-.queryformat_dropdown {
-  margin-bottom: 20px;
-  margin-right: 5%;
-  width: 45%;
-}*/
+}
 .queryformat_dropdown{
   width: 80%;
 }
 .template_dropdown {
   width: 50%;
-}
-.template_dropdown {
   margin-bottom: 5%;
-}
-.button-accordion {
-  margin-bottom: 50px;
-}
-mat-expansion-panel-header {
-  padding: 15px 20px 25px 20px;
-}
-::ng-deep .mat-mdc-menu-panel {
-  padding: 4px 7px;
-}
-.mat-mdc-menu-item {
-  color: black;
 }
 .query-expiration-date {
   width: 74%;
   margin-bottom: 5%;
 }
-::ng-deep .query-input .mat-mdc-text-field-wrapper {
-  background-color: #f5f5f5;
-  min-width: 220px;
-}
-.query-contactid, .query-context {
+.query-context {
+  width: 35%;
   margin-right: 20px;
-}
-.download-link {
-  font-weight: bold;
-  color: #0AADB5;
-}
-.query-input {
-  display: flex;
-  margin-bottom: 30px;
-  max-width: 1310px;
-}
-.query-input-right {
-  display: grid;
-  margin-left: 30px;
-  margin-top: 20px;
 }
 .query-label {
   width: 80%;
   margin-bottom: 12%;
   height: 50px;
 }
-.input-left {
-  margin-right: 30px;
-  margin-top: 20px;
-}
-.dropdowns {
-  display: flex;
-}
-.dropdowns-left {
-  margin-right: 20px;
-  width: min-content;
-}
 .upload-button, .download-button {
   width: 50%;
   max-width: 200px;
 }
 
-.input-box {
-  display: flex;
-}
-.summary-box {
-  width: 30%;
-  background-color: rgba(197, 197, 197, 0.2);
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  margin-right: 5px;
-  height: 480px;
-  overflow: auto;
-}
-.summary-box-left {
-  width: 40%;
-}
-.summary-box-right {
-  width: 60%;
-}
-.summary-table {
-  text-align: left;
-}
-.summary-table td {
-  padding: 6px;
-  border-bottom: #e0e0e0 1px solid;
-}
 .table-left {
   width: 35%;
 }
@@ -369,16 +207,6 @@ mat-expansion-panel-header {
   padding-left: 0!important;
   padding-right: 0!important;
 }
-/*
-.queryformat-select, .outputformat-select,
-::ng-deep .query-input .mat-mdc-form-field-infix {
-  padding-top: 18px!important;
-  padding-bottom: 2px!important;
-  min-height: 52px!important;
-}*/
-.query-context {
-  width: 35%;
-}
 
 .stepper-help-title {
   display: flex;
@@ -404,38 +232,23 @@ mat-expansion-panel-header {
   padding-bottom: 2px!important;
   min-height: 50px!important;
 }
-::ng-deep .query-selection .mdc-label {
-  padding-left: 0;
-}
-::ng-deep .query-selection .mat-mdc-checkbox {
-  margin-right: 15px;
-}
 ::ng-deep .mat-mdc-floating-label.mdc-floating-label {
   font-size: small!important;
 }
-.link-icon {
-  font-size: 24px;
-}
-.description-textfield, .query-textfield {
+.query-textfield {
   height: 114px;
 }
 .box-title, .box-description {
   font-weight: bold;
   font-size: x-large;
 }
-.box-createdAt, .box-contactId {
+.box-createdAt {
   font-size: 12px;
 }
-.box-contactId {
-  margin-bottom: 20px;
-}
-.box-table, .table-side-right {
+.box-table {
   margin-top: 20px;
   text-align: left;
   font-size: large;
-}
-.table-side-right {
-  padding: 3px 10px 3px 0;
 }
 .box-table td{
   padding: 3px 10px 3px 0;
@@ -476,10 +289,6 @@ mat-expansion-panel-header {
   display:flex;
   margin-bottom: 21px;
 }
-.button-status {
-  display: flex;
-  margin-top: 10px;
-}
 .status {
   margin: 1.4% 0 0 3%;
 }
@@ -503,15 +312,8 @@ mat-expansion-panel-header {
   max-height: 200px;
   overflow: auto;
 }
-.executions {
-  min-height: 120px;
-}
-
 .outputformat_dropdown {
   width: 60%;
-}
-.overview-query {
-  border: 1px solid black;
 }
 .executions {
   margin: 30px;
@@ -519,40 +321,20 @@ mat-expansion-panel-header {
   gap: 20px;
   align-items: center;
   padding: 15px 20px;
-  /*border: 1px solid darkgrey;*/
   justify-content: space-between;
   border-radius: 10px;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .execution-row-date, .execution-row-status, .execution-row-templateId, .execution-row-format{
   font-weight: bold;
-
 }
 
 :host-context(body.dark-theme) .log-exporter,
-:host-context(body.dark-theme) .summary-box,
 :host-context(body.dark-theme) .executions {
   background-color: var(--surface-color);
   color: var(--text-color);
 }
-::ng-deep :host-context(body.dark-theme) .query-input .mat-mdc-text-field-wrapper {
-  background-color: var(--border-color);
-}
-:host-context(body.dark-theme) .mat-mdc-menu-item {
-  color: var(--text-color);
-}
-:host-context(body.dark-theme) .mat-mdc-header-cell {
-  background-color: var(--surface-header, var(--border-color)) !important;
-  color: var(--text-color);
-}
-:host-context(body.dark-theme) .mat-mdc-table,
-:host-context(body.dark-theme) .mat-mdc-row,
-:host-context(body.dark-theme) .mat-mdc-cell {
-  background-color: transparent;
-  color: var(--text-color);
-}
 :host-context(body.dark-theme) .delete-button {
-  background-color: var(--surface-color) !important;
   color: var(--text-color) !important;
 }
 
@@ -587,19 +369,6 @@ mat-expansion-panel-header {
   background-color: var(--border-color) !important;
 }
 
-/* stepper icon contrast (selected / visited-editable / others) */
-:host-context(body.dark-theme) .mat-step-icon-selected {
-  background-color: var(--accent-primary, #3b82f6) !important;
-  color: #ffffff !important;
-}
-:host-context(body.dark-theme) .mat-step-icon-state-edit {
-  background-color: var(--color-success, #22c55e) !important;
-  color: #ffffff !important;
-}
-:host-context(body.dark-theme) .mat-step-icon:not(.mat-step-icon-selected):not(.mat-step-icon-state-edit) {
-  background-color: var(--border-color) !important;
-  color: var(--text-secondary, var(--text-color)) !important;
-}
 :host-context(body.dark-theme) .mat-stepper-horizontal-line {
   border-top-color: var(--border-color) !important;
 }
@@ -609,4 +378,20 @@ mat-expansion-panel-header {
   background-color: var(--border-subtle, var(--border-color)) !important;
   color: var(--text-disabled, darkgrey) !important;
   opacity: 1 !important;
+}
+
+/* "Erstellen"/"Bearbeiten" tab labels: the Material theme redeclares these
+   tokens directly on .mat-mdc-tab-group (i.e. on .query-form-tabs itself),
+   which is a closer ancestor than body.dark-theme - so setting them globally
+   on body.dark-theme never wins the inheritance. Redeclare them here, at the
+   same element, instead. */
+:host-context(body.dark-theme) .query-form-tabs {
+  --mat-tab-header-inactive-label-text-color: var(--text-color);
+  --mat-tab-header-inactive-hover-label-text-color: var(--text-color);
+  --mat-tab-header-inactive-focus-label-text-color: var(--text-color);
+  --mat-tab-header-active-label-text-color: var(--accent-primary, #3b82f6);
+  --mat-tab-header-active-hover-label-text-color: var(--accent-primary, #3b82f6);
+  --mat-tab-header-active-focus-label-text-color: var(--accent-primary, #3b82f6);
+  --mdc-tab-indicator-active-indicator-color: var(--accent-primary, #3b82f6);
+  --mat-tab-header-divider-color: var(--border-color);
 }

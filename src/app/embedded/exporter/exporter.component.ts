@@ -1,23 +1,15 @@
-import {Component, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
-import {ExporterService, exportLog} from "../../teiler/exporter.service";
-import {from, map, Observable, Subscription} from "rxjs";
-import {Router} from "@angular/router";
-import {EmbeddedTeilerApps} from "../../teiler/teiler-app";
-import {QBResponse, Templates} from "../quality-report/quality-report.component";
-import {environment} from "../../../environments/environment";
-import {SelectionModel} from "@angular/cdk/collections";
+import {ExporterService} from "../../teiler/exporter.service";
+import {from, Subscription} from "rxjs";
 import {TeilerAuthService} from "../../security/teiler-auth.service";
-import {createRouterLinkForBase} from "../../route/route-utils";
-import {FormBuilder} from "@angular/forms";
-import {BreakpointObserver} from "@angular/cdk/layout";
-import {StepperOrientation} from "@angular/cdk/stepper";
 import {ViewportScroller} from "@angular/common";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {EditQueryDialogComponent} from "./edit-query-dialog/edit-query-dialog.component";
 import {ExporterExecutions} from "../execution/execution.component";
 import {ExecutionService} from "../../teiler/execution.service";
+import {environment} from "../../../environments/environment";
 
 const KNOWN_FORMAT_ACRONYMS = ['FHIR', 'CQL', 'CSV', 'JSON', 'XML', 'SQL', 'ID', 'URL'];
 
@@ -91,495 +83,207 @@ export interface QueryBoxRow {
 export class ExporterComponent implements OnInit, OnDestroy {
   private subscriptionGetExecutionList: Subscription | undefined
   private subscriptionGetQueries: Subscription | undefined
-  private subscriptionGetTemplateIDs: Subscription | undefined
-  private subscriptionGetOutputFormats: Subscription | undefined
-  private subscriptionGetQueryFormats: Subscription | undefined
-  private subscriptionGenerateExport: Subscription | undefined
-  private subscriptionGetExportStatus: Subscription | undefined
-  private subscriptionFetchLogs: Subscription | undefined
-  private subscriptionUpdateQuery: Subscription | undefined
-  private subscriptionCreateQuery: Subscription | undefined;
   dataSourceExecutions = new MatTableDataSource<ExporterExecutions>();
 
   activeDataSource: number = 0;
 
-  descriptionLoc = $localize`Beschreibung`
-  queryLoc = $localize`Anfrage`
-  outputLoc = $localize`Ausgabe`
-  otherParametersLoc = $localize`weitere Parameter`
-
-  displayedColumns: string[] = ['#', 'timestamp', 'querytitle', 'querysource', 'format', 'executions'];
   queryBoxColumns: string[] = ['feld', 'wert'];
   infoBoxColumns: string[] = ['label', 'createdAt'];
   dataSource = new MatTableDataSource<ExporterQueriesBox>();
-  buttonDisabled: boolean = true;
-  editButtonDisabled: boolean = true;
-  editModus: boolean = false;
-  templateIDs: Templates[] = [];
-  outputFormats: DropdownFormat[] = [];
-  queryFormats: DropdownFormat[] = [];
-  selectedTemplate: string = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-  selectedOutputFormat: string = "EXCEL";
-  selectedQueryFormat: string = "FHIR_SEARCH";
-  exportUrl = "";
-  fileName: string | undefined;
-  importTemplate: string = "";
-  exportStatus: ExportStatus = ExportStatus.EMPTY;
-  private intervall: number | undefined;
-  expirationDate: Date | undefined;
-  query: string = "";
-  queryLabel: string = "";
-  queryDescription: string = "";
-  contactID: string | undefined;
-  selection = new SelectionModel<any>(false, []);
-  executeOnSaving: boolean = true;
-  saveButtonText: Map<boolean, string> = new Map([[false, $localize`Anfrage speichern`], [true, $localize`Anfrage speichern und ausführen`]]);
-  loadedQueryID: string = "";
-  activeQueries: boolean = true;
-  archivedQueries: boolean = true;
+  queryFilter: string = '';
   queryList: ExporterQueries[] = [];
-  executionLink: string = EmbeddedTeilerApps.EXECUTION;
-  panelOpenState: boolean = false;
-  contextArray: Context[] = [{key: "", value: ""}];
-  showPlusButton: boolean = false;
   tempEQs: ExporterQueriesBox[] = [];
-
-  firstFormGroup = this._formBuilder.group({
-    queryTitle: [''],
-    queryDescription: ['']
-  });
-  secondFormGroup = this._formBuilder.group({
-    query: [''],
-    queryformat: [''],
-  });
-  thirdFormGroup = this._formBuilder.group({
-    template: [''],
-    outputformat: [''],
-  });
-  forthFormGroup = this._formBuilder.group({
-    expirationDate: [''],
-    contextKey: [''],
-    contextValue: ['']
-  });
-  stepperOrientation: Observable<StepperOrientation>;
   readonly dialog = inject(MatDialog);
 
-  constructor(private exporterService: ExporterService, private router: Router, public authService: TeilerAuthService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private viewport: ViewportScroller, private executionService: ExecutionService) {
-    from(authService.loadUserProfile()).subscribe(authUserProfile => this.contactID = authUserProfile.email);
-    this.stepperOrientation = breakpointObserver
-      .observe('(min-width: 800px)')
-      .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
+  constructor(private exporterService: ExporterService, public authService: TeilerAuthService, private viewport: ViewportScroller, private executionService: ExecutionService) {
+    this.dataSource.filterPredicate = (data: ExporterQueriesBox, filter: string): boolean => {
+      const term = filter.trim().toLowerCase();
+      if (!term) {
+        return true;
+      }
+      return [data.label, data.description, data.query, data.contactId, data.format]
+        .some((value) => !!value && value.toLowerCase().includes(term));
+    };
+  }
+
+  applyQueryFilter(): void {
+    this.dataSource.filter = this.queryFilter;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   // @ts-ignore
   @ViewChild('paginator') paginator: MatPaginator;
+  @ViewChild('queryBox') queryBoxRef: ElementRef<HTMLDivElement> | undefined;
+  @ViewChild('infoBox') infoBoxRef: ElementRef<HTMLDivElement> | undefined;
+  private queryBoxResizeObserver: ResizeObserver | undefined;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.viewport.scrollToPosition([0, 0]);
+
+    if (this.queryBoxRef && this.infoBoxRef) {
+      const queryBoxElement = this.queryBoxRef.nativeElement;
+      const infoBoxElement = this.infoBoxRef.nativeElement;
+      // box-sizing is border-box (Bootstrap reset), so use the border-box
+      // height here too - ResizeObserver's contentRect always excludes padding.
+      this.queryBoxResizeObserver = new ResizeObserver(() => {
+        infoBoxElement.style.height = `${queryBoxElement.getBoundingClientRect().height}px`;
+      });
+      this.queryBoxResizeObserver.observe(queryBoxElement);
+    }
   }
 
   ngOnInit(): void {
-    this.exportUrl = this.exporterService.getExporterURL() + "/";
     this.getQueries();
-    this.getTemplateIDs();
-    this.getOutputFormats();
-    this.getQueryFormats()
     window.dispatchEvent(new Event('resize'));
   }
 
   ngOnDestroy(): void {
     this.subscriptionGetQueries?.unsubscribe();
-    this.subscriptionGetTemplateIDs?.unsubscribe();
-    this.subscriptionGetOutputFormats?.unsubscribe();
-    this.subscriptionGetQueryFormats?.unsubscribe();
-    this.subscriptionGenerateExport?.unsubscribe();
-    this.subscriptionGetExportStatus?.unsubscribe();
-    this.subscriptionFetchLogs?.unsubscribe();
-    this.subscriptionUpdateQuery?.unsubscribe();
-    this.subscriptionCreateQuery?.unsubscribe();
-    window.clearInterval(this.intervall);
     this.subscriptionGetExecutionList?.unsubscribe();
-  }
-
-  ngAfterContentChecked() {
-    //this.ref.detectChanges();
+    this.queryBoxResizeObserver?.disconnect();
   }
 
   getQueries(): void {
     this.subscriptionGetQueries?.unsubscribe();
     this.subscriptionGetQueries = this.exporterService.getReports().subscribe({
       next: (queryList: ExporterQueries[]) => {
-        this.queryList = []
         this.queryList = queryList;
         this.filterQueries();
       },
       error: (error) => {
         console.log(error);
-      },
-      complete: () => {
       }
     })
   }
 
   filterQueries(): void {
-    this.tempEQs = [];
-    this.queryList.forEach((query) => {
-      if ((this.activeQueries && query.archivedAt === null) || (this.archivedQueries && query.archivedAt !== null)) {
-        let selectedOutputFormat: string
-        let selectedTemplate: string
-        //let expirationDate: Date | undefined
-        let contextArray: Context[] = []
-        query.defaultOutputFormat !== null && query.defaultOutputFormat !== undefined ? selectedOutputFormat = query.defaultOutputFormat : selectedOutputFormat = "EXCEL";
-        query.defaultTemplateId !== null && query.defaultTemplateId !== undefined ? selectedTemplate = query.defaultTemplateId : selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-        //query.expirationDate !== "0" ? expirationDate = new Date(parseInt(query.expirationDate)) : expirationDate = undefined;
-        if (query.context !== null) {
-          atob(query.context).split(';').forEach((context) => {
-            const contextPair = context.split('=');
-            contextArray.push({key: contextPair[0], value: contextPair[1]} as Context);
-          })
-        } else {
-          contextArray = [{key: "", value: ""} as Context];
-        }
-
-        this.tempEQs.push({
-          id: query.id,
-          query: query.query,
-          format: query.format,
-          label: query.label,
-          description: query.description,
-          contactId: query.contactId,
-          expirationDate: this.transformDate(query.expirationDate),
-          createdAt: this.transformDate(query.createdAt),
-          archivedAt: this.transformDate(query.archivedAt),
-          defaultTemplateId: query.defaultTemplateId,
-          defaultOutputFormat: query.defaultOutputFormat,
-          context: query.context,
-          selectedOutputFormat: selectedOutputFormat,
-          selectedTemplate: selectedTemplate,
-          selectedQueryFormat: query.format,
-          contextArray: contextArray
-        });
+    this.tempEQs = this.queryList.map((query) => {
+      let selectedOutputFormat: string
+      let selectedTemplate: string
+      let contextArray: Context[]
+      query.defaultOutputFormat !== null && query.defaultOutputFormat !== undefined ? selectedOutputFormat = query.defaultOutputFormat : selectedOutputFormat = "EXCEL";
+      query.defaultTemplateId !== null && query.defaultTemplateId !== undefined ? selectedTemplate = query.defaultTemplateId : selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
+      if (query.context !== null) {
+        contextArray = [];
+        atob(query.context).split(';').forEach((context) => {
+          const contextPair = context.split('=');
+          contextArray.push({key: contextPair[0], value: contextPair[1]} as Context);
+        })
+      } else {
+        contextArray = [{key: "", value: ""} as Context];
       }
-    })
+
+      return {
+        id: query.id,
+        query: query.query,
+        format: query.format,
+        label: query.label,
+        description: query.description,
+        contactId: query.contactId,
+        expirationDate: this.transformDate(query.expirationDate),
+        createdAt: this.transformDate(query.createdAt),
+        archivedAt: this.transformDate(query.archivedAt),
+        defaultTemplateId: query.defaultTemplateId,
+        defaultOutputFormat: query.defaultOutputFormat,
+        context: query.context,
+        selectedOutputFormat: selectedOutputFormat,
+        selectedTemplate: selectedTemplate,
+        selectedQueryFormat: query.format,
+        contextArray: contextArray
+      };
+    });
     this.tempEQs.sort((a, b) => Number(b.createdAt) - Number(a.createdAt))
     this.dataSource.data = this.tempEQs;
     this.dataSource._updateChangeSubscription();
-  }
-
-  openQuery(query: ExporterQueries): void {
-    console.log(query)
-//    this.router.navigate([EmbeddedTeilerApps.EXECUTION, query.id], {state: { query: query.query, label: query.label, description: query.description, selectedQueryFormat: query.format, selectedOutputFormat: "", selectedTemplate: ""}})
   }
 
   transformDate(date: string): string {
     return new Date(date).getTime().toString();
   }
 
-  transformDateForQuery(date: Date | undefined): string {
-    if (date) {
-      const offset = date.getTimezoneOffset();
-      date = new Date(date.getTime() - (offset * 60 * 1000));
-      return date.toISOString().split('T')[0];
-    } else {
-      return "";
-    }
-  }
-
-  createAndExecuteQuery() {
-    this.subscriptionGenerateExport?.unsubscribe();
-    this.subscriptionGenerateExport = this.exporterService.generateExport(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.selectedTemplate, this.getContext(), this.importTemplate).subscribe({
-      next: (response: QBResponse) => {
-        const url = new URL(response.responseUrl)
-        const id = url.searchParams.get("query-execution-id");
-        //this.exportStatus = ExportStatus.RUNNING
-        if (id) {
-          this.router.navigate([this.executionLink, id], {
-            state: {
-              newQueryID: id,
-              query: this.query,
-              label: this.queryLabel,
-              description: this.queryDescription,
-              selectedQueryFormat: this.selectedQueryFormat,
-              selectedOutputFormat: this.selectedOutputFormat,
-              selectedTemplate: this.selectedTemplate
-            }
-          })
-          //this.pollingStatusAndLogs(id, false);
-        }
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-      }
-    });
-  }
-
   executeQuery() {
     const element = this.dataSource.data[this.activeDataSource]
+    element.loadedQueryID = element.id.toString();
     this.editDialog(element, "execution")
   }
 
-  saveQuery() {
-    this.subscriptionUpdateQuery?.unsubscribe();
-    this.subscriptionCreateQuery?.unsubscribe();
-
-    this.buttonDisabled = true;
-    const expDate = this.transformDateForQuery(this.expirationDate);
-
-    if (this.loadedQueryID !== "") {
-      this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.loadedQueryID, this.query, this.queryLabel, this.queryDescription, this.selectedOutputFormat, this.selectedTemplate, this.getContext(), expDate, this.importTemplate).subscribe({
-        next: (response: any) => {
-          this.getQueries();
-          this.editModus = false;
-          this.buttonDisabled = false;
-          if (this.executeOnSaving) {
-            this.executeQuery();
-          }
-        },
-        error: (error) => {
-          console.log(error);
-          this.editModus = false;
-          this.buttonDisabled = false;
-        },
-        complete: () => {
-        }
-      });
-    } else {
-      this.subscriptionCreateQuery = this.exporterService.createQuery(this.query, this.queryLabel, this.queryDescription, this.selectedQueryFormat, this.selectedOutputFormat, this.contactID, this.selectedTemplate, this.getContext(), expDate, this.importTemplate).subscribe({
-        next: (response: QueryResponse) => {
-          this.getQueries();
-          this.editModus = false;
-          this.buttonDisabled = false;
-          if (this.executeOnSaving) {
-            this.loadedQueryID = response.queryId;
-            this.executeQuery();
-          }
-
-        },
-        error: (error) => {
-          console.log(error);
-          this.editModus = false;
-          this.buttonDisabled = false;
-        },
-        complete: () => {
-        }
-      });
-    }
-
-  }
-
-
-  getTemplateIDs(): void {
-    this.subscriptionGetTemplateIDs?.unsubscribe();
-    this.subscriptionGetTemplateIDs = this.exporterService.getExporterTemplates().subscribe({
-      next: (templateList: string[]) => {
-        templateList.forEach((template) => {
-          this.templateIDs.push({value: template, display: template})
-        })
-        this.templateIDs.push({value: "custom", display: "Eigenes Template"})
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
-  }
-
-  getOutputFormats(): void {
-    this.subscriptionGetOutputFormats?.unsubscribe();
-    this.subscriptionGetOutputFormats = this.exporterService.getOutputFormats().subscribe({
-      next: (formatList: string[]) => {
-        formatList.forEach((format) => {
-          this.outputFormats.push({value: format, display: formatEnumDisplayLabel(format)})
-        })
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
-  }
-
-  getQueryFormats(): void {
-    this.subscriptionGetQueryFormats?.unsubscribe();
-    this.subscriptionGetQueryFormats = this.exporterService.getQueryFormats().subscribe({
-      next: (formatList: string[]) => {
-        formatList.forEach((format) => {
-          this.queryFormats.push({value: format, display: formatEnumDisplayLabel(format)})
-        })
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
-  }
-
-  doImportFromFile(event: Event): void {
-    // @ts-ignore
-    const file: File = (event.target as HTMLInputElement).files[0];
-    const reader = new FileReader();
-    reader.onload = this.onReaderLoad.bind(this);
-    reader.readAsText(file);
-    this.fileName = file.name;
-  }
-
-  onReaderLoad(event: any): void {
-    this.importTemplate = event.target.result;
-    //this.generateExport();
-  }
-
-  cancelExport(): void {
-    window.clearInterval(this.intervall);
-    this.buttonDisabled = false;
-    this.exportStatus = ExportStatus.EMPTY;
-  }
-
-  generateButtonStatus(): void {
-    this.buttonDisabled = (this.queryLabel === "") || (this.query === "") || (this.queryDescription === "");
-  }
-
-  downloadTemplate(): void {
-    window.location.href = this.exportUrl + 'template?template-id=' + this.selectedTemplate;
-  }
-
-  toggleCheckbox(event: any, row: any): void {
-    if (!this.editModus) {
-      event ? this.selection.toggle(row) : null;
-      this.loadQuery();
-    }
-  }
-
-  loadQuery(): void {
-    const query: ExporterQueries[] = this.selection.selected
-
-    if (query.length > 0) {
-      this.query = query[0].query;
-      this.queryDescription = query[0].description;
-      this.queryLabel = query[0].label;
-      this.selectedQueryFormat = query[0].format;
-      this.contactID = query[0].contactId;
-      this.editButtonDisabled = false;
-      this.executeOnSaving = true;
-      this.buttonDisabled = false;
-      this.loadedQueryID = query[0].id.toString();
-      query[0].defaultOutputFormat !== null && query[0].defaultOutputFormat !== undefined ? this.selectedOutputFormat = query[0].defaultOutputFormat : this.selectedOutputFormat = "EXCEL";
-      query[0].defaultTemplateId !== null && query[0].defaultTemplateId !== undefined ? this.selectedTemplate = query[0].defaultTemplateId : this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-      this.panelOpenState = true;
-      query[0].expirationDate !== "0" ? this.expirationDate = new Date(parseInt(query[0].expirationDate)) : this.expirationDate = undefined;
-      if (query[0].context !== null) {
-        this.contextArray = [];
-        atob(query[0].context).split(';').forEach((context) => {
-          const contextPair = context.split('=');
-          this.contextArray.push({key: contextPair[0], value: contextPair[1]} as Context);
-        })
-        this.showPlusButton = true;
-      } else {
-        this.contextArray = [{key: "", value: ""} as Context];
-      }
-
-    } else {
-      this.query = "";
-      this.queryDescription = "";
-      this.queryLabel = "";
-      from(this.authService.loadUserProfile()).subscribe(keycloakProfile => this.contactID = keycloakProfile.email);
-      this.selectedQueryFormat = "FHIR_SEARCH";
-      this.editButtonDisabled = true;
-      this.buttonDisabled = true;
-      this.loadedQueryID = "";
-      this.expirationDate = undefined;
-      this.selectedTemplate = environment.config.EXPORTER_DEFAULT_TEMPLATE_ID;
-      this.selectedOutputFormat = "EXCEL";
-      this.contextArray = [{key: "", value: ""} as Context];
-    }
-  }
-
-  createNewQuery(modus:string): void {
-    var isCreate:boolean = true
-    if(modus === "edit"){
-      isCreate = false
-    }
-    this.editModus = true;
+  openQueryFormDialog(): void {
     from(this.authService.loadUserProfile()).subscribe(keycloakProfile => {
       const contactId = keycloakProfile.email;
+      const createElement = this.buildQueryBox(true, contactId);
+      const editElement = this.dataSource.data.length > 0 ? this.buildQueryBox(false, contactId) : undefined;
 
-      const newQuery: ExporterQueriesBox = {
-        loadedQueryID: isCreate ? undefined : this.dataSource.data[this.activeDataSource].id.toString(),
-        id: this.tempEQs.length,
-        label: isCreate ? "" : this.dataSource.data[this.activeDataSource].label,
-        description: isCreate ? "" : this.dataSource.data[this.activeDataSource].description,
-        query: isCreate ? "" : this.dataSource.data[this.activeDataSource].query,
-        contactId: isCreate ? contactId : this.dataSource.data[this.activeDataSource].contactId,
-        selectedTemplate: isCreate ? environment.config.EXPORTER_DEFAULT_TEMPLATE_ID : this.dataSource.data[this.activeDataSource].selectedTemplate,
-        selectedOutputFormat: isCreate ? "EXCEL" : this.dataSource.data[this.activeDataSource].selectedOutputFormat,
-        selectedQueryFormat: isCreate ? "FHIR_SEARCH" : this.dataSource.data[this.activeDataSource].selectedQueryFormat,
-        expirationDate: isCreate ? "" : this.dataSource.data[this.activeDataSource].expirationDate,
-        contextArray: [{key: "", value: ""} as Context],
-        format: isCreate ? "" : this.dataSource.data[this.activeDataSource].format,
-        createdAt: isCreate ? "" : this.dataSource.data[this.activeDataSource].createdAt,
-        archivedAt: isCreate ? "" :this.dataSource.data[this.activeDataSource].archivedAt,
-        context: isCreate ? "" : this.dataSource.data[this.activeDataSource].context,
-        defaultTemplateId: isCreate ? "" : this.dataSource.data[this.activeDataSource].defaultTemplateId,
-        defaultOutputFormat: isCreate ? "" : this.dataSource.data[this.activeDataSource].defaultOutputFormat,
-      }
-      this.selection.clear();
-      this.generateButtonStatus();
-      this.editDialog(newQuery, "formular")
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {createElement: createElement, editElement: editElement, target: "formular"};
+      dialogConfig.width = "1500px";
+      this.dialog.open(EditQueryDialogComponent, dialogConfig).afterClosed().subscribe((isSaved: boolean) => {
+        if (isSaved) {
+          this.getQueries()
+        }
+      });
     });
   }
 
-  editQuery(): void {
-    this.editModus = true;
-    this.panelOpenState = true;
-    this.generateButtonStatus();
-  }
+  private buildQueryBox(isCreate: boolean, contactId: string): ExporterQueriesBox {
+    if (isCreate) {
+      return {
+        id: this.tempEQs.length,
+        label: "",
+        description: "",
+        query: "",
+        contactId: contactId,
+        selectedTemplate: environment.config.EXPORTER_DEFAULT_TEMPLATE_ID,
+        selectedOutputFormat: "EXCEL",
+        selectedQueryFormat: "FHIR_SEARCH",
+        expirationDate: "",
+        contextArray: [{key: "", value: ""} as Context],
+        format: "",
+        createdAt: "",
+        archivedAt: "",
+        context: "",
+        defaultTemplateId: "",
+        defaultOutputFormat: "",
+      };
+    }
 
-  saveButtonMenu(modus: boolean) {
-    this.executeOnSaving = modus;
-  }
-
-  cancelEdit(): void {
-    this.editModus = false;
-  }
-
-  getRouterLink(id: string): string {
-    return '/' + createRouterLinkForBase(this.executionLink + '/' + id);
-  }
-
-  addContextInput(element: any, index2: number): void {
-    const scrollElement = element.target.parentNode.parentNode.parentNode;
-    this.contextArray.push({key: "", value: ""} as Context);
-    setTimeout(() => {
-      scrollElement.scrollTop = scrollElement.scrollHeight;
-    }, 50);
-    this.showPlusButton = false;
-  }
-
-  deleteContextInput(index: number): void {
-    this.contextArray.splice(index, 1);
-    this.checkContext(this.contextArray.length - 1);
-  }
-
-  checkContext(index: number) {
-    this.showPlusButton = this.contextArray[index].key.length > 0 && this.contextArray[index].value.length > 0;
-  }
-
-  getContext(): string {
-    let context: string = "";
-    this.contextArray.forEach(contextPair => {
-      if (contextPair.key.length !== 0 && contextPair.value.length !== 0) {
-        if (context.length !== 0) {
-          context += ";"
-        }
-        context += contextPair.key + "=" + contextPair.value;
-      }
-    })
-    //return Buffer.from(context).toString("base64");
-    return btoa(context);
+    const current = this.dataSource.data[this.activeDataSource] ?? this.dataSource.data[0];
+    let contextArray: Context[];
+    if (current.context) {
+      contextArray = [];
+      atob(current.context).split(';').forEach((context) => {
+        const contextPair = context.split('=');
+        contextArray.push({key: contextPair[0], value: contextPair[1]} as Context);
+      })
+    } else {
+      contextArray = [{key: "", value: ""} as Context];
+    }
+    return {
+      loadedQueryID: current.id.toString(),
+      id: current.id,
+      label: current.label,
+      description: current.description,
+      query: current.query,
+      contactId: current.contactId,
+      selectedTemplate: current.selectedTemplate,
+      selectedOutputFormat: current.selectedOutputFormat,
+      selectedQueryFormat: current.selectedQueryFormat,
+      expirationDate: current.expirationDate,
+      contextArray: contextArray,
+      format: current.format,
+      createdAt: current.createdAt,
+      archivedAt: current.archivedAt,
+      context: current.context,
+      defaultTemplateId: current.defaultTemplateId,
+      defaultOutputFormat: current.defaultOutputFormat,
+    };
   }
 
   editDialog(element: ExporterQueriesBox, target:string): void {
     const dialogConfig = new MatDialogConfig();
-    //dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {element: element,target: target};
     dialogConfig.width = "1500px";
@@ -616,7 +320,6 @@ export class ExporterComponent implements OnInit, OnDestroy {
               status: execution.status,
               executedAt: this.transformDate(execution.executedAt)
             })
-            console.log("test")
             tempExecs.sort((a, b) => Number(b.executedAt) - Number(a.executedAt))
             this.dataSourceExecutions.data = tempExecs;
             this.dataSourceExecutions._updateChangeSubscription();
@@ -625,8 +328,6 @@ export class ExporterComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.log(error);
-      },
-      complete: () => {
       }
     })
   }

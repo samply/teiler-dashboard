@@ -1,29 +1,46 @@
 <div class="main">
   <div class="title">
     <h2 i18n>Exporter Anfragen</h2>
-    <button class="create-button" mat-raised-button (click)="createNewQuery('create')" i18n>neue Anfrage erstellen</button>
+    <button class="create-button" mat-raised-button (click)="openQueryFormDialog()" i18n>Anfragen erstellen/ bearbeiten</button>
   </div>
 
   <div class="main-box">
   <div class="create">
-    <div class="info-box">
+    <div class="info-box" #infoBox>
         <h3 class="uebersicht-titel">Übersicht Anfragen</h3>
 
-      <table mat-table [dataSource]="dataSource" class="info-box-table">
+      <mat-form-field appearance="outline" class="info-box-search">
+        <i class="bi bi-search" matPrefix></i>
+        <input matInput type="text"
+               [(ngModel)]="queryFilter"
+               (ngModelChange)="applyQueryFilter()"
+               [ngModelOptions]="{standalone: true}"
+               i18n-placeholder placeholder="Anfrage suchen ...">
+        <button *ngIf="queryFilter" matSuffix mat-icon-button aria-label="Clear" (click)="queryFilter=''; applyQueryFilter()">
+          <i class="bi bi-x"></i>
+        </button>
+      </mat-form-field>
 
-        <ng-container matColumnDef="label">
-          <th mat-header-cell *matHeaderCellDef i18n>Titel</th>
-          <td mat-cell *matCellDef="let element"> {{element.label}} </td>
-        </ng-container>
+      <div class="info-box-table-wrapper">
+        <table mat-table [dataSource]="dataSource" class="info-box-table">
 
-        <ng-container matColumnDef="createdAt">
-          <th mat-header-cell *matHeaderCellDef i18n>Datum</th>
-          <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd.MM.yyyy'}} </td>
-        </ng-container>
+          <ng-container matColumnDef="label">
+            <th mat-header-cell *matHeaderCellDef i18n>Titel</th>
+            <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="infoBoxColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: infoBoxColumns;" (click)="selectQuery(row)"></tr>
-      </table>
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef i18n>Datum</th>
+            <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'dd.MM.yyyy'}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="infoBoxColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: infoBoxColumns;" (click)="selectQuery(row)"></tr>
+          <tr class="info-box-no-data" *matNoDataRow>
+            <td [attr.colspan]="infoBoxColumns.length" i18n>Keine Anfragen gefunden.</td>
+          </tr>
+        </table>
+      </div>
 
       <div class="paginator">
         <mat-paginator
@@ -36,7 +53,7 @@
     </div>
   </div>
 
-    <div class="query-box">
+    <div class="query-box" #queryBox>
       <h3 class="uebersicht-titel query-box-heading" i18n>Details</h3>
       <table mat-table [dataSource]="queryBoxRows" class="query-box-table">
 
@@ -57,65 +74,20 @@
         <tr mat-row *matRowDef="let row; columns: queryBoxColumns;"></tr>
       </table>
       <div class="edit-ausfuehren">
-        <button class="query-box-edit" mat-raised-button (click)="createNewQuery('edit')">Edit</button>
         <button class="query-box-ausfuehren" mat-raised-button (click)="executeQuery()" >Ausführen</button>
       </div>
-      <div class="execution-row" *ngFor="let element of dataSourceExecutions.data; let index = index" >
-        <span><span class="execution-row-date">Ausgeführt am: </span>{{element.executedAt | date: 'mediumDate'}}</span>
-        <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
-        <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
-        <span><span class="execution-row-format">Ausgabeformat: </span>  {{element.outputFormat}}</span>
-        <span class="execution-row-format"><i class="bi bi-download"></i></span>
+      <div class="execution-list-label" i18n>Ausführungs Logs</div>
+      <div class="execution-list">
+        <div class="execution-row" *ngFor="let element of dataSourceExecutions.data; let index = index" >
+          <span><span class="execution-row-date">Ausgeführt am: </span>{{element.executedAt | date: 'mediumDate'}}</span>
+          <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
+          <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
+          <span><span class="execution-row-format">Ausgabeformat: </span>  {{element.outputFormat}}</span>
+          <span class="execution-row-format"><i class="bi bi-download"></i></span>
+        </div>
+        <div class="execution-list-empty" *ngIf="dataSourceExecutions.data.length === 0" i18n>Es wurde nichts ausgeführt</div>
       </div>
     </div>
-  </div>
-
-  <div class="tablex" style="display:none">
-    <section class="query-selection">
-      <mat-checkbox class="active-queries" [(ngModel)]="activeQueries" (change)="filterQueries()" i18n>aktive Anfragen</mat-checkbox>
-      <mat-checkbox class="archived-queries" [(ngModel)]="archivedQueries" (change)="filterQueries()" i18n>archivierte Anfragen</mat-checkbox>
-    </section>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-      <ng-container matColumnDef="#">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let row">
-          <mat-checkbox (click)="$event.stopPropagation()"
-                        (change)="toggleCheckbox($event, row)"
-                        [checked]="selection.isSelected(row)"
-                        [disabled]="editModus"
-          >
-          </mat-checkbox>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="timestamp">
-        <th mat-header-cell *matHeaderCellDef><div i18n>Zeitstempel</div> </th>
-        <td mat-cell *matCellDef="let element"> {{element.createdAt | date: 'medium'}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="querytitle">
-        <th mat-header-cell *matHeaderCellDef><div i18n>Label</div> </th>
-        <td mat-cell *matCellDef="let element"> {{element.label}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="querysource">
-        <th mat-header-cell *matHeaderCellDef><div i18n>Anfrage</div> </th>
-        <td mat-cell *matCellDef="let element"> {{element.query}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="format">
-        <th mat-header-cell *matHeaderCellDef i18n>Format</th>
-        <td mat-cell *matCellDef="let element" > {{element.format}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="executions">
-        <th mat-header-cell class="table-link-column" *matHeaderCellDef i18n>Ausführungen</th>
-        <td mat-cell class="table-link-column" *matCellDef="let element" > <a routerLink="{{getRouterLink(element.id)}}"><i class="link-icon bi bi-box-arrow-in-right"></i></a> </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="toggleCheckbox($event, row)"></tr>
-    </table>
   </div>
 </div>
 

@@ -133,12 +133,32 @@ body.dark-theme {
     --mat-stepper-header-optional-label-text-color: var(--text-color);
     --mat-stepper-header-selected-state-label-text-color: var(--text-color);
     --mat-stepper-header-icon-background-color: var(--border-color);
+    /* only the currently-selected step keeps the accent highlight; a step
+       you've merely visited and left (state "edit"/"done") goes back to the
+       same neutral grey as an unvisited step, instead of staying accent-colored */
+    --mat-stepper-header-icon-foreground-color: var(--text-color);
+    --mat-stepper-header-done-state-icon-background-color: var(--border-color);
+    --mat-stepper-header-done-state-icon-foreground-color: var(--text-color);
+    --mat-stepper-header-edit-state-icon-background-color: var(--border-color);
+    --mat-stepper-header-edit-state-icon-foreground-color: var(--text-color);
+    --mat-stepper-header-selected-state-icon-background-color: var(--accent-primary);
+    --mat-stepper-header-selected-state-icon-foreground-color: #ffffff;
 
     /* table header text */
     --mat-table-header-headline-color: var(--text-color);
 
     /* plain (unthemed) mat-button, e.g. the language-selector translate icon */
     --mdc-text-button-label-text-color: var(--icon-color);
+
+    /* tabs (e.g. "Erstellen"/"Bearbeiten" in the exporter query dialog) */
+    --mat-tab-header-inactive-label-text-color: var(--text-color);
+    --mat-tab-header-inactive-hover-label-text-color: var(--text-color);
+    --mat-tab-header-inactive-focus-label-text-color: var(--text-color);
+    --mat-tab-header-active-label-text-color: var(--accent-primary);
+    --mat-tab-header-active-hover-label-text-color: var(--accent-primary);
+    --mat-tab-header-active-focus-label-text-color: var(--accent-primary);
+    --mdc-tab-indicator-active-indicator-color: var(--accent-primary);
+    --mat-tab-header-divider-color: var(--border-color);
 }
 
 /* decorative background texture, kept very subtle so it doesn't compete with content */
