@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
-import {DropdownFormat, ExporterQueriesBox, formatEnumDisplayLabel} from "../exporter.component";
+import {DropdownFormat, ExporterQueriesBox, ExportStatus, formatEnumDisplayLabel} from "../exporter.component";
 import {Subscription} from "rxjs";
 import {ExporterService} from "../../../teiler/exporter.service";
 import {ExporterExecutions} from "../../execution/execution.component";
@@ -8,19 +8,9 @@ import {MatTableDataSource} from "@angular/material/table";
 import {ExecutionService} from "../../../teiler/execution.service";
 import {QueryFormCompletedEvent} from "./query-form/query-form.component";
 
-export enum ExportStatus {
-  OK = "OK",
-  RUNNING = "RUNNING",
-  NOT_FOUND = "NOT_FOUND",
-  EMPTY = "EMPTY",
-  ERROR = "ERROR"
-}
-
 export interface EditQueryDialogData {
   target: string;
   element?: ExporterQueriesBox;
-  createElement?: ExporterQueriesBox;
-  editElement?: ExporterQueriesBox;
 }
 
 @Component({
@@ -39,12 +29,10 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   dataSourceExecutions = new MatTableDataSource<ExporterExecutions>();
 
   element: ExporterQueriesBox | undefined;
-  createElement: ExporterQueriesBox | undefined;
-  editElement: ExporterQueriesBox | undefined;
   showStepper: boolean = true;
-  isTabbedForm: boolean = false;
+  isCreateTabbed: boolean = false;
   createTabLabel = $localize`Erstellen`;
-  editTabLabel = $localize`Bearbeiten`;
+  executionTabLabel = $localize`Ausführung`;
   buttonDisabled: boolean = false;
   outputFormats: DropdownFormat[] = [];
   exportUrl = "";
@@ -55,15 +43,9 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   selectedOutputFormat: string = "EXCEL";
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: EditQueryDialogData, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, boolean>, private executionService: ExecutionService) {
-    if (data.target === 'formular') {
-      this.createElement = data.createElement;
-      this.editElement = data.editElement;
-      this.isTabbedForm = true;
-      this.showStepper = true;
-    } else {
-      this.element = data.element;
-      this.showStepper = false;
-    }
+    this.element = data.element;
+    this.showStepper = data.target !== 'execution';
+    this.isCreateTabbed = data.target === 'create';
   }
 
   ngOnInit(): void {

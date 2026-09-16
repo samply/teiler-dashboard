@@ -212,19 +212,15 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   openQueryFormDialog(): void {
     from(this.authService.loadUserProfile()).subscribe(keycloakProfile => {
-      const contactId = keycloakProfile.email;
-      const createElement = this.buildQueryBox(true, contactId);
-      const editElement = this.dataSource.data.length > 0 ? this.buildQueryBox(false, contactId) : undefined;
+      const createElement = this.buildQueryBox(true, keycloakProfile.userData.name || keycloakProfile.userData.email);
+      this.editDialog(createElement, "create");
+    });
+  }
 
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.autoFocus = true;
-      dialogConfig.data = {createElement: createElement, editElement: editElement, target: "formular"};
-      dialogConfig.width = "1500px";
-      this.dialog.open(EditQueryDialogComponent, dialogConfig).afterClosed().subscribe((isSaved: boolean) => {
-        if (isSaved) {
-          this.getQueries()
-        }
-      });
+  editQuery(): void {
+    from(this.authService.loadUserProfile()).subscribe(keycloakProfile => {
+      const editElement = this.buildQueryBox(false, keycloakProfile.userData.name || keycloakProfile.userData.email);
+      this.editDialog(editElement, "edit");
     });
   }
 
@@ -242,7 +238,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
         expirationDate: "",
         contextArray: [{key: "", value: ""} as Context],
         format: "",
-        createdAt: "",
+        createdAt: Date.now().toString(),
         archivedAt: "",
         context: "",
         defaultTemplateId: "",

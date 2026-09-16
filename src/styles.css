@@ -18,6 +18,22 @@
     --color-warning: #b45309;
     --color-error: #dc2626;
     --color-info: #2563eb;
+
+    /* stepper: only the currently-selected step keeps the accent highlight; a
+       step you've merely visited and left (state "edit"/"done") goes back to
+       the same neutral grey as an unvisited step, instead of staying accent-colored */
+    --mat-stepper-header-optional-label-text-color: var(--text-color);
+    --mat-stepper-header-selected-state-label-text-color: var(--text-color);
+    --mat-stepper-header-icon-background-color: var(--border-color);
+    --mat-stepper-header-icon-foreground-color: var(--text-color);
+    --mat-stepper-header-done-state-icon-background-color: var(--border-color);
+    --mat-stepper-header-done-state-icon-foreground-color: var(--text-color);
+    --mat-stepper-header-edit-state-icon-background-color: var(--border-color);
+    --mat-stepper-header-edit-state-icon-foreground-color: var(--text-color);
+    --mat-stepper-header-selected-state-icon-background-color: var(--color-info);
+    --mat-stepper-header-selected-state-icon-foreground-color: #ffffff;
+    --mat-stepper-header-hover-state-layer-color: transparent;
+    --mat-stepper-header-focus-state-layer-color: transparent;
 }
 
 body.dark-theme {
@@ -159,6 +175,20 @@ body.dark-theme {
     --mat-tab-header-active-focus-label-text-color: var(--accent-primary);
     --mdc-tab-indicator-active-indicator-color: var(--accent-primary);
     --mat-tab-header-divider-color: var(--border-color);
+}
+
+/* native <select> dropdowns (matNativeControl) render their option list via
+   the browser's own popup, which ignores Angular Material's CSS custom
+   properties — without this the options stay light-text-on-white and are
+   nearly unreadable in dark mode */
+body.dark-theme select {
+    color-scheme: dark;
+}
+
+body.dark-theme select option,
+body.dark-theme select optgroup {
+    background-color: var(--surface-color);
+    color: var(--text-color);
 }
 
 /* decorative background texture, kept very subtle so it doesn't compete with content */

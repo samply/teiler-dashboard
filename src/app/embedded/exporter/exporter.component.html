@@ -1,7 +1,7 @@
 <div class="main">
   <div class="title">
     <h2 i18n>Exporter Anfragen</h2>
-    <button class="create-button" mat-raised-button (click)="openQueryFormDialog()" i18n>Anfragen erstellen/ bearbeiten</button>
+    <button class="create-button" mat-raised-button (click)="openQueryFormDialog()" i18n>Anfrage erstellen</button>
   </div>
 
   <div class="main-box">
@@ -74,6 +74,7 @@
         <tr mat-row *matRowDef="let row; columns: queryBoxColumns;"></tr>
       </table>
       <div class="edit-ausfuehren">
+        <button class="query-box-bearbeiten" mat-raised-button (click)="editQuery()" i18n>Bearbeiten</button>
         <button class="query-box-ausfuehren" mat-raised-button (click)="executeQuery()" >Ausführen</button>
       </div>
       <div class="execution-list-label" i18n>Ausführungs Logs</div>

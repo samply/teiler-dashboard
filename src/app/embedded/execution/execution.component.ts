@@ -7,7 +7,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {SelectionModel} from "@angular/cdk/collections";
 import {environment} from "../../../environments/environment";
 import {ExporterService} from "../../teiler/exporter.service";
-import {Context, DropdownFormat, ExportResponse, formatEnumDisplayLabel} from "../exporter/exporter.component";
+import {Context, DropdownFormat, ExportResponse, ExportStatus, formatEnumDisplayLabel} from "../exporter/exporter.component";
 import {Templates} from "../quality-report/quality-report.component";
 
 
@@ -24,14 +24,6 @@ export interface ExecutionError {
   queryExecutionId: number;
   error: string;
 }
-export enum ExportStatus {
-  OK = "OK",
-  RUNNING = "RUNNING",
-  NOT_FOUND = "NOT_FOUND",
-  EMPTY = "EMPTY",
-  ERROR = "ERROR"
-}
-
 @Component({
     selector: 'execution',
     templateUrl: './execution.component.html',

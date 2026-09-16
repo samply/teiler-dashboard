@@ -2,35 +2,38 @@
   <button class="delete-button" (click)="deleteQuery()">X</button>
 </div>
 
-<ng-container *ngIf="showStepper">
-  <ng-container *ngIf="isTabbedForm; else singleForm">
-    <mat-tab-group class="query-form-tabs" mat-align-tabs="start">
-      <mat-tab [label]="createTabLabel">
-        <samply-query-form *ngIf="createElement" [element]="createElement" (completed)="onFormCompleted($event)"></samply-query-form>
-      </mat-tab>
-      <mat-tab [label]="editTabLabel" [disabled]="!editElement">
-        <samply-query-form *ngIf="editElement" [element]="editElement" (completed)="onFormCompleted($event)"></samply-query-form>
-      </mat-tab>
-    </mat-tab-group>
-  </ng-container>
-  <ng-template #singleForm>
-    <samply-query-form *ngIf="element" [element]="element" (completed)="onFormCompleted($event)"></samply-query-form>
-  </ng-template>
+<ng-container *ngIf="isCreateTabbed; else nonTabbed">
+  <mat-tab-group class="query-form-tabs" mat-align-tabs="start" [selectedIndex]="showStepper ? 0 : 1">
+    <mat-tab [label]="createTabLabel">
+      <samply-query-form *ngIf="element" [element]="element" (completed)="onFormCompleted($event)"></samply-query-form>
+    </mat-tab>
+    <mat-tab [label]="executionTabLabel">
+      <ng-container *ngTemplateOutlet="executionOverview"></ng-container>
+    </mat-tab>
+  </mat-tab-group>
 </ng-container>
 
-<ng-container *ngIf="!showStepper && element">
-  <button class="delete-button" (click)="deleteQuery()">X</button>
+<ng-template #nonTabbed>
+  <ng-container *ngIf="showStepper">
+    <samply-query-form *ngIf="element" [element]="element" (completed)="onFormCompleted($event)"></samply-query-form>
+  </ng-container>
+  <ng-container *ngIf="!showStepper && element">
+    <ng-container *ngTemplateOutlet="executionOverview"></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #executionOverview>
   <div class="overview-info" style="display: flex"><span class="fw-bold">Ausführung</span></div>
   <div class="short-info">
     <div style="width:30%">
-      <div class="box-title">{{element.label}}</div>
-      <div class="box-createdAt" style="font-weight: 700"><span class="fw-bold">Erstellt am: </span>{{element.createdAt | date: 'medium'}}</div>
+      <div class="box-title">{{element?.label}}</div>
+      <div class="box-createdAt" style="font-weight: 700"><span class="fw-bold">Erstellt am: </span>{{element?.createdAt | date: 'mediumDate'}}</div>
     </div>
     <div style="width:40%;margin-right:10%">
-      <div class="box-query maxwidth"><span class="fw-bold">Anfrage: </span><span class="font">{{element.query}}</span></div>
+      <div class="box-query maxwidth"><span class="fw-bold">Anfrage: </span><span class="font">{{element?.query}}</span></div>
     </div>
     <div style="width:20%">
-      <div class="box-format"><span class="fw-bold">Format: </span>{{element.format}}</div>
+      <div class="box-format"><span class="fw-bold">Format: </span>{{element?.format}}</div>
     </div>
   </div>
 
@@ -79,4 +82,4 @@
       <span class="execution-row-format"><i class="bi bi-download"></i></span>
     </div>
   </div>
-</ng-container>
+</ng-template>

@@ -22,6 +22,9 @@ button{
 }
 .upload-button, .download-button {
   display: none;
+  width: 50%;
+  max-width: 200px;
+  margin-left: 2%;
 }
 .visible {
   display: block;
@@ -32,12 +35,14 @@ button{
 .visible-button {
   display: inline-flex;
 }
-.save-button, .exec-button, .back-button {
+.save-button, .exec-button, .back-button, .next-button, .plus-button, .minus-button, .file-upload {
+  color: black!important;
+}
+.save-button, .exec-button, .back-button, .next-button {
   width: 180px;
   height: 40px;
   padding: 5px;
   font-size: 14px;
-  color: black!important;
 }
 .close-button-container{
   position: relative;
@@ -54,8 +59,8 @@ button{
   color: black!important;
   position: absolute;
   z-index: 1000;
-  right: -10px;
-  top: -15px;
+  right: 0;
+  top: 0;
   border-style: none;
   cursor: pointer;
   background-color: transparent !important;
@@ -67,30 +72,25 @@ button{
 .download-button, .plus-button, .minus-button, .next-button, .back-button, .save-button, .exec-button {
   background-color: #D3D3D3 !important;
 }
-.download-button, .upload-button {
-  margin-left: 2%;
+.download-button {
+  height: 45px;
+  max-width: 150px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 .plus-button, .minus-button {
   width: 35px;
   height: 35px;
   padding: 5px;
   font-size: 14px;
-  color: black!important;
   min-width: 35px;
-}
-.minus-button {
-  margin-right: 10px;
-}
-.next-button, .back-button {
-  font-size: 14px;
-  color: black!important;
 }
 .file-upload {
   text-transform: none !important;
   width: 200px;
   height: 45px;
   font-size: 13px;
-  color: black!important;
   display: flex;
   padding: 5px;
   background-color: #2BCDD563 !important;
@@ -107,27 +107,23 @@ button{
   width: 80%;
 }
 .template_dropdown {
-  width: 50%;
-  margin-bottom: 5%;
+  width: 60%;
+  flex-shrink: 0;
 }
 .query-expiration-date {
   width: 74%;
+  margin-top: 10px;
   margin-bottom: 5%;
 }
 .query-context {
-  width: 35%;
-  margin-right: 20px;
+  flex: 0 0 calc((74% - 10px) / 2);
+  width: auto;
 }
 .query-label {
   width: 80%;
-  margin-bottom: 12%;
-  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
-.upload-button, .download-button {
-  width: 50%;
-  max-width: 200px;
-}
-
 .table-left {
   width: 35%;
 }
@@ -153,12 +149,18 @@ button{
   padding-right: 0;
 }
 .query-textbox {
+  margin-top: 10px;
   margin-bottom: 5%;
 }
 .stepper-buttons {
   display: flex;
   justify-content: space-between;
-  margin: 20px 20px 0px 20px;
+  margin: 20px 0px 0px 0px;
+}
+.stepper-buttons-summary {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 .stepper-buttons-log{
   display: flex;
@@ -174,14 +176,21 @@ button{
 }
 .FormGroup-input-div {
   width: 55%;
-  max-height: 315px;
+  height: 315px;
   overflow: auto;
   margin-bottom: 10px;
+}
+.FormGroup-description-div, .fifthFormGroup, .short-info, .log-exporter, .executions {
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+.FormGroup-description-div, .fifthFormGroup, .short-info {
+  background-color: var(--app-bg-color);
+  color: var(--text-color);
 }
 .FormGroup-description-div {
   width: 45%;
   font-size: 11pt;
-  max-height: 315px;
+  height: 315px;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -189,12 +198,12 @@ button{
   padding: 1.7rem;
   justify-content: center;
   border-radius: 10px;
-  background-color: #696969;
-  color: white;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .FormGroup-description-div ul {
   margin-top: 0;
+}
+.stepper-help-steps li {
+  margin-bottom: 10px;
 }
 .firstFormGroup-div, .secondFormGroup-div, .thirdFormGroup-div, .forthFormGroup-div {
   display: flex;
@@ -202,6 +211,14 @@ button{
 }
 .template-box {
   display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 5%;
+}
+.context-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 ::ng-deep .mat-horizontal-content-container {
   padding-left: 0!important;
@@ -259,13 +276,10 @@ button{
 .fifthFormGroup {
   display: flex;
   margin: 30px 20px 0px 20px;
-  height: 320px;
+  height: 315px;
   border: solid 1px black;
   padding: 8px;
   border-radius: 8px;
-  background-color: #696969;
-  color: white;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .short-info {
   display: flex;
@@ -275,9 +289,6 @@ button{
   border-radius: 8px;
   padding: 10px;
   align-items: center;
-  color: white;
-  background-color: #696969;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .overview-info {
   justify-content: center;
@@ -293,7 +304,6 @@ button{
   margin: 1.4% 0 0 3%;
 }
 .log-exporter {
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   width: 50%;
   padding: 1% 2%;
   background-color: white;
@@ -323,7 +333,6 @@ button{
   padding: 15px 20px;
   justify-content: space-between;
   border-radius: 10px;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .execution-row-date, .execution-row-status, .execution-row-templateId, .execution-row-format{
   font-weight: bold;
@@ -334,8 +343,18 @@ button{
   background-color: var(--surface-color);
   color: var(--text-color);
 }
+:host-context(body.dark-theme) .FormGroup-description-div,
+:host-context(body.dark-theme) .fifthFormGroup,
+:host-context(body.dark-theme) .short-info {
+  background-color: var(--surface-header);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
 :host-context(body.dark-theme) .delete-button {
   color: var(--text-color) !important;
+}
+:host-context(body.dark-theme) .overview-info {
+  color: var(--text-color);
 }
 
 /* button hierarchy: primary (raised, filled) / secondary (stroked) / tertiary (text-only) */
@@ -380,7 +399,7 @@ button{
   opacity: 1 !important;
 }
 
-/* "Erstellen"/"Bearbeiten" tab labels: the Material theme redeclares these
+/* "Erstellen"/"Ausführung" tab labels: the Material theme redeclares these
    tokens directly on .mat-mdc-tab-group (i.e. on .query-form-tabs itself),
    which is a closer ancestor than body.dark-theme - so setting them globally
    on body.dark-theme never wins the inheritance. Redeclare them here, at the

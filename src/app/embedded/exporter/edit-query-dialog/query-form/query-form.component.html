@@ -1,6 +1,7 @@
 <div class="stepper">
 <mat-stepper
   class="query-stepper"
+  linear
   [orientation]="(stepperOrientation | async)!"
   (selectionChange)="onStepperSelectionChange($event)">
   <ng-template matStepperIcon="edit" let-index="index">
@@ -45,29 +46,12 @@
         <div class="FormGroup-description-div">
           <div class="stepper-help-title"><i class="bi bi-info-circle"></i><span i18n>Hilfe</span></div>
             <span class="stepper-help-header" i18n>Erstellen Sie Ihre Anfrage in 4 Schritten: </span>
-          <ol>
-            <li>
-              <span class="stepper-help-text" i18n>Versehen Sie sie mit einer Überschrift und einer Beschreibung.</span>
-              <br>
-              <br>
-            </li>
-            <li>
-              <span class="stepper-help-text" i18n>Bestimmen Sie die Anfragesprache und formulieren Sie Ihre Anfrage (Query) entsprechend dem gewählten Format.</span>
-              <br>
-              <br>
-            </li>
-            <li>
-              <span class="stepper-help-text" i18n>Wählen Sie ein Ausgabeformat und das passende Template.</span>
-              <br>
-              <br>
-            </li>
-            <li>
-              <span class="stepper-help-text" i18n>Setzen Sie ein Ablaufdatum und fügen Sie zusätzliche Parameter hinzu, falls Ihre Anfrage spezielle Anforderungen hat.</span>
-              <br>
-              <br>
-            </li>
+          <ol class="stepper-help-steps">
+            <li i18n>Versehen Sie sie mit einer Überschrift und einer Beschreibung.</li>
+            <li i18n>Bestimmen Sie die Anfragesprache und formulieren Sie Ihre Anfrage (Query) entsprechend dem gewählten Format.</li>
+            <li i18n>Wählen Sie ein Ausgabeformat und das passende Template.</li>
+            <li i18n>Setzen Sie ein Ablaufdatum und fügen Sie zusätzliche Parameter hinzu, falls Ihre Anfrage spezielle Anforderungen hat.</li>
           </ol>
-
         </div>
       </div>
       <div class="stepper-buttons">
@@ -141,7 +125,7 @@
       <div class="thirdFormGroup-div">
         <div class="FormGroup-input-div">
           <div class="template-box">
-            <mat-form-field appearance="outline" class="template_dropdown">
+            <mat-form-field appearance="outline" class="template_dropdown" subscriptSizing="dynamic">
               <mat-label i18n>Template</mat-label>
               <select class="template-select"
                       matNativeControl
@@ -164,8 +148,9 @@
             <button type="button" class="download-button" mat-button color="primary"
                     (click)="downloadTemplate();$event.stopPropagation();"
                     [ngClass]="{ 'visible-button': (element.selectedTemplate !== 'custom') }"
-                    [disabled] = "!editModus"
-                    i18n>Template herunterladen
+                    [disabled] = "!editModus">
+              <i class="bi bi-download"></i>
+              <span i18n>Template</span>
             </button>
           </div>
           <mat-form-field appearance="outline" class="outputformat_dropdown">
@@ -217,8 +202,8 @@
             <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
             <mat-datepicker #dateStartPicker></mat-datepicker>
           </mat-form-field>
-          <div *ngFor="let context of element.contextArray; let i=index">
-            <mat-form-field appearance="outline" class="query-context">
+          <div class="context-row" *ngFor="let context of element.contextArray; let i=index">
+            <mat-form-field appearance="outline" class="query-context" subscriptSizing="dynamic">
               <mat-label i18n>Schlüssel</mat-label>
               <input
                 id="context_key_{{i}}"
@@ -230,7 +215,7 @@
                 (ngModelChange)="checkContext(i)"
               />
             </mat-form-field>
-            <mat-form-field appearance="outline" class="query-context">
+            <mat-form-field appearance="outline" class="query-context" subscriptSizing="dynamic">
               <mat-label i18n>Wert</mat-label>
               <input
                 id="context_value_{{i}}"
@@ -290,7 +275,7 @@
           </tr>
           <tr>
             <td class="table-left">Erstellt am: </td>
-            <td class="table-right">{{element.createdAt ? (element.createdAt | date: 'medium') : '—'}}</td>
+            <td class="table-right">{{element.createdAt ? (element.createdAt | date: 'mediumDate') : '—'}}</td>
           </tr>
           <tr>
             <td class="table-left" i18n>Anfrageformat:</td>
@@ -328,11 +313,11 @@
       </div>
     </div>
 
-    <div class="stepper-buttons" style="margin: 20px 20px 0px 20px">
+    <div class="stepper-buttons stepper-buttons-summary">
       <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
       <div style="display:flex">
-        <button class="save-button" mat-raised-button color="primary" (click)="saveQuery()" ><span i18n>Speichern</span></button>
-        <button class="exec-button" mat-raised-button color="primary" (click)="saveAndExecute()" style="margin-left: 2%" ><span i18n>Ausführen</span></button>
+        <button class="save-button" mat-raised-button color="primary" (click)="saveQuery()" [disabled]="!element.label || !element.description || !element.query"><span i18n>Speichern</span></button>
+        <button class="exec-button" mat-raised-button color="primary" (click)="saveAndExecute()" style="margin-left: 2%" [disabled]="!element.label || !element.description || !element.query"><span i18n>Ausführen</span></button>
       </div>
     </div>
   </mat-step>

@@ -65,7 +65,6 @@ button{
   width: auto;
   padding: 5px 15px;
   font-size: 13px;
-  color: black!important;
   margin-bottom: 4px;
 }
 .main-box {
@@ -200,8 +199,14 @@ button{
   grid-column: 1 / -1;
 }
 .create-button, .query-box-ausfuehren {
-  background-color: #D3D3D3 !important;
+  background-color: var(--color-info) !important;
+  color: #ffffff !important;
   border-style: none;
+}
+.query-box-bearbeiten {
+  background-color: transparent !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color);
 }
 .edit-ausfuehren {
   grid-column: 1 / -1;
@@ -252,7 +257,7 @@ button{
   display: flex;
   flex-direction: column;
 }
-.query-box-ausfuehren {
+.query-box-bearbeiten, .query-box-ausfuehren {
   flex: 1;
 }
 
@@ -282,13 +287,21 @@ button{
   color: var(--text-color);
 }
 
-/* "Ausführen" is the sole, primary action in the details box */
+/* "Ausführen" is the primary action in the details box, "Bearbeiten" is secondary */
 :host-context(body.dark-theme) .query-box-ausfuehren {
   background-color: var(--accent-primary, #3b82f6) !important;
   color: #ffffff !important;
 }
 :host-context(body.dark-theme) .query-box-ausfuehren:hover {
   background-color: var(--accent-hover, #2563eb) !important;
+}
+:host-context(body.dark-theme) .query-box-bearbeiten {
+  background-color: transparent !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color);
+}
+:host-context(body.dark-theme) .query-box-bearbeiten:hover {
+  background-color: var(--border-color) !important;
 }
 
 /* label vs. value contrast in the Feld/Wert table */
