@@ -117,7 +117,6 @@ button{
 }
 .query-context {
   flex: 0 0 calc((74% - 10px) / 2);
-  width: auto;
 }
 .query-label {
   width: 80%;
