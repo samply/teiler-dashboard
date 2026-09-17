@@ -316,8 +316,8 @@
     <div class="stepper-buttons stepper-buttons-summary">
       <button class="back-button" mat-raised-button color="primary" matStepperPrevious ><span i18n>Zurück</span></button>
       <div style="display:flex">
-        <button class="save-button" mat-raised-button color="primary" (click)="saveQuery()" [disabled]="!element.label || !element.description || !element.query"><span i18n>Speichern</span></button>
-        <button class="exec-button" mat-raised-button color="primary" (click)="saveAndExecute()" style="margin-left: 2%" [disabled]="!element.label || !element.description || !element.query"><span i18n>Ausführen</span></button>
+        <button class="exec-button" mat-raised-button color="primary" (click)="saveAndExecute()" [disabled]="!element.label || !element.description || !element.query"><span i18n>Ausführen</span></button>
+        <button class="save-button" mat-raised-button color="primary" (click)="saveQuery()" style="margin-left: 2%" [disabled]="!element.label || !element.description || !element.query"><span i18n>Speichern</span></button>
       </div>
     </div>
   </mat-step>

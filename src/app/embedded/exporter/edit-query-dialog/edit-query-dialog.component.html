@@ -3,9 +3,9 @@
 </div>
 
 <ng-container *ngIf="isCreateTabbed; else nonTabbed">
-  <mat-tab-group class="query-form-tabs" mat-align-tabs="start" [selectedIndex]="showStepper ? 0 : 1">
+  <mat-tab-group class="query-form-tabs" mat-align-tabs="start" [selectedIndex]="showStepper ? 0 : 1" (selectedTabChange)="onTabChanged($event)">
     <mat-tab [label]="createTabLabel">
-      <samply-query-form *ngIf="element" [element]="element" (completed)="onFormCompleted($event)"></samply-query-form>
+      <samply-query-form *ngIf="createTabElement" [element]="createTabElement" (completed)="onFormCompleted($event)"></samply-query-form>
     </mat-tab>
     <mat-tab [label]="executionTabLabel">
       <ng-container *ngTemplateOutlet="executionOverview"></ng-container>
@@ -59,8 +59,10 @@
         </div>
       </div>
     <div class="stepper-buttons-log" style="margin:20px 30px">
-      <button class="back-button" mat-raised-button color="primary" (click)="showStepper=true" style="width: 60%; margin-top: 10px"><span i18n>Anfrage editieren</span></button>
-      <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()" style="width: 60%"><span i18n>Ausführen</span></button>
+      <div class="exec-buttons-row">
+        <button class="back-button" mat-raised-button color="primary" (click)="editFromExecutionView()"><span i18n>Anfrage bearbeiten</span></button>
+        <button class="exec-button" mat-raised-button color="primary" (click)="executeQuery()"><span i18n>Ausführen</span></button>
+      </div>
       <div style="display:flex">
         <mat-form-field class="outputformat_dropdown">
           <mat-label i18n>Ausgabeformat</mat-label>
@@ -79,7 +81,9 @@
       <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
       <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
       <span><span class="execution-row-format">Ausgabeformat: </span>  {{element.outputFormat}}</span>
-      <span class="execution-row-format"><i class="bi bi-download"></i></span>
+      <a *ngIf="element.status === 'OK'" class="execution-row-format download-link" target="_blank" href="{{exportUrl + 'response?query-execution-id=' + element.id}}">
+        <i class="bi bi-download"></i>
+      </a>
     </div>
   </div>
 </ng-template>

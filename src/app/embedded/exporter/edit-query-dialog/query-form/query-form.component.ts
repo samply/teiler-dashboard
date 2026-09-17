@@ -213,11 +213,12 @@ export class QueryFormComponent implements OnInit, OnDestroy {
     return btoa(context);
   }
 
-  transformDateForQuery(date: Date | undefined): string {
+  transformDateForQuery(date: Date | string | undefined): string {
     if (date) {
-      const offset = date.getTimezoneOffset();
-      date = new Date(date.getTime() - (offset * 60 * 1000));
-      return date.toISOString().split('T')[0];
+      const parsedDate = date instanceof Date ? date : new Date(date);
+      const offset = parsedDate.getTimezoneOffset();
+      const adjustedDate = new Date(parsedDate.getTime() - (offset * 60 * 1000));
+      return adjustedDate.toISOString().split('T')[0];
     } else {
       return "";
     }
@@ -230,7 +231,7 @@ export class QueryFormComponent implements OnInit, OnDestroy {
     this.executeOnSaving = executeAfter;
     this.buttonDisabled = true;
 
-    const date = this.transformDateForQuery(this.element.expirationDate as unknown as Date)
+    const date = this.transformDateForQuery(this.element.expirationDate as unknown as Date | string)
     if (this.element.loadedQueryID) {
       this.subscriptionUpdateQuery = this.exporterService.updateQuery(this.element.loadedQueryID, this.element.query, this.element.label, this.element.description, this.element.selectedOutputFormat, this.element.selectedTemplate, this.getContext(), date, this.importTemplate).subscribe({
         next: () => {

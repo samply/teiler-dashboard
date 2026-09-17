@@ -108,7 +108,7 @@ h6 {
   color: var(--text-secondary, var(--icon-color));
 }
 .b-img{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

@@ -13,6 +13,27 @@ import {environment} from "../../../environments/environment";
 
 const KNOWN_FORMAT_ACRONYMS = ['FHIR', 'CQL', 'CSV', 'JSON', 'XML', 'SQL', 'ID', 'URL'];
 
+export function buildEmptyQueryBox(contactId: string, id: number = 0): ExporterQueriesBox {
+  return {
+    id: id,
+    label: "",
+    description: "",
+    query: "",
+    contactId: contactId,
+    selectedTemplate: environment.config.EXPORTER_DEFAULT_TEMPLATE_ID,
+    selectedOutputFormat: "EXCEL",
+    selectedQueryFormat: "FHIR_SEARCH",
+    expirationDate: "",
+    contextArray: [{key: "", value: ""} as Context],
+    format: "",
+    createdAt: Date.now().toString(),
+    archivedAt: "",
+    context: "",
+    defaultTemplateId: "",
+    defaultOutputFormat: "",
+  };
+}
+
 export function formatEnumDisplayLabel(value: string): string {
   return value
     .split('_')
@@ -135,7 +156,10 @@ export class ExporterComponent implements OnInit, OnDestroy {
     }
   }
 
+  exportUrl = "";
+
   ngOnInit(): void {
+    this.exportUrl = this.exporterService.getExporterURL() + "/";
     this.getQueries();
     window.dispatchEvent(new Event('resize'));
   }
@@ -213,7 +237,10 @@ export class ExporterComponent implements OnInit, OnDestroy {
   openQueryFormDialog(): void {
     from(this.authService.loadUserProfile()).subscribe(keycloakProfile => {
       const createElement = this.buildQueryBox(true, keycloakProfile.userData.name || keycloakProfile.userData.email);
-      this.editDialog(createElement, "create");
+      const detailsElement = this.dataSource.data.length > 0
+        ? this.buildQueryBox(false, keycloakProfile.userData.name || keycloakProfile.userData.email)
+        : undefined;
+      this.editDialog(createElement, "create", detailsElement);
     });
   }
 
@@ -226,24 +253,7 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   private buildQueryBox(isCreate: boolean, contactId: string): ExporterQueriesBox {
     if (isCreate) {
-      return {
-        id: this.tempEQs.length,
-        label: "",
-        description: "",
-        query: "",
-        contactId: contactId,
-        selectedTemplate: environment.config.EXPORTER_DEFAULT_TEMPLATE_ID,
-        selectedOutputFormat: "EXCEL",
-        selectedQueryFormat: "FHIR_SEARCH",
-        expirationDate: "",
-        contextArray: [{key: "", value: ""} as Context],
-        format: "",
-        createdAt: Date.now().toString(),
-        archivedAt: "",
-        context: "",
-        defaultTemplateId: "",
-        defaultOutputFormat: "",
-      };
+      return buildEmptyQueryBox(contactId, this.tempEQs.length);
     }
 
     const current = this.dataSource.data[this.activeDataSource] ?? this.dataSource.data[0];
@@ -278,10 +288,10 @@ export class ExporterComponent implements OnInit, OnDestroy {
     };
   }
 
-  editDialog(element: ExporterQueriesBox, target:string): void {
+  editDialog(element: ExporterQueriesBox, target:string, detailsElement?: ExporterQueriesBox): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {element: element,target: target};
+    dialogConfig.data = {element: element, target: target, detailsElement: detailsElement};
     dialogConfig.width = "1500px";
     this.dialog.open(EditQueryDialogComponent, dialogConfig).afterClosed().subscribe((isSaved:boolean)=>{
       if(isSaved){

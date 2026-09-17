@@ -1,16 +1,18 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
-import {DropdownFormat, ExporterQueriesBox, ExportStatus, formatEnumDisplayLabel} from "../exporter.component";
+import {buildEmptyQueryBox, DropdownFormat, ExporterQueriesBox, ExportStatus, formatEnumDisplayLabel} from "../exporter.component";
 import {Subscription} from "rxjs";
 import {ExporterService} from "../../../teiler/exporter.service";
 import {ExporterExecutions} from "../../execution/execution.component";
 import {MatTableDataSource} from "@angular/material/table";
 import {ExecutionService} from "../../../teiler/execution.service";
 import {QueryFormCompletedEvent} from "./query-form/query-form.component";
+import {MatTabChangeEvent} from "@angular/material/tabs";
 
 export interface EditQueryDialogData {
   target: string;
   element?: ExporterQueriesBox;
+  detailsElement?: ExporterQueriesBox;
 }
 
 @Component({
@@ -29,6 +31,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   dataSourceExecutions = new MatTableDataSource<ExporterExecutions>();
 
   element: ExporterQueriesBox | undefined;
+  createTabElement: ExporterQueriesBox | undefined;
   showStepper: boolean = true;
   isCreateTabbed: boolean = false;
   createTabLabel = $localize`Erstellen`;
@@ -43,9 +46,14 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   selectedOutputFormat: string = "EXCEL";
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: EditQueryDialogData, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, boolean>, private executionService: ExecutionService) {
-    this.element = data.element;
     this.showStepper = data.target !== 'execution';
-    this.isCreateTabbed = data.target === 'create';
+    this.isCreateTabbed = data.target === 'create' || data.target === 'execution';
+
+    this.element = data.target === 'create' ? (data.detailsElement ?? data.element) : data.element;
+    // The "Erstellen" tab always starts a brand new query, never the query
+    // being viewed/executed - for 'execution', data.element is that
+    // existing query, so build a fresh blank one instead of reusing it.
+    this.createTabElement = data.target === 'execution' ? buildEmptyQueryBox(data.element?.contactId ?? '') : data.element;
   }
 
   ngOnInit(): void {
@@ -81,18 +89,42 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     })
   }
 
+  onTabChanged(event: MatTabChangeEvent): void {
+    // Keep showStepper in sync with whichever tab is actually active,
+    // including manual tab-header clicks, so a later programmatic
+    // `showStepper = true` (e.g. from editFromExecutionView) is a real
+    // state change that Angular pushes through to the tab group instead
+    // of a no-op because the variable never noticed the manual switch.
+    this.showStepper = event.tab.textLabel === this.createTabLabel;
+    if (event.tab.textLabel === this.executionTabLabel && this.element?.loadedQueryID) {
+      this.getQueryExecutions(parseInt(this.element.loadedQueryID));
+    }
+  }
+
+  editFromExecutionView(): void {
+    // "Anfrage bearbeiten" should open the edit view for the query shown
+    // here, not the "Erstellen" tab (which is for creating a brand new,
+    // unrelated query). Drop out of tabbed mode entirely so the plain
+    // edit form for `element` (the query being viewed) is shown, the same
+    // way it already works when this dialog is opened directly in edit
+    // mode.
+    this.isCreateTabbed = false;
+    this.showStepper = true;
+  }
+
   transformDate(date: string): string {
     return new Date(date).getTime().toString();
   }
 
   onFormCompleted(result: QueryFormCompletedEvent): void {
-    if (!result.execute) {
-      this.dialogRef.close(true);
-      return;
-    }
     this.element = result.element;
+    this.createTabElement = result.element;
     this.importTemplate = result.importTemplate;
     this.selectedOutputFormat = result.element.selectedOutputFormat;
+    if (!result.execute) {
+      return;
+    }
+    this.isCreateTabbed = true;
     this.showStepper = false;
     this.executeQuery();
   }

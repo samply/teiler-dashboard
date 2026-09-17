@@ -324,6 +324,20 @@ button{
 .outputformat_dropdown {
   width: 60%;
 }
+.stepper-buttons-log .outputformat_dropdown {
+  width: 100%;
+}
+.exec-buttons-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+.exec-buttons-row .back-button,
+.exec-buttons-row .exec-button {
+  flex: 1;
+  width: auto;
+}
 .executions {
   margin: 30px;
   display: flex;

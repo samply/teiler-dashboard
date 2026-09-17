@@ -84,7 +84,9 @@
           <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
           <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
           <span><span class="execution-row-format">Ausgabeformat: </span>  {{element.outputFormat}}</span>
-          <span class="execution-row-format"><i class="bi bi-download"></i></span>
+          <a *ngIf="element.status === 'OK'" class="execution-row-format download-link" target="_blank" href="{{exportUrl + 'response?query-execution-id=' + element.id}}">
+            <i class="bi bi-download"></i>
+          </a>
         </div>
         <div class="execution-list-empty" *ngIf="dataSourceExecutions.data.length === 0" i18n>Es wurde nichts ausgeführt</div>
       </div>
