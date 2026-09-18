@@ -1,15 +1,24 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StylingService } from './styling.service';
+import { DashboardConfigService } from './teiler/dashboard-config.service';
 import { ColorPalette, ColorPalettes } from './color-palette.model';
 import * as data from '../assets/color-palettes.json';
 import { environment } from '../environments/environment';
 
 describe('ColorPaletteService', () => {
   let service: StylingService;
+  let http: HttpClient;
+  let configService: DashboardConfigService;
   const mockPalettes: ColorPalettes = (data as any).default;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule]
+    });
+    http = TestBed.inject(HttpClient);
+    configService = TestBed.inject(DashboardConfigService);
     service = TestBed.inject(StylingService);
   });
 
@@ -19,7 +28,7 @@ describe('ColorPaletteService', () => {
 
   it('should load color palettes on initialization', () => {
     spyOn(console, 'log');
-    service = new StylingService();
+    service = new StylingService(http, configService);
     expect(console.log).toHaveBeenCalledWith('loadColorPalettes method called');
     expect(service['colorPalettes']).toEqual(jasmine.objectContaining(mockPalettes['color-palettes'].reduce((acc: { [key: string]: ColorPalette }, palette: ColorPalette) => {
       acc[palette.name] = palette;
@@ -29,12 +38,12 @@ describe('ColorPaletteService', () => {
   });
 
   it('should set palettesLoaded$ to true after loading palettes', () => {
-    service = new StylingService();
+    service = new StylingService(http, configService);
     expect(service.getPalettesLoadedStatus().getValue()).toBe(true);
   });
 
   it('should select palette specified in environment configuration', () => {
-    service = new StylingService();
+    service = new StylingService(http, configService);
     const paletteName = environment.config.COLOR_PALETTE;
     expect(service.getSelectedPaletteName()).toBe(paletteName);
   });
