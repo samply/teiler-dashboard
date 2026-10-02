@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnDestroy, OnInit, Output} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import {buildEmptyQueryBox, DropdownFormat, ExporterQueriesBox, ExportStatus, formatEnumDisplayLabel} from "../exporter.component";
 import {Subscription} from "rxjs";
@@ -8,6 +8,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {ExecutionService} from "../../../teiler/execution.service";
 import {QueryFormCompletedEvent} from "./query-form/query-form.component";
 import {MatTabChangeEvent} from "@angular/material/tabs";
+import {PageEvent} from "@angular/material/paginator";
 
 export interface EditQueryDialogData {
   target: string;
@@ -22,6 +23,9 @@ export interface EditQueryDialogData {
   standalone: false
 })
 export class EditQueryDialogComponent implements OnInit, OnDestroy {
+  // Emits the affected query ID after every request that changed data on
+  // the backend, so the exporter page behind the dialog can reload.
+  @Output() dataChanged = new EventEmitter<string | undefined>();
   private subscriptionGetExecutionList: Subscription | undefined
   private subscriptionGetOutputFormats: Subscription | undefined
   private subscriptionExecuteQuery: Subscription | undefined;
@@ -34,7 +38,9 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   createTabElement: ExporterQueriesBox | undefined;
   showStepper: boolean = true;
   isCreateTabbed: boolean = false;
+  isEditTabbed: boolean = false;
   createTabLabel = $localize`Erstellen`;
+  editTabLabel = $localize`Bearbeiten`;
   executionTabLabel = $localize`Ausführung`;
   buttonDisabled: boolean = false;
   outputFormats: DropdownFormat[] = [];
@@ -48,6 +54,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
   constructor(@Inject(MAT_DIALOG_DATA) public data: EditQueryDialogData, private exporterService: ExporterService, private dialogRef: MatDialogRef<EditQueryDialogComponent, boolean>, private executionService: ExecutionService) {
     this.showStepper = data.target !== 'execution';
     this.isCreateTabbed = data.target === 'create' || data.target === 'execution';
+    this.isEditTabbed = data.target === 'edit';
 
     this.element = data.target === 'create' ? (data.detailsElement ?? data.element) : data.element;
     // The "Erstellen" tab always starts a brand new query, never the query
@@ -95,7 +102,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     // `showStepper = true` (e.g. from editFromExecutionView) is a real
     // state change that Angular pushes through to the tab group instead
     // of a no-op because the variable never noticed the manual switch.
-    this.showStepper = event.tab.textLabel === this.createTabLabel;
+    this.showStepper = event.tab.textLabel === this.createTabLabel || event.tab.textLabel === this.editTabLabel;
     if (event.tab.textLabel === this.executionTabLabel && this.element?.loadedQueryID) {
       this.getQueryExecutions(parseInt(this.element.loadedQueryID));
     }
@@ -107,8 +114,11 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     // unrelated query). Drop out of tabbed mode entirely so the plain
     // edit form for `element` (the query being viewed) is shown, the same
     // way it already works when this dialog is opened directly in edit
-    // mode.
-    this.isCreateTabbed = false;
+    // mode. In edit-tabbed mode the "Bearbeiten" tab already holds that
+    // query, so just switch back to it.
+    if (!this.isEditTabbed) {
+      this.isCreateTabbed = false;
+    }
     this.showStepper = true;
   }
 
@@ -121,10 +131,13 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     this.createTabElement = result.element;
     this.importTemplate = result.importTemplate;
     this.selectedOutputFormat = result.element.selectedOutputFormat;
+    this.dataChanged.emit(result.element.loadedQueryID);
     if (!result.execute) {
       return;
     }
-    this.isCreateTabbed = true;
+    if (!this.isEditTabbed) {
+      this.isCreateTabbed = true;
+    }
     this.showStepper = false;
     this.executeQuery();
   }
@@ -139,6 +152,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
       next: (response) => {
         const url = new URL(response.responseUrl)
         const id = url.searchParams.get("query-execution-id");
+        this.dataChanged.emit(this.element?.loadedQueryID);
         if (id) {
           this.pollingStatusAndLogs(id);
         }
@@ -168,6 +182,7 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
           if (status !== ExportStatus.RUNNING) {
             window.clearInterval(this.intervall);
             this.buttonDisabled = false;
+            this.dataChanged.emit(this.element?.loadedQueryID);
             if (status === ExportStatus.OK) {
               this.exportLog = [];
               if (this.selectedOutputFormat !== 'OPAL') {this.downloadExport(id)}
@@ -214,7 +229,22 @@ export class EditQueryDialogComponent implements OnInit, OnDestroy {
     this.dialogRef.close(false)
   }
 
+  readonly executionPaginatorThreshold = 5;
+  executionPageIndex: number = 0;
+  executionPageSize: number = 5;
+
+  get pagedExecutions(): ExporterExecutions[] {
+    const start = this.executionPageIndex * this.executionPageSize;
+    return this.dataSourceExecutions.data.slice(start, start + this.executionPageSize);
+  }
+
+  onExecutionPage(event: PageEvent): void {
+    this.executionPageIndex = event.pageIndex;
+    this.executionPageSize = event.pageSize;
+  }
+
   getQueryExecutions(queryID: number): void {
+    this.executionPageIndex = 0;
     this.subscriptionGetExecutionList?.unsubscribe();
     this.subscriptionGetExecutionList = this.executionService.getExecutionList(queryID).subscribe({
       next: (execs) => {

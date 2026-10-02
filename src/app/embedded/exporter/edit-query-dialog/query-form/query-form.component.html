@@ -1,7 +1,6 @@
 <div class="stepper">
 <mat-stepper
   class="query-stepper"
-  linear
   [orientation]="(stepperOrientation | async)!"
   (selectionChange)="onStepperSelectionChange($event)">
   <ng-template matStepperIcon="edit" let-index="index">

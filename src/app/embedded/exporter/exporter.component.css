@@ -38,6 +38,13 @@ table {
 .mat-mdc-header-cell {
   background-color: #2BCDD563!important;
 }
+.mat-mdc-row.selected-row .mat-mdc-cell {
+  background-color: #2BCDD5A6;
+  font-weight: 600;
+}
+.mat-mdc-row.selected-row .mat-mdc-cell:first-child {
+  box-shadow: inset 4px 0 0 var(--color-info);
+}
 ::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
   height: 30px !important;
 }
@@ -70,7 +77,10 @@ button{
 .main-box {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  /* flex-start, not stretch: the info box copies the query box's height via
+     ResizeObserver, so stretching would feed that height back into the query
+     box and it could never shrink again (e.g. 25 -> 5 execution logs). */
+  align-items: flex-start;
   gap: 15px;
 }
 .info-box {
@@ -284,6 +294,9 @@ button{
   background-color: transparent;
   color: var(--text-color);
 }
+:host-context(body.dark-theme) .mat-mdc-row.selected-row .mat-mdc-cell {
+  background-color: var(--surface-header, var(--border-color));
+}
 
 /* "Ausführen" is the primary action in the details box, "Bearbeiten" is secondary */
 :host-context(body.dark-theme) .query-box-ausfuehren {
@@ -318,4 +331,8 @@ button{
 :host-context(body.dark-theme) .query-box-table .mat-mdc-row:hover,
 :host-context(body.dark-theme) .info-box-table .mat-mdc-row:hover {
   background-color: var(--border-subtle, var(--border-color)) !important;
+}
+
+.execution-paginator {
+  margin-top: 8px;
 }

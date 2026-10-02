@@ -1,6 +1,6 @@
 import {Component, ElementRef, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {ExporterService} from "../../teiler/exporter.service";
 import {from, Subscription} from "rxjs";
 import {TeilerAuthService} from "../../security/teiler-auth.service";
@@ -170,12 +170,15 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.queryBoxResizeObserver?.disconnect();
   }
 
-  getQueries(): void {
+  getQueries(selectQueryId?: string): void {
     this.subscriptionGetQueries?.unsubscribe();
     this.subscriptionGetQueries = this.exporterService.getReports().subscribe({
       next: (queryList: ExporterQueries[]) => {
         this.queryList = queryList;
         this.filterQueries();
+        if (selectQueryId !== undefined) {
+          this.restoreSelection(selectQueryId);
+        }
       },
       error: (error) => {
         console.log(error);
@@ -293,11 +296,28 @@ export class ExporterComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = true;
     dialogConfig.data = {element: element, target: target, detailsElement: detailsElement};
     dialogConfig.width = "1500px";
-    this.dialog.open(EditQueryDialogComponent, dialogConfig).afterClosed().subscribe((isSaved:boolean)=>{
-      if(isSaved){
-        this.getQueries()
-      }
+    const dialogRef = this.dialog.open(EditQueryDialogComponent, dialogConfig);
+    const dataChangedSubscription = dialogRef.componentInstance.dataChanged.subscribe((queryId?: string) => this.refreshData(queryId));
+    dialogRef.afterClosed().subscribe(() => {
+      dataChangedSubscription.unsubscribe();
+      this.refreshData();
     });
+  }
+
+  // Reloads the query list (and the executions of the selected query) after
+  // a request changed data, keeping the selection on the same query - or on
+  // `queryId`, e.g. a query that was just created.
+  refreshData(queryId?: string): void {
+    const selectedId = queryId ?? this.dataSource.data[this.activeDataSource]?.id?.toString() ?? '';
+    this.getQueries(selectedId);
+  }
+
+  private restoreSelection(queryId: string): void {
+    if (this.dataSource.data.length === 0) {
+      return;
+    }
+    const index = this.dataSource.data.findIndex((query) => query.id.toString() === queryId);
+    this.setActiveDataSource(index >= 0 ? index : Math.min(this.activeDataSource, this.dataSource.data.length - 1));
   }
 
   selectQuery(row: ExporterQueriesBox): void {
@@ -310,8 +330,23 @@ export class ExporterComponent implements OnInit, OnDestroy {
     this.getQueryExecutions(id)
   }
 
+  readonly executionPaginatorThreshold = 5;
+  executionPageIndex: number = 0;
+  executionPageSize: number = 5;
+
+  get pagedExecutions(): ExporterExecutions[] {
+    const start = this.executionPageIndex * this.executionPageSize;
+    return this.dataSourceExecutions.data.slice(start, start + this.executionPageSize);
+  }
+
+  onExecutionPage(event: PageEvent): void {
+    this.executionPageIndex = event.pageIndex;
+    this.executionPageSize = event.pageSize;
+  }
+
   getQueryExecutions(queryID: number): void {
     this.dataSourceExecutions.data = []
+    this.executionPageIndex = 0;
     this.subscriptionGetExecutionList?.unsubscribe();
     this.subscriptionGetExecutionList = this.executionService.getExecutionList(queryID).subscribe({
       next: (execs) => {
@@ -340,6 +375,10 @@ export class ExporterComponent implements OnInit, OnDestroy {
 
   get currentItem(): any {
     return this.dataSource.data[this.activeDataSource]
+  }
+
+  isSelected(row: ExporterQueriesBox): boolean {
+    return this.currentItem === row;
   }
 
   get queryBoxRows(): QueryBoxRow[] {

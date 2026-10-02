@@ -35,7 +35,7 @@
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="infoBoxColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: infoBoxColumns;" (click)="selectQuery(row)"></tr>
+          <tr mat-row *matRowDef="let row; columns: infoBoxColumns;" [class.selected-row]="isSelected(row)" (click)="selectQuery(row)"></tr>
           <tr class="info-box-no-data" *matNoDataRow>
             <td [attr.colspan]="infoBoxColumns.length" i18n>Keine Anfragen gefunden.</td>
           </tr>
@@ -79,7 +79,7 @@
       </div>
       <div class="execution-list-label" i18n>Ausführungs Logs</div>
       <div class="execution-list">
-        <div class="execution-row" *ngFor="let element of dataSourceExecutions.data; let index = index" >
+        <div class="execution-row" *ngFor="let element of pagedExecutions; let index = index" >
           <span><span class="execution-row-date">Ausgeführt am: </span>{{element.executedAt | date: 'mediumDate'}}</span>
           <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
           <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
@@ -89,6 +89,16 @@
           </a>
         </div>
         <div class="execution-list-empty" *ngIf="dataSourceExecutions.data.length === 0" i18n>Es wurde nichts ausgeführt</div>
+        <div class="paginator execution-paginator" *ngIf="dataSourceExecutions.data.length > executionPaginatorThreshold">
+          <mat-paginator
+            [length]="dataSourceExecutions.data.length"
+            [pageIndex]="executionPageIndex"
+            [pageSize]="executionPageSize"
+            [pageSizeOptions]="[5,10,25,100]"
+            showFirstLastButtons
+            (page)="onExecutionPage($event)"
+          ></mat-paginator>
+        </div>
       </div>
     </div>
   </div>

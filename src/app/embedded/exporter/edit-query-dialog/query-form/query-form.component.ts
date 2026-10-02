@@ -4,6 +4,7 @@ import {map, Observable, Subscription} from "rxjs";
 import {StepperOrientation, StepperSelectionEvent} from "@angular/cdk/stepper";
 import {FormBuilder} from "@angular/forms";
 import {BreakpointObserver} from "@angular/cdk/layout";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {ExporterService} from "../../../../teiler/exporter.service";
 import {Templates} from "../../../quality-report/quality-report.component";
 
@@ -36,6 +37,9 @@ export class QueryFormComponent implements OnInit, OnDestroy {
   summaryLoc = $localize`Zusammenfassung`
   step1TooltipText = $localize`Bitte füllen Sie die Pflichtfelder "Titel" und "Beschreibung" aus.`
   step2TooltipText = $localize`Bitte füllen Sie das Pflichtfeld "Anfrage" aus.`
+  saveSuccessLoc = $localize`Die Anfrage wurde erfolgreich gespeichert.`
+  saveErrorLoc = $localize`Die Anfrage konnte nicht gespeichert werden.`
+  closeLoc = $localize`Schließen`
   visitedSteps: boolean[] = [true, false, false, false, false];
   firstFormGroup = this._formBuilder.group({
     queryTitle: [''],
@@ -67,7 +71,7 @@ export class QueryFormComponent implements OnInit, OnDestroy {
   showPlusButton: boolean = false;
   exportUrl = "";
 
-  constructor(private exporterService: ExporterService, private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver) {
+  constructor(private exporterService: ExporterService, private _formBuilder: FormBuilder, private snackBar: MatSnackBar, breakpointObserver: BreakpointObserver) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -237,11 +241,13 @@ export class QueryFormComponent implements OnInit, OnDestroy {
         next: () => {
           this.editModus = false;
           this.buttonDisabled = false;
+          this.showSaveResult(true);
         },
         error: (error) => {
           console.log(error);
           this.editModus = false;
           this.buttonDisabled = false;
+          this.showSaveResult(false);
         },
         complete: () => {
           this.completed.emit({element: this.element, execute: this.executeOnSaving, importTemplate: this.importTemplate});
@@ -253,17 +259,28 @@ export class QueryFormComponent implements OnInit, OnDestroy {
           this.editModus = false;
           this.buttonDisabled = false;
           this.element.loadedQueryID = response.queryId;
+          this.showSaveResult(true);
         },
         error: (error) => {
           console.log(error);
           this.editModus = false;
           this.buttonDisabled = false;
+          this.showSaveResult(false);
         },
         complete: () => {
           this.completed.emit({element: this.element, execute: this.executeOnSaving, importTemplate: this.importTemplate});
         }
       });
     }
+  }
+
+  showSaveResult(success: boolean): void {
+    this.snackBar.open(success ? this.saveSuccessLoc : this.saveErrorLoc, this.closeLoc, {
+      duration: success ? 3000 : 6000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: success ? 'snackbar-success' : 'snackbar-error'
+    });
   }
 
   saveAndExecute(): void {

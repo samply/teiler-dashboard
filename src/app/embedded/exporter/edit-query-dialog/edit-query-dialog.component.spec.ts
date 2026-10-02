@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -50,6 +51,7 @@ describe('EditQueryDialogComponent', () => {
         MatDatepickerModule,
         MatFormFieldModule,
         MatNativeDateModule,
+        MatPaginatorModule,
         MatStepperModule,
         MatTabsModule,
         MatTooltipModule
@@ -70,5 +72,15 @@ describe('EditQueryDialogComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should notify the exporter page after a query was saved', () => {
+    const emitted: (string | undefined)[] = [];
+    component.dataChanged.subscribe((id) => emitted.push(id));
+    const saved = {...buildEmptyQueryBox('contact-1'), loadedQueryID: '5'};
+
+    component.onFormCompleted({element: saved, execute: false, importTemplate: ''});
+
+    expect(emitted).toEqual(['5']);
   });
 });

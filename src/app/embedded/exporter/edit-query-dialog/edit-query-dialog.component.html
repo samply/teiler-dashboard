@@ -14,6 +14,19 @@
 </ng-container>
 
 <ng-template #nonTabbed>
+  <ng-container *ngIf="isEditTabbed; else plainView">
+    <mat-tab-group class="query-form-tabs" mat-align-tabs="start" [selectedIndex]="showStepper ? 0 : 1" (selectedTabChange)="onTabChanged($event)">
+      <mat-tab [label]="editTabLabel">
+        <samply-query-form *ngIf="element" [element]="element" (completed)="onFormCompleted($event)"></samply-query-form>
+      </mat-tab>
+      <mat-tab [label]="executionTabLabel">
+        <ng-container *ngTemplateOutlet="executionOverview"></ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+</ng-template>
+
+<ng-template #plainView>
   <ng-container *ngIf="showStepper">
     <samply-query-form *ngIf="element" [element]="element" (completed)="onFormCompleted($event)"></samply-query-form>
   </ng-container>
@@ -76,7 +89,7 @@
       </div>
     </div>
   </div>
-    <div class="executions" *ngFor="let element of dataSourceExecutions.data; let index = index" >
+    <div class="executions" *ngFor="let element of pagedExecutions; let index = index" >
       <span><span class="execution-row-date">Ausgeführt am: </span>{{element.executedAt | date: 'mediumDate'}}</span>
       <span><span class="execution-row-status">Status: </span>{{element.status}}</span>
       <span><span class="execution-row-templateId">Template-ID: </span> {{element.templateId}}</span>
@@ -84,6 +97,16 @@
       <a *ngIf="element.status === 'OK'" class="execution-row-format download-link" target="_blank" href="{{exportUrl + 'response?query-execution-id=' + element.id}}">
         <i class="bi bi-download"></i>
       </a>
+    </div>
+    <div class="paginator execution-paginator" *ngIf="dataSourceExecutions.data.length > executionPaginatorThreshold">
+      <mat-paginator
+        [length]="dataSourceExecutions.data.length"
+        [pageIndex]="executionPageIndex"
+        [pageSize]="executionPageSize"
+        [pageSizeOptions]="[5,10,25,100]"
+        showFirstLastButtons
+        (page)="onExecutionPage($event)"
+      ></mat-paginator>
     </div>
   </div>
 </ng-template>

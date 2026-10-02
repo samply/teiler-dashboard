@@ -427,3 +427,13 @@ button{
   --mdc-tab-indicator-active-indicator-color: var(--accent-primary, #3b82f6);
   --mat-tab-header-divider-color: var(--border-color);
 }
+
+.execution-paginator mat-paginator {
+  opacity: 0.8;
+  width: 100%;
+  border-radius: 10px;
+}
+::ng-deep .execution-paginator .mat-mdc-paginator-container {
+  justify-content: center;
+  flex-wrap: wrap;
+}

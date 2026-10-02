@@ -769,5 +769,32 @@
         <target>Reporter</target>
       </segment>
     </unit>
+    <unit id="6147965221577029623">
+      <notes>
+        <note category="location">src/app/embedded/exporter/edit-query-dialog/query-form/query-form.component.ts</note>
+      </notes>
+      <segment>
+        <source>Die Anfrage wurde erfolgreich gespeichert.</source>
+        <target>The query was saved successfully.</target>
+      </segment>
+    </unit>
+    <unit id="3582786988049626197">
+      <notes>
+        <note category="location">src/app/embedded/exporter/edit-query-dialog/query-form/query-form.component.ts</note>
+      </notes>
+      <segment>
+        <source>Die Anfrage konnte nicht gespeichert werden.</source>
+        <target>The query could not be saved.</target>
+      </segment>
+    </unit>
+    <unit id="8183476381446897959">
+      <notes>
+        <note category="location">src/app/embedded/exporter/edit-query-dialog/query-form/query-form.component.ts</note>
+      </notes>
+      <segment>
+        <source>Schließen</source>
+        <target>Close</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

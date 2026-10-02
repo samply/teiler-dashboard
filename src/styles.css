@@ -227,3 +227,15 @@ body.dark-theme::before {
   font-weight: 600;
 }
 
+
+.mat-mdc-snack-bar-container.snackbar-success {
+  --mdc-snackbar-container-color: #2e7d32;
+  --mdc-snackbar-supporting-text-color: #fff;
+  --mat-snack-bar-button-color: #fff;
+}
+
+.mat-mdc-snack-bar-container.snackbar-error {
+  --mdc-snackbar-container-color: #c62828;
+  --mdc-snackbar-supporting-text-color: #fff;
+  --mat-snack-bar-button-color: #fff;
+}
