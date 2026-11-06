@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
     return this.colorSchemeService.getColor();
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     this.innerWidth = window.innerWidth;
   }

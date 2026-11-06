@@ -2,9 +2,11 @@
 
   <button mat-button [matMenuTriggerFor]="menu"><i class="bi bi-translate"></i></button>
   <mat-menu #menu="matMenu">
-    <a mat-menu-item *ngFor="let languageHref of availableLanguages" routerLink="/placeholder" [externalLink]="languageHref.href">
-      {{languageHref.language}}
-    </a>
+    @for (languageHref of availableLanguages; track languageHref) {
+      <a mat-menu-item routerLink="/placeholder" [externalLink]="languageHref.href">
+        {{languageHref.language}}
+      </a>
+    }
   </mat-menu>
 
 </div>

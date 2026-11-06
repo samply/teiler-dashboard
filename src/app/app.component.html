@@ -8,21 +8,29 @@
     </div>
     <div class="spacer"></div>
     <div class="user">
-      <div *ngIf="user != undefined && user.length > 0">
-        <i class="bi bi-person"></i>&nbsp;
-        <span>{{user}}</span>
-      </div>
-      <div *ngIf="environment.config.OIDC_URL">
-        <div *ngIf="!isLoggedIn">
-          <span class="login-hint1" i18n>für weitere Apps loggen Sie sich Bitte > </span>
-          <a class="login-link" routerLink="{{'/' + routeManagerService.loginRouterLink}}"><span i18n>hier</span></a>
-          <span class="login-hint2" i18n> < ein</span>
+      @if (user != undefined && user.length > 0) {
+        <div>
+          <i class="bi bi-person"></i>&nbsp;
+          <span>{{user}}</span>
         </div>
-        <div *ngIf="isLoggedIn">
-          <a routerLink="{{'/' + routeManagerService.logoutRouterLink}}" (click)="authService.logout()"><span
+      }
+      @if (environment.config.OIDC_URL) {
+        <div>
+          @if (!isLoggedIn) {
+            <div>
+              <span class="login-hint1" i18n>für weitere Apps loggen Sie sich Bitte > </span>
+              <a class="login-link" routerLink="{{'/' + routeManagerService.loginRouterLink}}"><span i18n>hier</span></a>
+              <span class="login-hint2" i18n> < ein</span>
+            </div>
+          }
+          @if (isLoggedIn) {
+            <div>
+              <a routerLink="{{'/' + routeManagerService.logoutRouterLink}}" (click)="authService.logout()"><span
               i18n>ausloggen</span></a>
+            </div>
+          }
         </div>
-      </div>
+      }
       <div>
         <language-selector></language-selector>
       </div>
@@ -31,15 +39,19 @@
 
   <svg [innerHtml]="svgimage" class="b-img" [style.width.px]="svgWidth" [style.height.px]="svgHeight"></svg>
   <app-sidebar></app-sidebar>
-  <div *ngIf="showFooter" class="footer">
-    <a class="user-agreement" href="{{contact.userAgreementLink}}" target="_blank">Nutzervereinbarung</a>
-    <a class="email" href="mailto:{{contact.emailLink}}">{{contact.emailText}}</a>
-    <div class="copyright">
-      <span *ngIf="contact.aboutYear !== ''">&#169; {{contact.aboutYear}} </span>
-      <a href="{{contact.aboutLink}}" target="_blank"
-      >{{contact.aboutText}}</a
-      >
-    </div>
+  @if (showFooter) {
+    <div class="footer">
+      <a class="user-agreement" href="{{contact.userAgreementLink}}" target="_blank">Nutzervereinbarung</a>
+      <a class="email" href="mailto:{{contact.emailLink}}">{{contact.emailText}}</a>
+      <div class="copyright">
+        @if (contact.aboutYear !== '') {
+          <span>&#169; {{contact.aboutYear}} </span>
+        }
+        <a href="{{contact.aboutLink}}" target="_blank"
+          >{{contact.aboutText}}</a
+          >
+        </div>
+      </div>
+    }
   </div>
-</div>
 
