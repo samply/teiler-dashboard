@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 
 import {MatTableDataSource} from "@angular/material/table";
@@ -34,6 +34,7 @@ export enum QBStatus {
     selector: 'quality-report-app',
     templateUrl: './quality-report.component.html',
     styleUrls: ['./quality-report.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 

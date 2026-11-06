@@ -11,7 +11,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from "@angular/material/list";
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {MatSelectModule} from "@angular/material/select";
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from "@angular/common/http";
 import {
   TeilerAppPluginOrchestratorComponent
 } from './teiler-app-plugin-orchestrator/teiler-app-plugin-orchestrator.component';
@@ -106,7 +106,7 @@ const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
         })],
     providers: [
         ColorSchemeService,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withXhr(), withInterceptorsFromDi())
     ] })
 export class AppModule {
 }

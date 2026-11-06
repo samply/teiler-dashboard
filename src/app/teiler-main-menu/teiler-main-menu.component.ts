@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy} from '@angular/core';
 import {TeilerService} from "../teiler/teiler.service";
 import {TeilerAuthService} from "../security/teiler-auth.service";
 import {from} from "rxjs";
@@ -9,6 +9,7 @@ import {TeilerApp} from "../teiler/teiler-app";
     selector: 'teiler-main-menu',
     templateUrl: './teiler-main-menu.component.html',
     styleUrls: ['./teiler-main-menu.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TeilerMainMenuComponent implements OnInit {
