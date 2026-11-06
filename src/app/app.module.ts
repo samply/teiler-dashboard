@@ -22,7 +22,6 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TeilerBoxComponent} from './teiler-box/teiler-box.component';
 import {MatCardModule} from "@angular/material/card";
-import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {TeilerWelcomeComponent} from './teiler-welcome/teiler-welcome.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
@@ -63,7 +62,6 @@ const oidcUrl = environment?.config?.OIDC_URL?.replace(/\/$/, '');
         AppRoutingModule,
         BarChartModule,
         BrowserModule,
-        FlexLayoutModule,
         FormsModule,
         MatButtonModule,
         MatCardModule,
