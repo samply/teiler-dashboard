@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Templates use the built-in control flow (@if/@for)
 - Docker: node:26-alpine (LTS), npm ci, nginx:1.30-alpine
 
+### Fixed
+- Karma tests start again: zone.js and src/assets/env.js are loaded in the test target (in production both are provided at runtime by the orchestrator and the container)
+
 ### Removed
 - @angular/flex-layout (deprecated, unused)
 

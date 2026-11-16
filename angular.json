@@ -133,6 +133,7 @@
           "options": {
             "main": "src/test.ts",
             "polyfills": [
+              "zone.js",
               "src/polyfills.ts",
               "@angular/localize/init"
             ],
@@ -152,7 +153,9 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "./src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/env.js"
+            ]
           }
         }
       }
