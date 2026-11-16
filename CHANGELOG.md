@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Karma tests start again: zone.js and src/assets/env.js are loaded in the test target (in production both are provided at runtime by the orchestrator and the container)
+- Unit tests: all specs pass again (44). Outdated "should create" specs now provide mocked services; removed the specs for the no longer existing ConfigurationService and the outdated color palette spec (replaced by styling.service.spec.ts); new tests for role mapping, auth guard, group claims and palette fallback
 
 ### Removed
 - @angular/flex-layout (deprecated, unused)
