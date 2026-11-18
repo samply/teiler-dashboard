@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {ExporterService, exportLog} from "../../teiler/exporter.service";
@@ -55,6 +55,7 @@ export interface Context {
     selector: 'exporter',
     templateUrl: './exporter.component.html',
     styleUrls: ['./exporter.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ExporterComponent implements OnInit, OnDestroy {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {BackgroundColors, EmptyTeilerApp, TeilerApp} from "../teiler/teiler-app";
 
 enum TeilerAppStatus {
@@ -11,6 +11,7 @@ enum TeilerAppStatus {
     selector: 'teiler-box',
     templateUrl: './teiler-box.component.html',
     styleUrls: ['./teiler-box.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TeilerBoxComponent implements OnInit {

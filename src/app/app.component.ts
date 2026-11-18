@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouteManagerService} from "./route/route-manager.service";
 import {TeilerAuthService} from "./security/teiler-auth.service";
 import {debounceTime, from, fromEvent, throttleTime} from "rxjs";
@@ -22,6 +22,7 @@ interface Contact {
     selector: 'teiler-dashboard',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent implements OnInit{

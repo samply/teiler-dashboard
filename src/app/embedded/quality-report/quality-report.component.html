@@ -8,7 +8,9 @@
       <mat-form-field class="template_dropdown">
         <mat-label>Template</mat-label>
         <select class="template-select" matNativeControl [(ngModel)]="selectedTemplate" (ngModelChange)="changeTemplateSelection()" [disabled]="buttonDisabled">
-          <option *ngFor="let id of templateIDs" [value]="id.value">{{id.display}}</option>
+          @for (id of templateIDs; track id) {
+            <option [value]="id.value">{{id.display}}</option>
+          }
         </select>
       </mat-form-field>
       <button class="cancel-button" mat-raised-button color="primary" (click)=cancelQB() [ngClass]="{ 'visible-button': !buttonVisible }" ><span i18n>abbrechen</span></button>
@@ -23,11 +25,21 @@
       <button class="download-button" mat-raised-button color="primary" (click)=downloadTemplate() [ngClass]="{ 'visible-button': selectedTemplate !== 'custom' }" ><span i18n>Template herunterladen</span></button>
 
       <div class="status">
-        <ng-container *ngIf="qbStatus === QBStatus.EMPTY"><span class="status-empty"></span></ng-container>
-        <ng-container *ngIf="qbStatus === QBStatus.RUNNING"><span class="status-running" i18n>Report wird erstellt ...</span></ng-container>
-        <ng-container *ngIf="qbStatus === QBStatus.OK"><span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span></ng-container>
-        <ng-container *ngIf="qbStatus === QBStatus.NOT_FOUND"><span class="status-not-found" i18n>Report wurde nicht gefunden.</span></ng-container>
-        <ng-container *ngIf="qbStatus === QBStatus.ERROR"><span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span></ng-container>
+        @if (qbStatus === QBStatus.EMPTY) {
+          <span class="status-empty"></span>
+        }
+        @if (qbStatus === QBStatus.RUNNING) {
+          <span class="status-running" i18n>Report wird erstellt ...</span>
+        }
+        @if (qbStatus === QBStatus.OK) {
+          <span class="status-ok" i18n>Report wurde erfolgreich erstellt.</span>
+        }
+        @if (qbStatus === QBStatus.NOT_FOUND) {
+          <span class="status-not-found" i18n>Report wurde nicht gefunden.</span>
+        }
+        @if (qbStatus === QBStatus.ERROR) {
+          <span class="status-not-found" i18n>Ein Fehler ist aufgetreten.</span>
+        }
       </div>
     </div>
     <mat-accordion class="log-accordion" [ngClass]="{ 'visible': panelVisible }">
@@ -38,11 +50,15 @@
         <div class="log-div">
           <div class="log-reporter" >
             <div class="log-header">Reporter Log:</div>
-            <div id="reportDiv" class="log-reports"><div *ngFor="let log of reportLog[0]?.lastLines">{{log}}</div></div>
+            <div id="reportDiv" class="log-reports">@for (log of reportLog[0]?.lastLines; track log) {
+              <div>{{log}}</div>
+            }</div>
           </div>
           <div class="log-exporter">
             <div class="log-header">Exporter Log:</div>
-            <div id="exportDiv" class="log-reports"><div *ngFor="let log of reportLog[1]?.lastLines">{{log}}</div></div>
+            <div id="exportDiv" class="log-reports">@for (log of reportLog[1]?.lastLines; track log) {
+              <div>{{log}}</div>
+            }</div>
           </div>
         </div>
       </mat-expansion-panel>

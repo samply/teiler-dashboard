@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {DashboardConfigService} from "../teiler/dashboard-config.service";
 
@@ -20,6 +20,7 @@ class TeilerAdmin {
     selector: 'teiler-welcome',
     templateUrl: './teiler-welcome.component.html',
     styleUrls: ['./teiler-welcome.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TeilerWelcomeComponent implements OnInit {

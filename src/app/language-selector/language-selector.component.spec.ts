@@ -1,5 +1,7 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideRouter } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
 import { LanguageSelectorComponent } from './language-selector.component';
 
 describe('LanguageSelectorComponent', () => {
@@ -8,9 +10,11 @@ describe('LanguageSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LanguageSelectorComponent ]
-    })
-    .compileComponents();
+      declarations: [LanguageSelectorComponent],
+      imports: [MatMenuModule],
+      providers: [provideRouter([])],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LanguageSelectorComponent);
     component = fixture.componentInstance;

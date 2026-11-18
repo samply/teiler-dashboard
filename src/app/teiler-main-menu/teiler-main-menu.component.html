@@ -1,45 +1,62 @@
 <div class="content" role="main">
 
-  <div *ngIf="!isLoggedIn" class="welcome-text">
-    <teiler-welcome></teiler-welcome>
-  </div>
+  @if (!isLoggedIn) {
+    <div class="welcome-text">
+      <teiler-welcome></teiler-welcome>
+    </div>
+  }
 
   <div class="tabs">
-    <div class="section-header" *ngIf="existLocalAndCentralTeilerAppsAtTheSameTime()">
-      <div class="tabs1">
-        <section class="app-selection">
-          <mat-checkbox class="local-apps" [(ngModel)]="showLocalApps" i18n>lokale Apps</mat-checkbox>
-          <mat-checkbox class="central-apps" [(ngModel)]="showCentralApps" i18n>zentrale Apps</mat-checkbox>
-        </section>
-        <div class="contents">
-          <div class="slider-wrap">
-            <div class="slider-main">
-              <div *ngFor="let teilerApp of teilerService.teilerApps">
-                <ng-container *ngIf="(teilerApp.local && showLocalApps) || (!teilerApp.local && showCentralApps)">
-                  <div *ngIf="teilerApp.inMenu">
-                    <div *ngIf="!teilerApp.externLink">
-                      <a *ngIf="isClickable(teilerApp); else nonClickableApp" routerLink="{{'/'+teilerApp.routerLink}}"
-                      >
-                        <teiler-box [teilerApp]="teilerApp"></teiler-box>
-                      </a>
-                    </div>
-                    <div *ngIf="teilerApp.externLink">
-                      <a *ngIf="isClickable(teilerApp); else nonClickableApp" routerLink="{{'/'+teilerApp.routerLink}}"
-                         [externalLinkBlank]="teilerApp.sourceUrl??''"
-                      >
-                        <teiler-box [teilerApp]="teilerApp"></teiler-box>
-                      </a>
-                    </div>
-                    <ng-template #nonClickableApp>
-                      <teiler-box [teilerApp]="teilerApp"></teiler-box>
-                    </ng-template>
+    @if (existLocalAndCentralTeilerAppsAtTheSameTime()) {
+      <div class="section-header">
+        <div class="tabs1">
+          <section class="app-selection">
+            <mat-checkbox class="local-apps" [(ngModel)]="showLocalApps" i18n>lokale Apps</mat-checkbox>
+            <mat-checkbox class="central-apps" [(ngModel)]="showCentralApps" i18n>zentrale Apps</mat-checkbox>
+          </section>
+          <div class="contents">
+            <div class="slider-wrap">
+              <div class="slider-main">
+                @for (teilerApp of teilerService.teilerApps; track teilerApp) {
+                  <div>
+                    @if ((teilerApp.local && showLocalApps) || (!teilerApp.local && showCentralApps)) {
+                      @if (teilerApp.inMenu) {
+                        <div>
+                          @if (!teilerApp.externLink) {
+                            <div>
+                              @if (isClickable(teilerApp)) {
+                                <a routerLink="{{'/'+teilerApp.routerLink}}"
+                                  >
+                                  <teiler-box [teilerApp]="teilerApp"></teiler-box>
+                                </a>
+                              } @else {
+                                <teiler-box [teilerApp]="teilerApp"></teiler-box>
+                              }
+                            </div>
+                          }
+                          @if (teilerApp.externLink) {
+                            <div>
+                              @if (isClickable(teilerApp)) {
+                                <a routerLink="{{'/'+teilerApp.routerLink}}"
+                                  [externalLinkBlank]="teilerApp.sourceUrl??''"
+                                  >
+                                  <teiler-box [teilerApp]="teilerApp"></teiler-box>
+                                </a>
+                              } @else {
+                                <teiler-box [teilerApp]="teilerApp"></teiler-box>
+                              }
+                            </div>
+                          }
+                        </div>
+                      }
+                    }
                   </div>
-                </ng-container>
+                }
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    }
   </div>
 </div>
