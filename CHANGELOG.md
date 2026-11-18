@@ -6,9 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.6] - 2025-07-28
 ### Changed
-- Angular 22 (via 20 and 21), TypeScript 6.0, Angular Material 22
+- Angular 22.2.6 (via 20 and 21), TypeScript 6.0, Angular Material / CDK 22.2.7, Angular CLI 22.2.7
 - single-spa-angular 22, single-spa 6, zone.js 0.16 (same as the orchestrator)
-- angular-auth-oidc-client 22, @swimlane/ngx-charts 25, bootstrap 5.3.8, cldr 49
+- angular-auth-oidc-client 22.0.3, @swimlane/ngx-charts 25, bootstrap 5.3.9, cldr 49, style-loader 4
 - Templates use the built-in control flow (@if/@for)
 - Docker: node:26-alpine (LTS), npm ci, nginx:1.30-alpine
 
