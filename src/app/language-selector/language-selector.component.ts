@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {getHref, getRouterLinkSwitchingLocale} from "../route/route-utils";
 import {Router} from "@angular/router";
 
@@ -12,6 +12,7 @@ class LanguageHref {
     selector: 'language-selector',
     templateUrl: './language-selector.component.html',
     styleUrls: ['./language-selector.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LanguageSelectorComponent implements OnInit {

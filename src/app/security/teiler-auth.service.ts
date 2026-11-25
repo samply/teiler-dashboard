@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { OidcSecurityService, UserDataResult } from 'angular-auth-oidc-client';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import type { UserDataResult } from 'angular-auth-oidc-client';
 import {firstValueFrom, Observable} from 'rxjs';
 import { environment } from '../../environments/environment';
 import { getHref, getLocale } from '../route/route-utils';

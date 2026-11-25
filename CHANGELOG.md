@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.6] - 2025-07-28
+### Changed
+- Angular 22.2.6 (via 20 and 21), TypeScript 6.0, Angular Material / CDK 22.2.7, Angular CLI 22.2.7
+- single-spa-angular 22, single-spa 6, zone.js 0.16 (same as the orchestrator)
+- angular-auth-oidc-client 22.0.3, @swimlane/ngx-charts 25, bootstrap 5.3.9, cldr 49 (style-loader stays 3.x: peer dependency of single-spa-angular 22)
+- Templates use the built-in control flow (@if/@for)
+- Docker: node:26-alpine (LTS), npm ci, nginx:1.30-alpine
+
+### Fixed
+- Karma tests start again: zone.js and src/assets/env.js are loaded in the test target (in production both are provided at runtime by the orchestrator and the container)
+- Unit tests: all specs pass again (44). Outdated "should create" specs now provide mocked services; removed the specs for the no longer existing ConfigurationService and the outdated color palette spec (replaced by styling.service.spec.ts); new tests for role mapping, auth guard, group claims and palette fallback
+
+### Removed
+- @angular/flex-layout (deprecated, unused)
 
 ## [1.0.5] - 2025-06-24
 ### Removed

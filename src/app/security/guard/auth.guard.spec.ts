@@ -1,26 +1,44 @@
-import { authGuard } from './auth.guard';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { firstValueFrom, Observable, of } from 'rxjs';
+import { authGuard } from './auth.guard';
+import { environment } from '../../../environments/environment';
 
 describe('authGuard', () => {
-  let oidcSecurityServiceSpy: jasmine.SpyObj<OidcSecurityService>;
+  let oidcSecurityService: jasmine.SpyObj<OidcSecurityService>;
+  const originalOidcUrl = environment.config.OIDC_URL;
 
-  beforeEach(() => {
-    oidcSecurityServiceSpy = jasmine.createSpyObj('OidcSecurityService', ['authorize'], {
-      isAuthenticated$: of(true), // ✅ Mocked observable
+  const runGuard = () => TestBed.runInInjectionContext(() =>
+    firstValueFrom(authGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot) as Observable<boolean>));
+
+  const setup = (isAuthenticated: boolean) => {
+    oidcSecurityService = jasmine.createSpyObj<OidcSecurityService>('OidcSecurityService', ['authorize'], {
+      isAuthenticated$: of({ isAuthenticated, allConfigsAuthenticated: [] }),
     });
-
     TestBed.configureTestingModule({
-      providers: [
-        { provide: OidcSecurityService, useValue: oidcSecurityServiceSpy },
-      ],
+      providers: [{ provide: OidcSecurityService, useValue: oidcSecurityService }],
     });
-  });
+  };
+
+  beforeEach(() => environment.config.OIDC_URL = 'https://sso.example.org');
+  afterEach(() => environment.config.OIDC_URL = originalOidcUrl);
 
   it('should return true when user is authenticated', async () => {
-    const result = await authGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot);
-    expect(result).toBeTrue();
+    setup(true);
+    expect(await runGuard()).toBeTrue();
+    expect(oidcSecurityService.authorize).not.toHaveBeenCalled();
+  });
+
+  it('should start the login and return false when user is not authenticated', async () => {
+    setup(false);
+    expect(await runGuard()).toBeFalse();
+    expect(oidcSecurityService.authorize).toHaveBeenCalled();
+  });
+
+  it('should return false when no OIDC provider is configured', async () => {
+    setup(true);
+    environment.config.OIDC_URL = '';
+    expect(await runGuard()).toBeFalse();
   });
 });

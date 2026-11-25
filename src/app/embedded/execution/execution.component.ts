@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ExecutionService} from "../../teiler/execution.service";
 import {Subscription} from "rxjs";
@@ -36,6 +36,7 @@ export enum ExportStatus {
     selector: 'execution',
     templateUrl: './execution.component.html',
     styleUrls: ['./execution.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ExecutionComponent implements OnInit, OnDestroy {

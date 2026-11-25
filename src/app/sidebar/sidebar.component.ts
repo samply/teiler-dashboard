@@ -1,4 +1,4 @@
-import {Component, OnInit, HostListener, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, HostListener, ViewChild, ElementRef, ChangeDetectionStrategy} from '@angular/core';
 import {TeilerService} from "../teiler/teiler.service";
 import {createMainRouterLink} from "../route/route-utils";
 import {ColorSchemeService} from "../color-scheme.service";
@@ -11,6 +11,7 @@ import {environment} from "../../environments/environment";
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SidebarComponent implements OnInit {
@@ -48,7 +49,7 @@ export class SidebarComponent implements OnInit {
     return this.colorSchemeService.getColor();
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     this.innerWidth = window.innerWidth;
   }

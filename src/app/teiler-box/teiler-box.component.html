@@ -1,24 +1,32 @@
 
 <div class="teiler-box" [ngClass]="isAppClickable() ? 'clickable' : 'nonclickable'">
   <div class="text">
-    <div class="teiler-box-icon" *ngIf="teilerApp.iconClass != undefined">
-      <i class="{{teilerApp.iconClass}}" ></i>
-    </div>
-    <div class="teiler-box-image" *ngIf="teilerApp.iconSourceUrl != undefined">
-      <img alt="" src="{{teilerApp.iconSourceUrl}}">
-    </div>
+    @if (teilerApp.iconClass != undefined) {
+      <div class="teiler-box-icon">
+        <i class="{{teilerApp.iconClass}}" ></i>
+      </div>
+    }
+    @if (teilerApp.iconSourceUrl != undefined) {
+      <div class="teiler-box-image">
+        <img alt="" src="{{teilerApp.iconSourceUrl}}">
+      </div>
+    }
     <h3>{{teilerApp.title}}</h3>
     <div class="strich">
       <hr>
+      </div>
+      <p class="teiler-box-description">{{teilerApp.description}}</p>
     </div>
-    <p class="teiler-box-description">{{teilerApp.description}}</p>
-  </div>
-  <div class="icon-footer">
-    <span *ngIf="teilerApp.local" i18n>lokal</span>
-    <span *ngIf="!teilerApp.local" i18n>zentral</span>
-    <div class="icon-footer-box">
-      <i class="{{getCheckIconClass()}}" title="{{getCheckIconTitle()}}"></i>
+    <div class="icon-footer">
+      @if (teilerApp.local) {
+        <span i18n>lokal</span>
+      }
+      @if (!teilerApp.local) {
+        <span i18n>zentral</span>
+      }
+      <div class="icon-footer-box">
+        <i class="{{getCheckIconClass()}}" title="{{getCheckIconTitle()}}"></i>
+      </div>
     </div>
   </div>
-</div>
 

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouteManagerService} from "./route/route-manager.service";
 import {TeilerAuthService} from "./security/teiler-auth.service";
 import {debounceTime, from, fromEvent, throttleTime} from "rxjs";
@@ -22,6 +22,7 @@ interface Contact {
     selector: 'teiler-dashboard',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent implements OnInit{
@@ -138,6 +139,11 @@ export class AppComponent implements OnInit{
     })
   }
   updateSVG(): void {
+    // Called after a timeout and on every resize, also before the background SVG has been
+    // loaded (or when no styling is configured): parsing "" would only produce a parser error.
+    if (!this.svgOrig) {
+      return;
+    }
     this.svgWidth = this.myIdentifier.nativeElement.offsetWidth;
     this.svgHeight = this.myIdentifier.nativeElement.offsetHeight;
 
