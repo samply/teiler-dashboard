@@ -139,6 +139,11 @@ export class AppComponent implements OnInit{
     })
   }
   updateSVG(): void {
+    // Called after a timeout and on every resize, also before the background SVG has been
+    // loaded (or when no styling is configured): parsing "" would only produce a parser error.
+    if (!this.svgOrig) {
+      return;
+    }
     this.svgWidth = this.myIdentifier.nativeElement.offsetWidth;
     this.svgHeight = this.myIdentifier.nativeElement.offsetHeight;
 
